@@ -18,45 +18,45 @@ class ListView extends Component {
                     <Grid item xs={12}>
                         <MaterialTable
                             columns={[
-                                {title: 'מספר גרסה', field: 'versionNumber'},
+                                {title: 'תאריך יצירת גרסה', field: 'createDate'},
+                                {title: 'פעיל/לא פעיל', field: 'active'},
                                 {title: 'סוג בית חולים', field: 'hospitalType'},
-                                {title: 'שם גרסה', field: 'versionName', type: 'numeric'},
                                 {
-                                    title: 'סוג גרסה',
-                                    field: 'versionType',
+                                    title: 'שם גרסה',
+                                    field: 'versionName',
                                 },
                                 {
-                                    title: 'פעיל/לא פעיל',
-                                    field: 'active',
+                                    title: 'מספר גרסה',
+                                    field: 'versionNumber',
                                 },
                             ]}
                             data={[
                                 {
-                                    versionNumber: '1234',
+                                    versionNumber: '1000',
                                     hospitalType: 'כללים',
-                                    versionName: 'שם',
-                                    versionType: 63,
+                                    versionName: 'גרסה ינואר-אפריל 2018',
+
                                     active: 'פעיל'
                                 },
                                 {
-                                    versionNumber: '1234',
-                                    hospitalType: 'כללים',
-                                    versionName: 'שם',
-                                    versionType: 63,
+                                    versionNumber: '1001',
+                                    hospitalType: 'גריאטריים',
+                                    versionName: 'גרסה ינואר-ספטמבר 2017',
+
                                     active: 'פעיל'
                                 },
                                 {
-                                    versionNumber: '1234',
+                                    versionNumber: '1002',
                                     hospitalType: 'כללים',
                                     versionName: 'שם',
-                                    versionType: 63,
+
                                     active: 'פעיל'
                                 },
                                 {
-                                    versionNumber: '1234',
+                                    versionNumber: '1003',
                                     hospitalType: 'כללים',
                                     versionName: 'שם',
-                                    versionType: 63,
+
                                     active: 'פעיל'
                                 },
                             ]}

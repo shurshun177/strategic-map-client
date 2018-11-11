@@ -17,16 +17,16 @@ function ContainedButtons(props) {
     return (
         <div>
             <Button variant="contained" className={classes.button}>
-                Create
+                יצירת גרסה חדשה
             </Button>
             <Button variant="contained" color="primary" className={classes.button}>
-                Update
+                עדכון גרסה
             </Button>
             <Button variant="contained" color="secondary" className={classes.button}>
-                Copy
+                העתקת גרסה
             </Button>
             <Button variant="contained" color="secondary" disabled className={classes.button}>
-                Delete
+                מחיקת גרסה
             </Button>
         </div>
     );
