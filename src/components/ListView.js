@@ -72,8 +72,8 @@ class ListView extends Component {
                             ]}
                             options={{
                                 selection: true,
-                                search: true,
-                                toolbar: false,
+                                search: false,
+                                toolbar: true,
                                 paging: false,
                             }}
                         />
