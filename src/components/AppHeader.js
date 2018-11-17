@@ -16,11 +16,12 @@ function AppHeader(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static" color="default">
+            <AppBar position="static" color="default" title='Title'>
                 <Toolbar>
-                    <Typography variant="h6" color="inherit">
-                        This is place for logo
-                    </Typography>
+                    {/*<Typography variant="h6" color="inherit">*/}
+                        {/*This is place for logo*/}
+                    {/*</Typography>*/}
+                    <img src="logo.jpg"/>
                 </Toolbar>
             </AppBar>
         </div>
