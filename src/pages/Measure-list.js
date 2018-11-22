@@ -8,7 +8,7 @@ class MeasureList extends Component {
     render() {
         return (
             <div>
-                <ContainedButtons>
+                <ContainedButtons/>
                 <ListViewTable/>
             </div>
         );
