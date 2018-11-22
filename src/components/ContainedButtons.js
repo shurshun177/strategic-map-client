@@ -22,7 +22,7 @@ function ContainedButtons(props) {
             <Button variant="contained" color="primary" className={classes.button}>
                 עדכון גרסה
             </Button>
-            <Button variant="contained" color="secondary" className={classes.button}>
+            <Button variant="contained" color="primary" className={classes.button}>
                 העתקת גרסה
             </Button>
             <Button variant="contained" color="secondary"  className={classes.button}>
