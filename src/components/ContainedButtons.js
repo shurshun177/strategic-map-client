@@ -16,7 +16,7 @@ function ContainedButtons(props) {
     const { classes } = props;
     return (
         <div>
-            <Button variant="contained" className={classes.button}>
+            <Button variant="contained" color="primary" className={classes.button}>
                 יצירת גרסה חדשה
             </Button>
             <Button variant="contained" color="primary" className={classes.button}>
@@ -25,7 +25,7 @@ function ContainedButtons(props) {
             <Button variant="contained" color="secondary" className={classes.button}>
                 העתקת גרסה
             </Button>
-            <Button variant="contained" color="secondary" disabled className={classes.button}>
+            <Button variant="contained" color="secondary"  className={classes.button}>
                 מחיקת גרסה
             </Button>
         </div>
@@ -35,5 +35,7 @@ function ContainedButtons(props) {
 ContainedButtons.propTypes = {
     classes: PropTypes.object.isRequired,
 };
+
+
 
 export default withStyles(styles)(ContainedButtons);
