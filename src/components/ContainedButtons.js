@@ -12,22 +12,15 @@ const styles = theme => ({
     },
 });
 
+const getButtonComponent = (button, classes) =>{
+    return <Button variant="contained" color={button.type} className={classes.button}>{button.text}</Button>
+};
+
 function ContainedButtons(props) {
-    const { classes } = props;
+    const { classes, buttons } = props;
     return (
         <div>
-            <Button variant="contained" color="primary" className={classes.button}>
-                יצירת גרסה חדשה
-            </Button>
-            <Button variant="contained" color="primary" className={classes.button}>
-                עדכון גרסה
-            </Button>
-            <Button variant="contained" color="primary" className={classes.button}>
-                העתקת גרסה
-            </Button>
-            <Button variant="contained" color="secondary"  className={classes.button}>
-                מחיקת גרסה
-            </Button>
+            { buttons.map(button => getButtonComponent(button, classes))}
         </div>
     );
 }
