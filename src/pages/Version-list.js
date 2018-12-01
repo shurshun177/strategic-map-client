@@ -42,10 +42,10 @@ class VersionList extends Component {
         const {classes} = this.props;
 
         let buttons = [
-            {text: 'צירת גרסה חדשה', type: 'primary'},
-            {text: 'עדכון גרסה', type: 'primary'},
-            {text: 'העתקת גרסה', type: 'primary'},
-            {text: 'מחיקת גרסה', type: 'secondary'}
+            {text:'יצירת גרסה חדשה', type: 'primary' },
+            {text:'עדכון גרסה', type: 'primary' },
+            {text:'העתקת גרסה', type: 'primary' },
+            {text:'מחיקת גרסה', type: 'secondary' }
         ];
 
 
