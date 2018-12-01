@@ -19,7 +19,7 @@ class VersionDetails extends Component {
     // }
     render() {
         return (
-            <Form/>
+            <Form type="version"/>
         );
     }
 }

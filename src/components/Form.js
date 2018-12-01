@@ -6,6 +6,9 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
 
 const styles = theme => ({
     container: {
@@ -23,6 +26,9 @@ const styles = theme => ({
     menu: {
         width: 200,
     },
+    group: {
+        flexDirection: "row"
+    }
 });
 
 const currencies = [
@@ -45,23 +51,57 @@ const currencies = [
 ];
 
 
-const getFormByType = ()=>{
-    return [
-        {},
-    ]
+//TODO implement to get elements render form dynamically by form type
+const getFormByType = {
+    'version': type=>{
+
+    },
+    'measure': type=>{
+        // return (<TextField
+        //     id="standard-name"
+        //     required
+        //     label="Name"
+        //     className={classes.textField}
+        //     value={this.state.name}
+        //     onChange={this.handleChange('name')}
+        //     margin="normal"
+        // />)
+    }
 };
+
+
+
 
 
 class Form extends Component {
 
     //TODO define state for form
-    state = {
-        mode: 'create',
-        name: 'Cat in the Hat',
-        age: '',
-        multiline: 'Controlled',
-        currency: 'EUR',
-    };
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+            measure_code: '',
+            measure_name: '',
+            measure_desc: '',
+            criteria_inclusion: '',
+            removal_criteria : '',
+            numerator : '',
+            denominator : '',
+            hospital_type : '',
+            business_topic : '',
+            measure_type : '',
+            measuring_frequency : '',
+            measure_unit : '',
+            digit_num : '',
+            separate_thousands : '',
+            active : '',
+            from_date : '',
+            to_date : '',
+            target_default : '',
+            remarks : '',
+        };
+    }
+
 
     handleChange = name => event => {
         this.setState({
@@ -69,172 +109,100 @@ class Form extends Component {
         });
     };
 
-    render() {
-        const { classes } = this.props;
+    handleSubmit(e){
+        e.preventDefault();
+        alert('form submitted')
+        this.props.handleFormSubmit(this.state);
+    }
 
+    render() {
+        const { classes, type } = this.props;
         return (
-            <form className={classes.container} noValidate autoComplete="off">
+            <form className={classes.container} noValidate autoComplete="off"
+                  onSubmit={this.handleSubmit}
+            >
                 <TextField
-                    id="standard-name"
+                    id="measure_code"
+                    name="measure_code"
                     required
-                    label="Name"
-                    className={classes.textField}
-                    value={this.state.name}
-                    onChange={this.handleChange('name')}
-                    margin="normal"
-                />
-                <TextField
-                    id="standard-uncontrolled"
-                    label="Uncontrolled"
-                    defaultValue="foo"
+                    label="קוד מדד"
                     className={classes.textField}
                     margin="normal"
+                    onChange={this.handleChange('measure_code')}
                 />
                 <TextField
+                    id="measure_name"
+                    name="measure_name"
                     required
-                    id="standard-required"
-                    label="Required"
-                    defaultValue="Hello World"
+                    label="קוד מדד"
                     className={classes.textField}
                     margin="normal"
+                    onChange={this.handleChange('measure_name')}
                 />
                 <TextField
-                    error
-                    id="standard-error"
-                    label="Error"
-                    defaultValue="Hello World"
+                    id="measure_desc"
+                    name="measure_desc"
+                    required
+                    label="קוד מדד"
                     className={classes.textField}
                     margin="normal"
+                    onChange={this.handleChange('measure_desc')}
+
                 />
                 <TextField
-                    disabled
-                    id="standard-disabled"
-                    label="Disabled"
-                    defaultValue="Hello World"
+                    id="criteria_inclusion"
+                    name="criteria_inclusion"
+                    required
+                    label="קוד מדד"
                     className={classes.textField}
                     margin="normal"
+                    onChange={this.handleChange('criteria_inclusion')}
+
                 />
                 <TextField
-                    id="standard-password-input"
-                    label="Password"
-                    className={classes.textField}
-                    type="password"
-                    autoComplete="current-password"
-                    margin="normal"
-                />
-                <TextField
-                    id="standard-read-only-input"
-                    label="Read Only"
-                    defaultValue="Hello World"
+                    id="removal_criteria"
+                    name="removal_criteria"
+                    required
+                    label="קוד מדד"
                     className={classes.textField}
                     margin="normal"
-                    InputProps={{
-                        readOnly: true,
-                    }}
+                    onChange={this.handleChange('removal_criteria')}
+
                 />
                 <TextField
-                    id="standard-dense"
-                    label="Dense"
-                    className={classNames(classes.textField, classes.dense)}
-                    margin="dense"
-                />
-                <TextField
-                    id="standard-multiline-flexible"
-                    label="Multiline"
-                    multiline
-                    rowsMax="4"
-                    value={this.state.multiline}
-                    onChange={this.handleChange('multiline')}
+                    id="numerator"
+                    name="numerator"
+                    required
+                    label="קוד מדד"
                     className={classes.textField}
                     margin="normal"
+                    onChange={this.handleChange('numerator')}
+
                 />
                 <TextField
-                    id="standard-multiline-static"
-                    label="Multiline"
-                    multiline
-                    rows="4"
-                    defaultValue="Default Value"
+                    id="denominator"
+                    name="denominator"
+                    required
+                    label="קוד מדד"
                     className={classes.textField}
                     margin="normal"
+                    onChange={this.handleChange('denominator')}
+
                 />
                 <TextField
-                    id="standard-helperText"
-                    label="Helper text"
-                    defaultValue="Default Value"
-                    className={classes.textField}
-                    helperText="Some important text"
-                    margin="normal"
-                />
-                <TextField
-                    id="standard-with-placeholder"
-                    label="With placeholder"
-                    placeholder="Placeholder"
-                    className={classes.textField}
-                    margin="normal"
-                />
-                <TextField
-                    id="standard-textarea"
-                    label="With placeholder multiline"
-                    placeholder="Placeholder"
-                    multiline
-                    className={classes.textField}
-                    margin="normal"
-                />
-                <TextField
-                    id="standard-number"
-                    label="Number"
-                    value={this.state.age}
-                    onChange={this.handleChange('age')}
-                    type="number"
-                    className={classes.textField}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    margin="normal"
-                />
-                <TextField
-                    id="standard-search"
-                    label="Search field"
-                    type="search"
-                    className={classes.textField}
-                    margin="normal"
-                />
-                <TextField
-                    id="standard-select-currency"
+                    id="hospital_type"
+                    name="hospital_type"
                     select
-                    label="Select"
+                    label="סוג בית חולים"
                     className={classes.textField}
-                    value={this.state.currency}
-                    onChange={this.handleChange('currency')}
-                    SelectProps={{
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    helperText="Please select your currency"
-                    margin="normal"
-                >
-                    {currencies.map(option => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
-                </TextField>
-                <TextField
-                    id="standard-select-currency-native"
-                    select
-                    label="Native select"
-                    className={classes.textField}
-                    value={this.state.currency}
-                    onChange={this.handleChange('currency')}
                     SelectProps={{
                         native: true,
                         MenuProps: {
                             className: classes.menu,
                         },
                     }}
-                    helperText="Please select your currency"
                     margin="normal"
+                    onChange={this.handleChange('hospital_type')}
                 >
                     {currencies.map(option => (
                         <option key={option.value} value={option.value}>
@@ -243,23 +211,171 @@ class Form extends Component {
                     ))}
                 </TextField>
                 <TextField
-                    id="standard-full-width"
-                    label="Label"
-                    style={{ margin: 8 }}
-                    placeholder="Placeholder"
-                    helperText="Full width!"
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true,
+                    id="business_topic"
+                    name="business_topic"
+                    select
+                    label="נושא עיסקי"
+                    className={classes.textField}
+                    SelectProps={{
+                        native: true,
+                        MenuProps: {
+                            className: classes.menu,
+                        },
                     }}
+                    margin="normal"
+                    onChange={this.handleChange('business_topic')}
+
+                >
+                    {currencies.map(option => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </TextField>
+                <TextField
+                    id="measure_type"
+                    name="measure_type"
+                    select
+                    label="סוג מדד"
+                    className={classes.textField}
+                    SelectProps={{
+                        native: true,
+                        MenuProps: {
+                            className: classes.menu,
+                        },
+                    }}
+                    margin="normal"
+                    onChange={this.handleChange('measure_type')}
+
+                >
+                    {currencies.map(option => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </TextField>
+                <TextField
+                    id="measuring_frequency"
+                    name="measuring_frequency"
+                    select
+                    label="תדירות מדידה"
+                    className={classes.textField}
+                    SelectProps={{
+                        native: true,
+                        MenuProps: {
+                            className: classes.menu,
+                        },
+                    }}
+                    margin="normal"
+                    onChange={this.handleChange('measuring_frequency')}
+
+                >
+                    {currencies.map(option => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </TextField>
+                <TextField
+                    id="measure_unit"
+                    name="measure_unit"
+                    required
+                    label="קוד מדד"
+                    className={classes.textField}
+                    margin="normal"
+                    onChange={this.handleChange('measure_unit')}
+
                 />
                 <TextField
-                    id="standard-bare"
+                    id="digit_num"
+                    name="digit_num"
+                    required
+                    label="קוד מדד"
                     className={classes.textField}
-                    defaultValue="Bare"
+                    margin="normal"
+                    onChange={this.handleChange('digit_num')}
+
+                />
+
+
+                <FormGroup row>
+
+                <FormControlLabel
+                    control={
+                        <Switch
+                            id="separate_thousands"
+                            name="separate_thousands"
+                            checked={this.state.checkedA}
+                            onChange={this.handleChange('separate_thousands')}
+                            value="separate_thousands"
+                        />
+                    }
+                    label="מפריד אלפים"
+                />
+
+                <FormControlLabel
+                    control={
+                        <Switch
+                            id="active"
+                            name="active"
+                            checked={this.state.checkedA}
+                            onChange={this.handleChange('active')}
+                            value="active"
+                        />
+                    }
+                    label="פעיל"
+                />
+
+
+
+                </FormGroup>
+
+                <TextField
+                    id="from_date"
+                    name="from_date"
+                    label="מתאריך"
+                    className={classNames(classes.textField)}
+                    margin="normal"
+                    type="date"
+                    onChange={this.handleChange('from_date')}
+                />
+
+                <TextField
+                    id="to_date"
+                    name="to_date"
+                    label="עד תאריך"
+                    className={classNames(classes.textField)}
+                    margin="normal"
+                    type="date"
+                    onChange={this.handleChange('to_date')}
+
+                />
+
+                <TextField
+                    id="target_default"
+                    name="target_default"
+                    label="Multiline"
+                    multiline
+                    rowsMax="4"
+                    value={this.state.multiline}
+                    onChange={this.handleChange('target_default')}
+                    className={classes.textField}
+                    margin="normal"
+
+                />
+
+                <TextField
+                    id="remarks"
+                    name="remarks"
+                    label="Multiline"
+                    multiline
+                    rowsMax="4"
+                    value={this.state.multiline}
+                    onChange={this.handleChange('remarks')}
+                    className={classes.textField}
                     margin="normal"
                 />
+                <input type="submit" value="Submit" />
             </form>
         );
     }

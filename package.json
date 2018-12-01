@@ -2,8 +2,10 @@
   "name": "strategic-map-client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://127.0.0.1:8000",
   "dependencies": {
     "@material-ui/core": "^3.4.0",
+    "axios": "^0.18.0",
     "jss-rtl": "^0.2.3",
     "material-table": "^1.1.2",
     "react": "^16.6.1",
