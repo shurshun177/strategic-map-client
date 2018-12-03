@@ -41,10 +41,10 @@ class MeasureList extends Component {
     render() {
         const {classes} = this.props;
         let buttons = [
-            {text:'יצירת מדד חדש', type: 'primary' },
-            {text:'עדכון מדד', type: 'primary' },
-            {text:'העתקת מדד', type: 'primary' },
-            {text:'מחיקת מדד', type: 'secondary' }
+            {text:'יצירת מדד חדש', type: 'primary', 'url': '/measure-details' },
+            {text:'עדכון מדד', type: 'primary', 'url': '/measure-details' },
+            {text:'העתקת מדד', type: 'primary', 'url':'/measure-details' },
+            {text:'מחיקת מדד', type: 'secondary', 'url': '/measure-details' }
         ];
         return (
             <div>
