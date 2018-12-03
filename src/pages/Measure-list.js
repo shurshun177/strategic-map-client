@@ -5,6 +5,7 @@ import ContainedButtons from '../components/ContainedButtons';
 import ListViewTable from '../components/ListViewTable'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import RestAPI from '../api';
 
 
 const styles = {
@@ -14,9 +15,31 @@ const styles = {
 };
 
 class MeasureList extends Component {
-    render() {
-        const { classes } = this.props;
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        };
+    }
 
+    componentDidMount() {
+        let url = `measures/`;
+        const measuresList = RestAPI().get(url, {withCredentials: true});
+        measuresList.then(result => {
+            let data = result;
+            this.setState((prevState, props) => {
+                return {
+                    data: data
+                };
+            });
+
+        }).catch((error) => {
+
+        });
+    }
+
+    render() {
+        const {classes} = this.props;
         let buttons = [
             {text:'יצירת מדד חדש', type: 'primary' },
             {text:'עדכון מדד', type: 'primary' },

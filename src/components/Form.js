@@ -31,25 +31,93 @@ const styles = theme => ({
     }
 });
 
-const currencies = [
+const hosp_type = [
     {
-        value: 'USD',
-        label: '$',
+        value: '1',
+        label: 'כללים',
     },
     {
-        value: 'EUR',
-        label: '€',
+        value: '2',
+        label: 'גריאטריים',
     },
     {
-        value: 'BTC',
-        label: '฿',
-    },
-    {
-        value: 'JPY',
-        label: '¥',
+        value: '3',
+        label: 'פסיכיאטריים',
     },
 ];
 
+const topic_list = [
+    {
+        value: '1',
+        label: 'תקן איוש ונלוות',
+    },
+    {
+        value: '2',
+        label: 'פעילות',
+    },
+    {
+        value: '3',
+        label: 'חווית המטופל',
+    },
+    {
+        value: '4',
+        label: 'הון אנושי',
+    },
+    {
+        value: '5',
+        label: 'איכות ובטיחות',
+    },
+    {
+        value: '6',
+        label: 'תשתית כלכלית ופיזית',
+    },
+    {
+        value: '7',
+        label: 'ניצולת חדרי ניתוח',
+    },
+    {
+        value: '8',
+        label: 'תשתיתטכנולוגית',
+    },
+];
+
+const meas_type = [
+    {
+        value: '1',
+        label: 'ON TARGET',
+    },
+    {
+        value: '2',
+        label: 'LOW IS BETTER',
+    },
+    {
+        value: '3',
+        label: 'HIGH IS BETTER',
+    },
+];
+
+const meas_freq = [
+    {
+        value: '1',
+        label: 'יומי',
+    },
+    {
+        value: '2',
+        label: 'חודשי',
+    },
+    {
+        value: '3',
+        label: 'רבעוני',
+    },
+    {
+        value: '4',
+        label: 'חציוני',
+    },
+    {
+        value: '5',
+        label: 'שנתי',
+    },
+];
 
 //TODO implement to get elements render form dynamically by form type
 const getFormByType = {
@@ -134,7 +202,7 @@ class Form extends Component {
                     id="measure_name"
                     name="measure_name"
                     required
-                    label="קוד מדד"
+                    label="שם מדד"
                     className={classes.textField}
                     margin="normal"
                     onChange={this.handleChange('measure_name')}
@@ -143,7 +211,7 @@ class Form extends Component {
                     id="measure_desc"
                     name="measure_desc"
                     required
-                    label="קוד מדד"
+                    label="תיאור מדד"
                     className={classes.textField}
                     margin="normal"
                     onChange={this.handleChange('measure_desc')}
@@ -153,7 +221,7 @@ class Form extends Component {
                     id="criteria_inclusion"
                     name="criteria_inclusion"
                     required
-                    label="קוד מדד"
+                    label="קריטריונים להכללה"
                     className={classes.textField}
                     margin="normal"
                     onChange={this.handleChange('criteria_inclusion')}
@@ -163,7 +231,7 @@ class Form extends Component {
                     id="removal_criteria"
                     name="removal_criteria"
                     required
-                    label="קוד מדד"
+                    label="קריטריונים להוצאה"
                     className={classes.textField}
                     margin="normal"
                     onChange={this.handleChange('removal_criteria')}
@@ -173,7 +241,7 @@ class Form extends Component {
                     id="numerator"
                     name="numerator"
                     required
-                    label="קוד מדד"
+                    label="מונה"
                     className={classes.textField}
                     margin="normal"
                     onChange={this.handleChange('numerator')}
@@ -183,7 +251,7 @@ class Form extends Component {
                     id="denominator"
                     name="denominator"
                     required
-                    label="קוד מדד"
+                    label="מכנה"
                     className={classes.textField}
                     margin="normal"
                     onChange={this.handleChange('denominator')}
@@ -204,7 +272,7 @@ class Form extends Component {
                     margin="normal"
                     onChange={this.handleChange('hospital_type')}
                 >
-                    {currencies.map(option => (
+                    {hosp_type.map(option => (
                         <option key={option.value} value={option.value}>
                             {option.label}
                         </option>
@@ -214,7 +282,7 @@ class Form extends Component {
                     id="business_topic"
                     name="business_topic"
                     select
-                    label="נושא עיסקי"
+                    label="נושא עסקי"
                     className={classes.textField}
                     SelectProps={{
                         native: true,
@@ -226,7 +294,7 @@ class Form extends Component {
                     onChange={this.handleChange('business_topic')}
 
                 >
-                    {currencies.map(option => (
+                    {topic_list.map(option => (
                         <option key={option.value} value={option.value}>
                             {option.label}
                         </option>
@@ -248,7 +316,7 @@ class Form extends Component {
                     onChange={this.handleChange('measure_type')}
 
                 >
-                    {currencies.map(option => (
+                    {meas_type.map(option => (
                         <option key={option.value} value={option.value}>
                             {option.label}
                         </option>
@@ -270,7 +338,7 @@ class Form extends Component {
                     onChange={this.handleChange('measuring_frequency')}
 
                 >
-                    {currencies.map(option => (
+                    {meas_freq.map(option => (
                         <option key={option.value} value={option.value}>
                             {option.label}
                         </option>
@@ -280,7 +348,7 @@ class Form extends Component {
                     id="measure_unit"
                     name="measure_unit"
                     required
-                    label="קוד מדד"
+                    label="יחידת מידה"
                     className={classes.textField}
                     margin="normal"
                     onChange={this.handleChange('measure_unit')}
@@ -290,7 +358,7 @@ class Form extends Component {
                     id="digit_num"
                     name="digit_num"
                     required
-                    label="קוד מדד"
+                    label="מספר ספרות אחרי הנקודה"
                     className={classes.textField}
                     margin="normal"
                     onChange={this.handleChange('digit_num')}
@@ -354,7 +422,7 @@ class Form extends Component {
                 <TextField
                     id="target_default"
                     name="target_default"
-                    label="Multiline"
+                    label="יעד"
                     multiline
                     rowsMax="4"
                     value={this.state.multiline}
@@ -367,7 +435,7 @@ class Form extends Component {
                 <TextField
                     id="remarks"
                     name="remarks"
-                    label="Multiline"
+                    label="הערות"
                     multiline
                     rowsMax="4"
                     value={this.state.multiline}
