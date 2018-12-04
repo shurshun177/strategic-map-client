@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-// import ListView from "./components/ListView";
-// import AppHeader from './components/AppHeader';
-
-// import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
-// import RTL from './components/RTL';
 import Form from '../components/Form'
-
-
-/*const theme = createMuiTheme({
-    direction: 'rtl',
-});*/
+import RestAPI from '../api';
 
 class VersionDetails extends Component {
-    // componentDidMount() {
-    //     document.body.dir = "rtl";
-    // }
+    handleFormSubmit(formData){
+        let url = `versions/`;
+        const createVersion = RestAPI().post(url, formData, {withCredentials: true});
+        createVersion.then(result => {
+            let data = result;
+            //TODO if successful, redirect to list with toaster
+        }).catch((error) => {
+            //todo if not successful, display an error with toaster
+        });
+    }
+
     render() {
         return (
-            <Form type="version"/>
+            <Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version'/>
         );
     }
 }
