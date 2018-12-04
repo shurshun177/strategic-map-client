@@ -16,7 +16,7 @@ class MeasureDetails extends Component {
 
     render() {
         return (
-            <Form handleFormSubmit={this.handleFormSubmit.bind(this)}/>
+            <Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='measure'/>
         );
     }
 }

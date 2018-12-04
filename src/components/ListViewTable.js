@@ -15,8 +15,7 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-// import DeleteIcon from '@material-ui/icons/Delete';
-// import FilterListIcon from '@material-ui/icons/FilterList';
+
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 let counter = 0;
@@ -69,11 +68,6 @@ class ListViewTable extends React.Component {
             <TableHead>
                 <TableRow>
                     <TableCell padding="checkbox">
-                        {/*<Checkbox*/}
-                            {/*indeterminate={numSelected > 0 && numSelected < rowCount}*/}
-                            {/*checked={numSelected === rowCount}*/}
-                            {/*onChange={onSelectAllClick}*/}
-                        {/*/>*/}
                     </TableCell>
                     {rows.map(row => {
                         return (
@@ -203,7 +197,7 @@ class EnhancedTable extends React.Component {
     state = {
         order: 'asc',
         orderBy: 'calories',
-        selected: [],
+        selected: null,
         data: [
             createData('1000','גרסה ינואר-אפריל 2018', 3.7, 67, 4.3),
             createData('1001', 'גרסה ינואר-ספטמבר 2017', 25.0, 51, 4.9),
@@ -234,32 +228,10 @@ class EnhancedTable extends React.Component {
         this.setState({ order, orderBy });
     };
 
-    handleSelectAllClick = event => {
-        if (event.target.checked) {
-            this.setState(state => ({ selected: state.data.map(n => n.id) }));
-            return;
-        }
-        this.setState({ selected: [] });
-    };
 
     handleClick = (event, id) => {
         const { selected } = this.state;
-        const selectedIndex = selected.indexOf(id);
-        let newSelected = [];
-
-        if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, id);
-        } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1));
-        } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
-        } else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1),
-            );
-        }
-
+        let newSelected = id;
         this.setState({ selected: newSelected });
     };
 
@@ -271,7 +243,7 @@ class EnhancedTable extends React.Component {
         this.setState({ rowsPerPage: event.target.value });
     };
 
-    isSelected = id => this.state.selected.indexOf(id) !== -1;
+    isSelected = id => this.state.selected === id;
 
     render() {
         const { classes } = this.props;
@@ -280,11 +252,11 @@ class EnhancedTable extends React.Component {
 
         return (
             <Paper className={classes.root}>
-                <EnhancedTableToolbar numSelected={selected.length} />
+                {/*<EnhancedTableToolbar numSelected={selected.length} />*/}
                 <div className={classes.tableWrapper}>
                     <Table className={classes.table} aria-labelledby="tableTitle">
                         <ListViewTable
-                            numSelected={selected.length}
+                            numSelected='1'
                             order={order}
                             orderBy={orderBy}
                             onSelectAllClick={this.handleSelectAllClick}
