@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -14,19 +14,46 @@ const styles = theme => ({
 });
 
 
-const getButtonComponent = (button, classes) =>{
-    return <Button
-        component={Link} to={`/measure-details/1`}
-        variant="contained" color={button.type} className={classes.button}>{button.text}</Button>
-};
+class ContainedButtons extends Component{
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         selectedId: null
+    //     };
+    // }
+    //
+    // isButtonDisabled(){
+    //    return this.props.selectedId === null;
+    // }
 
-function ContainedButtons(props) {
-    const { classes, buttons } = props;
-    return (
+    getButtonComponent(button, classes){
+        if (button.onClick){
+            return <Button
+                variant="contained" color={button.type} className={classes.button}
+                onClick={button.onClick}
+            >{button.text}
+            </Button
+            >
+        }
+        else{
+            return <Button
+                component={Link} to={`${button.url}/${this.props.selectedId}`}
+                variant="contained" color={button.type} className={classes.button}>{button.text}
+            </Button
+            >
+        }
+    }
+
+    render(){
+        const { classes, buttons } = this.props;
+
+       return (
         <div>
-            { buttons.map(button => getButtonComponent(button, classes))}
+            { buttons.map(button => this.getButtonComponent(button, classes))}
         </div>
-    );
+        );
+    }
+
 }
 
 ContainedButtons.propTypes = {

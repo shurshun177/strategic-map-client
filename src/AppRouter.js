@@ -13,7 +13,7 @@ const AppRouter =()=>{
             <Route exact path="/versions" component={VersionList} />
             <Route exact path="/measures" component={MeasureList} />
             <Route path="/measure-details/:id" component={MeasureDetails} />
-            <Route exact path="/version-details" component={VersionDetails} />
+            <Route exact path="/version-details/:id" component={VersionDetails} />
 
         </React.Fragment>
     );

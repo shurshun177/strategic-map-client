@@ -571,6 +571,9 @@ class Form extends Component {
         return form[type].apply(this, ['', classes]);
     }
 
+
+
+
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
@@ -579,8 +582,6 @@ class Form extends Component {
 
     handleSubmit(e){
         e.preventDefault();
-        console.log(this);
-        console.log(this);
         this.props.handleFormSubmit(this.state);
     }
 

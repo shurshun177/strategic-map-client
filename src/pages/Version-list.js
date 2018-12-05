@@ -18,7 +18,8 @@ class VersionList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            selectedVersion: null
         };
     }
 
@@ -26,15 +27,47 @@ class VersionList extends Component {
         let url = `versions/`;
         const versionsList = RestAPI().get(url, {withCredentials: true});
         versionsList.then(result => {
-            let data = result;
+            let data = result.data.items.map(el=>{
+               el.create_date = el.create_date['$date'];
+               return el;
+            });
             this.setState((prevState, props) => {
                 return {
-                    data: data
+                    data
                 };
             });
 
         }).catch((error) => {
+            console.log(error);
+        });
+    }
 
+    setSelectedVersion(version){
+        let id = version._id['$oid'];
+        this.setState((prevState, props) => {
+            return {
+                selectedVersion: id
+            };
+        });
+    }
+
+    updateVersionStatus(){
+        let url = `version/del_vers/${this.state.selectedVersion}/`;
+        const updatedVersion = RestAPI().put(url, {withCredentials: true});
+        updatedVersion.then(result => {
+            alert('succcess)')
+            // let data = result.data.items.map(el=>{
+            //     el.create_date = el.create_date['$date'];
+            //     return el;
+            // });
+            // this.setState((prevState, props) => {
+            //     return {
+            //         data
+            //     };
+            // });
+
+        }).catch((error) => {
+            console.log(error);
         });
     }
 
@@ -43,26 +76,33 @@ class VersionList extends Component {
 
         let buttons = [
             {text:'יצירת גרסה חדשה', type: 'primary', 'url': '/version-details' },
-            {text:'עדכון גרסה', type: 'primary' },
-            {text:'העתקת גרסה', type: 'primary' },
-            {text:'מחיקת גרסה', type: 'secondary' }
+            {text:'עדכון גרסה', type: 'primary', 'url':'/version-details'},
+            {text:'העתקת גרסה', type: 'primary', 'url':'/version-details' },
+            {text:'מחיקת גרסה', type: 'secondary', 'onClick': this.updateVersionStatus.bind(this)  }
         ];
 
 
-        let columns = [
-            {title: 'תאריך יצירת גרסה', field: 'createDate'},
-            {title: 'פעיל/לא פעיל', field: 'active'},
-            {title: 'סוג בית חולים', field: 'hospitalType'},
-            {
-                title: 'שם גרסה',
-                field: 'versionName',
-            },
-            {
-                title: 'מספר גרסה',
-                field: 'versionNumber',
-            },
-        ];
+        // let columns = [
+        //     {title: 'תאריך יצירת גרסה', field: 'create_date'},
+        //     {title: 'פעיל/לא פעיל', field: 'active'},
+        //     {title: 'סוג בית חולים', field: 'hospital_type'},
+        //     {
+        //         title: 'שם גרסה',
+        //         field: 'version_name',
+        //     },
+        //     {
+        //         title: 'מספר גרסה',
+        //         field: 'version_number',
+        //     },
+        // ];
 
+        const columns = [
+            { id: 'version_number', numeric: false, disablePadding: true, label: 'מספר גרסה' },
+            { id: 'version_name', numeric: true, disablePadding: false, label: 'שם הגרסה' },
+            { id: 'hospital_type', numeric: true, disablePadding: false, label: 'סוג בית חולים' },
+            { id: 'active', numeric: true, disablePadding: false, label: 'פעיל/לא פעיל' },
+            { id: 'create_date', numeric: true, disablePadding: false, label: 'תאריך יצירת גרסה' },
+        ];
 
         let data = [
             {
@@ -106,8 +146,8 @@ class VersionList extends Component {
                         מסך רשימת גרסאות
                     </Typography>
                 </Toolbar>
-                <ContainedButtons buttons={buttons}/>
-                <ListViewTable data={this.state.data} title={title} columns={columns}/>
+                <ContainedButtons buttons={buttons} selectedId={this.state.selectedVersion}/>
+                <ListViewTable data={this.state.data} title={title} columns={columns} setSelectedHandler={this.setSelectedVersion.bind(this)}/>
             </div>
         );
     }

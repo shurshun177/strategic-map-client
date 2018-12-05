@@ -48,13 +48,13 @@ function getSorting(order, orderBy) {
     return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
-const rows = [
-    { id: 'מספר גרסה', numeric: false, disablePadding: true, label: 'מספר גרסה' },
-    { id: 'calories', numeric: true, disablePadding: false, label: 'שם הגרסה' },
-    { id: 'fat', numeric: true, disablePadding: false, label: 'סוג בית חולים' },
-    { id: 'carbs', numeric: true, disablePadding: false, label: 'פעיל/לא פעיל' },
-    { id: 'ללחלחיי', numeric: true, disablePadding: false, label: 'תאריך יצירת גרסה' },
-];
+// const rows = [
+//     { id: 'version_number', numeric: false, disablePadding: true, label: 'מספר גרסה' },
+//     { id: 'version_name', numeric: true, disablePadding: false, label: 'שם הגרסה' },
+//     { id: 'hospital_type', numeric: true, disablePadding: false, label: 'סוג בית חולים' },
+//     { id: 'active', numeric: true, disablePadding: false, label: 'פעיל/לא פעיל' },
+//     { id: 'create_date', numeric: true, disablePadding: false, label: 'תאריך יצירת גרסה' },
+// ];
 
 class ListViewTable extends React.Component {
     createSortHandler = property => event => {
@@ -62,14 +62,16 @@ class ListViewTable extends React.Component {
     };
 
     render() {
-        const { onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
+        const { columns, onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
 
+
+        console.log(this.props)
         return (
             <TableHead>
                 <TableRow>
                     <TableCell padding="checkbox">
                     </TableCell>
-                    {rows.map(row => {
+                    {columns.map(row => {
                         return (
                             <TableCell
                                 key={row.id}
@@ -198,21 +200,6 @@ class EnhancedTable extends React.Component {
         order: 'asc',
         orderBy: 'calories',
         selected: null,
-        data: [
-            createData('1000','גרסה ינואר-אפריל 2018', 3.7, 67, 4.3),
-            createData('1001', 'גרסה ינואר-ספטמבר 2017', 25.0, 51, 4.9),
-            createData('1002', '', 16.0, 24, 6.0),
-            createData('1003', 159, 6.0, 24, 4.0),
-            createData('1005', 356, 16.0, 49, 3.9),
-            createData('', 408, 3.2, 87, 6.5),
-            createData('', 237, 9.0, 37, 4.3),
-            createData('', 375, 0.0, 94, 0.0),
-            createData('', 518, 26.0, 65, 7.0),
-            createData('', 392, 0.2, 98, 0.0),
-            createData('', 318, 0, 81, 2.0),
-            createData('', 360, 19.0, 9, 37.0),
-            createData('', 437, 18.0, 63, 4.0),
-        ],
         page: 0,
         rowsPerPage: 5,
     };
@@ -245,28 +232,49 @@ class EnhancedTable extends React.Component {
 
     isSelected = id => this.state.selected === id;
 
-    render() {
-        const { classes } = this.props;
-        const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
-        const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+    timestampToDate= timestamp=>{
+        return new Date(timestamp*1000/1000).toDateString();
+    }
 
+    isActive = isActive => isActive === true? 'פעיל': 'לא פעיל';
+
+
+    setSelectedHandler=(e, id)=>{
+        e.preventDefault();
+        // console.log(event);
+        console.log(e, id);
+        this.props.setSelectedHandler(id);
+    };
+
+    //TODO get current property by columns
+
+    // getPropertyByColumn = (fieldIndex)=>{
+    //
+    // }
+
+    render() {
+        const { classes, data } = this.props;
+        const { order, orderBy, selected, rowsPerPage, page } = this.state;
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+        const numSelected = 1;
         return (
             <Paper className={classes.root}>
                 {/*<EnhancedTableToolbar numSelected={selected.length} />*/}
                 <div className={classes.tableWrapper}>
                     <Table className={classes.table} aria-labelledby="tableTitle">
                         <ListViewTable
-                            numSelected='1'
+                            numSelected={numSelected}
                             order={order}
                             orderBy={orderBy}
                             onSelectAllClick={this.handleSelectAllClick}
                             onRequestSort={this.handleRequestSort}
                             rowCount={data.length}
+                            columns={this.props.columns}
                         />
                         <TableBody>
                             {stableSort(data, getSorting(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map(n => {
+                                .map((n, index) => {
                                     const isSelected = this.isSelected(n.id);
                                     return (
                                         <TableRow
@@ -279,15 +287,15 @@ class EnhancedTable extends React.Component {
                                             selected={isSelected}
                                         >
                                             <TableCell padding="checkbox">
-                                                <Checkbox checked={isSelected} />
+                                                <Checkbox checked={isSelected} onChange={event => this.setSelectedHandler(event, n)}/>
                                             </TableCell>
-                                            <TableCell component="th" scope="row" padding="none">
-                                                {n.name}
+                                            <TableCell component="th" scope="row" padding="none" numeric>
+                                                {n.version_number}
                                             </TableCell>
-                                            <TableCell numeric>{n.calories}</TableCell>
-                                            <TableCell numeric>{n.fat}</TableCell>
-                                            <TableCell numeric>{n.carbs}</TableCell>
-                                            <TableCell numeric>{n.protein}</TableCell>
+                                            <TableCell numeric>{n.version_name}</TableCell>
+                                            <TableCell numeric>{n.hospital_type}</TableCell>
+                                            <TableCell numeric>{this.isActive(n.active)}</TableCell>
+                                            <TableCell numeric>{this.timestampToDate(n.create_date)}</TableCell>
                                         </TableRow>
                                     );
                                 })}
