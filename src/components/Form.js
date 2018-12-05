@@ -33,6 +33,10 @@ const styles = theme => ({
 
 const hosp_type = [
     {
+        value: '0',
+        label: '*****',
+    },
+    {
         value: '1',
         label: 'כללים',
     },
@@ -47,6 +51,10 @@ const hosp_type = [
 ];
 
 const topic_list = [
+    {
+        value: '0',
+        label: '*****',
+    },
     {
         value: '1',
         label: 'תקן איוש ונלוות',
@@ -83,6 +91,10 @@ const topic_list = [
 
 const meas_type = [
     {
+        value: '0',
+        label: '*****',
+    },
+    {
         value: '1',
         label: 'ON TARGET',
     },
@@ -97,6 +109,10 @@ const meas_type = [
 ];
 
 const meas_freq = [
+    {
+        value: '0',
+        label: '*****',
+    },
     {
         value: '1',
         label: 'יומי',
@@ -120,6 +136,10 @@ const meas_freq = [
 ];
 
 const vers_type = [
+    {
+        value: '0',
+        label: '*****',
+    },
     {
         value: '1',
         label: 'חציוני',

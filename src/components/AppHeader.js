@@ -20,7 +20,7 @@ function AppHeader(props) {
                     {/*<Typography variant="h6" color="inherit">*/}
                         {/*This is place for logo*/}
                     {/*</Typography>*/}
-                    <img src="new-logo.PNG"/>
+                    <img src="/new-logo.PNG"/>
                 </Toolbar>
             </AppBar>
         </div>
