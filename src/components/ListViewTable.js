@@ -275,11 +275,12 @@ class EnhancedTable extends React.Component {
                             {stableSort(data, getSorting(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((n, index) => {
-                                    const isSelected = this.isSelected(n.id);
+                                    let id = n._id['$oid'];
+                                    const isSelected = this.isSelected(n._id);
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={event => this.handleClick(event, n.id)}
+                                            onClick={event => this.handleClick(event, n._id)}
                                             role="checkbox"
                                             aria-checked={isSelected}
                                             tabIndex={-1}
@@ -293,6 +294,7 @@ class EnhancedTable extends React.Component {
                                                 {n.version_number}
                                             </TableCell>
                                             <TableCell numeric>{n.version_name}</TableCell>
+
                                             <TableCell numeric>{n.hospital_type}</TableCell>
                                             <TableCell numeric>{this.isActive(n.active)}</TableCell>
                                             <TableCell numeric>{this.timestampToDate(n.create_date)}</TableCell>

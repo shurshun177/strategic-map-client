@@ -9,11 +9,15 @@ class VersionDetails extends Component {
         const createVersion = RestAPI().post(url, formData, {withCredentials: true});
         createVersion.then(result => {
             let data = result;
+            alert('version was created succcessfully')
             //TODO if successful, redirect to list with toaster
         }).catch((error) => {
             //todo if not successful, display an error with toaster
+            alert('such credentials already exist')
         });
     }
+
+
 
     render() {
         return (

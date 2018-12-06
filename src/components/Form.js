@@ -34,7 +34,7 @@ const styles = theme => ({
 const hosp_type = [
     {
         value: '0',
-        label: '*****',
+        label: 'םוג בית חולים',
     },
     {
         value: '1',
@@ -53,7 +53,7 @@ const hosp_type = [
 const topic_list = [
     {
         value: '0',
-        label: '*****',
+        label: 'נושא עסקי',
     },
     {
         value: '1',
@@ -92,7 +92,7 @@ const topic_list = [
 const meas_type = [
     {
         value: '0',
-        label: '*****',
+        label: 'סוג מדד',
     },
     {
         value: '1',
@@ -111,7 +111,7 @@ const meas_type = [
 const meas_freq = [
     {
         value: '0',
-        label: '*****',
+        label: 'תדירות מדידה',
     },
     {
         value: '1',
@@ -138,7 +138,7 @@ const meas_freq = [
 const vers_type = [
     {
         value: '0',
-        label: '*****',
+        label: 'סוג גרסה',
     },
     {
         value: '1',

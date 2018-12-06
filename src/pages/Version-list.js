@@ -55,7 +55,7 @@ class VersionList extends Component {
         let url = `version/del_vers/${this.state.selectedVersion}/`;
         const updatedVersion = RestAPI().put(url, {withCredentials: true});
         updatedVersion.then(result => {
-            alert('succcess)')
+            alert('version was deleted succcessfully')
             // let data = result.data.items.map(el=>{
             //     el.create_date = el.create_date['$date'];
             //     return el;
@@ -68,6 +68,7 @@ class VersionList extends Component {
 
         }).catch((error) => {
             console.log(error);
+            alert('version was not deleted')
         });
     }
 
