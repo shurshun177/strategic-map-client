@@ -5,6 +5,7 @@ import MeasureDetails from './pages/Measure-details';
 import VersionList from './pages/Version-list';
 import MeasureList from './pages/Measure-list';
 import VersionDetails from './pages/Version-details';
+import VersionUpdate from './pages/Version-update';
 
 const AppRouter =()=>{
     return (
@@ -14,7 +15,7 @@ const AppRouter =()=>{
             <Route exact path="/measures" component={MeasureList} />
             <Route path="/measure-details/:id" component={MeasureDetails} />
             <Route exact path="/version-details/:id" component={VersionDetails} />
-
+            <Route exact path="/version-update/:id" component={VersionUpdate} />
         </React.Fragment>
     );
 };

@@ -194,9 +194,16 @@ class Form extends Component {
 
     }
 
-    getFormByType(type, classes){
+    componentDidUpdate(prevProps) {
+        if (this.props.mode === 'update' && this.props.mode !==prevProps.mode){
+            this.setState((prevState, props) => {
+                return props.data;
+            });
+        }
+    }
+    getFormByType(type, classes, mode, data){
         let form = {
-            'version': function(type, classes){
+            'version': function(type, classes, mode, data){
                 return (
                     <>
                     <TextField
@@ -207,6 +214,7 @@ class Form extends Component {
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('version_number')}
+                        value={this.state.version_number}
                     />
                     <TextField
                         id="version_name"
@@ -216,6 +224,7 @@ class Form extends Component {
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('version_name')}
+                        value={this.state.version_name}
                     />
 
                     <TextField
@@ -232,6 +241,7 @@ class Form extends Component {
                         }}
                         margin="normal"
                         onChange={this.handleChange('hospital_type')}
+                        value={this.state.hospital_type}
                     >
                         {hosp_type.map(option => (
                             <option key={option.value} value={option.value}>
@@ -248,6 +258,7 @@ class Form extends Component {
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('version_desc')}
+                        value={this.state.version_desc}
 
                     />
                     <TextField
@@ -264,6 +275,7 @@ class Form extends Component {
                         }}
                         margin="normal"
                         onChange={this.handleChange('version_type')}
+                        value={this.state.version_type}
 
                     >
                         {vers_type.map(option => (
@@ -281,7 +293,7 @@ class Form extends Component {
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('measure')}
-
+                        value={this.state.measure}
                     />
 
                     <FormGroup row>
@@ -296,6 +308,7 @@ class Form extends Component {
                                     checked={this.state.checkedA}
                                     onChange={this.handleChange('active')}
                                     value="active"
+                                    // value={mode=== 'update'? data['active'] === 'active':''}
                                 />
                             }
                             label="פעיל"
@@ -568,7 +581,7 @@ class Form extends Component {
                 );
             }
         };
-        return form[type].apply(this, ['', classes]);
+        return form[type].apply(this, ['', classes, mode, data]);
     }
 
 
@@ -586,9 +599,9 @@ class Form extends Component {
     }
 
     render() {
-        const { classes, type } = this.props;
+        const { classes, type, mode, data } = this.props;
 
-        let components = this.getFormByType(type, classes);
+        let components = this.getFormByType(type, classes, mode, data);
         return (
             <form className={classes.container} noValidate autoComplete="off"
                   onSubmit={this.handleSubmit}

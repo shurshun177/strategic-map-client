@@ -102,7 +102,7 @@ class MeasureList extends Component {
             { id: 'measure_code', numeric: false, disablePadding: true, label: 'קןד מדד' },
             { id: 'measure_name', numeric: true, disablePadding: false, label: 'שם מדד' },
             { id: 'hospital_type', numeric: true, disablePadding: false, label: 'סוג בית חולים' },
-            { id: 'active', numeric: true, disablePadding: false, label: 'פעיל/לא פעיל' },
+            { id: 'active', numeric: true, disablePadding: false, label: 'פעיל/לא פעיל', isActive: true },
         ];
 
         let title = "מדדים";

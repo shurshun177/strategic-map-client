@@ -18,11 +18,10 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
+import moment from 'moment-timezone';
+// import momenttz from 'moment-timezone';
+
 let counter = 0;
-function createData(name, calories, fat, carbs, protein) {
-    counter += 1;
-    return { id: counter, name, calories, fat, carbs, protein };
-}
 
 function desc(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -48,14 +47,6 @@ function getSorting(order, orderBy) {
     return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
-// const rows = [
-//     { id: 'version_number', numeric: false, disablePadding: true, label: 'מספר גרסה' },
-//     { id: 'version_name', numeric: true, disablePadding: false, label: 'שם הגרסה' },
-//     { id: 'hospital_type', numeric: true, disablePadding: false, label: 'סוג בית חולים' },
-//     { id: 'active', numeric: true, disablePadding: false, label: 'פעיל/לא פעיל' },
-//     { id: 'create_date', numeric: true, disablePadding: false, label: 'תאריך יצירת גרסה' },
-// ];
-
 class ListViewTable extends React.Component {
     createSortHandler = property => event => {
         this.props.onRequestSort(event, property);
@@ -64,8 +55,6 @@ class ListViewTable extends React.Component {
     render() {
         const { columns, onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
 
-
-        console.log(this.props)
         return (
             <TableHead>
                 <TableRow>
@@ -233,8 +222,13 @@ class EnhancedTable extends React.Component {
     isSelected = id => this.state.selected === id;
 
     timestampToDate= timestamp=>{
-        return new Date(timestamp*1000/1000).toDateString();
-    }
+
+        return moment.unix(timestamp/1000).tz('Asia/Jerusalem').format("MM/DD/YYYY HH:mm");
+
+        // return new Date(timestamp*1000/1000).toDateString();
+
+
+    };
 
     isActive = isActive => isActive === true? 'פעיל': 'לא פעיל';
 
@@ -246,17 +240,26 @@ class EnhancedTable extends React.Component {
         this.props.setSelectedHandler(id);
     };
 
-    //TODO get current property by columns
+    elementToRow (columns, obj){
+        let row = [];
+        columns.forEach(el=>{
+            row.push(obj[el]);
+        });
+        return row;
+    }
 
-    // getPropertyByColumn = (fieldIndex)=>{
-    //
-    // }
+    getTableCells(){
 
+
+    }
     render() {
-        const { classes, data } = this.props;
+        const { classes, data, columns } = this.props;
         const { order, orderBy, selected, rowsPerPage, page } = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
         const numSelected = 1;
+        //TODO take columns names
+        let columnsNames = columns.map(el=>el.id);
+        console.log(columnsNames, 'COLUMNS NAMES')
         return (
             <Paper className={classes.root}>
                 {/*<EnhancedTableToolbar numSelected={selected.length} />*/}
@@ -276,28 +279,27 @@ class EnhancedTable extends React.Component {
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((n, index) => {
                                     let id = n._id['$oid'];
-                                    const isSelected = this.isSelected(n._id);
+                                    const isSelected = this.isSelected(id);
+                                    console.log(n);
+
+                                    let row = this.elementToRow(columnsNames, n);
+                                    console.log('ROWROW', row);
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={event => this.handleClick(event, n._id)}
+                                            onClick={event => this.handleClick(event,id)}
                                             role="checkbox"
                                             aria-checked={isSelected}
                                             tabIndex={-1}
-                                            key={n.id}
+                                            key={id}
                                             selected={isSelected}
                                         >
                                             <TableCell padding="checkbox">
-                                                <Checkbox checked={isSelected} onChange={event => this.setSelectedHandler(event, n)}/>
+                                            <Checkbox checked={isSelected} onChange={event => this.setSelectedHandler(event, n)}/>
                                             </TableCell>
-                                            <TableCell component="th" scope="row" padding="none" numeric>
-                                                {n.version_number}
-                                            </TableCell>
-                                            <TableCell numeric>{n.version_name}</TableCell>
-
-                                            <TableCell numeric>{n.hospital_type}</TableCell>
-                                            <TableCell numeric>{this.isActive(n.active)}</TableCell>
-                                            <TableCell numeric>{this.timestampToDate(n.create_date)}</TableCell>
+                                            {row.map((el, index) =>
+                                                <TableCell component='th' scope='row' padding='none' numeric>{columns[index].isActive? this.isActive(el): columns[index].isTimestamp? this.timestampToDate(el): el}</TableCell>
+                                            )}
                                         </TableRow>
                                     );
                                 })}

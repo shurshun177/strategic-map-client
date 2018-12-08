@@ -54,17 +54,14 @@ class VersionList extends Component {
     updateVersionStatus(){
         let url = `version/del_vers/${this.state.selectedVersion}/`;
         const updatedVersion = RestAPI().put(url, {withCredentials: true});
-        updatedVersion.then(result => {
+        updatedVersion.then(() => {
+            this.setState((prevState, props) => {
+                return {
+                    selectedVersion: null,
+                    data: prevState.data.filter(el=>el._id['$oid'] !== prevState.selectedVersion)
+                };
+            });
             alert('version was deleted succcessfully')
-            // let data = result.data.items.map(el=>{
-            //     el.create_date = el.create_date['$date'];
-            //     return el;
-            // });
-            // this.setState((prevState, props) => {
-            //     return {
-            //         data
-            //     };
-            // });
 
         }).catch((error) => {
             console.log(error);
@@ -77,32 +74,18 @@ class VersionList extends Component {
 
         let buttons = [
             {text:'יצירת גרסה חדשה', type: 'primary', 'url': '/version-details' },
-            {text:'עדכון גרסה', type: 'primary', 'url':'/version-details'},
+            {text:'עדכון גרסה', type: 'primary', 'url':'/version-update'},
             {text:'העתקת גרסה', type: 'primary', 'url':'/version-details' },
             {text:'מחיקת גרסה', type: 'secondary', 'onClick': this.updateVersionStatus.bind(this)  }
         ];
 
 
-        // let columns = [
-        //     {title: 'תאריך יצירת גרסה', field: 'create_date'},
-        //     {title: 'פעיל/לא פעיל', field: 'active'},
-        //     {title: 'סוג בית חולים', field: 'hospital_type'},
-        //     {
-        //         title: 'שם גרסה',
-        //         field: 'version_name',
-        //     },
-        //     {
-        //         title: 'מספר גרסה',
-        //         field: 'version_number',
-        //     },
-        // ];
-
         const columns = [
-            { id: 'version_number', numeric: false, disablePadding: true, label: 'מספר גרסה' },
+            { id: 'version_number', numeric: false, disablePadding: true, label: 'מספר גרסה'},
             { id: 'version_name', numeric: true, disablePadding: false, label: 'שם הגרסה' },
             { id: 'hospital_type', numeric: true, disablePadding: false, label: 'סוג בית חולים' },
-            { id: 'active', numeric: true, disablePadding: false, label: 'פעיל/לא פעיל' },
-            { id: 'create_date', numeric: true, disablePadding: false, label: 'תאריך יצירת גרסה' },
+            { id: 'active', numeric: true, disablePadding: false, label: 'פעיל/לא פעיל', isActive: true },
+            { id: 'create_date', numeric: true, disablePadding: false, label: 'תאריך יצירת גרסה', isTimestamp: true},
         ];
 
         let data = [
