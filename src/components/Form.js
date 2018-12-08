@@ -305,10 +305,10 @@ class Form extends Component {
                                 <Switch
                                     id="active"
                                     name="active"
-                                    checked={this.state.checkedA}
+                                    checked={this.state.active}
                                     onChange={this.handleChange('active')}
                                     value="active"
-                                    // value={mode=== 'update'? data['active'] === 'active':''}
+
                                 />
                             }
                             label="פעיל"
