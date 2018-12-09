@@ -19,6 +19,7 @@ class MeasureDetails extends Component {
     }
 
     render() {
+        console.log('SEARCH', this.props.match.params.id);
         return (
             <Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='measure'/>
         );

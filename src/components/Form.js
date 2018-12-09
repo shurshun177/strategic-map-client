@@ -201,6 +201,8 @@ class Form extends Component {
             });
         }
     }
+
+    
     getFormByType(type, classes, mode, data){
         let form = {
             'version': function(type, classes, mode, data){
@@ -305,7 +307,7 @@ class Form extends Component {
                                 <Switch
                                     id="active"
                                     name="active"
-                                    checked={this.state.active}
+                                    checked={this.state.chekedA}
                                     onChange={this.handleChange('active')}
                                     value="active"
 
@@ -319,7 +321,7 @@ class Form extends Component {
                     </>
                 );
             },
-            'measure': function(type, classes){
+            'measure': function(type, classes, mode, data){
 
                 return (
                     <>
@@ -331,6 +333,7 @@ class Form extends Component {
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('measure_code')}
+                        value={this.state.measure_code}
                     />
                     <TextField
                         id="measure_name"
@@ -340,6 +343,7 @@ class Form extends Component {
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('measure_name')}
+                        value={this.state.measure_name}
                     />
                     <TextField
                         id="measure_desc"
@@ -349,6 +353,7 @@ class Form extends Component {
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('measure_desc')}
+                        value={this.state.measure_desc}
 
                     />
                     <TextField
@@ -359,6 +364,7 @@ class Form extends Component {
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('criteria_inclusion')}
+                        value={this.state.criteria_inclusion}
 
                     />
                     <TextField
@@ -369,6 +375,7 @@ class Form extends Component {
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('removal_criteria')}
+                        value={this.state.removal_criteria}
 
                     />
                     <TextField
@@ -379,6 +386,7 @@ class Form extends Component {
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('numerator')}
+                        value={this.state.numerator}
 
                     />
                     <TextField
@@ -389,6 +397,7 @@ class Form extends Component {
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('denominator')}
+                        value={this.state.denominator}
 
                     />
                     <TextField
@@ -405,6 +414,7 @@ class Form extends Component {
                         }}
                         margin="normal"
                         onChange={this.handleChange('hospital_type')}
+                        value={this.state.hospital_type}
                     >
                         {hosp_type.map(option => (
                             <option key={option.value} value={option.value}>
@@ -426,6 +436,7 @@ class Form extends Component {
                         }}
                         margin="normal"
                         onChange={this.handleChange('business_topic')}
+                        value={this.state.business_topic}
 
                     >
                         {topic_list.map(option => (
@@ -448,6 +459,7 @@ class Form extends Component {
                         }}
                         margin="normal"
                         onChange={this.handleChange('measure_type')}
+                        value={this.state.measure_type}
 
                     >
                         {meas_type.map(option => (
@@ -470,6 +482,7 @@ class Form extends Component {
                         }}
                         margin="normal"
                         onChange={this.handleChange('measuring_frequency')}
+                        value={this.state.measuring_frequency}
 
                     >
                         {meas_freq.map(option => (
@@ -486,6 +499,7 @@ class Form extends Component {
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('measure_unit')}
+                        value={this.state.measure_unit}
 
                     />
                     <TextField
@@ -496,6 +510,7 @@ class Form extends Component {
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('digit_num')}
+                        value={this.state.digit_num}
 
                     />
 
@@ -540,6 +555,7 @@ class Form extends Component {
                         margin="normal"
                         type="date"
                         onChange={this.handleChange('from_date')}
+                        value={this.state.from_date}
                     />
 
                     <TextField
@@ -550,6 +566,7 @@ class Form extends Component {
                         margin="normal"
                         type="date"
                         onChange={this.handleChange('to_date')}
+                        value={this.state.to_date}
 
                     />
 
@@ -561,6 +578,7 @@ class Form extends Component {
                         rowsMax="4"
                         value={this.state.multiline}
                         onChange={this.handleChange('target_default')}
+                        value={this.state.target_default}
                         className={classes.textField}
                         margin="normal"
 
@@ -574,6 +592,7 @@ class Form extends Component {
                         rowsMax="4"
                         value={this.state.multiline}
                         onChange={this.handleChange('remarks')}
+                        value={this.state.remarks}
                         className={classes.textField}
                         margin="normal"
                     />

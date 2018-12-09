@@ -55,8 +55,14 @@ class MeasureList extends Component {
         let url = `measure/del_measure/${this.state.selectedMeasure}/`;
         console.log(this.state.selectedMeasure)
         const updatedMeasure = RestAPI().put(url, {withCredentials: true});
-        updatedMeasure.then(result => {
-            alert('version was deleted succcessfully')
+        updatedMeasure.then(() => {
+            this.setState((prevState, props) => {
+                return {
+                    selectedMeasure: null,
+                    data: prevState.data.filter(el=>el._id['$oid'] !== prevState.selectedMeasure)
+                };
+            });
+            alert('measure was deleted succcessfully')
             // let data = result.data.items.map(el=>{
             //     el.create_date = el.create_date['$date'];
             //     return el;
@@ -69,7 +75,7 @@ class MeasureList extends Component {
 
         }).catch((error) => {
             console.log(error);
-            alert('version was not deleted')
+            alert('measure was not deleted')
         });
     }
 
@@ -78,8 +84,8 @@ class MeasureList extends Component {
 
         let buttons = [
             {text:'יצירת מדד חדש', type: 'primary', 'url': '/measure-details' },
-            {text:'עדכון מדד', type: 'primary', 'url':'/measure-details'},
-            {text:'העתקת מדד', type: 'primary', 'url':'/measure-details' },
+            {text:'עדכון מדד', type: 'primary', 'url':'/measure-update'},
+            {text:'העתקת מדד', type: 'primary', 'url':'/measure-copy' },
             {text:'מחיקת מדד', type: 'secondary', 'onClick': this.updateMeasureStatus.bind(this)  }
         ];
 

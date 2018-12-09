@@ -75,7 +75,7 @@ class VersionList extends Component {
         let buttons = [
             {text:'יצירת גרסה חדשה', type: 'primary', 'url': '/version-details' },
             {text:'עדכון גרסה', type: 'primary', 'url':'/version-update'},
-            {text:'העתקת גרסה', type: 'primary', 'url':'/version-details' },
+            {text:'העתקת גרסה', type: 'primary', 'url':'/version-copy' },
             {text:'מחיקת גרסה', type: 'secondary', 'onClick': this.updateVersionStatus.bind(this)  }
         ];
 
