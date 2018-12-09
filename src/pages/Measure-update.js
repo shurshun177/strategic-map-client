@@ -11,7 +11,7 @@ class MeasureUpdate extends Component {
         this.state = {
             data: {},
             mode: null,
-            isCreated: true
+            isCreated: false
         }
 
     }
