@@ -307,7 +307,7 @@ class Form extends Component {
                                 <Switch
                                     id="active"
                                     name="active"
-                                    checked={this.state.chekedA}
+                                    checked={this.state.checkedA}
                                     onChange={this.handleChange('active')}
                                     value="active"
 
@@ -602,8 +602,6 @@ class Form extends Component {
         };
         return form[type].apply(this, ['', classes, mode, data]);
     }
-
-
 
 
     handleChange = name => event => {

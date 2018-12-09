@@ -10,6 +10,12 @@ const styles = {
     },
 };
 
+var divStyle = {
+   width: 250,
+    height: 100
+};
+
+
 function AppHeader(props) {
     const { classes } = props;
 
@@ -20,7 +26,7 @@ function AppHeader(props) {
                     {/*<Typography variant="h6" color="inherit">*/}
                         {/*This is place for logo*/}
                     {/*</Typography>*/}
-                    <img src="/new-logo.PNG"/>
+                    <img src="/new-logo.PNG" style={divStyle}/>
                 </Toolbar>
             </AppBar>
         </div>

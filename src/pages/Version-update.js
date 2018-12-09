@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from '../components/Form'
 import RestAPI from '../api';
+import { Route, Redirect } from 'react-router';
 
 class VersionUpdate extends Component {
 
@@ -9,7 +10,8 @@ class VersionUpdate extends Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.state = {
             data: {},
-            mode: null
+            mode: null,
+            isCreated: false
         }
 
     }
@@ -27,8 +29,11 @@ class VersionUpdate extends Component {
         let url = `version/update/${currentId}/`;
         const updateVersion = RestAPI().put(url, updateObject, {withCredentials: true});
         updateVersion.then(result => {
-            let data = result;
-            alert('version was updated succcessfully')
+            this.setState((prevState, props) => {
+                return {
+                    isCreated: true
+                };
+            });
             //TODO if successful, redirect to list with toaster
         }).catch((error) => {
             //todo if not successful, display an error with toaster
@@ -57,9 +62,12 @@ class VersionUpdate extends Component {
     }
 
     render() {
-        console.log(this.state.data, 'STATEDATA')
         return (
-            <Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version' mode={this.state.mode} data={this.state.data}/>
+            <div>{
+                this.state.isCreated ? (<Redirect to="/versions"/>) :
+                    (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version' mode={this.state.mode}
+                           data={this.state.data}/>)
+            }</div>
         );
     }
 }

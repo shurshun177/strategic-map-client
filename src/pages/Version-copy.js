@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from '../components/Form'
 import RestAPI from '../api';
+import { Route, Redirect } from 'react-router';
 
 class VersionCopy extends Component {
 
@@ -9,13 +10,12 @@ class VersionCopy extends Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.state = {
             data: {},
-            mode: null
+            mode: null,
+            isCreated: false
         }
 
     }
     handleFormSubmit(formData){
-        let currentId = this.props.match.params.id;
-
         let createObject = {
             active: formData.active === 'active',
             measure: formData.measure,
@@ -29,9 +29,11 @@ class VersionCopy extends Component {
         let url = `versions/`;
         const copyVersion = RestAPI().post(url, createObject, {withCredentials: true});
         copyVersion.then(result => {
-            let data = result;
-            alert('version was created succcessfully')
-            //TODO if successful, redirect to list with toaster
+            this.setState((prevState, props) => {
+                return {
+                    isCreated: true
+                };
+            });
         }).catch((error) => {
             //todo if not successful, display an error with toaster
             alert('such credentials already exist')
@@ -59,9 +61,12 @@ class VersionCopy extends Component {
     }
 
     render() {
-        console.log(this.state.data, 'STATEDATA')
         return (
-            <Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version' mode={this.state.mode} data={this.state.data}/>
+            <div>{
+                this.state.isCreated ? (<Redirect to="/versions"/>) :
+                    (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version' mode={this.state.mode}
+                           data={this.state.data}/>)
+            }</div>
         );
     }
 }

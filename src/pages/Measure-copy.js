@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from '../components/Form'
 import RestAPI from '../api';
+import { Route, Redirect } from 'react-router';
 
 class MeasureCopy extends Component {
 
@@ -9,7 +10,8 @@ class MeasureCopy extends Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.state = {
             data: {},
-            mode: null
+            mode: null,
+            isCreated: false
         }
 
     }
@@ -41,9 +43,11 @@ class MeasureCopy extends Component {
         let url = `measures/`;
         const copyMeasure = RestAPI().post(url, createObject, {withCredentials: true});
         copyMeasure.then(result => {
-            let data = result;
-            alert('measure was created succcessfully')
-            //TODO if successful, redirect to list with toaster
+            this.setState((prevState, props) => {
+                return {
+                    isCreated: true
+                };
+            });
         }).catch((error) => {
             //todo if not successful, display an error with toaster
             alert('such credentials already exist')
@@ -71,9 +75,11 @@ class MeasureCopy extends Component {
     }
 
     render() {
-        console.log(this.state.data, 'STATEDATA')
         return (
-            <Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='measure' mode={this.state.mode} data={this.state.data}/>
+            <div>{ this.state.isCreated ? (<Redirect to="/measures"/>) :
+                (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='measure' mode={this.state.mode}
+                      data={this.state.data}/>)
+            }</div>
         );
     }
 }

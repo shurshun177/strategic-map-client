@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from '../components/Form'
 import RestAPI from '../api';
+import { Route, Redirect } from 'react-router';
 
 class MeasureUpdate extends Component {
 
@@ -9,7 +10,8 @@ class MeasureUpdate extends Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.state = {
             data: {},
-            mode: null
+            mode: null,
+            isCreated: true
         }
 
     }
@@ -39,8 +41,11 @@ class MeasureUpdate extends Component {
         let url = `measure/update/${currentId}/`;
         const updateMeasure = RestAPI().put(url, updateObject, {withCredentials: true});
         updateMeasure.then(result => {
-            let data = result;
-            alert('measure was updated succcessfully')
+            this.setState((prevState, props) => {
+                return {
+                    isCreated: true
+                };
+            });
             //TODO if successful, redirect to list with toaster
         }).catch((error) => {
             //todo if not successful, display an error with toaster
@@ -71,7 +76,11 @@ class MeasureUpdate extends Component {
     render() {
         console.log(this.state.data, 'STATEDATA')
         return (
-            <Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='measure' mode={this.state.mode} data={this.state.data}/>
+            <div>{
+                this.state.isCreated ? (<Redirect to="/measures"/>) :
+                    (            <Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='measure' mode={this.state.mode} data={this.state.data}/>
+                    )
+            }</div>
         );
     }
 }

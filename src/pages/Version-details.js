@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import Form from '../components/Form'
 import RestAPI from '../api';
+import { Route, Redirect } from 'react-router';
 
 class VersionDetails extends Component {
+
+    constructor(props) {
+        super(props);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.state = {
+            isCreated: false
+        }
+    }
     handleFormSubmit(formData){
         formData.active = formData.active === 'active';
         let url = `versions/`;
         const createVersion = RestAPI().post(url, formData, {withCredentials: true});
         createVersion.then(result => {
-            let data = result;
-            alert('version was created succcessfully')
-            //TODO if successful, redirect to list with toaster
+            this.setState((prevState, props) => {
+                return {
+                    isCreated: true
+                };
+            });
         }).catch((error) => {
             //todo if not successful, display an error with toaster
             alert('such credentials already exist')
@@ -20,11 +31,12 @@ class VersionDetails extends Component {
 
 
     render() {
-        console.log('SEARCH', this.props.match.params.id);
-
         return (
-            <Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version'/>
-        );
+            <div>{
+                this.state.isCreated ? (<Redirect to="/versions"/>) :
+                (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version'/>)
+            }
+            </div>)
     }
 }
 
