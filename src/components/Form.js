@@ -12,13 +12,14 @@ import FormGroup from '@material-ui/core/FormGroup';
 
 const styles = theme => ({
     container: {
-        display: 'flex',
-        flexWrap: 'wrap',
+        display: 'grid'
+        //flexWrap: 'wrap',
     },
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        width: 200,
+
+        width: 400,
     },
     dense: {
         marginTop: 19,
@@ -27,14 +28,14 @@ const styles = theme => ({
         width: 200,
     },
     group: {
-        flexDirection: "row"
+        flexDirection: 'column'
     }
 });
 
 const hosp_type = [
     {
         value: '0',
-        label: 'םוג בית חולים',
+        label: '',
     },
     {
         value: '1',
@@ -53,7 +54,7 @@ const hosp_type = [
 const topic_list = [
     {
         value: '0',
-        label: 'נושא עסקי',
+        label: '',
     },
     {
         value: '1',
@@ -92,7 +93,7 @@ const topic_list = [
 const meas_type = [
     {
         value: '0',
-        label: 'סוג מדד',
+        label: '',
     },
     {
         value: '1',
@@ -111,7 +112,7 @@ const meas_type = [
 const meas_freq = [
     {
         value: '0',
-        label: 'תדירות מדידה',
+        label: '',
     },
     {
         value: '1',
@@ -138,7 +139,7 @@ const meas_freq = [
 const vers_type = [
     {
         value: '0',
-        label: 'סוג גרסה',
+        label: '',
     },
     {
         value: '1',

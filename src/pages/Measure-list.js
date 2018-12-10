@@ -62,7 +62,7 @@ class MeasureList extends Component {
                     data: prevState.data.filter(el=>el._id['$oid'] !== prevState.selectedMeasure)
                 };
             });
-            alert('measure was deleted succcessfully')
+
             // let data = result.data.items.map(el=>{
             //     el.create_date = el.create_date['$date'];
             //     return el;
@@ -118,6 +118,7 @@ class MeasureList extends Component {
                     <Typography variant="h4"
                                 color="inherit"
                                 align="center"
+
                                 className={classes.myTextStyle}>
                         מסך רשימת מדדים
                     </Typography>

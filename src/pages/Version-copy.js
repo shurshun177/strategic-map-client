@@ -66,6 +66,7 @@ class VersionCopy extends Component {
                 this.state.isCreated ? (<Redirect to="/versions"/>) :
                     (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version' mode={this.state.mode}
                            data={this.state.data}/>)
+
             }</div>
         );
     }
