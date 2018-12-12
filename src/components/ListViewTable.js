@@ -223,7 +223,7 @@ class EnhancedTable extends React.Component {
 
     timestampToDate= timestamp=>{
 
-        return moment.unix(timestamp/1000).tz('Asia/Jerusalem').format("DD/MM/YYYY HH:mm");
+        return moment.unix(timestamp/1000).tz('Asia/Jerusalem').format("DD/MM/YYYY");
 
         // return new Date(timestamp*1000/1000).toDateString();
 

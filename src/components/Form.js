@@ -308,9 +308,10 @@ class Form extends Component {
                                 <Switch
                                     id="active"
                                     name="active"
-                                    checked={this.state.checkedA}
+
                                     onChange={this.handleChange('active')}
-                                    value="active"
+                                    
+                                    value='active'
 
                                 />
                             }
@@ -574,7 +575,7 @@ class Form extends Component {
                     <TextField
                         id="target_default"
                         name="target_default"
-                        label="יעד"
+                        label="יעד עיסקי"
                         multiline
                         rowsMax="4"
                         value={this.state.multiline}
