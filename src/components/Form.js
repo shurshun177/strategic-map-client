@@ -9,10 +9,14 @@ import PropTypes from 'prop-types';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
+import DualListBox from 'react-dual-listbox';
 
 const styles = theme => ({
     container: {
-        display: 'grid'
+        display: 'flex',
+        flexDirection: 'column'
+
+        // display: 'grid'
         //flexWrap: 'wrap',
     },
     textField: {
@@ -28,7 +32,6 @@ const styles = theme => ({
         width: 200,
     },
     group: {
-        flexDirection: 'column'
     }
 });
 
@@ -165,7 +168,7 @@ class Form extends Component {
                 version_desc: '',
                 version_type: '',
                 hospital_type: '',
-                active: '',
+                active: true,
                 measure: []
             },
             'measure': {
@@ -182,8 +185,8 @@ class Form extends Component {
                 measuring_frequency: '',
                 measure_unit: '',
                 digit_num: '',
-                separate_thousands: '',
-                active: '',
+                separate_thousands: true,
+                active: true,
                 from_date: '',
                 to_date: '',
                 target_default: '',
@@ -207,17 +210,25 @@ class Form extends Component {
     getFormByType(type, classes, mode, data){
         let form = {
             'version': function(type, classes, mode, data){
+                let isReadonly = mode === 'update';
                 return (
                     <>
                     <TextField
                         id="version_number"
                         name="version_number"
-                        required
+                        required={true}
                         label="מספר גרסה"
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('version_number')}
                         value={this.state.version_number}
+                        type="number"
+                        inputProps={{
+                            min: 1000,
+                            step: 1
+                        }}
+                        readonly = {isReadonly}
+                        disabled={isReadonly}
                     />
                     <TextField
                         id="version_name"
@@ -233,6 +244,8 @@ class Form extends Component {
                     <TextField
                         id="hospital_type"
                         name="hospital_type"
+                        readonly = {isReadonly}
+                        disabled={isReadonly}
                         select
                         label="סוג בית חולים"
                         className={classes.textField}
@@ -251,6 +264,7 @@ class Form extends Component {
                                 {option.label}
                             </option>
                         ))}
+
                     </TextField>
 
                     <TextField
@@ -308,11 +322,9 @@ class Form extends Component {
                                 <Switch
                                     id="active"
                                     name="active"
-
-                                    onChange={this.handleChange('active')}
-                                    
+                                    checked={this.state.active}
+                                    onChange={this.handleChangeSwitch('active')}
                                     value='active'
-
                                 />
                             }
                             label="פעיל"
@@ -324,7 +336,7 @@ class Form extends Component {
                 );
             },
             'measure': function(type, classes, mode, data){
-
+                let isReadonly = mode === 'update';
                 return (
                     <>
                     <TextField
@@ -336,6 +348,8 @@ class Form extends Component {
                         margin="normal"
                         onChange={this.handleChange('measure_code')}
                         value={this.state.measure_code}
+                        readonly = {isReadonly}
+                        disabled={isReadonly}
                     />
                     <TextField
                         id="measure_name"
@@ -405,6 +419,8 @@ class Form extends Component {
                     <TextField
                         id="hospital_type"
                         name="hospital_type"
+                        readonly = {isReadonly}
+                        disabled={isReadonly}
                         select
                         label="סוג בית חולים"
                         className={classes.textField}
@@ -552,7 +568,7 @@ class Form extends Component {
                     <TextField
                         id="from_date"
                         name="from_date"
-                        label="מתאריך"
+                        helperText='מתאריך'
                         className={classNames(classes.textField)}
                         margin="normal"
                         type="date"
@@ -563,7 +579,7 @@ class Form extends Component {
                     <TextField
                         id="to_date"
                         name="to_date"
-                        label="עד תאריך"
+                        helperText="עד תאריך"
                         className={classNames(classes.textField)}
                         margin="normal"
                         type="date"
@@ -578,7 +594,6 @@ class Form extends Component {
                         label="יעד עיסקי"
                         multiline
                         rowsMax="4"
-                        value={this.state.multiline}
                         onChange={this.handleChange('target_default')}
                         value={this.state.target_default}
                         className={classes.textField}
@@ -592,7 +607,6 @@ class Form extends Component {
                         label="הערות"
                         multiline
                         rowsMax="4"
-                        value={this.state.multiline}
                         onChange={this.handleChange('remarks')}
                         value={this.state.remarks}
                         className={classes.textField}
@@ -609,6 +623,12 @@ class Form extends Component {
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
+        });
+    };
+
+    handleChangeSwitch = name => event => {
+        this.setState({
+            [name]: event.target.checked,
         });
     };
 

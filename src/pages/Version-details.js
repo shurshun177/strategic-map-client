@@ -13,7 +13,6 @@ class VersionDetails extends Component {
         }
     }
     handleFormSubmit(formData){
-        formData.active = formData.active === 'active';
         let url = `versions/`;
         const createVersion = RestAPI().post(url, formData, {withCredentials: true});
         createVersion.then(result => {
