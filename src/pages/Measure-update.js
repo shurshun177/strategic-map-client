@@ -19,7 +19,7 @@ class MeasureUpdate extends Component {
         let currentId = this.props.match.params.id;
 
         let updateObject = {
-            active: formData.active === 'active',
+            active: formData.active === true,
             measure_name: formData.measure_name,
             measure_desc: formData.measure_desc,
             criteria_inclusion: formData.criteria_inclusion,
@@ -31,7 +31,7 @@ class MeasureUpdate extends Component {
             measuring_frequency: formData.measuring_frequency,
             measure_unit: formData.measure_unit,
             digit_num: formData.digit_num,
-            separate_thousands: formData.separate_thousands === 'separate_thousands',
+            separate_thousands: formData.separate_thousands === true,
             from_date: formData.from_date,
             to_date: formData.to_date,
             target_default: formData.target_default,

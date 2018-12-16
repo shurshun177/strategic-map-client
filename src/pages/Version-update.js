@@ -19,7 +19,7 @@ class VersionUpdate extends Component {
         let currentId = this.props.match.params.id;
 
         let updateObject = {
-            active: formData.active === 'active',
+            active: formData.active === true,
             measure: formData.measure,
             version_desc: formData.version_desc,
             version_name: formData.version_name,

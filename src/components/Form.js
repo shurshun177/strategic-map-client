@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
-import DualListBox from 'react-dual-listbox';
 
 const styles = theme => ({
     container: {
@@ -163,7 +162,7 @@ class Form extends Component {
         console.log(props.type);//measure/version
         let stateByType = {
             'version': {
-                version_number: '',
+                version_number: 1000,
                 version_name: '',
                 version_desc: '',
                 version_type: '',
@@ -189,7 +188,7 @@ class Form extends Component {
                 active: true,
                 from_date: '',
                 to_date: '',
-                target_default: '',
+                target_default: 50,
                 remarks: '',
             }
         };
@@ -211,12 +210,13 @@ class Form extends Component {
         let form = {
             'version': function(type, classes, mode, data){
                 let isReadonly = mode === 'update';
+                let isReq = mode === 'update'
                 return (
                     <>
                     <TextField
                         id="version_number"
                         name="version_number"
-                        required={true}
+                        required={!isReq}
                         label="מספר גרסה"
                         className={classes.textField}
                         margin="normal"
@@ -233,7 +233,7 @@ class Form extends Component {
                     <TextField
                         id="version_name"
                         name="version_name"
-                        required
+                        required={!isReq}
                         label="שם גרסה"
                         className={classes.textField}
                         margin="normal"
@@ -244,6 +244,7 @@ class Form extends Component {
                     <TextField
                         id="hospital_type"
                         name="hospital_type"
+                        required={!isReq}
                         readonly = {isReadonly}
                         disabled={isReadonly}
                         select
@@ -270,7 +271,7 @@ class Form extends Component {
                     <TextField
                         id="version_desc"
                         name="version_desc"
-                        required
+
                         label="תיאור גרסה"
                         className={classes.textField}
                         margin="normal"
@@ -282,6 +283,7 @@ class Form extends Component {
                         id="version_type"
                         name="version_type"
                         select
+                        required={!isReq}
                         label="סוג גרסה"
                         className={classes.textField}
                         SelectProps={{
@@ -302,10 +304,32 @@ class Form extends Component {
                         ))}
                     </TextField>
 
+                     <TextField
+                        id="business_topic"
+                        name="business_topic"
+                        select
+                        label="נושא עסקי"
+                        className={classes.textField}
+                        SelectProps={{
+                            native: true,
+                            MenuProps: {
+                                className: classes.menu,
+                            },
+                        }}
+                        margin="normal"
+
+                    >
+                        {topic_list.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </TextField>
+
                     <TextField
                         id="measure"
                         name="measure"
-                        required
+                        required={!isReq}
                         label="מדדים"
                         className={classes.textField}
                         margin="normal"
@@ -332,17 +356,20 @@ class Form extends Component {
                     </FormGroup>
 
 
+
+
                     </>
                 );
             },
             'measure': function(type, classes, mode, data){
                 let isReadonly = mode === 'update';
+                let isReq = mode === 'update'
                 return (
                     <>
                     <TextField
                         id="measure_code"
                         name="measure_code"
-                        required
+                        required={!isReq}
                         label="קוד מדד"
                         className={classes.textField}
                         margin="normal"
@@ -354,7 +381,7 @@ class Form extends Component {
                     <TextField
                         id="measure_name"
                         name="measure_name"
-                        required
+                        required={!isReq}
                         label="שם מדד"
                         className={classes.textField}
                         margin="normal"
@@ -364,7 +391,7 @@ class Form extends Component {
                     <TextField
                         id="measure_desc"
                         name="measure_desc"
-                        required
+                        required={!isReq}
                         label="תיאור מדד"
                         className={classes.textField}
                         margin="normal"
@@ -375,7 +402,7 @@ class Form extends Component {
                     <TextField
                         id="criteria_inclusion"
                         name="criteria_inclusion"
-                        required
+
                         label="קריטריונים להכללה"
                         className={classes.textField}
                         margin="normal"
@@ -386,7 +413,7 @@ class Form extends Component {
                     <TextField
                         id="removal_criteria"
                         name="removal_criteria"
-                        required
+
                         label="קריטריונים להוצאה"
                         className={classes.textField}
                         margin="normal"
@@ -397,28 +424,39 @@ class Form extends Component {
                     <TextField
                         id="numerator"
                         name="numerator"
-                        required
+
                         label="מונה"
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('numerator')}
                         value={this.state.numerator}
+                        type="number"
+                        inputProps={{
+                            min: 1,
+                            step: 1
+                        }}
 
                     />
                     <TextField
                         id="denominator"
                         name="denominator"
-                        required
+
                         label="מכנה"
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('denominator')}
                         value={this.state.denominator}
+                        type="number"
+                        inputProps={{
+                            min: 1,
+                            step: 1
+                        }}
 
                     />
                     <TextField
                         id="hospital_type"
                         name="hospital_type"
+                        required={!isReq}
                         readonly = {isReadonly}
                         disabled={isReadonly}
                         select
@@ -443,6 +481,7 @@ class Form extends Component {
                     <TextField
                         id="business_topic"
                         name="business_topic"
+                        required={!isReq}
                         select
                         label="נושא עסקי"
                         className={classes.textField}
@@ -466,6 +505,7 @@ class Form extends Component {
                     <TextField
                         id="measure_type"
                         name="measure_type"
+                        required={!isReq}
                         select
                         label="סוג מדד"
                         className={classes.textField}
@@ -489,6 +529,7 @@ class Form extends Component {
                     <TextField
                         id="measuring_frequency"
                         name="measuring_frequency"
+
                         select
                         label="תדירות מדידה"
                         className={classes.textField}
@@ -512,23 +553,35 @@ class Form extends Component {
                     <TextField
                         id="measure_unit"
                         name="measure_unit"
-                        required
+                        required={!isReq}
                         label="יחידת מידה"
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('measure_unit')}
                         value={this.state.measure_unit}
+                        type="number"
+                        inputProps={{
+                            min: 1,
+                            step: 1
+                        }}
 
                     />
                     <TextField
                         id="digit_num"
                         name="digit_num"
-                        required
+                        required={!isReq}
                         label="מספר ספרות אחרי הנקודה"
                         className={classes.textField}
                         margin="normal"
                         onChange={this.handleChange('digit_num')}
                         value={this.state.digit_num}
+                        type="number"
+                        inputProps={{
+                            min: 1,
+                            step: 1
+                        }}
+
+
 
                     />
 
@@ -540,8 +593,8 @@ class Form extends Component {
                                 <Switch
                                     id="separate_thousands"
                                     name="separate_thousands"
-                                    checked={this.state.checkedA}
-                                    onChange={this.handleChange('separate_thousands')}
+                                    checked={this.state.separate_thousands}
+                                    onChange={this.handleChangeSwitch('separate_thousands')}
                                     value="separate_thousands"
                                 />
                             }
@@ -553,8 +606,8 @@ class Form extends Component {
                                 <Switch
                                     id="active"
                                     name="active"
-                                    checked={this.state.checkedA}
-                                    onChange={this.handleChange('active')}
+                                    checked={this.state.active}
+                                    onChange={this.handleChangeSwitch('active')}
                                     value="active"
                                 />
                             }
@@ -592,12 +645,16 @@ class Form extends Component {
                         id="target_default"
                         name="target_default"
                         label="יעד עיסקי"
-                        multiline
-                        rowsMax="4"
+
                         onChange={this.handleChange('target_default')}
                         value={this.state.target_default}
                         className={classes.textField}
                         margin="normal"
+                        type="number"
+                        inputProps={{
+                            min: 0,
+                            step: 5
+                        }}
 
                     />
 
@@ -605,7 +662,7 @@ class Form extends Component {
                         id="remarks"
                         name="remarks"
                         label="הערות"
-                        multiline
+
                         rowsMax="4"
                         onChange={this.handleChange('remarks')}
                         value={this.state.remarks}
@@ -630,6 +687,7 @@ class Form extends Component {
         this.setState({
             [name]: event.target.checked,
         });
+        console.log(this.state.active)
     };
 
     handleSubmit(e){
@@ -645,7 +703,7 @@ class Form extends Component {
             <form className={classes.container} noValidate autoComplete="off"
                   onSubmit={this.handleSubmit}
             >{components}
-                <input type="submit" value="Submit" />
+                <input type="submit" value="שמירה" />
             </form>
         );
     }
