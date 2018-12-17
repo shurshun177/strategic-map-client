@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
+import RestAPI from '../api';
 
 const styles = theme => ({
     container: {
@@ -168,6 +169,7 @@ class Form extends Component {
                 version_type: '',
                 hospital_type: '',
                 active: true,
+                business_topic: '',
                 measure: []
             },
             'measure': {
@@ -188,7 +190,7 @@ class Form extends Component {
                 active: true,
                 from_date: '',
                 to_date: '',
-                target_default: 50,
+                target_default: '',
                 remarks: '',
             }
         };
@@ -307,6 +309,7 @@ class Form extends Component {
                      <TextField
                         id="business_topic"
                         name="business_topic"
+
                         select
                         label="נושא עסקי"
                         className={classes.textField}
@@ -317,6 +320,8 @@ class Form extends Component {
                             },
                         }}
                         margin="normal"
+                        onChange={this.handleMeasure('business_topic')}
+
 
                     >
                         {topic_list.map(option => (
@@ -675,8 +680,27 @@ class Form extends Component {
         };
         return form[type].apply(this, ['', classes, mode, data]);
     }
-
-
+    handleMeasure = name => event => {
+        this.setState({
+            [name]: event.target.value,
+        });
+        console.log(this.state.topic)
+        let t = event.target.value
+        let code = this.state.hospital_type
+        let url = `available_measures/${code}/${t}/`;
+        const ShowMeasures = RestAPI().get(url, {withCredentials: true});
+        ShowMeasures.then(result => {
+            this.setState((prevState, props) => {
+                return {
+                    topic: result
+                };
+            })
+            //TODO if successful, redirect to list with toaster
+        }).catch((error) => {
+            //todo if not successful, display an error with toaster
+            alert('Database error')
+        });
+    };
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
