@@ -10,6 +10,8 @@ import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import RestAPI from '../api';
+import ListBox from './ListBox';
+import Calendar from 'react-calendar';
 
 const styles = theme => ({
     container: {
@@ -188,8 +190,8 @@ class Form extends Component {
                 digit_num: '',
                 separate_thousands: true,
                 active: true,
-                from_date: '',
-                to_date: '',
+                from_date: new Date(),
+                to_date: new Date(),
                 target_default: '',
                 remarks: '',
             }
@@ -359,10 +361,7 @@ class Form extends Component {
                             label="פעיל"
                         />
                     </FormGroup>
-
-
-
-
+                    <ListBox measureNamesList={this.state.business_topic}/>
                     </>
                 );
             },
@@ -634,6 +633,8 @@ class Form extends Component {
                         value={this.state.from_date}
                     />
 
+
+
                     <TextField
                         id="to_date"
                         name="to_date"
@@ -681,18 +682,20 @@ class Form extends Component {
         return form[type].apply(this, ['', classes, mode, data]);
     }
     handleMeasure = name => event => {
+        console.log(event.target.value)
         this.setState({
             [name]: event.target.value,
         });
-        console.log(this.state.topic)
+        console.log(this.state.business_topic)
         let t = event.target.value
         let code = this.state.hospital_type
         let url = `available_measures/${code}/${t}/`;
         const ShowMeasures = RestAPI().get(url, {withCredentials: true});
         ShowMeasures.then(result => {
+            console.log(result)
             this.setState((prevState, props) => {
                 return {
-                    topic: result
+                    business_topic: result.data.items
                 };
             })
             //TODO if successful, redirect to list with toaster
@@ -724,8 +727,10 @@ class Form extends Component {
 
         let components = this.getFormByType(type, classes, mode, data);
         return (
+
             <form className={classes.container} noValidate autoComplete="off"
                   onSubmit={this.handleSubmit}
+
             >{components}
                 <input type="submit" value="שמירה" />
             </form>

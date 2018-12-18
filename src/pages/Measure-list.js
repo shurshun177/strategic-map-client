@@ -115,9 +115,9 @@ class MeasureList extends Component {
         return (
             <div>
                 <Toolbar>
-                    <Typography variant="h4"
-                                color="inherit"
-                                align="center"
+                    <Typography variant="h3"
+                                color='primary'
+                                align='center'
 
                                 className={classes.myTextStyle}>
                         מסך רשימת מדדים

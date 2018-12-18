@@ -16,6 +16,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 
+
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
 import moment from 'moment-timezone';
@@ -305,7 +306,9 @@ class EnhancedTable extends React.Component {
                                 })}
                             {emptyRows > 0 && (
                                 <TableRow style={{ height: 49 * emptyRows }}>
-                                    <TableCell colSpan={6} />
+                                    <TableCell style={{body: {
+    fontSize: 20
+  }}} colSpan={6} />
                                 </TableRow>
                             )}
                         </TableBody>
