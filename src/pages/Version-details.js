@@ -9,9 +9,33 @@ class VersionDetails extends Component {
         super(props);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.state = {
-            isCreated: false
+            isCreated: false,
+            versionNumber: null
         }
     }
+
+
+     componentDidMount() {
+        //todo make request to get version id
+        //todo restApi........setState(()=>return{versionNumber: result)
+
+        let url = 'last_version/';
+        //console.log(this.state.versionNumber)
+        const last_version = RestAPI().get(url, {withCredentials: true});
+        last_version.then(result => {
+            let number = result.data.vers_number;
+            //console.log(result.data.vers_number)
+            this.setState((prevState, props) => {
+                return {
+                    versionNumber: number
+                };
+            });
+
+        }).catch((error) => {
+            console.log(error);
+        });
+     }
+
     handleFormSubmit(formData){
         let url = `versions/`;
         const createVersion = RestAPI().post(url, formData, {withCredentials: true});
@@ -33,7 +57,7 @@ class VersionDetails extends Component {
         return (
             <div>{
                 this.state.isCreated ? (<Redirect to="/versions"/>) :
-                (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version'/>)
+                (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version' versionNumber={this.state.versionNumber}/>)
             }
             </div>)
     }

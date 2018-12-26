@@ -9,11 +9,13 @@ import VersionUpdate from './pages/Version-update';
 import MeasureUpdate from './pages/Measure-update';
 import VersionCopy from './pages/Version-copy';
 import MeasureCopy from './pages/Measure-copy';
+//import LoginPage from './login/LoginPage';
 
 const AppRouter =()=>{
     return (
         <React.Fragment>
             <Route path="/" component={App} />
+
             <Route exact path="/versions" component={VersionList} />
             <Route exact path="/measures" component={MeasureList} />
             <Route path="/measure-details/:id" component={MeasureDetails} />

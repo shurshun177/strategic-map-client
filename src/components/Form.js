@@ -10,8 +10,14 @@ import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import RestAPI from '../api';
-import ListBox from './ListBox';
-import Calendar from 'react-calendar';
+//import ListBox from './ListBox';
+//import DatePicker from 'material-ui/DatePicker'
+//import DatePickerDialog from 'material-ui/DatePicker/DatePickerDialog';
+//import TimePickerDialog from 'material-ui/TimePicker/TimePickerDialog'
+
+import Button from '@material-ui/core/Button';
+import MaterialUIPickers from './DateTimePickerComp';
+import AssignUsers from './AssignUsers';
 
 const styles = theme => ({
     container: {
@@ -165,13 +171,13 @@ class Form extends Component {
         console.log(props.type);//measure/version
         let stateByType = {
             'version': {
-                version_number: 1000,
+                version_number: '',
                 version_name: '',
                 version_desc: '',
                 version_type: '',
                 hospital_type: '',
                 active: true,
-                business_topic: '',
+                measure_names: '',
                 measure: []
             },
             'measure': {
@@ -190,8 +196,8 @@ class Form extends Component {
                 digit_num: '',
                 separate_thousands: true,
                 active: true,
-                from_date: new Date(),
-                to_date: new Date(),
+                from_date: '',
+                to_date: '',
                 target_default: '',
                 remarks: '',
             }
@@ -207,6 +213,11 @@ class Form extends Component {
                 return props.data;
             });
         }
+
+        //if (this.props.versionNumber){
+          //  this.setState(() => {
+            //    return {version_number : versionNumber};});
+        //}
     }
 
     
@@ -217,6 +228,7 @@ class Form extends Component {
                 let isReq = mode === 'update'
                 return (
                     <>
+
                     <TextField
                         id="version_number"
                         name="version_number"
@@ -224,6 +236,7 @@ class Form extends Component {
                         label="מספר גרסה"
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                         onChange={this.handleChange('version_number')}
                         value={this.state.version_number}
                         type="number"
@@ -241,6 +254,8 @@ class Form extends Component {
                         label="שם גרסה"
                         className={classes.textField}
                         margin="normal"
+
+                        variant="outlined"
                         onChange={this.handleChange('version_name')}
                         value={this.state.version_name}
                     />
@@ -251,6 +266,7 @@ class Form extends Component {
                         required={!isReq}
                         readonly = {isReadonly}
                         disabled={isReadonly}
+                        variant="outlined"
                         select
                         label="סוג בית חולים"
                         className={classes.textField}
@@ -279,6 +295,7 @@ class Form extends Component {
                         label="תיאור גרסה"
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                         onChange={this.handleChange('version_desc')}
                         value={this.state.version_desc}
 
@@ -287,6 +304,7 @@ class Form extends Component {
                         id="version_type"
                         name="version_type"
                         select
+                        variant="outlined"
                         required={!isReq}
                         label="סוג גרסה"
                         className={classes.textField}
@@ -309,9 +327,9 @@ class Form extends Component {
                     </TextField>
 
                      <TextField
-                        id="business_topic"
-                        name="business_topic"
-
+                        id="measure_names"
+                        name="measure_names"
+                        variant="outlined"
                         select
                         label="נושא עסקי"
                         className={classes.textField}
@@ -322,7 +340,7 @@ class Form extends Component {
                             },
                         }}
                         margin="normal"
-                        onChange={this.handleMeasure('business_topic')}
+                        onChange={this.handleMeasure('measure_names')}
 
 
                     >
@@ -340,6 +358,7 @@ class Form extends Component {
                         label="מדדים"
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                         onChange={this.handleChange('measure')}
                         value={this.state.measure}
                     />
@@ -361,7 +380,17 @@ class Form extends Component {
                             label="פעיל"
                         />
                     </FormGroup>
-                    <ListBox measureNamesList={this.state.business_topic}/>
+
+                    <AssignUsers
+						title='kuku'
+						allUsersRoles={[]}
+						assigendUsersRoles={[]}
+						headerNamesAndRelativeIds={[]}
+						editedUserName=""
+						assigneesRoleName={"therapists"}
+					/>
+
+
                     </>
                 );
             },
@@ -377,6 +406,7 @@ class Form extends Component {
                         label="קוד מדד"
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                         onChange={this.handleChange('measure_code')}
                         value={this.state.measure_code}
                         readonly = {isReadonly}
@@ -389,6 +419,7 @@ class Form extends Component {
                         label="שם מדד"
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                         onChange={this.handleChange('measure_name')}
                         value={this.state.measure_name}
                     />
@@ -399,6 +430,7 @@ class Form extends Component {
                         label="תיאור מדד"
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                         onChange={this.handleChange('measure_desc')}
                         value={this.state.measure_desc}
 
@@ -410,6 +442,7 @@ class Form extends Component {
                         label="קריטריונים להכללה"
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                         onChange={this.handleChange('criteria_inclusion')}
                         value={this.state.criteria_inclusion}
 
@@ -421,6 +454,7 @@ class Form extends Component {
                         label="קריטריונים להוצאה"
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                         onChange={this.handleChange('removal_criteria')}
                         value={this.state.removal_criteria}
 
@@ -432,6 +466,7 @@ class Form extends Component {
                         label="מונה"
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                         onChange={this.handleChange('numerator')}
                         value={this.state.numerator}
                         type="number"
@@ -448,6 +483,7 @@ class Form extends Component {
                         label="מכנה"
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                         onChange={this.handleChange('denominator')}
                         value={this.state.denominator}
                         type="number"
@@ -463,6 +499,7 @@ class Form extends Component {
                         required={!isReq}
                         readonly = {isReadonly}
                         disabled={isReadonly}
+                        variant="outlined"
                         select
                         label="סוג בית חולים"
                         className={classes.textField}
@@ -486,6 +523,7 @@ class Form extends Component {
                         id="business_topic"
                         name="business_topic"
                         required={!isReq}
+                        variant="outlined"
                         select
                         label="נושא עסקי"
                         className={classes.textField}
@@ -510,6 +548,7 @@ class Form extends Component {
                         id="measure_type"
                         name="measure_type"
                         required={!isReq}
+                        variant="outlined"
                         select
                         label="סוג מדד"
                         className={classes.textField}
@@ -533,7 +572,7 @@ class Form extends Component {
                     <TextField
                         id="measuring_frequency"
                         name="measuring_frequency"
-
+                        variant="outlined"
                         select
                         label="תדירות מדידה"
                         className={classes.textField}
@@ -561,6 +600,7 @@ class Form extends Component {
                         label="יחידת מידה"
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                         onChange={this.handleChange('measure_unit')}
                         value={this.state.measure_unit}
                         type="number"
@@ -577,6 +617,7 @@ class Form extends Component {
                         label="מספר ספרות אחרי הנקודה"
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                         onChange={this.handleChange('digit_num')}
                         value={this.state.digit_num}
                         type="number"
@@ -628,6 +669,7 @@ class Form extends Component {
                         helperText='מתאריך'
                         className={classNames(classes.textField)}
                         margin="normal"
+                        variant="outlined"
                         type="date"
                         onChange={this.handleChange('from_date')}
                         value={this.state.from_date}
@@ -641,11 +683,14 @@ class Form extends Component {
                         helperText="עד תאריך"
                         className={classNames(classes.textField)}
                         margin="normal"
+                        variant="outlined"
                         type="date"
                         onChange={this.handleChange('to_date')}
                         value={this.state.to_date}
 
                     />
+
+
 
                     <TextField
                         id="target_default"
@@ -656,6 +701,7 @@ class Form extends Component {
                         value={this.state.target_default}
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                         type="number"
                         inputProps={{
                             min: 0,
@@ -674,7 +720,9 @@ class Form extends Component {
                         value={this.state.remarks}
                         className={classes.textField}
                         margin="normal"
+                        variant="outlined"
                     />
+
                     </>
                 );
             }
@@ -695,13 +743,13 @@ class Form extends Component {
             console.log(result)
             this.setState((prevState, props) => {
                 return {
-                    business_topic: result.data.items
+                    measure_names: result.data.items
                 };
             })
             //TODO if successful, redirect to list with toaster
         }).catch((error) => {
             //todo if not successful, display an error with toaster
-            alert('Database error')
+            alert('Hospital type and business topic must be selected')
         });
     };
     handleChange = name => event => {
@@ -722,7 +770,13 @@ class Form extends Component {
         this.props.handleFormSubmit(this.state);
     }
 
+    onExitClick(){
+     alert('Button click')
+        //todo
+    }
+
     render() {
+
         const { classes, type, mode, data } = this.props;
 
         let components = this.getFormByType(type, classes, mode, data);
@@ -733,8 +787,14 @@ class Form extends Component {
 
             >{components}
                 <input type="submit" value="שמירה" />
+
+
+                 <Button onClick={this.onExitClick}>יצירה
+                    </Button>
             </form>
+
         );
+
     }
 }
 

@@ -21,16 +21,14 @@ class ListBox extends Component {
     }
 
     render() {
-    let list = this.props.measureNamesList
-        return (
-            <div>
-             <List component="nav">
-        <ListItem button>
-          <ListItemText primary="Inbox" />
-        </ListItem>
-        </List>
-            </div>
-        );
+//    let list = this.props.measureNamesList
+//        return (
+//            <div>
+////             {list.map((item, index) => (
+////             <Item key={index} item={item} />
+////                )}
+//            </div>
+//        );
     }
 }
 

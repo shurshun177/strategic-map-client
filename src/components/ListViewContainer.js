@@ -4,6 +4,7 @@ class ListViewContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
+
             stepIndex: 0,
             text: 'Type \'Start\' to begin a story. For list of available commands type \'Help\'.',
             actions: [{
@@ -11,6 +12,7 @@ class ListViewContainer extends Component {
                 text: 'initialize the start of the quest'
             }],
             isHelpMode: false
+
         };
     }
 

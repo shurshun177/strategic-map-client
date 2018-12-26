@@ -49,6 +49,7 @@ function getSorting(order, orderBy) {
 }
 
 class ListViewTable extends React.Component {
+    
     createSortHandler = property => event => {
         this.props.onRequestSort(event, property);
     };
@@ -98,6 +99,7 @@ ListViewTable.propTypes = {
     order: PropTypes.string.isRequired,
     orderBy: PropTypes.string.isRequired,
     rowCount: PropTypes.number.isRequired,
+
 };
 
 const toolbarStyles = theme => ({
@@ -176,6 +178,7 @@ const styles = theme => ({
     root: {
         width: '100%',
         marginTop: theme.spacing.unit * 3,
+         fontFamily: 'Georgia'
     },
     table: {
         minWidth: 1020,
@@ -192,6 +195,7 @@ class EnhancedTable extends React.Component {
         selected: null,
         page: 0,
         rowsPerPage: 5,
+
     };
 
     handleRequestSort = (event, property) => {
@@ -274,6 +278,7 @@ class EnhancedTable extends React.Component {
                             onRequestSort={this.handleRequestSort}
                             rowCount={data.length}
                             columns={this.props.columns}
+
                         />
                         <TableBody>
                             {stableSort(data, getSorting(order, orderBy))
@@ -295,7 +300,7 @@ class EnhancedTable extends React.Component {
                                             key={id}
                                             selected={isSelected}
                                         >
-                                            <TableCell padding="checkbox">
+                                            <TableCell padding="checkbox" >
                                             <Checkbox checked={isSelected} onChange={event => this.setSelectedHandler(event, n)}/>
                                             </TableCell>
                                             {row.map((el, index) =>

@@ -25,6 +25,7 @@ class App extends Component {
           <RTL>
               <MuiThemeProvider theme={theme}>
                 <AppHeader/>
+
               </MuiThemeProvider>
           </RTL>
       </div>
