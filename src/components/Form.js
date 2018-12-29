@@ -10,14 +10,11 @@ import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import RestAPI from '../api';
-//import ListBox from './ListBox';
-//import DatePicker from 'material-ui/DatePicker'
-//import DatePickerDialog from 'material-ui/DatePicker/DatePickerDialog';
-//import TimePickerDialog from 'material-ui/TimePicker/TimePickerDialog'
-
+import {MuiPickersUtilsProvider} from 'material-ui-pickers';
 import Button from '@material-ui/core/Button';
 import MaterialUIPickers from './DateTimePickerComp';
 import AssignUsers from './AssignUsers';
+//import Calendar from 'react-input-calendar'
 
 const styles = theme => ({
     container: {
@@ -666,6 +663,7 @@ class Form extends Component {
                     <TextField
                         id="from_date"
                         name="from_date"
+
                         helperText='מתאריך'
                         className={classNames(classes.textField)}
                         margin="normal"

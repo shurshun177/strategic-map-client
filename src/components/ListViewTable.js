@@ -49,7 +49,7 @@ function getSorting(order, orderBy) {
 }
 
 class ListViewTable extends React.Component {
-    
+
     createSortHandler = property => event => {
         this.props.onRequestSort(event, property);
     };
@@ -270,6 +270,7 @@ class EnhancedTable extends React.Component {
                 {/*<EnhancedTableToolbar numSelected={selected.length} />*/}
                 <div className={classes.tableWrapper}>
                     <Table className={classes.table} aria-labelledby="tableTitle">
+
                         <ListViewTable
                             numSelected={numSelected}
                             order={order}
@@ -281,6 +282,7 @@ class EnhancedTable extends React.Component {
 
                         />
                         <TableBody>
+
                             {stableSort(data, getSorting(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((n, index) => {
@@ -292,6 +294,7 @@ class EnhancedTable extends React.Component {
                                     console.log('ROWROW', row);
                                     return (
                                         <TableRow
+
                                             hover
                                             onClick={event => this.handleClick(event,id)}
                                             role="checkbox"
@@ -312,8 +315,8 @@ class EnhancedTable extends React.Component {
                             {emptyRows > 0 && (
                                 <TableRow style={{ height: 49 * emptyRows }}>
                                     <TableCell style={{body: {
-    fontSize: 20
-  }}} colSpan={6} />
+                                            fontSize: 20
+                                          }}} colSpan={6} />
                                 </TableRow>
                             )}
                         </TableBody>
