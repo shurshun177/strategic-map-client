@@ -252,7 +252,7 @@
                   justify-content: space-between;
 
                   & > div {
-                      width: 33%;
+                      //width: 33%;
                       height: 100%;
                       font-size: 17px;
                       color: white;
@@ -295,10 +295,11 @@
 
                       &.selected {
                         font-weight: bold;
+                        background-color: #A9D4CE;
                       }
 
                       & > div {
-                          width: 33%;
+                          //width: 33%;
                           font-size: 17px;
                           text-transform: capitalize;
                           line-height: 40px;

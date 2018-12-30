@@ -65,7 +65,7 @@ class MeasureCopy extends Component {
             this.setState((prevState, props) => {
                 return {
                     data: item,
-                    mode: 'update'
+                    mode: 'clone'
                 };
             });
 

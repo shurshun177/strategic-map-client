@@ -13,7 +13,7 @@ import RestAPI from '../api';
 import {MuiPickersUtilsProvider} from 'material-ui-pickers';
 import Button from '@material-ui/core/Button';
 import MaterialUIPickers from './DateTimePickerComp';
-import AssignUsers from './AssignUsers';
+import AssignMeasures from './AssignMeasures';
 //import Calendar from 'react-input-calendar'
 
 const styles = theme => ({
@@ -211,6 +211,12 @@ class Form extends Component {
             });
         }
 
+        if (this.props.mode === 'clone' && this.props.mode !==prevProps.mode){
+            this.setState((prevState, props) => {
+                return props.data;
+            });
+        }
+
         //if (this.props.versionNumber){
           //  this.setState(() => {
             //    return {version_number : versionNumber};});
@@ -378,13 +384,14 @@ class Form extends Component {
                         />
                     </FormGroup>
 
-                    <AssignUsers
+                    <AssignMeasures
 						title='kuku'
-						allUsersRoles={[]}
-						assigendUsersRoles={[]}
+						allMeasures={this.state.measure_names}
+						assignedMeasures={[]}
 						headerNamesAndRelativeIds={[]}
 						editedUserName=""
 						assigneesRoleName={"therapists"}
+                        setMeasures={selectedMeasures=>{this.setState({measures: selectedMeasures })}}
 					/>
 
 
@@ -393,7 +400,7 @@ class Form extends Component {
             },
             'measure': function(type, classes, mode, data){
                 let isReadonly = mode === 'update';
-                let isReq = mode === 'update'
+                let isReq = mode === 'update';
                 return (
                     <>
                     <TextField
@@ -739,6 +746,8 @@ class Form extends Component {
         const ShowMeasures = RestAPI().get(url, {withCredentials: true});
         ShowMeasures.then(result => {
             console.log(result)
+
+            // {"items": [{"_id": {"$oid": "5c27ed38a933f91dc178076c"}, "measure_name": "name2"}]}
             this.setState((prevState, props) => {
                 return {
                     measure_names: result.data.items

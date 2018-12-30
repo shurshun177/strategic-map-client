@@ -13,3 +13,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.add-measures-button{
+  margin-right: 8px;
+}
