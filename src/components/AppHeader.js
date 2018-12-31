@@ -21,6 +21,7 @@ function AppHeader(props) {
 
     return (
         <div className={classes.root}>
+
             <AppBar position="static" color="default" title='Title'>
                 <Toolbar>
                     {/*<Typography variant="h6" color="inherit">*/}
@@ -29,6 +30,7 @@ function AppHeader(props) {
                     <img src="/new-logo.PNG" style={divStyle}/>
                 </Toolbar>
             </AppBar>
+
         </div>
     );
 }

@@ -15,6 +15,7 @@ import Button from '@material-ui/core/Button';
 import MaterialUIPickers from './DateTimePickerComp';
 import AssignMeasures from './AssignMeasures';
 //import Calendar from 'react-input-calendar'
+import SaveIcon from '@material-ui/icons/Save';
 
 const styles = theme => ({
     container: {
@@ -175,7 +176,8 @@ class Form extends Component {
                 hospital_type: '',
                 active: true,
                 measure_names: '',
-                measure: []
+                measure: [],
+                business_topic: ''
             },
             'measure': {
                 measure_code: '',
@@ -228,7 +230,7 @@ class Form extends Component {
         let form = {
             'version': function(type, classes, mode, data){
                 let isReadonly = mode === 'update';
-                let isReq = mode === 'update'
+                let isReq = mode === 'update';
                 return (
                     <>
 
@@ -330,8 +332,8 @@ class Form extends Component {
                     </TextField>
 
                      <TextField
-                        id="measure_names"
-                        name="measure_names"
+                        id="business_topic"
+                        name="business_topic"
                         variant="outlined"
                         select
                         label="נושא עסקי"
@@ -343,9 +345,7 @@ class Form extends Component {
                             },
                         }}
                         margin="normal"
-                        onChange={this.handleMeasure('measure_names')}
-
-
+                        onChange={this.handleMeasure('business_topic')}
                     >
                         {topic_list.map(option => (
                             <option key={option.value} value={option.value}>
@@ -387,14 +387,12 @@ class Form extends Component {
                     <AssignMeasures
 						title='kuku'
 						allMeasures={this.state.measure_names}
-						assignedMeasures={[]}
+						assignedMeasures={this.state.measure}
 						headerNamesAndRelativeIds={[]}
 						editedUserName=""
 						assigneesRoleName={"therapists"}
-                        setMeasures={selectedMeasures=>{this.setState({measures: selectedMeasures })}}
+                        setMeasures={selectedMeasures=>{this.setState({measure: selectedMeasures })}}
 					/>
-
-
                     </>
                 );
             },
@@ -735,34 +733,44 @@ class Form extends Component {
         return form[type].apply(this, ['', classes, mode, data]);
     }
     handleMeasure = name => event => {
-        console.log(event.target.value)
         this.setState({
             [name]: event.target.value,
         });
-        console.log(this.state.business_topic)
-        let t = event.target.value
-        let code = this.state.hospital_type
-        let url = `available_measures/${code}/${t}/`;
+        let t = event.target.value;
+        let code = this.state.hospital_type;
+        if (code && t){
+            this.requestAvailableMeasures(t, code);
+        }
+    };
+
+    requestAvailableMeasures = (measure, hospitalType)=>{
+        let url = `available_measures/${hospitalType}/${measure}/`;
         const ShowMeasures = RestAPI().get(url, {withCredentials: true});
         ShowMeasures.then(result => {
-            console.log(result)
-
             // {"items": [{"_id": {"$oid": "5c27ed38a933f91dc178076c"}, "measure_name": "name2"}]}
             this.setState((prevState, props) => {
                 return {
-                    measure_names: result.data.items
+                    measure_names: result.data.items,
+                    measure: []
                 };
             })
-            //TODO if successful, redirect to list with toaster
         }).catch((error) => {
             //todo if not successful, display an error with toaster
             alert('Hospital type and business topic must be selected')
         });
     };
+
+    //TODO separate logics
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
         });
+
+        if(name === 'hospital_type'){
+            if (this.state.business_topic !== ''){
+                this.requestAvailableMeasures(this.state.business_topic, event.target.value);
+            }
+        }
     };
 
     handleChangeSwitch = name => event => {
@@ -792,14 +800,18 @@ class Form extends Component {
             <form className={classes.container} noValidate autoComplete="off"
                   onSubmit={this.handleSubmit}
 
-            >{components}
-                <input type="submit" value="שמירה" />
+            >
+                {/*<Button variant="contained" size="small" type="submit" className="submit-button-form">*/}
+                    {/*<SaveIcon/>*/}
+                    {/*Save*/}
+                {/*</Button>*/}
+                <div>
+                <input class='submit-button-form' type="submit" value="שמירה" />
+                <input class="submit-button-form" value="kuku"/>
+                </div>
+                {components}
 
-
-                 <Button onClick={this.onExitClick}>יצירה
-                    </Button>
             </form>
-
         );
 
     }

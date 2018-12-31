@@ -38,6 +38,7 @@ class VersionDetails extends Component {
 
     handleFormSubmit(formData){
         let url = `versions/`;
+        delete formData.measure_names;
         const createVersion = RestAPI().post(url, formData, {withCredentials: true});
         createVersion.then(result => {
             this.setState((prevState, props) => {
