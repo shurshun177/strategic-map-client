@@ -40,7 +40,7 @@ class AssignUsersViewTable extends Component {
         onClick={() => this.props.setSelected(el)}>
         <div
             className="data-row"
-            title={el.measure_name} key={el._id.$oid}>
+            title={el.measure_name} key={el.id}>
             {el.measure_name}
         </div>
       </div>

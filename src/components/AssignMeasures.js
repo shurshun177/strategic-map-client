@@ -10,18 +10,14 @@ class AssignMeasures extends Component {
     super(props);
     this.state = {
       searchValue: '',
-      selectedMeasure: null  ,
-        // selectedAssignee,
-      // selectedUser: null,
-      // selectedAssignee: null,
+      selectedMeasure: null,
       currentAssignedMeasures: [],
       currentUnassignedMeasures: [],
-      openModal: false,
+      openModal: false
     }
   }
 
     componentDidUpdate(prevProps) {
-      console.log('component did mount')
         if (this.props.allMeasures !==prevProps.allMeasures || this.props.assignedMeasures !==prevProps.assignedMeasures){
             this.setState({
                 currentUnassignedMeasures: this.props.allMeasures,
@@ -34,9 +30,6 @@ class AssignMeasures extends Component {
     let { currentAssignedMeasures, currentUnassignedMeasures } = this.state;
 
     if (this.props.allMeasures.length){
-        console.log('KUKU');
-        console.log(this.props.allMeasures, 'all measures');
-        console.log(this.props.assignedMeasures, 'assigned measures')
         // currentAssignedMeasures = _.cloneDeep(this.props.assignedMeasures);
         currentUnassignedMeasures = _.cloneDeep(this.props.allMeasures);
         // currentUnassignedMeasures = _.cloneDeep(this.props.allMeasures).filter(receivedMeasure => currentAssignedMeasures.find(selectedMeasure => selectedMeasure._id.$oid == receivedMeasure._id.$oid) == null);
@@ -55,7 +48,7 @@ class AssignMeasures extends Component {
   setSelectedMeasure = selectedMeasure =>{
       this.setState((prevState, props) => {
           if(prevState.selectedMeasure){
-              if(prevState.selectedMeasure._id.$oid !== selectedMeasure._id.$oid){
+              if(prevState.selectedMeasure.id !== selectedMeasure.id){
                   return {
                       selectedMeasure
                   };
@@ -197,14 +190,6 @@ class AssignMeasures extends Component {
       <div className="table-container">
         {this.renderAssignModal()}
         {this.renderTitle()}
-        {/*<div className="table">*/}
-          {/*<div className="header">*/}
-            {/*{this.props.headerNamesAndRelativeIds.map(nameAndId => <div key={nameAndId.id}>{nameAndId.name}</div>)}*/}
-          {/*</div>*/}
-          {/*<div className="body">*/}
-            {/*{this.props.assignedMeasures.map((el, index) => this.renderRow(el, index))}*/}
-          {/*</div>*/}
-        {/*</div>*/}
       </div>
     )
   }
