@@ -31,6 +31,7 @@ class AssignMeasures extends Component {
 
     if (this.props.allMeasures.length){
         // currentAssignedMeasures = _.cloneDeep(this.props.assignedMeasures);
+        // currentAssignedMeasures = _.cloneDeep(this.props.assignedMeasures).filter(el => currentAssignedMeasures.find(selectedMeasure => selectedMeasure.id === el.id) == null);
         currentUnassignedMeasures = _.cloneDeep(this.props.allMeasures);
         // currentUnassignedMeasures = _.cloneDeep(this.props.allMeasures).filter(receivedMeasure => currentAssignedMeasures.find(selectedMeasure => selectedMeasure._id.$oid == receivedMeasure._id.$oid) == null);
     }
@@ -109,11 +110,14 @@ class AssignMeasures extends Component {
           if (!isMeasureUnassigned){
               prevState.currentAssignedMeasures.pop(selectedMeasure);
               prevState.currentUnassignedMeasures.push(selectedMeasure);
-              return {
-                  currentAssignedMeasures: prevState.currentAssignedMeasures,
-                  currentUnassignedMeasures: prevState.currentUnassignedMeasures
-              };
           }
+          else{
+              prevState.currentAssignedMeasures.pop(selectedMeasure);
+          }
+          return {
+              currentAssignedMeasures: prevState.currentAssignedMeasures,
+              currentUnassignedMeasures: prevState.currentUnassignedMeasures
+          };
       });
     // if (selectedAssignee == null) { return; }
     // currentUnassignedMeasures.push(this.state.selectedAssignee);
