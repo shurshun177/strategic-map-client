@@ -4,6 +4,9 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+
+import Drawer from '@material-ui/core/Drawer';
+
 const styles = {
     root: {
         flexGrow: 1,
@@ -21,6 +24,7 @@ function AppHeader(props) {
 
     return (
         <div className={classes.root}>
+            {/*<Drawer width={200} openSecondary={true} open={true} docked={true}  variant="persistent" >*/}
 
             <AppBar position="static" color="default" title='Title'>
                 <Toolbar>
@@ -31,6 +35,7 @@ function AppHeader(props) {
                 </Toolbar>
             </AppBar>
 
+            {/*</Drawer>*/}
         </div>
     );
 }

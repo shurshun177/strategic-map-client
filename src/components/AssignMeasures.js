@@ -77,12 +77,16 @@ class AssignMeasures extends Component {
     if (selectedMeasure == null) { return; }
       this.setState((prevState, props) => {
           if (selectedMeasure){
+              let isMeasureAssigned = prevState.currentAssignedMeasures.find(el=>el.id === selectedMeasure.id);
+              if (!isMeasureAssigned){
                   prevState.currentAssignedMeasures.push(selectedMeasure);
                   prevState.currentUnassignedMeasures.pop(selectedMeasure);
                   return {
                       currentAssignedMeasures: prevState.currentAssignedMeasures,
                       currentUnassignedMeasures: prevState.currentUnassignedMeasures
                   };
+              }
+
           }
       }, ()=>{
         console.log('add assignee, state');
@@ -101,12 +105,15 @@ class AssignMeasures extends Component {
 
       if (selectedMeasure == null) { return; }
       this.setState((prevState, props) => {
+          let isMeasureUnassigned = prevState.currentUnassignedMeasures.find(el=>el.id === selectedMeasure.id);
+          if (!isMeasureUnassigned){
               prevState.currentAssignedMeasures.pop(selectedMeasure);
               prevState.currentUnassignedMeasures.push(selectedMeasure);
               return {
                   currentAssignedMeasures: prevState.currentAssignedMeasures,
                   currentUnassignedMeasures: prevState.currentUnassignedMeasures
               };
+          }
       });
     // if (selectedAssignee == null) { return; }
     // currentUnassignedMeasures.push(this.state.selectedAssignee);
