@@ -140,9 +140,9 @@ class AssignMeasures extends Component {
                       selectedUserRole={this.state.selectedMeasure} />
               </div>
               <div className="add-remove">
-                  <div className={"button remove" + (this.state.selectedMeasure == null ? " disabled" : "")}
-                       onClick={() => this.addAssignee()}></div>
                   <div className={"button add" + (this.state.selectedMeasure == null ? " disabled" : "")}
+                       onClick={() => this.addAssignee()}></div>
+                  <div className={"button remove" + (this.state.selectedMeasure == null ? " disabled" : "")}
                        onClick={() => this.removeAssignee()}></div>
               </div>
               <div className="section all-therapists">

@@ -385,7 +385,7 @@ class Form extends Component {
                     </FormGroup>
 
                     <AssignMeasures
-						title='kuku'
+						title='בכירת מדדים'
 						allMeasures={this.state.measure_names}
 						assignedMeasures={this.state.measure}
 						headerNamesAndRelativeIds={[]}
