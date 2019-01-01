@@ -32,7 +32,7 @@ class MeasureDetails extends Component {
 
     render() {
         return (
-            <div>{
+            <div className="main-content">{
                 this.state.isCreated ? (<Redirect to="/measures"/>) :
                     (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='measure'/>)
             }

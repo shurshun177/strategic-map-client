@@ -76,7 +76,8 @@ class MeasureCopy extends Component {
 
     render() {
         return (
-            <div>{ this.state.isCreated ? (<Redirect to="/measures"/>) :
+            <div className="main-content">
+                { this.state.isCreated ? (<Redirect to="/measures"/>) :
                 (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='measure' mode={this.state.mode}
                       data={this.state.data}/>)
             }</div>

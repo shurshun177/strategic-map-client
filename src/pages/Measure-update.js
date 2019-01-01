@@ -74,9 +74,8 @@ class MeasureUpdate extends Component {
     }
 
     render() {
-        console.log(this.state.data, 'STATEDATA')
         return (
-            <div>{
+            <div className="main-content">{
                 this.state.isCreated ? (<Redirect to="/measures"/>) :
                     (            <Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='measure' mode={this.state.mode} data={this.state.data}/>
                     )

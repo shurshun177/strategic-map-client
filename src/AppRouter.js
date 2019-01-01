@@ -11,8 +11,43 @@ import VersionCopy from './pages/Version-copy';
 import MeasureCopy from './pages/Measure-copy';
 //import LoginPage from './login/LoginPage';
 
+
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+    direction: 'rtl',
+    typography:{
+        fontSize: 16
+    },
+    content: {
+        'margin-right': '25%'
+    },
+    palette: {
+        background:{
+            default: '#E3F2FD',
+
+        },
+        primary: {
+            light: '#757ce8',
+            main: '#3f50b5',
+            dark: '#002884',
+            contrastText: '#fff',
+            background:'#757ce8',
+
+        },
+        secondary: {
+            light: '#ff7961',
+            main: '#f44336',
+            dark: '#ba000d',
+            contrastText: '#000',
+        },
+    },
+});
+
 const AppRouter =()=>{
     return (
+        <MuiThemeProvider theme={theme}>
+
         <React.Fragment>
             <Route path="/" component={App} />
 
@@ -25,6 +60,8 @@ const AppRouter =()=>{
             <Route exact path="/version-copy/:id" component={VersionCopy} />
             <Route exact path="/measure-copy/:id" component={MeasureCopy} />
         </React.Fragment>
+        </MuiThemeProvider>
+
     );
 };
 

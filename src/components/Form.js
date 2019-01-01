@@ -760,7 +760,7 @@ class Form extends Component {
         });
     };
 
-    //TODO separate logics
+    //TODO separate logic
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,

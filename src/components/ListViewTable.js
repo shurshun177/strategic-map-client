@@ -178,10 +178,15 @@ const styles = theme => ({
     root: {
         width: '100%',
         marginTop: theme.spacing.unit * 3,
-         fontFamily: 'Georgia'
+         // fontFamily: 'Georgia'
     },
     table: {
         minWidth: 1020,
+        backgroundColor: '#E3F2FD',
+    },
+    head: {
+        backgroundColor: '#1E88E5',
+
     },
     tableWrapper: {
         overflowX: 'auto',

@@ -8,8 +8,14 @@ import Typography from '@material-ui/core/Typography'
 import RestAPI from '../api';
 
 const styles = {
+    root:{
+        'flex-direction':'row',
+        'justify-content':'center'
+    },
     'myTextStyle': {
-        textDecoration: 'underline'
+        textDecoration: 'underline',
+        'flex-direction':'row',
+        'justify-content':'center'
     }
 };
 
@@ -121,15 +127,18 @@ class VersionList extends Component {
 
         let title = "גרסאות";
         return (
-            <div>
+            <div className="main-content">
+                <div className="table-title">
                 <Toolbar>
+
                     <Typography variant="h4"
-                                color="inherit"
-                                align="center"
+                                color="secondary"
                                 className={classes.myTextStyle}>
                         מסך רשימת גרסאות
                     </Typography>
                 </Toolbar>
+                </div>
+
                 <ContainedButtons buttons={buttons} selectedId={this.state.selectedVersion}/>
                 <ListViewTable data={this.state.data} title={title} columns={columns} setSelectedHandler={this.setSelectedVersion.bind(this)}/>
             </div>

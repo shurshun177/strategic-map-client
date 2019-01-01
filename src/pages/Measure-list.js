@@ -113,10 +113,10 @@ class MeasureList extends Component {
 
         let title = "מדדים";
         return (
-            <div>
+            <div className="main-content">
                 <Toolbar>
-                    <Typography variant="h3"
-                                color='primary'
+                    <Typography variant="h4"
+                                color='secondary'
                                 align='center'
 
                                 className={classes.myTextStyle}>
