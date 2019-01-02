@@ -29,7 +29,7 @@ class ContainedButtons extends Component{
     getButtonComponent(button, classes){
         if (button.onClick){
             return <Button
-                variant={button.variant} color={button.type} className={classes.button}
+                variant={button.variant} size={button.size} color={button.type} className={classes.button}
                 onClick={button.onClick}
             >{button.text}
             </Button

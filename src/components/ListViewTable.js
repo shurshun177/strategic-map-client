@@ -109,18 +109,18 @@ const toolbarStyles = theme => ({
     highlight:
         theme.palette.type === 'light'
             ? {
-                color: theme.palette.secondary.main,
-                backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+                color: theme.palette.primary.main,
+                backgroundColor: lighten(theme.palette.primary.light, 0.85),
             }
             : {
                 color: theme.palette.text.primary,
-                backgroundColor: theme.palette.secondary.dark,
+                backgroundColor: theme.palette.primary.dark,
             },
     spacer: {
         flex: '1 1 100%',
     },
     actions: {
-        color: theme.palette.text.secondary,
+        color: theme.palette.text.primary,
     },
     title: {
         flex: '0 0 auto',
@@ -309,7 +309,11 @@ class EnhancedTable extends React.Component {
                                             selected={isSelected}
                                         >
                                             <TableCell padding="checkbox" >
-                                            <Checkbox checked={isSelected} onChange={event => this.setSelectedHandler(event, n)}/>
+                                            <Checkbox
+                                                checked={isSelected}
+                                                onChange={event => this.setSelectedHandler(event, n)}
+                                                color="primary"
+                                            />
                                             </TableCell>
                                             {row.map((el, index) =>
                                                 <TableCell component='th' scope='row' padding='none' numeric>{columns[index].isActive? this.isActive(el): columns[index].isTimestamp? this.timestampToDate(el): el}</TableCell>

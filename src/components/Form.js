@@ -19,11 +19,11 @@ import SaveIcon from '@material-ui/icons/Save';
 
 const styles = theme => ({
     container: {
-        display: 'flex',
-        flexDirection: 'column'
+        //display: 'flex',
+        //flexDirection: 'column'
 
-        // display: 'grid'
-        //flexWrap: 'wrap',
+         display: 'raw',
+         flexWrap: 'wrap',
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -178,7 +178,8 @@ class Form extends Component {
                 measure_names: '',
                 measure: [],
                 business_topic: '',
-                retro: true
+                retro: true,
+                year: ''
             },
             'measure': {
                 measure_code: '',
@@ -234,7 +235,7 @@ class Form extends Component {
                 let isReq = mode === 'update';
                 return (
                     <>
-                    <FormGroup row>
+                    <FormGroup grid>
 
 
 
@@ -246,6 +247,7 @@ class Form extends Component {
                                     checked={this.state.active}
                                     onChange={this.handleChangeSwitch('active')}
                                     value='active'
+                                    color="primary"
                                 />
                             }
                             label="פעיל"
@@ -259,11 +261,26 @@ class Form extends Component {
                                     checked={this.state.retro}
                                     onChange={this.handleChangeSwitch('retro')}
                                     value="retro"
+                                    color="primary"
                                 />
                             }
                             label="אפשר עדכון דיווח קודם"
                         />
+
                     </FormGroup>
+
+                    <TextField
+                        id="year"
+                        name="year"
+
+                        helperText='שנה'
+                        className={classNames(classes.textField)}
+                        margin="normal"
+                        variant="outlined"
+                        type="date"
+                        onChange={this.handleChange('year')}
+                        value={this.state.year}
+                    />
 
                     <TextField
                         id="version_number"
@@ -377,6 +394,7 @@ class Form extends Component {
                         }}
                         margin="normal"
                         onChange={this.handleMeasure('business_topic')}
+                        value={this.state.business_topic}
                     >
                         {topic_list.map(option => (
                             <option key={option.value} value={option.value}>
@@ -385,21 +403,11 @@ class Form extends Component {
                         ))}
                     </TextField>
 
-                    <TextField
-                        id="measure"
-                        name="measure"
-                        required={!isReq}
-                        label="מדדים"
-                        className={classes.textField}
-                        margin="normal"
-                        variant="outlined"
-                        onChange={this.handleChange('measure')}
-                        value={this.state.measure}
-                    />
+
 
 
                     <AssignMeasures
-						title='בכירת מדדים'
+						title='בחירת מדדים'
 						allMeasures={this.state.measure_names}
 						assignedMeasures={this.state.measure}
 						headerNamesAndRelativeIds={[]}
@@ -415,6 +423,40 @@ class Form extends Component {
                 let isReq = mode === 'update';
                 return (
                     <>
+                     <FormGroup grid>
+
+                         <FormControlLabel
+                             control={
+                                <Switch
+                                    id="separate_thousands"
+                                    name="separate_thousands"
+                                    checked={this.state.separate_thousands}
+                                    onChange={this.handleChangeSwitch('separate_thousands')}
+                                    value="separate_thousands"
+                                    color="primary"
+                                />
+                            }
+                            label="מפריד אלפים"
+                        />
+
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    id="active"
+                                    name="active"
+                                    checked={this.state.active}
+                                    onChange={this.handleChangeSwitch('active')}
+                                    value="active"
+                                    color="primary"
+                                />
+                            }
+                            label="פעיל"
+                        />
+                     </FormGroup>
+
+
+
+
                     <TextField
                         id="measure_code"
                         name="measure_code"
@@ -647,37 +689,7 @@ class Form extends Component {
                     />
 
 
-                    <FormGroup row>
 
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    id="separate_thousands"
-                                    name="separate_thousands"
-                                    checked={this.state.separate_thousands}
-                                    onChange={this.handleChangeSwitch('separate_thousands')}
-                                    value="separate_thousands"
-                                />
-                            }
-                            label="מפריד אלפים"
-                        />
-
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    id="active"
-                                    name="active"
-                                    checked={this.state.active}
-                                    onChange={this.handleChangeSwitch('active')}
-                                    value="active"
-                                />
-                            }
-                            label="פעיל"
-                        />
-
-
-
-                    </FormGroup>
 
                     <TextField
                         id="from_date"

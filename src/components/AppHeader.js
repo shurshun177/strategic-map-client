@@ -66,7 +66,8 @@ class AppHeader extends React.Component{
 
         const menuItems = [
             {name: 'רשימת גירסאות', link: '/versions'},
-            {name: 'רשימת מדדים', link: '/measures'}
+            {name: 'רשימת מדדים', link: '/measures'},
+            {name: 'חדש', link: '/new'}
         ];
         return (
         <div className={classes.root}>
