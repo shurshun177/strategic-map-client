@@ -177,7 +177,8 @@ class Form extends Component {
                 active: true,
                 measure_names: '',
                 measure: [],
-                business_topic: ''
+                business_topic: '',
+                retro: true
             },
             'measure': {
                 measure_code: '',
@@ -233,6 +234,36 @@ class Form extends Component {
                 let isReq = mode === 'update';
                 return (
                     <>
+                    <FormGroup row>
+
+
+
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    id="active"
+                                    name="active"
+                                    checked={this.state.active}
+                                    onChange={this.handleChangeSwitch('active')}
+                                    value='active'
+                                />
+                            }
+                            label="פעיל"
+                        />
+
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    id="retro"
+                                    name="retro"
+                                    checked={this.state.retro}
+                                    onChange={this.handleChangeSwitch('retro')}
+                                    value="retro"
+                                />
+                            }
+                            label="אפשר עדכון דיווח קודם"
+                        />
+                    </FormGroup>
 
                     <TextField
                         id="version_number"
@@ -366,23 +397,6 @@ class Form extends Component {
                         value={this.state.measure}
                     />
 
-                    <FormGroup row>
-
-
-
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    id="active"
-                                    name="active"
-                                    checked={this.state.active}
-                                    onChange={this.handleChangeSwitch('active')}
-                                    value='active'
-                                />
-                            }
-                            label="פעיל"
-                        />
-                    </FormGroup>
 
                     <AssignMeasures
 						title='בכירת מדדים'
@@ -807,7 +821,7 @@ class Form extends Component {
                 {/*</Button>*/}
                 <div>
                 <input class='submit-button-form' type="submit" value="שמירה" />
-                <input class="submit-button-form" value="kuku"/>
+                <input class="submit-button-form" value="יציאה"/>
                 </div>
                 {components}
 

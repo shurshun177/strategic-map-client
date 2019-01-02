@@ -145,7 +145,7 @@ class AssignMeasures extends Component {
               <div className="therapists-assign-body">
               <div className="section patient-therapists">
                   <AssignMeasuresViewTable
-                      header='מדדים נבכרים'
+                      header='מדדים שנבחרו'
                       list={this.state.currentAssignedMeasures}
                       setSelected={this.setSelectedMeasure}
                       selectedUserRole={this.state.selectedMeasure} />
@@ -158,7 +158,7 @@ class AssignMeasures extends Component {
               </div>
               <div className="section all-therapists">
                   <AssignMeasuresViewTable
-                      header='כל המדדים'
+                      header='מדדים זמינים'
                       searchValue={this.state.searchValue}
                       list={this.state.currentUnassignedMeasures}
                       setSelected={this.setSelectedMeasure}

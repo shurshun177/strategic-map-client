@@ -73,6 +73,7 @@ class AppHeader extends React.Component{
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar  disableGutters={!this.state.open}>
                     <img src="/new-logo.PNG" style={iconStyle}/>
+
                 </Toolbar>
             </AppBar>
             <Drawer

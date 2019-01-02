@@ -79,10 +79,10 @@ class VersionList extends Component {
         const {classes} = this.props;
 
         let buttons = [
-            {text:'יצירת גרסה חדשה', type: 'primary', 'url': '/version-details' },
-            {text:'עדכון גרסה', type: 'primary', 'url':'/version-update'},
-            {text:'העתקת גרסה', type: 'primary', 'url':'/version-copy' },
-            {text:'מחיקת גרסה', type: 'secondary', 'onClick': this.updateVersionStatus.bind(this)  }
+            {text:'יצירת גרסה חדשה', variant:'outlined', type: 'primary', 'url': '/version-details' },
+            {text:'עדכון גרסה', variant:'outlined', type: 'primary', 'url':'/version-update'},
+            {text:'העתקת גרסה', variant:'outlined', type: 'primary', 'url':'/version-copy' },
+            {text:'מחיקת גרסה', variant:'contained', type: 'secondary', 'onClick': this.updateVersionStatus.bind(this)  }
         ];
 
 

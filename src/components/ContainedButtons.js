@@ -29,7 +29,7 @@ class ContainedButtons extends Component{
     getButtonComponent(button, classes){
         if (button.onClick){
             return <Button
-                variant="contained" color={button.type} className={classes.button}
+                variant={button.variant} color={button.type} className={classes.button}
                 onClick={button.onClick}
             >{button.text}
             </Button
@@ -38,7 +38,7 @@ class ContainedButtons extends Component{
         else{
             return <Button
                 component={Link} to={`${button.url}/${this.props.selectedId}`}
-                variant="contained" color={button.type} className={classes.button}>{button.text}
+                variant={button.variant} color={button.type} className={classes.button}>{button.text}
             </Button
             >
         }
