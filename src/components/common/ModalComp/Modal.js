@@ -15,6 +15,7 @@ const Modal = (props) => {
         contentStyle={props.wrapperStyle}
         bodyStyle={props.style}
         bodyClassName="dialog_body"
+        fullWidth={true}
       >
         <div className="modal-header">
           <div className="modal_title" >{props.modal_title}</div>
