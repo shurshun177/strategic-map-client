@@ -28,19 +28,17 @@ const styles = theme => ({
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
-        backgroundColor: 'primary'
+        backgroundColor: '#2196F3'
     },
     drawer: {
         // width: drawerWidth,
         flexShrink: 0,
         padding: theme.spacing.unit * 5,
-
     },
     drawerPaper: {
         // width: drawerWidth,
         'padding-top': theme.spacing.unit * 5,
-
-
+        backgroundColor: theme.palette.primary.dark
     },
     content: {
         flexGrow: 1,

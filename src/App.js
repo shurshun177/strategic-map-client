@@ -19,8 +19,7 @@ const theme = createMuiTheme({
         fontSize: 14,
     },
     palette: {
-        type: 'light',
-
+        type: 'light'
     },
 });
 
