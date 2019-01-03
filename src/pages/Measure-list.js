@@ -9,7 +9,7 @@ import RestAPI from '../api';
 
 const styles = {
     'myTextStyle': {
-        textDecoration: 'underline'
+        //textDecoration: 'underline'
     }
 };
 
@@ -116,7 +116,7 @@ class MeasureList extends Component {
             <div className="main-content">
                 <Toolbar>
                     <Typography variant="h4"
-                                color='secondary'
+                                color='primary'
                                 align='center'
 
                                 className={classes.myTextStyle}>

@@ -13,7 +13,7 @@ const styles = {
         'justify-content':'center'
     },
     'myTextStyle': {
-        textDecoration: 'underline',
+        //textDecoration: 'underline',
         'flex-direction':'row',
         'justify-content':'center'
     }
@@ -132,7 +132,7 @@ class VersionList extends Component {
                 <Toolbar>
 
                     <Typography variant="h4"
-                                color="secondary"
+                                color="primary"
                                 className={classes.myTextStyle}>
                         מסך רשימת גרסאות
                     </Typography>
