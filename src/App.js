@@ -13,11 +13,14 @@ import ListViewTable from './components/ListViewTable'
 
 const theme = createMuiTheme({
     direction: 'rtl',
+
     typography: {
         // In Japanese the characters are usually larger.
         fontSize: 14,
-    },palette: {
+    },
+    palette: {
         type: 'light',
+
     },
 });
 

@@ -28,15 +28,18 @@ const styles = theme => ({
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
+        backgroundColor: 'primary'
     },
     drawer: {
         // width: drawerWidth,
         flexShrink: 0,
         padding: theme.spacing.unit * 5,
+
     },
     drawerPaper: {
         // width: drawerWidth,
         'padding-top': theme.spacing.unit * 5,
+
 
     },
     content: {
@@ -50,6 +53,7 @@ const styles = theme => ({
 const iconStyle = {
     width: 250,
     height: 100
+
 };
 
 

@@ -17,6 +17,7 @@ import AssignMeasures from './AssignMeasures';
 //import Calendar from 'react-input-calendar'
 import SaveIcon from '@material-ui/icons/Save';
 
+
 const styles = theme => ({
     container: {
         //display: 'flex',
@@ -512,6 +513,7 @@ class Form extends Component {
                         label="קריטריונים להוצאה"
                         className={classes.textField}
                         margin="normal"
+
                         variant="outlined"
                         onChange={this.handleChange('removal_criteria')}
                         value={this.state.removal_criteria}
@@ -699,6 +701,7 @@ class Form extends Component {
                         className={classNames(classes.textField)}
                         margin="normal"
                         variant="outlined"
+
                         type="date"
                         onChange={this.handleChange('from_date')}
                         value={this.state.from_date}
