@@ -702,6 +702,9 @@ class Form extends Component {
                         type="date"
                         onChange={this.handleChange('from_date')}
                         value={this.state.from_date}
+                        InputLabelProps={{
+                        shrink: true,
+                    }}
                     />
 
 

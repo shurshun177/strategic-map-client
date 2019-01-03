@@ -17,7 +17,7 @@ const theme = createMuiTheme({
         // In Japanese the characters are usually larger.
         fontSize: 14,
     },palette: {
-        type: 'dark',
+        type: 'light',
     },
 });
 
