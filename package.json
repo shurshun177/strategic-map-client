@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://127.0.0.1:8000",
   "dependencies": {
+    "@date-io/moment": "0.0.2",
     "@material-ui/core": "3.7.1",
     "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
@@ -12,7 +13,7 @@
     "material-table": "^1.1.2",
     "material-ui-datetimepicker": "^1.0.7",
     "material-ui-pickers": "^2.0.5",
-    "moment": "^2.22.2",
+    "moment": "^2.23.0",
     "moment-timezone": "^0.5.23",
     "node-sass": "^4.11.0",
     "react": "^16.6.1",
