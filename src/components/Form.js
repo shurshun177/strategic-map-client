@@ -185,8 +185,8 @@ class Form extends Component {
                 measure_names: '',
                 measure: [],
                 business_topic: '',
-                retro: true,
-                year: ''
+                retro: false,
+                year: Date()
             },
             'measure': {
                 measure_code: '',
@@ -198,11 +198,13 @@ class Form extends Component {
                 denominator: '',
                 hospital_type: '',
                 business_topic: '',
+                sub_business_topic: '',
                 measure_type: '',
                 measuring_frequency: '',
                 measure_unit: '',
                 digit_num: '',
-                separate_thousands: true,
+                is_division: false,
+                separate_thousands: false,
                 active: true,
                 from_date: moment().format(),
                 to_date: moment().format(),
@@ -276,18 +278,26 @@ class Form extends Component {
 
                     </FormGroup>
 
-                    <TextField
-                        id="year"
-                        name="year"
+                    <MuiPickersUtilsProvider utils={MomentUtils}>
+                        <DatePicker
+                            id="year"
+                            name="year"
+                            format="YYYY"
+                            openToYearSelection={true}
+                            helperText='שנה'
+                            className={classNames(classes.textField)}
+                            margin="normal"
+                            variant="outlined"
+                            hideCalendarDate={true}
+                            okLabel='אישור'
+                            cancelLabel='ביטול'
+                            value={this.state.year}
+                            onChange={this.handleYearChange('year')}
+                            rightArrowIcon={<ChevronRightIcon />}
+                            leftArrowIcon={<ChevronLeftIcon />}
 
-                        helperText='שנה'
-                        className={classNames(classes.textField)}
-                        margin="normal"
-                        variant="outlined"
-                        type="date"
-                        onChange={this.handleChange('year')}
-                        value={this.state.year}
-                    />
+                        />
+                    </MuiPickersUtilsProvider>
 
                     <TextField
                         id="version_number"
@@ -431,6 +441,20 @@ class Form extends Component {
                 return (
                     <>
                      <FormGroup grid>
+
+                        <FormControlLabel
+                             control={
+                                <Switch
+                                    id="is_division"
+                                    name="is_division"
+                                    checked={this.state.is_division}
+                                    onChange={this.handleChangeSwitch('is_division')}
+                                    value="is_division"
+                                    color="primary"
+                                />
+                            }
+                            label="האם מדד חטיבה"
+                        />
 
                          <FormControlLabel
                              control={
@@ -824,6 +848,10 @@ class Form extends Component {
 
     handleDateChange = name => date => {
         this.setState({  [name]: moment(date).format('YYYY-MM-DD')});
+    };
+
+    handleYearChange = name => date => {
+        this.setState({ [name]: moment(date).format('YYYY')});
     };
 
     handleSubmit(e){
