@@ -22,8 +22,6 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import {Link} from 'react-router-dom';
 
-import MenuItem from '@material-ui/core/MenuItem';
-
 const styles = theme => ({
     root: {
         display: 'flex',
@@ -40,17 +38,13 @@ const styles = theme => ({
     drawerPaper: {
         // width: drawerWidth,
         'padding-top': theme.spacing.unit * 5,
-        backgroundColor: theme.palette.primary.dark,
-        // color: 'white'
+        backgroundColor: theme.palette.primary.dark
     },
     content: {
         flexGrow: 1,
         padding: theme.spacing.unit * 5,
     },
     toolbar: theme.mixins.toolbar,
-        selected: {
-            'background-color': '#3fc880'
-        }
 });
 
 
@@ -95,10 +89,10 @@ class AppHeader extends React.Component{
                 <div className={classes.toolbar} />
                 <List>
                     {menuItems.map((el, index) => (
-                        <MenuItem button key={el.name} component={Link} to={el.link} classes={classNames.listItem}>
+                        <ListItem button key={el.name} component={Link} to={el.link} >
                             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                             <ListItemText primary={el.name} />
-                        </MenuItem>
+                        </ListItem>
                     ))}
                 </List>
                 {/*<Divider />*/}
