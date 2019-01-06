@@ -12,6 +12,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import RestAPI from '../api';
 import {MuiPickersUtilsProvider} from 'material-ui-pickers';
 import Button from '@material-ui/core/Button';
+import MaterialUIPickers from './DateTimePickerComp';
 import AssignMeasures from './AssignMeasures';
 //import Calendar from 'react-input-calendar'
 import SaveIcon from '@material-ui/icons/Save';
@@ -166,7 +167,6 @@ const vers_type = [
     },
 ];
 
-
 class Form extends Component {
 
     constructor(props) {
@@ -185,7 +185,7 @@ class Form extends Component {
                 measure_names: '',
                 measure: [],
                 business_topic: '',
-                retro: true,
+                retro: false,
                 year:  moment().format('YYYY'),
                 year_list: ()=>{
                     //TODO refactor
@@ -210,11 +210,13 @@ class Form extends Component {
                 denominator: '',
                 hospital_type: '',
                 business_topic: '',
+                sub_business_topic: '',
                 measure_type: '',
                 measuring_frequency: '',
                 measure_unit: '',
                 digit_num: '',
-                separate_thousands: true,
+                is_division: false,
+                separate_thousands: false,
                 active: true,
                 from_date: moment().format(),
                 to_date: moment().format(),
@@ -222,8 +224,6 @@ class Form extends Component {
                 remarks: '',
             }
         };
-
-
 
         this.state = stateByType[props.type];
 
@@ -457,6 +457,20 @@ class Form extends Component {
                 return (
                     <>
                      <FormGroup grid>
+
+                        <FormControlLabel
+                             control={
+                                <Switch
+                                    id="is_division"
+                                    name="is_division"
+                                    checked={this.state.is_division}
+                                    onChange={this.handleChangeSwitch('is_division')}
+                                    value="is_division"
+                                    color="primary"
+                                />
+                            }
+                            label="האם מדד חטיבה"
+                        />
 
                          <FormControlLabel
                              control={
@@ -851,12 +865,6 @@ class Form extends Component {
     handleDateChange = name => date => {
         this.setState({  [name]: moment(date).format('YYYY-MM-DD')});
     };
-
-    // handleYearChange = name => date => {
-    //     console.log('HANDLEYEARCHANGED')
-    //     this.setState({  [name]: date});
-    // };
-
 
     handleSubmit(e){
         e.preventDefault();
