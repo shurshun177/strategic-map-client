@@ -16,7 +16,13 @@ import MaterialUIPickers from './DateTimePickerComp';
 import AssignMeasures from './AssignMeasures';
 //import Calendar from 'react-input-calendar'
 import SaveIcon from '@material-ui/icons/Save';
+import { DatePicker } from 'material-ui-pickers';
+import MomentUtils from '@date-io/moment';
 
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+
+import moment from 'moment';
 
 const styles = theme => ({
     container: {
@@ -198,8 +204,8 @@ class Form extends Component {
                 digit_num: '',
                 separate_thousands: true,
                 active: true,
-                from_date: '',
-                to_date: '',
+                from_date: moment().format(),
+                to_date: moment().format(),
                 target_default: '',
                 remarks: '',
             }
@@ -690,41 +696,44 @@ class Form extends Component {
 
                     />
 
+                    <MuiPickersUtilsProvider utils={MomentUtils}>
+                        <DatePicker
+                            id="from_date"
+                            name="from_date"
+                            format="D/MM/YYYY"
+                            helperText='מתאריך'
+                            className={classNames(classes.textField)}
+                            margin="normal"
+                            variant="outlined"
+                            value={this.state.from_date}
+                            onChange={this.handleDateChange('from_date')}
+                            rightArrowIcon={<ChevronRightIcon />}
+                            leftArrowIcon={<ChevronLeftIcon />}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                    </MuiPickersUtilsProvider>
 
 
-
-                    <TextField
-                        id="from_date"
-                        name="from_date"
-
-                        helperText='מתאריך'
-                        className={classNames(classes.textField)}
-                        margin="normal"
-                        variant="outlined"
-
-                        type="date"
-                        onChange={this.handleChange('from_date')}
-                        value={this.state.from_date}
-                        InputLabelProps={{
-                        shrink: true,
-                    }}
-                    />
-
-
-
-                    <TextField
-                        id="to_date"
-                        name="to_date"
-                        helperText="עד תאריך"
-                        className={classNames(classes.textField)}
-                        margin="normal"
-                        variant="outlined"
-                        type="date"
-                        onChange={this.handleChange('to_date')}
-                        value={this.state.to_date}
-
-                    />
-
+                    <MuiPickersUtilsProvider utils={MomentUtils}>
+                        <DatePicker
+                            id="to_date"
+                            name="to_date"
+                            format="D/MM/YYYY"
+                            helperText="עד תאריך"
+                            className={classNames(classes.textField)}
+                            margin="normal"
+                            variant="outlined"
+                            value={this.state.to_date}
+                            onChange={this.handleDateChange('to_date')}
+                            rightArrowIcon={<ChevronRightIcon />}
+                            leftArrowIcon={<ChevronLeftIcon />}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                    </MuiPickersUtilsProvider>
 
 
                     <TextField
@@ -805,11 +814,16 @@ class Form extends Component {
         }
     };
 
+
+
     handleChangeSwitch = name => event => {
         this.setState({
             [name]: event.target.checked,
         });
-        console.log(this.state.active)
+    };
+
+    handleDateChange = name => date => {
+        this.setState({  [name]: moment(date).format('YYYY-MM-DD')});
     };
 
     handleSubmit(e){
