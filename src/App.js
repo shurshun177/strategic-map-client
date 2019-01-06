@@ -20,7 +20,7 @@ const theme = createMuiTheme({
     },
     palette: {
         type: 'light'
-    },
+    }
 });
 
 class App extends Component {
