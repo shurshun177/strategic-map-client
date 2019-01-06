@@ -49,12 +49,12 @@ class AssignUsersViewTable extends Component {
 
   render() {
     if (this.props.list){
-        console.log(this.props.list, 'USER ROLES')
         return (
             <div className="table-container">
               <div className="table">
                 <div className="header">
-                    {this.props.header}
+
+                  <div>{this.props.header}</div>
                 </div>
                 <div className="body">
                     {this.props.list
