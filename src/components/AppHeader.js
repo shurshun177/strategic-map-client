@@ -55,7 +55,7 @@ const styles = theme => ({
 
 
 const iconStyle = {
-    width: 250,
+    width: 211,
     height: 100
 
 };
@@ -81,7 +81,7 @@ class AppHeader extends React.Component{
         <div className={classes.root}>
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar  disableGutters={!this.state.open}>
-                    <img src="/new-logo.PNG" style={iconStyle}/>
+                    <img src="/logo.jpg" style={iconStyle}/>
 
                 </Toolbar>
             </AppBar>

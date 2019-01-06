@@ -12,7 +12,6 @@ import FormGroup from '@material-ui/core/FormGroup';
 import RestAPI from '../api';
 import {MuiPickersUtilsProvider} from 'material-ui-pickers';
 import Button from '@material-ui/core/Button';
-import MaterialUIPickers from './DateTimePickerComp';
 import AssignMeasures from './AssignMeasures';
 //import Calendar from 'react-input-calendar'
 import SaveIcon from '@material-ui/icons/Save';
@@ -167,6 +166,7 @@ const vers_type = [
     },
 ];
 
+
 class Form extends Component {
 
     constructor(props) {
@@ -186,7 +186,19 @@ class Form extends Component {
                 measure: [],
                 business_topic: '',
                 retro: true,
-                year: ''
+                year:  moment().format('YYYY'),
+                year_list: ()=>{
+                    //TODO refactor
+                    let d = new Date( "01 " + "July 1980");
+                    let first = d.getFullYear();
+
+                    var s = new Date( "01 " + "July 2019");
+                    let second = s.getFullYear();
+                    let arr = [];
+
+                    for(let i = second; i >= first; i--) arr.push(i);
+                    return arr;
+                }
             },
             'measure': {
                 measure_code: '',
@@ -210,6 +222,8 @@ class Form extends Component {
                 remarks: '',
             }
         };
+
+
 
         this.state = stateByType[props.type];
 
@@ -279,15 +293,27 @@ class Form extends Component {
                     <TextField
                         id="year"
                         name="year"
-
-                        helperText='שנה'
-                        className={classNames(classes.textField)}
-                        margin="normal"
                         variant="outlined"
-                        type="date"
+                        select
+                        label="שנה"
+                        className={classes.textField}
+                        SelectProps={{
+                            native: true,
+                            MenuProps: {
+                                className: classes.menu,
+                            },
+                        }}
+                        margin="normal"
                         onChange={this.handleChange('year')}
                         value={this.state.year}
-                    />
+                    >
+                        {this.state.year_list().map(option => (
+                            <option key={option} value={option}>
+                                {option}
+                            </option>
+                        ))}
+                    </TextField>
+
 
                     <TextField
                         id="version_number"
@@ -825,6 +851,12 @@ class Form extends Component {
     handleDateChange = name => date => {
         this.setState({  [name]: moment(date).format('YYYY-MM-DD')});
     };
+
+    // handleYearChange = name => date => {
+    //     console.log('HANDLEYEARCHANGED')
+    //     this.setState({  [name]: date});
+    // };
+
 
     handleSubmit(e){
         e.preventDefault();
