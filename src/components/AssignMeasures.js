@@ -10,7 +10,7 @@ class AssignMeasures extends Component {
     super(props);
     this.state = {
       searchValue: '',
-      selectedMeasure: null,
+      selectedMeasures: [],
       currentAssignedMeasures: [],
       currentUnassignedMeasures: [],
       openModal: false
@@ -35,59 +35,47 @@ class AssignMeasures extends Component {
         currentUnassignedMeasures = _.cloneDeep(this.props.allMeasures);
         // currentUnassignedMeasures = _.cloneDeep(this.props.allMeasures).filter(receivedMeasure => currentAssignedMeasures.find(selectedMeasure => selectedMeasure._id.$oid == receivedMeasure._id.$oid) == null);
     }
-      this.setState({ currentAssignedMeasures, currentUnassignedMeasures, selectedMeasure: null });
+      this.setState({ currentAssignedMeasures, currentUnassignedMeasures, selectedMeasures: [] });
       this.closeAssignModal();
   };
 
   submitChanges = () => {
     this.props.setMeasures(this.state.currentAssignedMeasures);
     // this.props.setAssigeens(this.state.currentAssignedMeasures);
-    this.setState({ selectedMeasure: null });
+    this.setState({ selectedMeasures: [] });
     this.closeAssignModal();
   };
 
-  setSelectedMeasure = selectedMeasure =>{
+  setSelectedMeasure = selectedMeasureArray =>{
       this.setState((prevState, props) => {
-          if(prevState.selectedMeasure){
-              if(prevState.selectedMeasure.id !== selectedMeasure.id){
-                  return {
-                      selectedMeasure
-                  };
-              }
-          }
-          else{
-              return {
-                  selectedMeasure
-              };
-          }
+          let {selectedMeasures} = prevState;
 
-          // if (!prevState.selectedMeasure || (prevState.selectedAssignee._id.$oid !== selectedMeasure._id.$oid)){
-          //     prevState.currentAssignedMeasures.push(selectedMeasure);
-          //     prevState.currentUnassignedMeasures.pop(selectedMeasure);
-          //     return {
-          //         selectedMeasure,
-          //         currentAssignedMeasures: prevState.currentAssignedMeasures,
-          //         currentUnassignedMeasures: prevState.currentUnassignedMeasures
-          //     };
-          // }
+          selectedMeasureArray.forEach(selectedMeasure=>{
+              let isAlreadyChoosen = selectedMeasures.some(item => item.id === selectedMeasure.id);
+              console.log(isAlreadyChoosen, 'is already choosen');
+              if (!isAlreadyChoosen){
+                  selectedMeasures.push(selectedMeasure);
+              }
+          });
+          return {
+              selectedMeasures
+          }
       });
   };
 
   addAssignee = () => {
-    let { currentAssignedMeasures, currentUnassignedMeasures, selectedMeasure } = this.state;
-    if (selectedMeasure == null) { return; }
+    let { currentAssignedMeasures, currentUnassignedMeasures, selectedMeasures } = this.state;
+    if (selectedMeasures.length === 0) { return; }
       this.setState((prevState, props) => {
-          if (selectedMeasure){
-              let isMeasureAssigned = prevState.currentAssignedMeasures.find(el=>el.id === selectedMeasure.id);
-              if (!isMeasureAssigned){
-                  prevState.currentAssignedMeasures.push(selectedMeasure);
-                  prevState.currentUnassignedMeasures.pop(selectedMeasure);
-                  return {
-                      currentAssignedMeasures: prevState.currentAssignedMeasures,
-                      currentUnassignedMeasures: prevState.currentUnassignedMeasures
-                  };
-              }
-
+          let currentSelectedElement = selectedMeasures.pop();
+          let isMeasureAssigned = prevState.currentAssignedMeasures.find(el => el.id === currentSelectedElement.id);
+          if (!isMeasureAssigned) {
+              prevState.currentAssignedMeasures.push(currentSelectedElement);
+              prevState.currentUnassignedMeasures.pop(currentSelectedElement);
+              return {
+                  currentAssignedMeasures: prevState.currentAssignedMeasures,
+                  currentUnassignedMeasures: prevState.currentUnassignedMeasures
+              };
           }
       }, ()=>{
         console.log('add assignee, state');
@@ -102,17 +90,18 @@ class AssignMeasures extends Component {
   };
 
   removeAssignee = () => {
-    let { currentAssignedMeasures, currentUnassignedMeasures, selectedMeasure } = this.state;
+    let { currentAssignedMeasures, currentUnassignedMeasures, selectedMeasures } = this.state;
 
-      if (selectedMeasure == null) { return; }
+      if (selectedMeasures.length === 0) { return; }
       this.setState((prevState, props) => {
-          let isMeasureUnassigned = prevState.currentUnassignedMeasures.find(el=>el.id === selectedMeasure.id);
+          let currentSelectedElement = selectedMeasures.pop();
+          let isMeasureUnassigned = prevState.currentUnassignedMeasures.find(el=>el.id === currentSelectedElement.id);
           if (!isMeasureUnassigned){
-              prevState.currentAssignedMeasures.pop(selectedMeasure);
-              prevState.currentUnassignedMeasures.push(selectedMeasure);
+              prevState.currentAssignedMeasures.pop(currentSelectedElement);
+              prevState.currentUnassignedMeasures.push(currentSelectedElement);
           }
           else{
-              prevState.currentAssignedMeasures.pop(selectedMeasure);
+              prevState.currentAssignedMeasures.pop(currentSelectedElement);
           }
           return {
               currentAssignedMeasures: prevState.currentAssignedMeasures,
@@ -148,12 +137,12 @@ class AssignMeasures extends Component {
                       header='מדדים שנבחרו'
                       list={this.state.currentAssignedMeasures}
                       setSelected={this.setSelectedMeasure}
-                      selectedUserRole={this.state.selectedMeasure} />
+                      selectedUserRole={this.state.selectedMeasures} />
               </div>
               <div className="add-remove">
-                  <div className={"button add" + (this.state.selectedMeasure == null ? " disabled" : "")}
+                  <div className={"button add" + (this.state.selectedMeasures === 0 ? " disabled" : "")}
                        onClick={() => this.addAssignee()}></div>
-                  <div className={"button remove" + (this.state.selectedMeasure == null ? " disabled" : "")}
+                  <div className={"button remove" + (this.state.selectedMeasures === 0 ? " disabled" : "")}
                        onClick={() => this.removeAssignee()}></div>
               </div>
               <div className="section all-therapists">
@@ -162,7 +151,8 @@ class AssignMeasures extends Component {
                       searchValue={this.state.searchValue}
                       list={this.state.currentUnassignedMeasures}
                       setSelected={this.setSelectedMeasure}
-                      selectedUserRole={this.state.selectedMeasure}
+                      selectedUserRole={this.state.selectedMeasures}
+                      showCheckbox={true}
                   />
               </div>
           </div>}
