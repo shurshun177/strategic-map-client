@@ -1,7 +1,16 @@
+
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import BuildVersion from '../common/BuildVersion';
+
+import * as bowser from 'bowser';
+
+import * as loginActions from '../../actions/login_actions';
 import LoginHeader from './LoginHeader';
 import LoginForm from './LoginForm';
-import '../common/Login.scss';
+import './../../../css/login/Login.scss';
+import cookie from '../../utils/cookie';
 
 class LoginPage extends Component {
 
@@ -11,6 +20,11 @@ class LoginPage extends Component {
     const loadingDone = () => {
       this.setState({ loading: false });
     };
+
+    if (cookie('jwt_token')) {
+      this.state.loading = true;
+      this.props.actions.rememberMe(loadingDone);
+    }
   }
 
   render() {
@@ -50,4 +64,10 @@ class LoginPage extends Component {
   }
 }
 
-export LoginPage;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(loginActions, dispatch),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(LoginPage);
