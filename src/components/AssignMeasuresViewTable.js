@@ -38,23 +38,9 @@ class AssignUsersViewTable extends Component {
 
 
     isElementSelected = el => {
-        return this.state.currentSelected ?
-            this.state.currentSelected.id === el.id :
-            this.props.selectedUserRole.some(item => item.id === el.id);
+        return this.props.selectedUserRole.some(item => item.id === el.id);
     };
 
-    createCheckbox = element => element ?
-
-        <Checkbox
-            checked={this.state.isAllChecked ? true : this.isElementSelected(element)}
-            onChange={this.handleCheckElement(element)}
-            color="primary"
-        /> :
-        <Checkbox
-            checked={this.state.isAllChecked}
-            onChange={this.handleCheckAll}
-            color="primary"
-        />;
 
     renderRow = (el, index) => {
         const isEven = index % 2 === 0 ? " even" : "";
@@ -69,7 +55,6 @@ class AssignUsersViewTable extends Component {
                     title={el.measure_name} key={el.id}>
                     {el.measure_name}
                 </div>
-                {this.props.showCheckbox ? <div>{this.createCheckbox(el)}</div> : ''}
             </div>
         )
     };
@@ -117,10 +102,6 @@ render() {
     if (this.props.list) {
         let headers = [];
         headers.push(this.props.header);
-        if (this.props.showCheckbox) {
-            let checkboxElement = this.createCheckbox();
-            headers.push(checkboxElement);
-        }
         return (
             <div className="table-container">
                 <div className="table">

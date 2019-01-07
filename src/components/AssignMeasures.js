@@ -52,7 +52,6 @@ class AssignMeasures extends Component {
 
           selectedMeasureArray.forEach(selectedMeasure=>{
               let isAlreadyChoosen = selectedMeasures.some(item => item.id === selectedMeasure.id);
-              console.log(isAlreadyChoosen, 'is already choosen');
               if (!isAlreadyChoosen){
                   selectedMeasures.push(selectedMeasure);
               }
@@ -67,52 +66,42 @@ class AssignMeasures extends Component {
     let { currentAssignedMeasures, currentUnassignedMeasures, selectedMeasures } = this.state;
     if (selectedMeasures.length === 0) { return; }
       this.setState((prevState, props) => {
-          let currentSelectedElement = selectedMeasures.pop();
-          let isMeasureAssigned = prevState.currentAssignedMeasures.find(el => el.id === currentSelectedElement.id);
-          if (!isMeasureAssigned) {
-              prevState.currentAssignedMeasures.push(currentSelectedElement);
-              prevState.currentUnassignedMeasures.pop(currentSelectedElement);
-              return {
-                  currentAssignedMeasures: prevState.currentAssignedMeasures,
-                  currentUnassignedMeasures: prevState.currentUnassignedMeasures
-              };
-          }
-      }, ()=>{
-        console.log('add assignee, state');
-        console.log(this.state.currentAssignedMeasures);
-        console.log(this.state.currentUnassignedMeasures);
+          let newAssigned = prevState.currentAssignedMeasures;
+          let newUnassigned = prevState.currentUnassignedMeasures;
+          selectedMeasures.forEach((selectedMeasure, index) => {
+              let isMeasureAssigned = prevState.currentAssignedMeasures.find(el => el.id === selectedMeasure.id);
+              if (!isMeasureAssigned) {
+                  newAssigned.push(selectedMeasure);
+                  newUnassigned = newUnassigned.filter(el => el.id !== selectedMeasure.id);
+              }
+          });
+          return {
+              currentAssignedMeasures: newAssigned,
+              currentUnassignedMeasures: newUnassigned,
+              selectedMeasures: []
+          };
       });
-
-    // currentAssignedMeasures.push(this.state.selectedUser);
-    // const indexToRemove = _.findIndex(currentUnassignedMeasures, unAssigendUser => unAssigendUser.id === this.state.selectedUser.id);
-    // currentUnassignedMeasures.splice(indexToRemove, 1);
-    // this.setState({ currentAssignedMeasures, currentUnassignedMeasures, selectedAssignee: null, selectedUser: null });
   };
 
   removeAssignee = () => {
     let { currentAssignedMeasures, currentUnassignedMeasures, selectedMeasures } = this.state;
-
       if (selectedMeasures.length === 0) { return; }
       this.setState((prevState, props) => {
-          let currentSelectedElement = selectedMeasures.pop();
-          let isMeasureUnassigned = prevState.currentUnassignedMeasures.find(el=>el.id === currentSelectedElement.id);
-          if (!isMeasureUnassigned){
-              prevState.currentAssignedMeasures.pop(currentSelectedElement);
-              prevState.currentUnassignedMeasures.push(currentSelectedElement);
-          }
-          else{
-              prevState.currentAssignedMeasures.pop(currentSelectedElement);
-          }
+          let newAssigned = prevState.currentAssignedMeasures;
+          let newUnassigned = prevState.currentUnassignedMeasures;
+          selectedMeasures.forEach((selectedMeasure, index)=>{
+              let isMeasureUnassigned = newUnassigned.find(el=>el.id === selectedMeasure.id);
+              if (!isMeasureUnassigned) {
+                  newUnassigned.push(selectedMeasure);
+                  newAssigned = newAssigned.filter(el=> el.id !== selectedMeasure.id);
+              }
+          });
           return {
-              currentAssignedMeasures: prevState.currentAssignedMeasures,
-              currentUnassignedMeasures: prevState.currentUnassignedMeasures
+              currentAssignedMeasures:newAssigned,
+              currentUnassignedMeasures: newUnassigned,
+              selectedMeasures: []
           };
       });
-    // if (selectedAssignee == null) { return; }
-    // currentUnassignedMeasures.push(this.state.selectedAssignee);
-    // const indexToRemove = _.findIndex(currentAssignedMeasures, assigendUser => assigendUser.id === this.state.selectedAssignee.id);
-    // currentAssignedMeasures.splice(indexToRemove, 1);
-    // this.setState({ currentAssignedMeasures, currentUnassignedMeasures, selectedAssignee: null, selectedUser: null });
   };
 
   closeAssignModal = () => {
