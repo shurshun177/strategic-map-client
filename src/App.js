@@ -17,10 +17,12 @@ const theme = createMuiTheme({
     typography: {
         // In Japanese the characters are usually larger.
         fontSize: 14,
+        //fontColor:
     },
     palette: {
         type: 'light'
-    }
+    },
+
 });
 
 class App extends Component {

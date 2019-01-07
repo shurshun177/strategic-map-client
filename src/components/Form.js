@@ -74,11 +74,13 @@ const topic_list = [
     },
     {
         value: '1',
-        label: 'תקן איוש ונלוות',
+        label: 'תקן איוש ונלוות'
+
     },
     {
         value: '2',
-        label: 'פעילות',
+        label: 'פעילות'
+
     },
     {
         value: '3',
@@ -102,7 +104,7 @@ const topic_list = [
     },
     {
         value: '8',
-        label: 'תשתיתטכנולוגית',
+        label: 'תשתית טכנולוגית',
     },
 ];
 
@@ -472,19 +474,7 @@ class Form extends Component {
                             label="האם מדד חטיבה"
                         />
 
-                         <FormControlLabel
-                             control={
-                                <Switch
-                                    id="separate_thousands"
-                                    name="separate_thousands"
-                                    checked={this.state.separate_thousands}
-                                    onChange={this.handleChangeSwitch('separate_thousands')}
-                                    value="separate_thousands"
-                                    color="primary"
-                                />
-                            }
-                            label="מפריד אלפים"
-                        />
+
 
                         <FormControlLabel
                             control={
@@ -575,11 +565,7 @@ class Form extends Component {
                         variant="outlined"
                         onChange={this.handleChange('numerator')}
                         value={this.state.numerator}
-                        type="number"
-                        inputProps={{
-                            min: 1,
-                            step: 1
-                        }}
+
 
                     />
                     <TextField
@@ -592,11 +578,8 @@ class Form extends Component {
                         variant="outlined"
                         onChange={this.handleChange('denominator')}
                         value={this.state.denominator}
-                        type="number"
-                        inputProps={{
-                            min: 1,
-                            step: 1
-                        }}
+
+
 
                     />
                     <TextField
@@ -716,6 +699,29 @@ class Form extends Component {
                         }}
 
                     />
+
+                    <FormGroup grid>
+
+
+
+                        <FormControlLabel
+                             control={
+                                <Switch
+                                    id="separate_thousands"
+                                    name="separate_thousands"
+                                    checked={this.state.separate_thousands}
+                                    onChange={this.handleChangeSwitch('separate_thousands')}
+                                    value="separate_thousands"
+                                    color="primary"
+                                />
+                            }
+                            label="מפריד אלפים"
+                        />
+
+
+                     </FormGroup>
+
+
                     <TextField
                         id="digit_num"
                         name="digit_num"
@@ -745,6 +751,8 @@ class Form extends Component {
                             className={classNames(classes.textField)}
                             margin="normal"
                             variant="outlined"
+                            okLabel='אישור'
+                            cancelLabel='ביטול'
                             value={this.state.from_date}
                             onChange={this.handleDateChange('from_date')}
                             rightArrowIcon={<ChevronRightIcon />}
@@ -765,6 +773,8 @@ class Form extends Component {
                             className={classNames(classes.textField)}
                             margin="normal"
                             variant="outlined"
+                            okLabel='אישור'
+                            cancelLabel='ביטול'
                             value={this.state.to_date}
                             onChange={this.handleDateChange('to_date')}
                             rightArrowIcon={<ChevronRightIcon />}
