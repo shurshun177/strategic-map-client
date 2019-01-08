@@ -98,8 +98,7 @@ class AssignUsersViewTable extends Component {
         });
     };
 
-render() {
-    if (this.props.list) {
+    render() {
         let headers = [];
         headers.push(this.props.header);
         return (
@@ -117,10 +116,6 @@ render() {
             </div>
         )
     }
-    else {
-        return (<div></div>)
-    }
-}
 }
 
 AssignUsersViewTable.propTypes = {
