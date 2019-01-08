@@ -41,7 +41,6 @@ class AssignMeasures extends Component {
 
   submitChanges = () => {
     this.props.setMeasures(this.state.currentAssignedMeasures);
-    // this.props.setAssigeens(this.state.currentAssignedMeasures);
     this.setState({ selectedMeasures: [] });
     this.closeAssignModal();
   };

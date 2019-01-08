@@ -1,16 +1,16 @@
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import BuildVersion from '../common/BuildVersion';
+// import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
+import BuildVersion from './BuildVersion';
 
 import * as bowser from 'bowser';
 
-import * as loginActions from '../../actions/login_actions';
+import * as loginActions from './login_actions';
 import LoginHeader from './LoginHeader';
 import LoginForm from './LoginForm';
 import './../../../css/login/Login.scss';
-import cookie from '../../utils/cookie';
+import cookie from './cookie';
 
 class LoginPage extends Component {
 
@@ -64,10 +64,4 @@ class LoginPage extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    actions: bindActionCreators(loginActions, dispatch),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default LoginPage;
