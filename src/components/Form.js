@@ -296,6 +296,7 @@ class Form extends Component {
                         id="year"
                         name="year"
                         variant="outlined"
+                        required={!isReq}
                         select
                         label="שנה"
                         className={classes.textField}
@@ -352,8 +353,8 @@ class Form extends Component {
                         id="hospital_type"
                         name="hospital_type"
                         required={!isReq}
-                        readonly = {isReadonly}
-                        disabled={isReadonly}
+
+
                         variant="outlined"
                         select
                         label="סוג בית חולים"
@@ -418,6 +419,7 @@ class Form extends Component {
                         id="business_topic"
                         name="business_topic"
                         variant="outlined"
+                        required={!isReq}
                         select
                         label="נושא עסקי"
                         className={classes.textField}
@@ -586,8 +588,8 @@ class Form extends Component {
                         id="hospital_type"
                         name="hospital_type"
                         required={!isReq}
-                        readonly = {isReadonly}
-                        disabled={isReadonly}
+
+
                         variant="outlined"
                         select
                         label="סוג בית חולים"
@@ -747,7 +749,7 @@ class Form extends Component {
                             id="from_date"
                             name="from_date"
                             format="D/MM/YYYY"
-                            helperText='מתאריך'
+                            label='מתאריך'
                             className={classNames(classes.textField)}
                             margin="normal"
                             variant="outlined"
@@ -769,7 +771,8 @@ class Form extends Component {
                             id="to_date"
                             name="to_date"
                             format="D/MM/YYYY"
-                            helperText="עד תאריך"
+                            label="עד תאריך"
+
                             className={classNames(classes.textField)}
                             margin="normal"
                             variant="outlined"
