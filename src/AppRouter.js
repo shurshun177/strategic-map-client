@@ -9,7 +9,7 @@ import VersionUpdate from './pages/Version-update';
 import MeasureUpdate from './pages/Measure-update';
 import VersionCopy from './pages/Version-copy';
 import MeasureCopy from './pages/Measure-copy';
-import NewScreen from './pages/New-screen';
+import AlertDialog from './pages/New-screen';
 
 
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
@@ -17,7 +17,7 @@ import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 const theme = createMuiTheme({
     direction: 'rtl',
     typography:{
-        fontSize: 16
+        fontSize: 18
     },
     content: {
         'margin-right': '25%'
@@ -59,7 +59,7 @@ const AppRouter =()=>{
             <Route exact path="/measure-update/:id" component={MeasureUpdate} />
             <Route exact path="/version-copy/:id" component={VersionCopy} />
             <Route exact path="/measure-copy/:id" component={MeasureCopy} />
-            <Route exact path="/new" component={NewScreen} />
+            <Route exact path="/new" component={AlertDialog} />
         </React.Fragment>
         </MuiThemeProvider>
 
