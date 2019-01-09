@@ -21,9 +21,10 @@ class AlertDialog extends React.Component {
 
   render() {
     return (
+    <div className="main-content">
       <div>
         <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-          Open alert dialog
+          לפתוח מסך חדש
         </Button>
         <Dialog
           open={this.state.open}
@@ -47,6 +48,7 @@ class AlertDialog extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
+      </div>
       </div>
     );
   }

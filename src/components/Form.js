@@ -744,6 +744,24 @@ class Form extends Component {
 
                     />
 
+                    <TextField
+                        id="target_default"
+                        name="target_default"
+                        label="יעד עיסקי"
+
+                        onChange={this.handleChange('target_default')}
+                        value={this.state.target_default}
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                        type="number"
+                        inputProps={{
+                            min: 0,
+                            step: 1
+                        }}
+
+                    />
+
                     <MuiPickersUtilsProvider utils={MomentUtils}>
                         <DatePicker
                             id="from_date"
@@ -789,23 +807,7 @@ class Form extends Component {
                     </MuiPickersUtilsProvider>
 
 
-                    <TextField
-                        id="target_default"
-                        name="target_default"
-                        label="יעד עיסקי"
 
-                        onChange={this.handleChange('target_default')}
-                        value={this.state.target_default}
-                        className={classes.textField}
-                        margin="normal"
-                        variant="outlined"
-                        type="number"
-                        inputProps={{
-                            min: 0,
-                            step: 5
-                        }}
-
-                    />
 
                     <TextField
                         id="remarks"
