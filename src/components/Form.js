@@ -12,7 +12,6 @@ import FormGroup from '@material-ui/core/FormGroup';
 import RestAPI from '../api';
 import {MuiPickersUtilsProvider} from 'material-ui-pickers';
 import Button from '@material-ui/core/Button';
-import MaterialUIPickers from './DateTimePickerComp';
 import AssignMeasures from './AssignMeasures';
 //import Calendar from 'react-input-calendar'
 import SaveIcon from '@material-ui/icons/Save';
@@ -184,7 +183,7 @@ class Form extends Component {
                 version_type: '',
                 hospital_type: '',
                 active: true,
-                measure_names: '',
+                measure_names: [],
                 measure: [],
                 business_topic: '',
                 retro: false,

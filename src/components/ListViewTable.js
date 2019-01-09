@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -9,18 +8,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 
 
-import { lighten } from '@material-ui/core/styles/colorManipulator';
+import EnhancedTableToolbar from './EnhancedTableToolbar';
 
 import moment from 'moment-timezone';
-// import momenttz from 'moment-timezone';
 
 let counter = 0;
 
@@ -102,78 +97,6 @@ ListViewTable.propTypes = {
 
 };
 
-const toolbarStyles = theme => ({
-    root: {
-        paddingRight: theme.spacing.unit,
-    },
-    highlight:
-        theme.palette.type === 'light'
-            ? {
-                color: theme.palette.primary.main,
-                backgroundColor: lighten(theme.palette.primary.light, 0.85),
-            }
-            : {
-                color: theme.palette.text.primary,
-                backgroundColor: theme.palette.primary.dark,
-            },
-    spacer: {
-        flex: '1 1 100%',
-    },
-    actions: {
-        color: theme.palette.text.primary,
-    },
-    title: {
-        flex: '0 0 auto',
-    },
-});
-
-let EnhancedTableToolbar = props => {
-    const { numSelected, classes } = props;
-
-    return (
-        <Toolbar
-            className={classNames(classes.root, {
-                [classes.highlight]: numSelected > 0,
-            })}
-        >
-            <div className={classes.title}>
-                {numSelected > 0 ? (
-                    <Typography color="inherit" variant="subtitle1">
-                        {numSelected} selected
-                    </Typography>
-                ) : (
-                    <Typography variant="h6" id="tableTitle">
-
-                    </Typography>
-                )}
-            </div>
-            <div className={classes.spacer} />
-            <div className={classes.actions}>
-                {numSelected > 0 ? (
-                    <Tooltip title="Delete">
-                        <IconButton aria-label="Delete">
-                            {/*<DeleteIcon />*/}
-                        </IconButton>
-                    </Tooltip>
-                ) : (
-                    <Tooltip title="Filter list">
-                        <IconButton aria-label="Filter list">
-                            {/*<FilterListIcon />*/}
-                        </IconButton>
-                    </Tooltip>
-                )}
-            </div>
-        </Toolbar>
-    );
-};
-
-EnhancedTableToolbar.propTypes = {
-    classes: PropTypes.object.isRequired,
-    numSelected: PropTypes.number.isRequired,
-};
-
-EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
-
 const styles = theme => ({
     root: {
         width: '99%',
@@ -194,6 +117,8 @@ const styles = theme => ({
 });
 
 class EnhancedTable extends React.Component {
+
+
     state = {
         order: 'asc',
         orderBy: 'calories',
@@ -202,6 +127,13 @@ class EnhancedTable extends React.Component {
         rowsPerPage: 5,
 
     };
+
+
+    handleSearch = ()=>{
+        //TODO implement search
+        alert('search')
+    };
+
 
     handleRequestSort = (event, property) => {
         const orderBy = property;
@@ -232,12 +164,7 @@ class EnhancedTable extends React.Component {
     isSelected = id => this.state.selected === id;
 
     timestampToDate= timestamp=>{
-
         return moment.unix(timestamp/1000).tz('Asia/Jerusalem').format("DD/MM/YYYY");
-
-        // return new Date(timestamp*1000/1000).toDateString();
-
-
     };
 
     isActive = isActive => isActive === true? 'פעיל': 'לא פעיל';
@@ -258,10 +185,6 @@ class EnhancedTable extends React.Component {
         return row;
     }
 
-    getTableCells(){
-
-
-    }
     render() {
         const { classes, data, columns } = this.props;
         const { order, orderBy, selected, rowsPerPage, page } = this.state;
@@ -269,10 +192,9 @@ class EnhancedTable extends React.Component {
         const numSelected = 1;
         //TODO take columns names
         let columnsNames = columns.map(el=>el.id);
-        console.log(columnsNames, 'COLUMNS NAMES')
         return (
             <Paper className={classes.root}>
-                {/*<EnhancedTableToolbar numSelected={selected.length} />*/}
+                <EnhancedTableToolbar handleSearch={this.handleSearch}/>
                 <div className={classes.tableWrapper}>
                     <Table className={classes.table} aria-labelledby="tableTitle">
 
@@ -293,10 +215,8 @@ class EnhancedTable extends React.Component {
                                 .map((n, index) => {
                                     let id = n._id['$oid'];
                                     const isSelected = this.isSelected(id);
-                                    console.log(n);
 
                                     let row = this.elementToRow(columnsNames, n);
-                                    console.log('ROWROW', row);
                                     return (
                                         <TableRow
 
