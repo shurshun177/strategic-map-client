@@ -295,7 +295,7 @@ class Form extends Component {
                         id="year"
                         name="year"
                         variant="outlined"
-                        required={!isReq}
+                        required
                         select
                         label="שנה"
                         className={classes.textField}
@@ -334,11 +334,12 @@ class Form extends Component {
                         }}
                         readonly = {isReadonly}
                         disabled={isReadonly}
+
                     />
                     <TextField
                         id="version_name"
                         name="version_name"
-                        required={!isReq}
+                        required
                         label="שם גרסה"
                         className={classes.textField}
                         margin="normal"
@@ -351,7 +352,7 @@ class Form extends Component {
                     <TextField
                         id="hospital_type"
                         name="hospital_type"
-                        required={!isReq}
+                        required
 
 
                         variant="outlined"
@@ -393,7 +394,7 @@ class Form extends Component {
                         name="version_type"
                         select
                         variant="outlined"
-                        required={!isReq}
+                        required
                         label="סוג גרסה"
                         className={classes.textField}
                         SelectProps={{
@@ -418,7 +419,7 @@ class Form extends Component {
                         id="business_topic"
                         name="business_topic"
                         variant="outlined"
-                        required={!isReq}
+                        required
                         select
                         label="נושא עסקי"
                         className={classes.textField}
@@ -505,13 +506,14 @@ class Form extends Component {
                         variant="outlined"
                         onChange={this.handleChange('measure_code')}
                         value={this.state.measure_code}
-                        readonly = {isReadonly}
+
                         disabled={isReadonly}
+
                     />
                     <TextField
                         id="measure_name"
                         name="measure_name"
-                        required={!isReq}
+                        required
                         label="שם מדד"
                         className={classes.textField}
                         margin="normal"
@@ -522,7 +524,7 @@ class Form extends Component {
                     <TextField
                         id="measure_desc"
                         name="measure_desc"
-                        required={!isReq}
+                        required
                         label="תיאור מדד"
                         className={classes.textField}
                         margin="normal"
@@ -586,7 +588,7 @@ class Form extends Component {
                     <TextField
                         id="hospital_type"
                         name="hospital_type"
-                        required={!isReq}
+                        required
 
 
                         variant="outlined"
@@ -612,7 +614,7 @@ class Form extends Component {
                     <TextField
                         id="business_topic"
                         name="business_topic"
-                        required={!isReq}
+                        required
                         variant="outlined"
                         select
                         label="נושא עסקי"
@@ -637,7 +639,7 @@ class Form extends Component {
                     <TextField
                         id="measure_type"
                         name="measure_type"
-                        required={!isReq}
+                        required
                         variant="outlined"
                         select
                         label="סוג מדד"
@@ -686,7 +688,7 @@ class Form extends Component {
                     <TextField
                         id="measure_unit"
                         name="measure_unit"
-                        required={!isReq}
+                        required
                         label="יחידת מידה"
                         className={classes.textField}
                         margin="normal"
@@ -726,7 +728,7 @@ class Form extends Component {
                     <TextField
                         id="digit_num"
                         name="digit_num"
-                        required={!isReq}
+                        required
                         label="מספר ספרות אחרי הנקודה"
                         className={classes.textField}
                         margin="normal"
