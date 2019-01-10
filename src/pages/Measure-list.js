@@ -120,7 +120,7 @@ class MeasureList extends Component {
                                 align='center'
 
                                 className={classes.myTextStyle}>
-                        מסך רשימת מדדים
+                        ניהול מדדים
                     </Typography>
                 </Toolbar>
                 <ContainedButtons buttons={buttons} selectedId={this.state.selectedMeasure}/>

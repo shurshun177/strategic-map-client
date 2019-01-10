@@ -134,7 +134,7 @@ class VersionList extends Component {
                     <Typography variant="h4"
                                 color="primary"
                                 className={classes.myTextStyle}>
-                        מסך רשימת גרסאות
+                         ניהול גרסאות
                     </Typography>
                 </Toolbar>
                 </div>
