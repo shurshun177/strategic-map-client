@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Form from '../components/Form'
 import RestAPI from '../api';
 import { Route, Redirect } from 'react-router';
+import MeasureForm from '../components/MeasureForm';
 
 class MeasureCopy extends Component {
 
@@ -77,10 +78,15 @@ class MeasureCopy extends Component {
     render() {
         return (
             <div className="main-content">
-                { this.state.isCreated ? (<Redirect to="/measures"/>) :
-                (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='measure' mode={this.state.mode}
-                      data={this.state.data}/>)
-            }</div>
+                { this.state.isCreated ? (<Redirect to="/app/measures"/>) :
+                // (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='measure' mode={this.state.mode}
+                //       data={this.state.data}/>)
+                    (<MeasureForm handleFormSubmit={this.handleFormSubmit.bind(this)}
+                                  mode={this.state.mode}
+                                  data={this.state.data}
+                    />)
+
+                }</div>
         );
     }
 }

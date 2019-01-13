@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Form from '../components/Form'
 import RestAPI from '../api';
 import { Route, Redirect } from 'react-router';
+import VersionForm from '../components/VersionForm';
 
 class VersionUpdate extends Component {
 
@@ -64,8 +65,11 @@ class VersionUpdate extends Component {
     render() {
         return (
             <div className="main-content">{
-                this.state.isCreated ? (<Redirect to="/versions"/>) :
-                    (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version' mode={this.state.mode}
+                this.state.isCreated ? (<Redirect to="/app/versions"/>) :
+                    // (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version' mode={this.state.mode}
+                    //        data={this.state.data}/>)
+
+                    (<VersionForm handleFormSubmit={this.handleFormSubmit.bind(this)} mode={this.state.mode}
                            data={this.state.data}/>)
             }</div>
         );

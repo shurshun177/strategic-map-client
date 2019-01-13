@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Form from '../components/Form'
 import RestAPI from '../api';
 import { Route, Redirect } from 'react-router';
+import VersionForm from '../components/VersionForm';
 
 class VersionDetails extends Component {
 
@@ -16,9 +17,6 @@ class VersionDetails extends Component {
 
 
      componentDidMount() {
-        //todo make request to get version id
-        //todo restApi........setState(()=>return{versionNumber: result)
-
         let url = 'last_version/';
         //console.log(this.state.versionNumber)
         const last_version = RestAPI().get(url, {withCredentials: true});
@@ -57,8 +55,9 @@ class VersionDetails extends Component {
     render() {
         return (
             <div className="main-content">{
-                this.state.isCreated ? (<Redirect to="/versions"/>) :
-                (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version' versionNumber={this.state.versionNumber}/>)
+                this.state.isCreated ? (<Redirect to="/app/versions"/>) :
+                // (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version' versionNumber={this.state.versionNumber}/>)
+                    (<VersionForm handleFormSubmit={this.handleFormSubmit.bind(this)} versionNumber={this.state.versionNumber}/>)
             }
             </div>)
     }

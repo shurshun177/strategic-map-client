@@ -1,28 +1,27 @@
-import { browserHistory } from 'react-router';
-import ajaxHelper from '../helpers/ajax_helper';
-import cookie from 'react-cookie';
+// import ajaxHelper from '../helpers/ajax_helper';
+import {Cookies} from 'react-cookie';
 import "isomorphic-fetch"
 
-import * as actionTypes from './actions_types';
+// import * as actionTypes from './actions_types';
 
 export function loginSuccess(user) {
   let actionType;
   switch (user.role) {
     case 'patient':
-      actionType = actionTypes.LOGIN_SUCCESS_PATIENT;
+      // actionType = actionTypes.LOGIN_SUCCESS_PATIENT;
       break;
     case 'supervisor':
     case 'therapist':
-      actionType = actionTypes.LOGIN_SUCCESS_THERAPIST;
+      // actionType = actionTypes.LOGIN_SUCCESS_THERAPIST;
       break;
     case 'siteadmin':
-      actionType = actionTypes.LOGIN_SUCCESS_SITEADMIN;
+      // actionType = actionTypes.LOGIN_SUCCESS_SITEADMIN;
       break;
     case 'admin':
-      actionType = actionTypes.LOGIN_SUCCESS_ADMIN;
+      // actionType = actionTypes.LOGIN_SUCCESS_ADMIN;
       break;
     case 'superadmin':
-      actionType = actionTypes.LOGIN_SUCCESS_SUPERADMIN;
+      // actionType = actionTypes.LOGIN_SUCCESS_SUPERADMIN;
       break;
   }
   return {
@@ -33,7 +32,7 @@ export function loginSuccess(user) {
 
 export function loginFail(error) {
   return {
-    type: actionTypes.LOGIN_ERROR,
+    // type: actionTypes.LOGIN_ERROR,
     error,
   };
 }
@@ -67,9 +66,9 @@ export function onSubmit(params) {
               dispatch(loginFail("Server Error"));
           }
         } else {
-          cookie.save('jwt_token', data.token, { path: '/' });
+            Cookies.save('jwt_token', data.token, { path: '/' });
           dispatch(loginSuccess(data.user));
-          browserHistory.push(data.url);
+          // browserHistory.push(data.url);
         }
       })
       .catch((error) => {
@@ -81,7 +80,7 @@ export function onSubmit(params) {
 export function rememberMe(done) {
   const succ = (dispatch, res) => {
     dispatch(loginSuccess(res.data.user));
-    browserHistory.push(res.data.url);
+    // browserHistory.push(res.data.url);
   };
   const err = (dispatch, error) => {
     dispatch(loginFail("Server Error"));
@@ -89,29 +88,30 @@ export function rememberMe(done) {
     // Failed to login via remember me cookie, nothing to do.
   };
   return (dispatch) => {
-    return ajaxHelper({
-      request: {
-        method: 'post',
-        url: 'login/remembered_user',
-      },
-    })
-      .then(
-        (res => succ(dispatch, res)),
-        err
-      )
-      .catch(e => err(dispatch, e));
+  //   return ajaxHelper({
+  //     request: {
+  //       method: 'post',
+  //       url: 'login/remembered_user',
+  //     },
+  //   })
+  //     .then(
+  //       (res => succ(dispatch, res)),
+  //       err
+  //     )
+  //     .catch(e => err(dispatch, e));
   };
 }
 
 export function logout(userId) {
-  ajaxHelper({
-    request: {
-      method: 'post',
-      url: '/login/logout',
-      data: { userId },
-    },
-  });
-  cookie.remove('jwt_token');
+  // ajaxHelper({
+  //   request: {
+  //     method: 'post',
+  //     url: '/login/logout',
+  //     data: { userId },
+  //   },
+  // });
+    Cookies.remove('jwt_token');
   window.location.href = '/';
-  return { type: actionTypes.LOGOUT };
+  return {}
+  // return { type: actionTypes.LOGOUT };
 }

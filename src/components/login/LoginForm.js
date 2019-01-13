@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
 
 import InputWrapper from './InputWrapper';
 import LoginButton from './LoginButton';
-import LoginFooter from './LoginFooter';
-import FlashError from '../common/FlashError';
-import BuildVersion from '../common/BuildVersion';
-import * as loginAction from '../../actions/login_actions';
+// import LoginFooter from './LoginFooter';
+// import FlashError from '../common/FlashError';
+import BuildVersion from './BuildVersion';
+import * as loginAction from './login_actions';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -54,11 +54,11 @@ class LoginForm extends Component {
               onInputChange={this.onPasswordInputChange}
             />
             <LoginButton onSubmit={this.onSubmit} />
-            <LoginFooter
-              togglCheckBox={this.togglCheckBox}
-              check_box_img={this.state.remember_me ? '/images/remember_me_checked.png' : '/images/remember_me.png'}
-            />
-            <FlashError message={this.props.login.errors} />
+            {/*<LoginFooter*/}
+              {/*togglCheckBox={this.togglCheckBox}*/}
+              {/*check_box_img={this.state.remember_me ? '/images/remember_me_checked.png' : '/images/remember_me.png'}*/}
+            {/*/>*/}
+            {/*<FlashError message={this.props.login.errors} />*/}
           </div>
           <BuildVersion />
         </div>
@@ -74,7 +74,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators(loginAction, dispatch),
+    // actions: bindActionCreators(loginAction, dispatch),
   };
 };
 
@@ -83,4 +83,4 @@ LoginForm.propTypes = {
   actions: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default LoginForm;

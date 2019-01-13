@@ -10,7 +10,7 @@ import MeasureUpdate from './pages/Measure-update';
 import VersionCopy from './pages/Version-copy';
 import MeasureCopy from './pages/Measure-copy';
 import AlertDialog from './pages/New-screen';
-
+import LoginPage from './components/login/LoginPage';
 
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 
@@ -49,17 +49,18 @@ const AppRouter =()=>{
         <MuiThemeProvider theme={theme}>
 
         <React.Fragment>
-            <Route path="/" component={App} />
 
-            <Route exact path="/versions" component={VersionList} />
-            <Route exact path="/measures" component={MeasureList} />
-            <Route path="/measure-details/:id" component={MeasureDetails} />
-            <Route exact path="/version-details/:id" component={VersionDetails} />
-            <Route exact path="/version-update/:id" component={VersionUpdate} />
-            <Route exact path="/measure-update/:id" component={MeasureUpdate} />
-            <Route exact path="/version-copy/:id" component={VersionCopy} />
-            <Route exact path="/measure-copy/:id" component={MeasureCopy} />
-            <Route exact path="/new" component={AlertDialog} />
+            <Route exact path="/" component={LoginPage} />
+            <Route path="/app" component={App} />
+            <Route exact path="/app/versions" component={VersionList} />
+            <Route exact path="/app/measures" component={MeasureList} />
+            <Route path="/app/measure-details/:id" component={MeasureDetails} />
+            <Route exact path="/app/version-details/:id" component={VersionDetails} />
+            <Route exact path="/app/version-update/:id" component={VersionUpdate} />
+            <Route exact path="/app/measure-update/:id" component={MeasureUpdate} />
+            <Route exact path="/app/version-copy/:id" component={VersionCopy} />
+            <Route exact path="/app/measure-copy/:id" component={MeasureCopy} />
+            <Route exact path="/app/new" component={AlertDialog} />
         </React.Fragment>
         </MuiThemeProvider>
 
