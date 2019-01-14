@@ -166,23 +166,23 @@ class Login extends Component {
                         Sign in
                     </Typography>
                     <form className={classes.form}>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="email"  classes={{root:classes.label}}>Email Address</InputLabel>
-                            <Input id="email" name="email" autoComplete="email" autoFocus />
-                        </FormControl>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="password"
-                            classes={{root:classes.label}}
+                        {/*<FormControl margin="normal" required fullWidth>*/}
+                            {/*<InputLabel htmlFor="email"  classes={{root:classes.label}}>Email Address</InputLabel>*/}
+                            {/*<Input id="email" name="email" autoComplete="email" autoFocus />*/}
+                        {/*</FormControl>*/}
+                        {/*<FormControl margin="normal" required fullWidth>*/}
+                            {/*<InputLabel htmlFor="password"*/}
+                            {/*classes={{root:classes.label}}*/}
 
-                            >Password</InputLabel>
-                            <Input name="password" type="password" id="password" autoComplete="current-password"
-                                   classes={{label:{marginRight:'20px', right:0}}}
-                            />
-                        </FormControl>
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
+                            {/*>Password</InputLabel>*/}
+                            {/*<Input name="password" type="password" id="password" autoComplete="current-password"*/}
+                                   {/*classes={{label:{marginRight:'20px', right:0}}}*/}
+                            {/*/>*/}
+                        {/*</FormControl>*/}
+                        {/*<FormControlLabel*/}
+                            {/*control={<Checkbox value="remember" color="primary" />}*/}
+                            {/*label="Remember me"*/}
+                        {/*/>*/}
                         <TextField
                             id="email"
                             name="email"

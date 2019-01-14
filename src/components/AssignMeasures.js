@@ -5,6 +5,7 @@ import AssignMeasuresViewTable from './AssignMeasuresViewTable';
 import _ from 'lodash';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import Button from '@material-ui/core/Button';
 class AssignMeasures extends Component {
   constructor(props) {
     super(props);
@@ -164,10 +165,10 @@ class AssignMeasures extends Component {
   renderTitle = () => {
     return (
         <div className="add-measures-button">
-          <Fab color="primary" aria-label="Add" onClick={() => {
+          <Fab variant='extended' size='large' color="primary" aria-label="Add" onClick={() => {
                   this.cancelChanges();
                   this.setState({ openModal: true });
-                }}>
+                }}>בחירת מדדים
             <AddIcon />
           </Fab>
         </div>

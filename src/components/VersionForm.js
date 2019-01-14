@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import '../App.css';
 import TextField from '@material-ui/core/TextField';
@@ -173,12 +174,10 @@ class VersionForm extends Component {
             retro: false,
             year:  moment().format('YYYY'),
             year_list: ()=>{
-                //TODO refactor
                 let d = new Date( "01 " + "July 1980");
                 let first = d.getFullYear();
 
-                var s = new Date( "01 " + "July 2019");
-                let second = s.getFullYear();
+                let second = moment().year();
                 let arr = [];
 
                 for(let i = second; i >= first; i--) arr.push(i);
@@ -287,7 +286,7 @@ class VersionForm extends Component {
                 {/*Save*/}
                 {/*</Button>*/}
             <div>
-                <input class='submit-button-form' type="submit" value="שמירה" />
+                <input  class='submit-button-form' type="submit" value="שמירה" />
                 <input class="submit-button-form" value="יציאה"/>
             </div>
             <FormGroup grid>
@@ -300,6 +299,7 @@ class VersionForm extends Component {
                                 onChange={this.handleChangeSwitch('active')}
                                 value='active'
                                 color="primary"
+
                             />
                         }
                         label="פעיל"

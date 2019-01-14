@@ -11,7 +11,7 @@ import VersionCopy from './pages/Version-copy';
 import MeasureCopy from './pages/Measure-copy';
 import AlertDialog from './pages/New-screen';
 import LoginPage from './pages/Login';
-
+import CustomizedSwitches from './pages/new';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -61,6 +61,7 @@ const AppRouter =()=>{
             <Route exact path="/app/version-copy/:id" component={VersionCopy} />
             <Route exact path="/app/measure-copy/:id" component={MeasureCopy} />
             <Route exact path="/app/new" component={AlertDialog} />
+            <Route exact path="/app/apple-button" component={CustomizedSwitches} />
         </React.Fragment>
         </MuiThemeProvider>
 
