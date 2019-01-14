@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import '../App.css';
 import TextField from '@material-ui/core/TextField';
@@ -283,7 +284,7 @@ class VersionForm extends Component {
                 {/*Save*/}
                 {/*</Button>*/}
             <div>
-                <input class='submit-button-form' type="submit" value="שמירה" />
+                <input  class='submit-button-form' type="submit" value="שמירה" />
                 <input class="submit-button-form" value="יציאה"/>
             </div>
             <FormGroup grid>
@@ -296,6 +297,7 @@ class VersionForm extends Component {
                                 onChange={this.handleChangeSwitch('active')}
                                 value='active'
                                 color="primary"
+
                             />
                         }
                         label="פעיל"
