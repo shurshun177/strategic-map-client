@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Form from '../components/Form'
 import RestAPI from '../api';
 import { Route, Redirect } from 'react-router';
 import VersionForm from '../components/VersionForm';
