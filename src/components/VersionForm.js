@@ -25,10 +25,7 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
 
-        width: 400,
-        InputLabelProps:{
-
-        }
+        width: 400
     },
     dense: {
         marginTop: 19,
@@ -37,6 +34,13 @@ const styles = theme => ({
         width: 200,
     },
     group: {
+    },
+    label:{
+        marginRight: '20px',
+        right: '15px',
+        animated: {
+            right: 0
+        }
     }
 });
 
@@ -331,6 +335,7 @@ class VersionForm extends Component {
                             className: classes.menu,
                         },
                     }}
+                    InputLabelProps={{classes:{root: classes.label}}}
                     margin="normal"
                     onChange={this.handleChange('year')}
                     value={this.state.year}
@@ -360,6 +365,7 @@ class VersionForm extends Component {
                     }}
                     readonly = {isReadonly}
                     disabled={isReadonly}
+                    InputLabelProps={{classes:{root: classes.label}}}
 
                 />
                 <TextField
@@ -373,6 +379,7 @@ class VersionForm extends Component {
                     variant="outlined"
                     onChange={this.handleChange('version_name')}
                     value={this.state.version_name}
+                    InputLabelProps={{classes:{root: classes.label}}}
                 />
 
                 <TextField
@@ -391,6 +398,7 @@ class VersionForm extends Component {
                             className: classes.menu,
                         },
                     }}
+                    InputLabelProps={{classes:{root: classes.label}}}
                     margin="normal"
                     onChange={this.handleChange('hospital_type')}
                     value={this.state.hospital_type}
@@ -413,6 +421,7 @@ class VersionForm extends Component {
                     variant="outlined"
                     onChange={this.handleChange('version_desc')}
                     value={this.state.version_desc}
+                    InputLabelProps={{classes:{root: classes.label}}}
 
                 />
                 <TextField
@@ -429,6 +438,7 @@ class VersionForm extends Component {
                             className: classes.menu,
                         },
                     }}
+                    InputLabelProps={{classes:{root: classes.label}}}
                     margin="normal"
                     onChange={this.handleChange('version_type')}
                     value={this.state.version_type}
@@ -455,6 +465,7 @@ class VersionForm extends Component {
                             className: classes.menu,
                         },
                     }}
+                    InputLabelProps={{classes:{root: classes.label}}}
                     margin="normal"
                     onChange={this.handleMeasure('business_topic')}
                     value={this.state.business_topic}

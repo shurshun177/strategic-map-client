@@ -10,7 +10,7 @@ import MeasureUpdate from './pages/Measure-update';
 import VersionCopy from './pages/Version-copy';
 import MeasureCopy from './pages/Measure-copy';
 import AlertDialog from './pages/New-screen';
-import LoginPage from './components/login/LoginPage';
+import LoginPage from './pages/Login';
 
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 
