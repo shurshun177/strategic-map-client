@@ -22,11 +22,12 @@ class App extends Component {
         document.body.dir = "rtl";
   }
   render() {
+      // {this.props.location.state.isLoggedIn}
     return (
       <div>
           <RTL>
               <MuiThemeProvider theme={theme}>
-                <AppHeader isLoggedIn={this.props.location.state.isLoggedIn}/>
+                <AppHeader/>
               </MuiThemeProvider>
           </RTL>
       </div>
