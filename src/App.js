@@ -26,8 +26,7 @@ class App extends Component {
       <div>
           <RTL>
               <MuiThemeProvider theme={theme}>
-                <AppHeader/>
-
+                <AppHeader isLoggedIn={this.props.location.state.isLoggedIn}/>
               </MuiThemeProvider>
           </RTL>
       </div>

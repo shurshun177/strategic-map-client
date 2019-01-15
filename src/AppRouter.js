@@ -64,7 +64,6 @@ const AppRouter =()=>{
             <Route exact path="/app/apple-button" component={CustomizedSwitches} />
         </React.Fragment>
         </MuiThemeProvider>
-
     );
 };
 

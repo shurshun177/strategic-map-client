@@ -67,8 +67,6 @@ class AppHeader extends React.Component{
         open: false,
     };
 
-
-
     render() {
         const { classes, theme } = this.props;
 
