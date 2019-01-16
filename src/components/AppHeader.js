@@ -59,7 +59,7 @@ const styles = theme => ({
 
 const iconStyle = {
     width: 211,
-    height: 100
+    height: 70
 
 };
 
