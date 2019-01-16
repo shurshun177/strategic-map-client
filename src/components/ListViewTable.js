@@ -11,6 +11,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import Tooltip from '@material-ui/core/Tooltip';
+import RestAPI from '../api';
 
 
 import EnhancedTableToolbar from './EnhancedTableToolbar';
@@ -129,9 +130,23 @@ class EnhancedTable extends React.Component {
     };
 
 
-    handleSearch = ()=>{
-        //TODO implement search
-        alert('search')
+    handleSearch = (searchWord)=>{
+        let url = `measure/search/searchWord`;
+        const measuresList = RestAPI().get(url, {withCredentials: true});
+        measuresList.then(result => {
+            let data = result.data.items.map(el=>{
+               el.create_date = el.create_date['$date'];
+               return el;
+            });
+            this.setState((prevState, props) => {
+                return {
+                    data
+                };
+            });
+
+        }).catch((error) => {
+            console.log(error);
+        });
     };
 
 

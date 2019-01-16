@@ -38,7 +38,7 @@ const styles = theme => ({
         padding: theme.spacing.unit * 5,
     },
     drawerPaper: {
-        // width: drawerWidth,
+         width: '210px',
         'padding-top': theme.spacing.unit * 5,
         backgroundColor: theme.palette.primary.dark,
         // color: 'white'
@@ -76,7 +76,7 @@ class AppHeader extends React.Component{
             {name: 'רשימת גירסאות', link: '/app/versions'},
             {name: 'רשימת מדדים', link: '/app/measures'},
             {name: 'חדש', link: '/app/new'},
-            {name: 'exmaple button', link: '/app/apple-button'}
+            {name: 'מסך עדכון מדד לאומי', link: '/app/national-measure'}
         ];
         return (
         <div className={classes.root}>

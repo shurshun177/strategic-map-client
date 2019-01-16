@@ -240,11 +240,7 @@ class MeasureForm extends Component {
             [name]: event.target.value,
         });
 
-        if(name === 'hospital_type'){
-            if (this.state.business_topic !== ''){
-                this.requestAvailableMeasures(this.state.business_topic, event.target.value);
-            }
-        }
+
     };
 
 
