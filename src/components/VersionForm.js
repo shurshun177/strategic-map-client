@@ -56,6 +56,9 @@ const styles = theme => ({
     },
     button: {
         margin: theme.spacing.unit,
+    },
+    switch: {
+        direction: 'ltr'
     }
 });
 
@@ -328,7 +331,7 @@ class VersionForm extends Component {
                                 onChange={this.handleChangeSwitch('active')}
                                 value='active'
                                 color="primary"
-
+                                classes={{root: classes.switch}}
                             />
                         }
                         label="פעיל"
@@ -343,6 +346,7 @@ class VersionForm extends Component {
                                 onChange={this.handleChangeSwitch('retro')}
                                 value="retro"
                                 color="primary"
+                                classes={{root: classes.switch}}
                             />
                         }
                         label="אפשר עדכון דיווח קודם"
