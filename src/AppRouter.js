@@ -64,7 +64,6 @@ const AppRouter =()=>{
             <Route exact path="/app/national-measure" component={NationalMeasureUpdate} />
         </React.Fragment>
         </MuiThemeProvider>
-
     );
 };
 
