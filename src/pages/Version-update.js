@@ -21,9 +21,11 @@ class VersionUpdate extends Component {
         let updateObject = {
             active: formData.active === true,
             measure: formData.measure,
-            version_desc: formData.version_desc,
             version_name: formData.version_name,
-            version_type: formData.version_type
+            version_type: formData.version_type,
+            year: formData.year,
+            hospital_type: formData.hospital_type
+
         };
 
         let url = `version/update/${currentId}/`;

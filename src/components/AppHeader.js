@@ -74,8 +74,8 @@ class AppHeader extends React.Component{
         const { classes, theme } = this.props;
 
         const menuItems = [
-            {name: 'רשימת גירסאות', link: '/app/versions'},
-            {name: 'רשימת מדדים', link: '/app/measures'},
+            {name: 'ניהול גירסאות', link: '/app/versions'},
+            {name: 'ניהול מדדים', link: '/app/measures'},
             {name: 'חדש', link: '/app/new'},
             {name: 'מסך עדכון מדד לאומי', link: '/app/national-measure'}
         ];

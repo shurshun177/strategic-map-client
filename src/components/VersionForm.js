@@ -163,7 +163,6 @@ class VersionForm extends Component {
         this.state = {
             version_number: '',
             version_name: '',
-            version_desc: '',
             version_type: '',
             hospital_type: '',
             active: true,
@@ -410,19 +409,7 @@ class VersionForm extends Component {
 
                 </TextField>
 
-                <TextField
-                    id="version_desc"
-                    name="version_desc"
 
-                    label="תיאור גרסה"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange('version_desc')}
-                    value={this.state.version_desc}
-                    InputLabelProps={{classes:{root: classes.label}}}
-
-                />
                 <TextField
                     id="version_type"
                     name="version_type"

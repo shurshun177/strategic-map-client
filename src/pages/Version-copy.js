@@ -18,13 +18,14 @@ class VersionCopy extends Component {
     }
     handleFormSubmit(formData){
         let createObject = {
-            active: formData.active === 'active',
+            active: formData.active === true,
             measure: formData.measure,
             version_desc: formData.version_desc,
             version_name: formData.version_name,
             version_type: formData.version_type,
             version_number: formData.version_number,
-            hospital_type: formData.hospital_type
+            hospital_type: formData.hospital_type,
+            year: formData.year
         };
 
         let url = `versions/`;

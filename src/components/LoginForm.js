@@ -52,8 +52,8 @@ const styles = theme => ({
 });
 
 const iconStyle = {
-    width: 211,
-    height: 100
+    width: 311,
+    height: 75
 
 };
 
@@ -98,7 +98,7 @@ class Login extends Component {
                 <Paper className={classes.paper}>
                     <img src="/logo.jpg" style={iconStyle}/>
                     <Typography component="h1" variant="h5">
-                        Sign in
+
                     </Typography>
                     <form className={classes.form} onSubmit={this.handleSubmit}>
                         <TextField
@@ -127,7 +127,7 @@ class Login extends Component {
                             value={this.state.password}
                             InputLabelProps={{classes:{root: classes.label}}}
                         />
-                        {this.props.isError? <div style={{color: 'red'}}>An error occured. Please check your credentials and try again</div> : ''}
+                        {this.props.isError? <div style={{color: 'red'}}>משתמש אינו קיים או פרטי זיהוי שגויים</div> : ''}
                         <Button
                             type="submit"
                             fullWidth

@@ -20,6 +20,7 @@ class MeasureUpdate extends Component {
         let currentId = this.props.match.params.id;
 
         let updateObject = {
+            hospital_type : formData.hospital_type,
             active: formData.active === true,
             measure_name: formData.measure_name,
             measure_desc: formData.measure_desc,

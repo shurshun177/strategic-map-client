@@ -158,6 +158,24 @@ const meas_type = [
     },
 ];
 
+const meas_unit = [
+    {
+        'value': '0',
+        'label': '',
+    },
+    {
+        'value': '1',
+        'label': 'אחוזים %',
+    },
+    {
+        'value': '2',
+        'label': 'שקלים חדשים ₪',
+    },
+    {   'value': '3',
+        'label': 'ללא יחידת מידה',
+    },
+];
+
 const meas_freq = [
     {
         value: '0',
@@ -544,18 +562,26 @@ class MeasureForm extends Component {
                     name="measure_unit"
                     required
                     label="יחידת מידה"
+                    select
                     className={classes.textField}
                     margin="normal"
                     variant="outlined"
                     onChange={this.handleChange('measure_unit')}
                     value={this.state.measure_unit}
-                    type="number"
-                    inputProps={{
-                        min: 1,
-                        step: 1
-                    }}
 
-                />
+                    SelectProps={{
+                        native: true,
+                        MenuProps: {
+                            className: classes.menu,
+                        },
+                    }}
+                >
+                    {meas_unit.map(option => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </TextField>
 
                 <FormGroup grid>
 

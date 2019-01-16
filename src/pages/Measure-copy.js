@@ -22,7 +22,7 @@ class MeasureCopy extends Component {
         let createObject = {
             measure_code: formData.measure_code,
             hospital_type: formData.hospital_type,
-            active: formData.active === 'active',
+            active: formData.active === true,
             measure_name: formData.measure_name,
             measure_desc: formData.measure_desc,
             criteria_inclusion: formData.criteria_inclusion,
