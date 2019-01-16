@@ -9,7 +9,11 @@ import FormGroup from '@material-ui/core/FormGroup';
 import RestAPI from '../api';
 import Button from '@material-ui/core/Button';
 import AssignMeasures from './AssignMeasures';
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import moment from 'moment';
 
@@ -28,7 +32,7 @@ const styles = theme => ({
         width: 400
     },
     dense: {
-        marginTop: 19,
+        marginTop: 30,
     },
     menu: {
         width: 200,
@@ -37,10 +41,21 @@ const styles = theme => ({
     },
     label:{
         marginRight: '20px',
-        right: '15px',
-        animated: {
-            right: 0
-        }
+        right: '15px'
+    },
+    focused: {
+        margin:'20px',
+        right: '0px',
+        // padding: '10px'
+    },
+    input:{
+        // padding: '20px'
+    },
+    formHelperText:{
+        textAlign: 'right'
+    },
+    button: {
+        margin: theme.spacing.unit,
     }
 });
 
@@ -160,6 +175,7 @@ class VersionForm extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onExitClick = this.onExitClick.bind(this);
         this.state = {
             version_number: '',
             version_name: '',
@@ -180,7 +196,8 @@ class VersionForm extends Component {
 
                 for(let i = second; i >= first; i--) arr.push(i);
                 return arr;
-            }
+            },
+            open: false
         };
     }
 
@@ -197,10 +214,10 @@ class VersionForm extends Component {
             });
         }
 
-        //if (this.props.versionNumber){
-        //  this.setState(() => {
-        //    return {version_number : versionNumber};});
-        //}
+        if (this.props.versionNumber && this.props.versionNumber !==prevProps.versionNumber){
+         this.setState(() => {
+           return {version_number : this.props.versionNumber};});
+        }
     }
 
     handleMeasure = name => event => {
@@ -261,9 +278,22 @@ class VersionForm extends Component {
         this.props.handleFormSubmit(this.state);
     }
 
-    onExitClick(){
-        alert('Button click')
-        //todo
+
+    onDialogCancel = () => {
+        this.setState({ open: false });
+    };
+
+    onDialogSave = ()=>{
+        this.setState({ open: false }, ()=>{
+            this.props.handleFormSubmit(this.state);
+        });
+
+    };
+
+    onExitClick(e){
+        e.preventDefault();
+        //TODO check if state is changed
+        this.setState({ open: true });
     }
 
     render() {
@@ -279,13 +309,14 @@ class VersionForm extends Component {
             <form className={classes.container} noValidate autoComplete="off"
                   onSubmit={this.handleSubmit}
             >
-                {/*<Button variant="contained" size="small" type="submit" className="submit-button-form">*/}
-                {/*<SaveIcon/>*/}
-                {/*Save*/}
-                {/*</Button>*/}
+
             <div>
-                <input  class='submit-button-form' type="submit" value="שמירה" />
-                <input class="submit-button-form" value="יציאה"/>
+                <Button variant="contained" color='primary' size="small" type="submit" className={classes.button} >
+                    שמירה
+                </Button>
+                <Button variant="contained" color='primary' size="small" className={classes.button} onClick={this.onExitClick}>
+                    יציאה
+                </Button>
             </div>
             <FormGroup grid>
                     <FormControlLabel
@@ -443,7 +474,7 @@ class VersionForm extends Component {
                     variant="outlined"
                     required
                     select
-                    label="נושא עסקי"
+                    helperText="נושא עסקי"
                     className={classes.textField}
                     SelectProps={{
                         native: true,
@@ -451,10 +482,10 @@ class VersionForm extends Component {
                             className: classes.menu,
                         },
                     }}
-                    InputLabelProps={{classes:{root: classes.label}}}
                     margin="normal"
                     onChange={this.handleMeasure('business_topic')}
                     value={this.state.business_topic}
+                    FormHelperTextProps={{classes:{root:classes.formHelperText }}}
                 >
                     {topic_list.map(option => (
                         <option key={option.value} value={option.value}>
@@ -471,6 +502,28 @@ class VersionForm extends Component {
                     assigneesRoleName={"therapists"}
                     setMeasures={selectedMeasures=>{this.setState({measure: selectedMeasures })}}
                 />
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Let Google help apps determine location. This means sending anonymous location data to
+                            Google, even when no apps are running.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.onDialogCancel} color="primary">
+                            Disagree
+                        </Button>
+                        <Button onClick={this.onDialogSave} color="primary" autoFocus>
+                            Agree
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </form>
             </>
         );
