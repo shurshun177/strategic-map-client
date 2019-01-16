@@ -98,7 +98,6 @@ class AppHeader extends React.Component{
                 <List>
                     {menuItems.map((el, index) => (
                         <MenuItem button key={el.name} component={Link} to={el.link} classes={classNames.listItem}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                             <ListItemText primary={el.name} classes={{primary: classes.listItem}}/>
                         </MenuItem>
                     ))}
