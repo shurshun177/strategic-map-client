@@ -39,6 +39,7 @@ class MeasureCopy extends Component {
             to_date: formData.to_date,
             target_default: formData.target_default,
             remarks: formData.remarks,
+            is_division: formData.is_division
         };
 
         let url = `measures/`;

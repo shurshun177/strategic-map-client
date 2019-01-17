@@ -24,7 +24,8 @@ class VersionUpdate extends Component {
             version_name: formData.version_name,
             version_type: formData.version_type,
             year: formData.year,
-            hospital_type: formData.hospital_type
+            hospital_type: formData.hospital_type,
+            retro: formData.retro
 
         };
 

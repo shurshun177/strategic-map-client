@@ -12,8 +12,14 @@ import { DatePicker } from 'material-ui-pickers';
 import MomentUtils from '@date-io/moment';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
+import Button from '@material-ui/core/Button';
 import moment from 'moment';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const styles = theme => ({
     container: {
@@ -39,6 +45,50 @@ const styles = theme => ({
         width: 200,
     },
     group: {
+    },
+    button: {
+        margin: theme.spacing.unit,
+    },
+    iOSSwitchBase: {
+    '&$iOSChecked': {
+      color: theme.palette.common.white,
+      '& + $iOSBar': {
+        backgroundColor: '#2196f3',
+      },
+    },
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+      easing: theme.transitions.easing.sharp,
+    }),
+  },
+  iOSChecked: {
+    transform: 'translateX(30px)',
+    '& + $iOSBar': {
+      opacity: 1,
+      border: 'none',
+    },
+  },
+  iOSBar: {
+    borderRadius: 13,
+    width: 57,
+    height: 26,
+    marginTop: -13,
+    marginLeft: -21,
+    border: 'solid 1px',
+    borderColor: theme.palette.grey[400],
+    backgroundColor: theme.palette.grey[50],
+    opacity: 1,
+    transition: theme.transitions.create(['background-color', 'border']),
+  },
+  iOSIcon: {
+    width: 24,
+    height: 24,
+  },
+  iOSIconChecked: {
+    boxShadow: theme.shadows[1],
+  },
+    switch: {
+        direction: 'ltr'
     }
 });
 
@@ -208,6 +258,7 @@ class MeasureForm extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onExitClick = this.onExitClick.bind(this);
         this.state = {
             measure_code: '',
             measure_name: '',
@@ -278,10 +329,21 @@ class MeasureForm extends Component {
         this.props.handleFormSubmit(this.state);
     }
 
-    onExitClick(){
-        alert('Button click')
-        //todo
-    }
+    onDialogCancel = () => {
+        this.setState({ open: false });
+    };
+
+    onExitClick(e){
+        e.preventDefault();
+        //TODO check if state is changed
+        this.setState({ open: true });
+        }
+
+    onDialogSave = ()=>{
+        this.setState({ open: false }, ()=>{
+            this.props.handleFormSubmit(this.state);
+        });
+}
 
     render() {
 
@@ -293,17 +355,19 @@ class MeasureForm extends Component {
         return (
             <>
 
+
             <form className={classes.container} noValidate autoComplete="off"
                   onSubmit={this.handleSubmit}
             >
-                {/*<Button variant="contained" size="small" type="submit" className="submit-button-form">*/}
-                {/*<SaveIcon/>*/}
-                {/*Save*/}
-                {/*</Button>*/}
-                <div>
-                    <input class='submit-button-form' type="submit" value="שמירה" />
-                    <input class="submit-button-form" value="יציאה"/>
-                </div>
+
+            <div>
+                <Button variant="outlined" color='primary' size="large" type="submit" className={classes.button} >
+                    שמירה
+                </Button>
+                <Button variant="outlined" color='primary' size="large" className={classes.button} onClick={this.onExitClick}>
+                    יציאה
+                </Button>
+            </div>
                 <FormGroup grid>
 
                     <FormControlLabel
@@ -315,6 +379,15 @@ class MeasureForm extends Component {
                                 onChange={this.handleChangeSwitch('is_division')}
                                 value="is_division"
                                 color="primary"
+                                disableRipple
+                                classes={{
+                                    switchBase: classes.iOSSwitchBase,
+                                    bar: classes.iOSBar,
+                                    icon: classes.iOSIcon,
+                                    iconChecked: classes.iOSIconChecked,
+                                    checked: classes.iOSChecked,
+                                    root: classes.switch
+                                }}
                             />
                         }
                         label="האם מדד חטיבה"
@@ -331,6 +404,15 @@ class MeasureForm extends Component {
                                 onChange={this.handleChangeSwitch('active')}
                                 value="active"
                                 color="primary"
+                                disableRipple
+                                classes={{
+                                    switchBase: classes.iOSSwitchBase,
+                                    bar: classes.iOSBar,
+                                    icon: classes.iOSIcon,
+                                    iconChecked: classes.iOSIconChecked,
+                                    checked: classes.iOSChecked,
+                                    root: classes.switch
+                                }}
                             />
                         }
                         label="פעיל"
@@ -596,6 +678,15 @@ class MeasureForm extends Component {
                                 onChange={this.handleChangeSwitch('separate_thousands')}
                                 value="separate_thousands"
                                 color="primary"
+                                disableRipple
+                                classes={{
+                                    switchBase: classes.iOSSwitchBase,
+                                    bar: classes.iOSBar,
+                                    icon: classes.iOSIcon,
+                                    iconChecked: classes.iOSIconChecked,
+                                    checked: classes.iOSChecked,
+                                    root: classes.switch
+                                }}
                             />
                         }
                         label="מפריד אלפים"
@@ -698,6 +789,28 @@ class MeasureForm extends Component {
                     margin="normal"
                     variant="outlined"
                 />
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"האם ברצונך לשמור שינויים ?"}</DialogTitle>
+                    <DialogContent>
+                            <DialogContentText id="alert-dialog-description">
+                            אם לא לשמור שינויים נתוני תופס ימחקו !
+                        </DialogContentText>
+
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.onDialogCancel} variant='outlined' color="primary">
+                            לצאת בלי שמירה
+                        </Button>
+                        <Button onClick={this.onDialogSave} variant='outlined' color="primary" autoFocus>
+                            לשמור
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </form>
             </>
         );

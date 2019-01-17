@@ -25,7 +25,8 @@ class VersionCopy extends Component {
             version_type: formData.version_type,
             version_number: formData.version_number,
             hospital_type: formData.hospital_type,
-            year: formData.year
+            year: formData.year,
+            retro: formData.retro
         };
 
         let url = `versions/`;

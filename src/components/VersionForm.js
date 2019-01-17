@@ -54,9 +54,48 @@ const styles = theme => ({
     formHelperText:{
         textAlign: 'right'
     },
+
     button: {
         margin: theme.spacing.unit,
     },
+    iOSSwitchBase: {
+    '&$iOSChecked': {
+      color: theme.palette.common.white,
+      '& + $iOSBar': {
+        backgroundColor: '#2196f3',
+      },
+    },
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+      easing: theme.transitions.easing.sharp,
+    }),
+  },
+  iOSChecked: {
+    transform: 'translateX(30px)',
+    '& + $iOSBar': {
+      opacity: 1,
+      border: 'none',
+    },
+  },
+  iOSBar: {
+    borderRadius: 13,
+    width: 57,
+    height: 26,
+    marginTop: -13,
+    marginLeft: -21,
+    border: 'solid 1px',
+    borderColor: theme.palette.grey[400],
+    backgroundColor: theme.palette.grey[50],
+    opacity: 1,
+    transition: theme.transitions.create(['background-color', 'border']),
+  },
+  iOSIcon: {
+    width: 24,
+    height: 24,
+  },
+  iOSIconChecked: {
+    boxShadow: theme.shadows[1],
+  },
     switch: {
         direction: 'ltr'
     }
@@ -297,7 +336,7 @@ class VersionForm extends Component {
         e.preventDefault();
         //TODO check if state is changed
         this.setState({ open: true });
-    }
+    };
 
     render() {
 
@@ -314,10 +353,10 @@ class VersionForm extends Component {
             >
 
             <div>
-                <Button variant="contained" color='primary' size="small" type="submit" className={classes.button} >
+                <Button variant="outlined" color='primary' size="large" type="submit" className={classes.button} >
                     שמירה
                 </Button>
-                <Button variant="contained" color='primary' size="small" className={classes.button} onClick={this.onExitClick}>
+                <Button variant="outlined" color='primary' size="large" className={classes.button} onClick={this.onExitClick}>
                     יציאה
                 </Button>
             </div>
@@ -330,8 +369,18 @@ class VersionForm extends Component {
                                 checked={this.state.active}
                                 onChange={this.handleChangeSwitch('active')}
                                 value='active'
+                                disableRipple
                                 color="primary"
-                                classes={{root: classes.switch}}
+                                disableRipple
+                                classes={{
+                                    switchBase: classes.iOSSwitchBase,
+                                    bar: classes.iOSBar,
+                                    icon: classes.iOSIcon,
+                                    iconChecked: classes.iOSIconChecked,
+                                    checked: classes.iOSChecked,
+                                    root: classes.switch
+                                }}
+
                             />
                         }
                         label="פעיל"
@@ -346,7 +395,14 @@ class VersionForm extends Component {
                                 onChange={this.handleChangeSwitch('retro')}
                                 value="retro"
                                 color="primary"
-                                classes={{root: classes.switch}}
+                                classes={{
+                                    switchBase: classes.iOSSwitchBase,
+                                    bar: classes.iOSBar,
+                                    icon: classes.iOSIcon,
+                                    iconChecked: classes.iOSIconChecked,
+                                    checked: classes.iOSChecked,
+                                    root: classes.switch
+                                }}
                             />
                         }
                         label="אפשר עדכון דיווח קודם"
@@ -512,19 +568,18 @@ class VersionForm extends Component {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">{"האם ברצונך לשמור שינויים ?"}</DialogTitle>
                     <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                            Let Google help apps determine location. This means sending anonymous location data to
-                            Google, even when no apps are running.
-                        </DialogContentText>
+                           <DialogContentText>
+                           אם לא לשמור שינויים נתוני תופס ימחקו !
+                           </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.onDialogCancel} color="primary">
-                            Disagree
+                        <Button onClick={this.onDialogCancel} variant='outlined' color="primary">
+                            לצאת בלי שמירה
                         </Button>
-                        <Button onClick={this.onDialogSave} color="primary" autoFocus>
-                            Agree
+                        <Button onClick={this.onDialogSave} variant='outlined' color="primary" autoFocus>
+                            לשמור
                         </Button>
                     </DialogActions>
                 </Dialog>

@@ -6,6 +6,12 @@ import ListViewTable from '../components/ListViewTable'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import RestAPI from '../api';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 
 const styles = {
     root:{
@@ -23,6 +29,8 @@ class VersionList extends Component {
 
     constructor(props) {
         super(props);
+        this.onDeleteClick = this.onDeleteClick.bind(this)
+
         this.state = {
             data: [],
             selectedVersion: null
@@ -67,13 +75,31 @@ class VersionList extends Component {
                     data: prevState.data.filter(el=>el._id['$oid'] !== prevState.selectedVersion)
                 };
             });
-            alert('version was deleted succcessfully')
+
 
         }).catch((error) => {
             console.log(error);
             alert('version was not deleted')
         });
     }
+    onDialogCancel = () => {
+        this.setState({ open: false });
+    };
+
+    onDialogDelete = ()=>{
+        this.setState({ open: false }, ()=>{
+            this.updateVersionStatus.bind(this)();
+        });
+
+    };
+
+
+
+    onDeleteClick(e){
+        e.preventDefault();
+        //TODO check if state is changed
+        this.setState({ open: true });
+    };
 
     render() {
         const {classes} = this.props;
@@ -82,7 +108,7 @@ class VersionList extends Component {
             {text:'יצירת גרסה חדשה', variant:'outlined', size: 'large', type: 'primary', 'url': '/app/version-details' },
             {text:'עדכון גרסה', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/version-update'},
             {text:'העתקת גרסה', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/version-copy' },
-            {text:'מחיקת גרסה', variant:'contained', size: 'large', type: 'secondary', 'onClick': this.updateVersionStatus.bind(this)  }
+            {text:'מחיקת גרסה', variant:'contained', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick  }
         ];
 
 
@@ -141,7 +167,29 @@ class VersionList extends Component {
 
                 <ContainedButtons buttons={buttons} selectedId={this.state.selectedVersion}/>
                 <ListViewTable data={this.state.data} title={title} columns={columns} setSelectedHandler={this.setSelectedVersion.bind(this)}/>
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"האם אתה בטוח שברצונך למחוק את הגרסה ?"}</DialogTitle>
+                    <DialogContent>
+                           <DialogContentText>
+                           אם לא לשמור שינויים נתוני תופס ימחקו !
+                           </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.onDialogCancel} variant='outlined' color="primary">
+                            ביטול
+                        </Button>
+                        <Button onClick={this.onDialogDelete} variant='outlined' color="primary" autoFocus>
+                            למחוק
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
+
         );
     }
 }
