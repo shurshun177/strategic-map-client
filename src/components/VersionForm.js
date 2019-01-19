@@ -14,6 +14,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Redirect } from 'react-router';
+
 
 import moment from 'moment';
 
@@ -239,7 +241,8 @@ class VersionForm extends Component {
                 for(let i = second; i >= first; i--) arr.push(i);
                 return arr;
             },
-            open: false
+            open: false,
+            shouldExit: false
         };
     }
 
@@ -247,12 +250,16 @@ class VersionForm extends Component {
         if (this.props.mode === 'update' && this.props.mode !==prevProps.mode){
             this.setState((prevState, props) => {
                 return props.data;
+            }, ()=>{
+                this.requestAvailableMeasures(this.state.business_topic, this.state.hospital_type);
             });
         }
 
         if (this.props.mode === 'clone' && this.props.mode !==prevProps.mode){
             this.setState((prevState, props) => {
                 return props.data;
+            }, ()=>{
+                this.requestAvailableMeasures(this.state.business_topic, this.state.hospital_type);
             });
         }
 
@@ -322,7 +329,7 @@ class VersionForm extends Component {
 
 
     onDialogCancel = () => {
-        this.setState({ open: false });
+        this.setState({ open: false, shouldExit: true });
     };
 
     onDialogSave = ()=>{
@@ -346,7 +353,7 @@ class VersionForm extends Component {
         let isReq = mode === 'update';
 
         return (
-            <>
+            <>{this.state.shouldExit?  (<Redirect to="/app/versions"/>):
 
             <form className={classes.container} noValidate autoComplete="off"
                   onSubmit={this.handleSubmit}
@@ -583,7 +590,7 @@ class VersionForm extends Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
-            </form>
+            </form>}
             </>
         );
     }

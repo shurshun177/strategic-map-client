@@ -23,7 +23,9 @@ class MeasureList extends Component {
 
     constructor(props) {
         super(props);
-        this.onDeleteClick = this.onDeleteClick.bind(this)
+        this.onDeleteClick = this.onDeleteClick.bind(this);
+        this.updateMeasureStatus = this.updateMeasureStatus.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
         this.state = {
             data: [],
             selectedMeasure: null
@@ -92,9 +94,8 @@ class MeasureList extends Component {
 
     onDialogDelete = ()=>{
         this.setState({ open: false }, ()=>{
-            this.updateMeasureStatus.bind(this)();
+            this.updateMeasureStatus();
         });
-
     };
 
 
@@ -104,6 +105,25 @@ class MeasureList extends Component {
         //TODO check if state is changed
         this.setState({ open: true });
     };
+
+    handleSearch(searchWord){
+        let url = `measure/search/${searchWord}`;
+        const measuresList = RestAPI().get(url, {withCredentials: true});
+        measuresList.then(result => {
+            let data = result.data.items.map(el=>{
+                el.create_date = el.create_date['$date'];
+                return el;
+            });
+            this.setState((prevState, props) => {
+                return {
+                    data
+                };
+            });
+
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
 
     render() {
         const {classes} = this.props;
@@ -150,7 +170,8 @@ class MeasureList extends Component {
                     </Typography>
                 </Toolbar>
                 <ContainedButtons buttons={buttons} selectedId={this.state.selectedMeasure}/>
-                <ListViewTable data={this.state.data} title={title} columns={columns} setSelectedHandler={this.setSelectedMeasure.bind(this)}/>
+                <ListViewTable data={this.state.data} title={title} columns={columns} setSelectedHandler={this.setSelectedMeasure.bind(this)}
+                               handleSearch ={this.handleSearch.bind(this)}/>
 
                 <Dialog
                     open={this.state.open}

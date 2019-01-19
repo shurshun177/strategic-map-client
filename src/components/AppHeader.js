@@ -5,24 +5,23 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import classNames from 'classnames';
-
 import Drawer from '@material-ui/core/Drawer';
-
 import List from '@material-ui/core/List';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import {Link} from 'react-router-dom';
 
 import MenuItem from '@material-ui/core/MenuItem';
+import { Redirect } from 'react-router';
+
+
 
 const styles = theme => ({
     root: {
@@ -53,7 +52,13 @@ const styles = theme => ({
         },
     listItem: {
         color: 'white'
-    }
+    },
+    sectionMobile: {
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+        marginLeft: theme.spacing.unit*178,
+        width: '100%'
+    },
 });
 
 
@@ -70,6 +75,22 @@ class AppHeader extends React.Component{
         open: false,
     };
 
+    constructor(props) {
+        super(props);
+        this.signout = this.signout.bind(this);
+        this.state = {
+            isLoggedOut: false
+        };
+    }
+
+
+    signout(){
+        this.setState(()=>{
+            return {
+                isLoggedOut: true
+            }
+        })
+    }
     render() {
         const { classes, theme } = this.props;
 
@@ -80,11 +101,19 @@ class AppHeader extends React.Component{
             {name: 'מסך עדכון מדד לאומי', link: '/app/national-measure'}
         ];
         return (
+        <>{this.state.isLoggedOut ?
+            (<Redirect to="/"/>)
+            :
         <div className={classes.root}>
+
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar  disableGutters={!this.state.open}>
                     <img src="/logo.jpg" style={iconStyle}/>
-
+                    <div className={classes.sectionMobile}>
+                    <IconButton aria-haspopup="true" onClick={this.signout} color="inherit">
+                        <ExitToApp />
+                    </IconButton>
+                        </div>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -104,7 +133,8 @@ class AppHeader extends React.Component{
                 </List>
                 {/*<Divider />*/}
             </Drawer>
-        </div>
+        </div>}
+        </>
         );
     }
 }
