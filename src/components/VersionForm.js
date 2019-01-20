@@ -15,11 +15,15 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Redirect } from 'react-router';
+import Grid from '@material-ui/core/Grid';
 
 
 import moment from 'moment';
 
 const styles = theme => ({
+    root: {
+    flexGrow: 1,
+    },
     container: {
         //display: 'flex',
         //flexDirection: 'column'
@@ -353,6 +357,7 @@ class VersionForm extends Component {
         let isReq = mode === 'update';
 
         return (
+            <div className={classes.root}>
             <>{this.state.shouldExit?  (<Redirect to="/app/versions"/>):
 
             <form className={classes.container} noValidate autoComplete="off"
@@ -368,6 +373,26 @@ class VersionForm extends Component {
                 </Button>
             </div>
             <FormGroup grid>
+                <TextField
+                    id="version_number"
+                    name="version_number"
+                    required={!isReq}
+                    label="מספר גרסה"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    onChange={this.handleChange('version_number')}
+                    value={this.state.version_number}
+                    type="number"
+                    inputProps={{
+                        min: 1000,
+                        step: 1
+                    }}
+                    readonly = {isReadonly}
+                    disabled={isReadonly}
+                    InputLabelProps={{classes:{root: classes.label}}}
+
+                />
                     <FormControlLabel
                         control={
                             <Switch
@@ -392,30 +417,36 @@ class VersionForm extends Component {
                         }
                         label="פעיל"
                     />
+            </FormGroup>
 
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                id="retro"
-                                name="retro"
-                                checked={this.state.retro}
-                                onChange={this.handleChangeSwitch('retro')}
-                                value="retro"
-                                color="primary"
-                                classes={{
-                                    switchBase: classes.iOSSwitchBase,
-                                    bar: classes.iOSBar,
-                                    icon: classes.iOSIcon,
-                                    iconChecked: classes.iOSIconChecked,
-                                    checked: classes.iOSChecked,
-                                    root: classes.switch
-                                }}
-                            />
-                        }
-                        label="אפשר עדכון דיווח קודם"
-                    />
+            <FormGroup row>
+                <TextField
+                    id="version_type"
+                    name="version_type"
+                    select
+                    variant="outlined"
+                    required
+                    label="סוג גרסה"
+                    className={classes.textField}
+                    SelectProps={{
+                        native: true,
+                        MenuProps: {
+                            className: classes.menu,
+                        },
+                    }}
+                    InputLabelProps={{classes:{root: classes.label}}}
+                    margin="normal"
+                    onChange={this.handleChange('version_type')}
+                    value={this.state.version_type}
 
-                </FormGroup>
+                >
+                    {vers_type.map(option => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </TextField>
+
 
                 <TextField
                     id="year"
@@ -442,29 +473,11 @@ class VersionForm extends Component {
                         </option>
                     ))}
                 </TextField>
+            </FormGroup>
 
+            <FormGroup grid>
 
-                <TextField
-                    id="version_number"
-                    name="version_number"
-                    required={!isReq}
-                    label="מספר גרסה"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange('version_number')}
-                    value={this.state.version_number}
-                    type="number"
-                    inputProps={{
-                        min: 1000,
-                        step: 1
-                    }}
-                    readonly = {isReadonly}
-                    disabled={isReadonly}
-                    InputLabelProps={{classes:{root: classes.label}}}
-
-                />
-                <TextField
+                    <TextField
                     id="version_name"
                     name="version_name"
                     required
@@ -478,7 +491,7 @@ class VersionForm extends Component {
                     InputLabelProps={{classes:{root: classes.label}}}
                 />
 
-                <TextField
+                    <TextField
                     id="hospital_type"
                     name="hospital_type"
                     required
@@ -508,32 +521,32 @@ class VersionForm extends Component {
                 </TextField>
 
 
-                <TextField
-                    id="version_type"
-                    name="version_type"
-                    select
-                    variant="outlined"
-                    required
-                    label="סוג גרסה"
-                    className={classes.textField}
-                    SelectProps={{
-                        native: true,
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    InputLabelProps={{classes:{root: classes.label}}}
-                    margin="normal"
-                    onChange={this.handleChange('version_type')}
-                    value={this.state.version_type}
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                id="retro"
+                                name="retro"
+                                checked={this.state.retro}
+                                onChange={this.handleChangeSwitch('retro')}
+                                value="retro"
+                                color="primary"
+                                classes={{
+                                    switchBase: classes.iOSSwitchBase,
+                                    bar: classes.iOSBar,
+                                    icon: classes.iOSIcon,
+                                    iconChecked: classes.iOSIconChecked,
+                                    checked: classes.iOSChecked,
+                                    root: classes.switch
+                                }}
+                            />
+                        }
+                        label="אפשר עדכון דיווח קודם"
+                    />
 
-                >
-                    {vers_type.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </TextField>
+
+
+
+
 
                 <TextField
                     id="business_topic"
@@ -569,6 +582,7 @@ class VersionForm extends Component {
                     assigneesRoleName={"therapists"}
                     setMeasures={selectedMeasures=>{this.setState({measure: selectedMeasures })}}
                 />
+            </FormGroup>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -590,8 +604,10 @@ class VersionForm extends Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
-            </form>}
+            </form>
+            }
             </>
+            </div>
         );
     }
 }

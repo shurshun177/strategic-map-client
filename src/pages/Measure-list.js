@@ -132,7 +132,7 @@ class MeasureList extends Component {
             {text:'יצירת מדד חדש', variant:'outlined', size: 'large', type: 'primary', 'url': '/app/measure-details' },
             {text:'עדכון מדד',  variant:'outlined', size: 'large', type: 'primary', 'url':'/app/measure-update'},
             {text:'העתקת מדד', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/measure-copy' },
-            {text:'מחיקת מדד', variant:'contained', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick  }
+            {text:'מחיקת מדד', variant:'outlined', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick  }
         ];
 
 

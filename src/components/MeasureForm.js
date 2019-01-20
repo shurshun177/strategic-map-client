@@ -19,9 +19,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Redirect } from 'react-router';
+
 
 
 const styles = theme => ({
+    root: {
+    flexGrow: 1,
+    },
     container: {
         //display: 'flex',
         //flexDirection: 'column'
@@ -210,19 +215,19 @@ const meas_type = [
 
 const meas_unit = [
     {
-        'value': '0',
-        'label': '',
+        value: '0',
+        label: '',
     },
     {
-        'value': '1',
-        'label': 'אחוזים %',
+        value: '1',
+        label: 'אחוזים %',
     },
     {
-        'value': '2',
-        'label': 'שקלים חדשים ₪',
+        value: '2',
+        label: 'שקלים חדשים ₪',
     },
-    {   'value': '3',
-        'label': 'ללא יחידת מידה',
+    {   value: '3',
+        label: 'ללא יחידת מידה',
     },
 ];
 
@@ -281,6 +286,8 @@ class MeasureForm extends Component {
             to_date: moment().format(),
             target_default: '',
             remarks: '',
+            open: false,
+            shouldExit: false
         };
     }
 
@@ -330,7 +337,7 @@ class MeasureForm extends Component {
     }
 
     onDialogCancel = () => {
-        this.setState({ open: false });
+        this.setState({ open: false, shouldExit: true });
     };
 
     onExitClick(e){
@@ -343,7 +350,7 @@ class MeasureForm extends Component {
         this.setState({ open: false }, ()=>{
             this.props.handleFormSubmit(this.state);
         });
-}
+};
 
     render() {
 
@@ -353,7 +360,7 @@ class MeasureForm extends Component {
         let isReq = mode === 'update';
 
         return (
-            <>
+            <>{this.state.shouldExit?  (<Redirect to="/app/measures"/>):
 
 
             <form className={classes.container} noValidate autoComplete="off"
@@ -615,6 +622,34 @@ class MeasureForm extends Component {
                         </option>
                     ))}
                 </TextField>
+
+                <TextField
+                    id="measure_unit"
+                    name="measure_unit"
+                    required
+
+
+                    variant="outlined"
+                    select
+                    label="יחידת מידה"
+                    className={classes.textField}
+                    SelectProps={{
+                        native: true,
+                        MenuProps: {
+                            className: classes.menu,
+                        },
+                    }}
+                    margin="normal"
+                    onChange={this.handleChange('measure_unit')}
+                    value={this.state.measure_unit}
+                >
+                    {meas_unit.map(option => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </TextField>
+
                 <TextField
                     id="measuring_frequency"
                     name="measuring_frequency"
@@ -639,31 +674,8 @@ class MeasureForm extends Component {
                         </option>
                     ))}
                 </TextField>
-                <TextField
-                    id="measure_unit"
-                    name="measure_unit"
-                    required
-                    label="יחידת מידה"
-                    select
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange('measure_unit')}
-                    value={this.state.measure_unit}
 
-                    SelectProps={{
-                        native: true,
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                >
-                    {meas_unit.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </TextField>
+
 
                 <FormGroup grid>
 
@@ -781,8 +793,8 @@ class MeasureForm extends Component {
                     id="remarks"
                     name="remarks"
                     label="הערות"
-
-                    rowsMax="4"
+                    multiline
+                    rows="4"
                     onChange={this.handleChange('remarks')}
                     value={this.state.remarks}
                     className={classes.textField}
@@ -796,12 +808,12 @@ class MeasureForm extends Component {
                     aria-describedby="alert-dialog-description"
                 >
                     <DialogTitle id="alert-dialog-title">{"האם ברצונך לשמור שינויים ?"}</DialogTitle>
-                    <DialogContent>
+                        <DialogContent>
                             <DialogContentText id="alert-dialog-description">
                             אם לא לשמור שינויים נתוני תופס ימחקו !
-                        </DialogContentText>
+                            </DialogContentText>
 
-                    </DialogContent>
+                        </DialogContent>
                     <DialogActions>
                         <Button onClick={this.onDialogCancel} variant='outlined' color="primary">
                             לצאת בלי שמירה
@@ -812,10 +824,12 @@ class MeasureForm extends Component {
                     </DialogActions>
                 </Dialog>
             </form>
+            }
             </>
         );
-    }
+   }
 }
+
 
 MeasureForm.propTypes = {
     classes: PropTypes.object.isRequired,

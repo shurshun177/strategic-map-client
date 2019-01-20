@@ -108,7 +108,7 @@ class VersionList extends Component {
             {text:'יצירת גרסה חדשה', variant:'outlined', size: 'large', type: 'primary', 'url': '/app/version-details' },
             {text:'עדכון גרסה', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/version-update'},
             {text:'העתקת גרסה', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/version-copy' },
-            {text:'מחיקת גרסה', variant:'contained', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick  }
+            {text:'מחיקת גרסה', variant:'outlined', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick  }
         ];
 
 

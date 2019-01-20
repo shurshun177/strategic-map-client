@@ -98,7 +98,7 @@ class AppHeader extends React.Component{
             {name: 'ניהול גירסאות', link: '/app/versions'},
             {name: 'ניהול מדדים', link: '/app/measures'},
             {name: 'חדש', link: '/app/new'},
-            {name: 'מסך עדכון מדד לאומי', link: '/app/national-measure'}
+            {name: 'מסך עדכון המדד הלאומי', link: '/app/national-measure'}
         ];
         return (
         <>{this.state.isLoggedOut ?
