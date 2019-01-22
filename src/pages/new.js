@@ -39,7 +39,8 @@ const styles = theme => ({
     menu: {
         width: 200,
     },
-    group: {
+    width: {
+        width: 800
     },
     label:{
         marginRight: '20px',
@@ -60,47 +61,7 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
     },
-    iOSSwitchBase: {
-    '&$iOSChecked': {
-      color: theme.palette.common.white,
-      '& + $iOSBar': {
-        backgroundColor: '#2196f3',
-      },
-    },
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-      easing: theme.transitions.easing.sharp,
-    }),
-  },
-  iOSChecked: {
-    transform: 'translateX(30px)',
-    '& + $iOSBar': {
-      opacity: 1,
-      border: 'none',
-    },
-  },
-  iOSBar: {
-    borderRadius: 13,
-    width: 57,
-    height: 26,
-    marginTop: -13,
-    marginLeft: -21,
-    border: 'solid 1px',
-    borderColor: theme.palette.grey[400],
-    backgroundColor: theme.palette.grey[50],
-    opacity: 1,
-    transition: theme.transitions.create(['background-color', 'border']),
-  },
-  iOSIcon: {
-    width: 24,
-    height: 24,
-  },
-  iOSIconChecked: {
-    boxShadow: theme.shadows[1],
-  },
-    switch: {
-        direction: 'ltr'
-    }
+
 });
 
 const hosp_type = [
@@ -376,7 +337,7 @@ class NationalMesureUpdate extends Component {
                     variant="outlined"
                     select
                     label="סוג בית חולים"
-                    className={classes.textField}
+                    className={classes.textField, classes.width}
                     SelectProps={{
                         native: true,
                         MenuProps: {

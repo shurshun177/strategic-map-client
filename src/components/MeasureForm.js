@@ -43,6 +43,15 @@ const styles = theme => ({
 
         }
     },
+    width: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 820
+    },
+    label:{
+        marginRight: '20px',
+        right: '15px'
+    },
     dense: {
         marginTop: 19,
     },
@@ -375,34 +384,7 @@ class MeasureForm extends Component {
                     יציאה
                 </Button>
             </div>
-                <FormGroup grid>
-
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                id="is_division"
-                                name="is_division"
-                                checked={this.state.is_division}
-                                onChange={this.handleChangeSwitch('is_division')}
-                                value="is_division"
-                                color="primary"
-                                disableRipple
-                                classes={{
-                                    switchBase: classes.iOSSwitchBase,
-                                    bar: classes.iOSBar,
-                                    icon: classes.iOSIcon,
-                                    iconChecked: classes.iOSIconChecked,
-                                    checked: classes.iOSChecked,
-                                    root: classes.switch
-                                }}
-                            />
-                        }
-                        label="האם מדד חטיבה"
-                    />
-
-
-
-                    <FormControlLabel
+                <FormControlLabel
                         control={
                             <Switch
                                 id="active"
@@ -424,262 +406,289 @@ class MeasureForm extends Component {
                         }
                         label="פעיל"
                     />
+                <FormGroup row>
+                    <TextField
+                        id="hospital_type"
+                        name="hospital_type"
+                        required
+
+
+                        variant="outlined"
+                        select
+                        label="סוג בית חולים"
+                        className={classes.textField}
+                        SelectProps={{
+                            native: true,
+                            MenuProps: {
+                                className: classes.menu,
+                            },
+                        }}
+                        margin="normal"
+                        onChange={this.handleChange('hospital_type')}
+                        value={this.state.hospital_type}
+                    >
+                        {hosp_type.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </TextField>
+                    <TextField
+                        id="business_topic"
+                        name="business_topic"
+                        required
+                        variant="outlined"
+                        select
+                        label="נושא עסקי"
+                        className={classes.textField}
+                        SelectProps={{
+                            native: true,
+                            MenuProps: {
+                                className: classes.menu,
+                            },
+                        }}
+                        margin="normal"
+                        onChange={this.handleChange('business_topic')}
+                        value={this.state.business_topic}
+
+                    >
+                        {topic_list.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </TextField>
+
+
+                </FormGroup>
+                    <TextField
+                        id="measure_code"
+                        name="measure_code"
+                        required={!isReq}
+                        label="קוד מדד"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                        onChange={this.handleChange('measure_code')}
+                        value={this.state.measure_code}
+
+                        disabled={isReadonly}
+
+                    />
+                    <TextField
+                        id="sub_business_topic"
+                        name="sub_business_topic"
+                        required
+                        variant="outlined"
+                        select
+                        label="תת-נושא"
+                        className={classes.textField}
+                        SelectProps={{
+                            native: true,
+                            MenuProps: {
+                                className: classes.menu,
+                            },
+                        }}
+                        margin="normal"
+                        onChange={this.handleChange('sub_business_topic')}
+                        value={this.state.sub_business_topic}
+
+                    >
+                        {topic_list.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </TextField>
+
+                <FormGroup grid>
+                    <TextField
+                        id="measure_name"
+                        name="measure_name"
+                        required
+                        label="שם מדד"
+                        className={classes.width}
+                        margin="normal"
+                        variant="outlined"
+                        onChange={this.handleChange('measure_name')}
+                        value={this.state.measure_name}
+                    />
+                    <TextField
+                        id="measure_desc"
+                        name="measure_desc"
+                        required
+                        label="תיאור מדד"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                        onChange={this.handleChange('measure_desc')}
+                        value={this.state.measure_desc}
+
+                    />
+                </FormGroup>
+
+
+                <FormGroup row>
+                    <TextField
+                        id="criteria_inclusion"
+                        name="criteria_inclusion"
+
+                        label="קריטריונים להכללה"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                        onChange={this.handleChange('criteria_inclusion')}
+                        value={this.state.criteria_inclusion}
+
+                    />
+                    <TextField
+                        id="removal_criteria"
+                        name="removal_criteria"
+
+                        label="קריטריונים להוצאה"
+                        className={classes.textField}
+                        margin="normal"
+
+                        variant="outlined"
+                        onChange={this.handleChange('removal_criteria')}
+                        value={this.state.removal_criteria}
+
+                    />
+                </FormGroup>
+
+                <FormGroup row>
+                    <TextField
+                        id="numerator"
+                        name="numerator"
+
+                        label="מומה (תיאור)"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                        onChange={this.handleChange('numerator')}
+                        value={this.state.numerator}
+
+
+                    />
+                    <TextField
+                        id="denominator"
+                        name="denominator"
+
+                        label="מכנה (תיאור)"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                        onChange={this.handleChange('denominator')}
+                        value={this.state.denominator}
+
+                    />
+
                 </FormGroup>
 
 
 
+                    <TextField
+                        id="measure_type"
+                        name="measure_type"
+                        required
+                        variant="outlined"
+                        select
+                        label="סוג מדד"
+                        className={classes.textField}
+                        SelectProps={{
+                            native: true,
+                            MenuProps: {
+                                className: classes.menu,
+                            },
+                        }}
+                        margin="normal"
+                        onChange={this.handleChange('measure_type')}
+                        value={this.state.measure_type}
 
-                <TextField
-                    id="measure_code"
-                    name="measure_code"
-                    required={!isReq}
-                    label="קוד מדד"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange('measure_code')}
-                    value={this.state.measure_code}
-
-                    disabled={isReadonly}
-
-                />
-                <TextField
-                    id="measure_name"
-                    name="measure_name"
-                    required
-                    label="שם מדד"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange('measure_name')}
-                    value={this.state.measure_name}
-                />
-                <TextField
-                    id="measure_desc"
-                    name="measure_desc"
-                    required
-                    label="תיאור מדד"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange('measure_desc')}
-                    value={this.state.measure_desc}
-
-                />
-                <TextField
-                    id="criteria_inclusion"
-                    name="criteria_inclusion"
-
-                    label="קריטריונים להכללה"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange('criteria_inclusion')}
-                    value={this.state.criteria_inclusion}
-
-                />
-                <TextField
-                    id="removal_criteria"
-                    name="removal_criteria"
-
-                    label="קריטריונים להוצאה"
-                    className={classes.textField}
-                    margin="normal"
-
-                    variant="outlined"
-                    onChange={this.handleChange('removal_criteria')}
-                    value={this.state.removal_criteria}
-
-                />
-                <TextField
-                    id="numerator"
-                    name="numerator"
-
-                    label="מונה"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange('numerator')}
-                    value={this.state.numerator}
-
-
-                />
-                <TextField
-                    id="denominator"
-                    name="denominator"
-
-                    label="מכנה"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange('denominator')}
-                    value={this.state.denominator}
+                    >
+                        {meas_type.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </TextField>
 
 
 
-                />
-                <TextField
-                    id="hospital_type"
-                    name="hospital_type"
-                    required
+                    <TextField
+                        id="measuring_frequency"
+                        name="measuring_frequency"
+                        variant="outlined"
+                        select
+                        label="תדירות מדידה"
+                        className={classes.textField}
+                        SelectProps={{
+                            native: true,
+                            MenuProps: {
+                                className: classes.menu,
+                            },
+                        }}
+                        margin="normal"
+                        onChange={this.handleChange('measuring_frequency')}
+                        value={this.state.measuring_frequency}
+
+                    >
+                        {meas_freq.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </TextField>
 
 
-                    variant="outlined"
-                    select
-                    label="סוג בית חולים"
-                    className={classes.textField}
-                    SelectProps={{
-                        native: true,
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    margin="normal"
-                    onChange={this.handleChange('hospital_type')}
-                    value={this.state.hospital_type}
-                >
-                    {hosp_type.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </TextField>
-                <TextField
-                    id="business_topic"
-                    name="business_topic"
-                    required
-                    variant="outlined"
-                    select
-                    label="נושא עסקי"
-                    className={classes.textField}
-                    SelectProps={{
-                        native: true,
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    margin="normal"
-                    onChange={this.handleChange('business_topic')}
-                    value={this.state.business_topic}
+                <FormGroup row>
+                    <TextField
+                        id="measure_unit"
+                        name="measure_unit"
+                        required
 
-                >
-                    {topic_list.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </TextField>
-                <TextField
-                    id="business_topic"
-                    name="business_topic"
-                    required
-                    variant="outlined"
-                    select
-                    label="נושא עסקי"
-                    className={classes.textField}
-                    SelectProps={{
-                        native: true,
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    margin="normal"
-                    onChange={this.handleChange('business_topic')}
-                    value={this.state.business_topic}
 
-                >
-                    {topic_list.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </TextField>
+                        variant="outlined"
+                        select
+                        label="יחידת מידה"
+                        className={classes.textField}
+                        SelectProps={{
+                            native: true,
+                            MenuProps: {
+                                className: classes.menu,
+                            },
+                        }}
+                        margin="normal"
+                        onChange={this.handleChange('measure_unit')}
+                        value={this.state.measure_unit}
+                    >
+                        {meas_unit.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </TextField>
+
+                    <TextField
+                        id="digit_num"
+                        name="digit_num"
+                        required
+                        label="מספר ספרות אחרי הנקודה"
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                        onChange={this.handleChange('digit_num')}
+                        value={this.state.digit_num}
+                        type="number"
+                        inputProps={{
+                            min: 1,
+                            step: 1
+                        }}
 
 
 
-                <TextField
-                    id="measure_type"
-                    name="measure_type"
-                    required
-                    variant="outlined"
-                    select
-                    label="סוג מדד"
-                    className={classes.textField}
-                    SelectProps={{
-                        native: true,
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    margin="normal"
-                    onChange={this.handleChange('measure_type')}
-                    value={this.state.measure_type}
-
-                >
-                    {meas_type.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </TextField>
-
-                <TextField
-                    id="measure_unit"
-                    name="measure_unit"
-                    required
-
-
-                    variant="outlined"
-                    select
-                    label="יחידת מידה"
-                    className={classes.textField}
-                    SelectProps={{
-                        native: true,
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    margin="normal"
-                    onChange={this.handleChange('measure_unit')}
-                    value={this.state.measure_unit}
-                >
-                    {meas_unit.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </TextField>
-
-                <TextField
-                    id="measuring_frequency"
-                    name="measuring_frequency"
-                    variant="outlined"
-                    select
-                    label="תדירות מדידה"
-                    className={classes.textField}
-                    SelectProps={{
-                        native: true,
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    margin="normal"
-                    onChange={this.handleChange('measuring_frequency')}
-                    value={this.state.measuring_frequency}
-
-                >
-                    {meas_freq.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </TextField>
-
-
-
-                <FormGroup grid>
-
-
+                    />
+                </FormGroup>
 
                     <FormControlLabel
                         control={
@@ -704,103 +713,109 @@ class MeasureForm extends Component {
                         label="מפריד אלפים"
                     />
 
+                <FormGroup row>
 
+                    <MuiPickersUtilsProvider utils={MomentUtils}>
+                        <DatePicker
+                            id="from_date"
+                            name="from_date"
+                            format="D/MM/YYYY"
+                            label='מתאריך'
+                            className={classNames(classes.textField)}
+                            margin="normal"
+                            variant="outlined"
+                            okLabel='אישור'
+                            cancelLabel='ביטול'
+                            value={this.state.from_date}
+                            onChange={this.handleDateChange('from_date')}
+                            rightArrowIcon={<ChevronRightIcon />}
+                            leftArrowIcon={<ChevronLeftIcon />}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                    </MuiPickersUtilsProvider>
+
+
+                    <MuiPickersUtilsProvider utils={MomentUtils}>
+                        <DatePicker
+                            id="to_date"
+                            name="to_date"
+                            format="D/MM/YYYY"
+                            label="עד תאריך"
+
+                            className={classNames(classes.textField)}
+                            margin="normal"
+                            variant="outlined"
+                            okLabel='אישור'
+                            cancelLabel='ביטול'
+                            value={this.state.to_date}
+                            onChange={this.handleDateChange('to_date')}
+                            rightArrowIcon={<ChevronRightIcon />}
+                            leftArrowIcon={<ChevronLeftIcon />}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                    </MuiPickersUtilsProvider>
+                </FormGroup>
+                <FormGroup grid>
+                    <TextField
+                        id="target_default"
+                        name="target_default"
+                        label="יעד עיסקי"
+
+                        onChange={this.handleChange('target_default')}
+                        value={this.state.target_default}
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                        type="number"
+                        inputProps={{
+                            min: 0,
+                            step: 1
+                        }}
+
+                    />
+
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                id="is_division"
+                                name="is_division"
+                                checked={this.state.is_division}
+                                onChange={this.handleChangeSwitch('is_division')}
+                                value="is_division"
+                                color="primary"
+                                disableRipple
+                                classes={{
+                                    switchBase: classes.iOSSwitchBase,
+                                    bar: classes.iOSBar,
+                                    icon: classes.iOSIcon,
+                                    iconChecked: classes.iOSIconChecked,
+                                    checked: classes.iOSChecked,
+                                    root: classes.switch
+                                }}
+                            />
+                        }
+                        label="מיועד לדיווח על ידי החטיבה"
+                    />
+
+                    <TextField
+                        id="remarks"
+                        name="remarks"
+                        label="הערות"
+                        multiline
+                        rows="4"
+                        onChange={this.handleChange('remarks')}
+                        value={this.state.remarks}
+                        className={classes.width}
+                        margin="normal"
+                        variant="outlined"
+                        InputLabelProps={{classes:{root: classes.label}}}
+                    />
                 </FormGroup>
 
-
-                <TextField
-                    id="digit_num"
-                    name="digit_num"
-                    required
-                    label="מספר ספרות אחרי הנקודה"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange('digit_num')}
-                    value={this.state.digit_num}
-                    type="number"
-                    inputProps={{
-                        min: 1,
-                        step: 1
-                    }}
-
-
-
-                />
-
-                <TextField
-                    id="target_default"
-                    name="target_default"
-                    label="יעד עיסקי"
-
-                    onChange={this.handleChange('target_default')}
-                    value={this.state.target_default}
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    type="number"
-                    inputProps={{
-                        min: 0,
-                        step: 1
-                    }}
-
-                />
-
-                <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <DatePicker
-                        id="from_date"
-                        name="from_date"
-                        format="D/MM/YYYY"
-                        label='מתאריך'
-                        className={classNames(classes.textField)}
-                        margin="normal"
-                        variant="outlined"
-                        okLabel='אישור'
-                        cancelLabel='ביטול'
-                        value={this.state.from_date}
-                        onChange={this.handleDateChange('from_date')}
-                        rightArrowIcon={<ChevronRightIcon />}
-                        leftArrowIcon={<ChevronLeftIcon />}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                </MuiPickersUtilsProvider>
-
-
-                <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <DatePicker
-                        id="to_date"
-                        name="to_date"
-                        format="D/MM/YYYY"
-                        label="עד תאריך"
-
-                        className={classNames(classes.textField)}
-                        margin="normal"
-                        variant="outlined"
-                        okLabel='אישור'
-                        cancelLabel='ביטול'
-                        value={this.state.to_date}
-                        onChange={this.handleDateChange('to_date')}
-                        rightArrowIcon={<ChevronRightIcon />}
-                        leftArrowIcon={<ChevronLeftIcon />}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                </MuiPickersUtilsProvider>
-                <TextField
-                    id="remarks"
-                    name="remarks"
-                    label="הערות"
-                    multiline
-                    rows="4"
-                    onChange={this.handleChange('remarks')}
-                    value={this.state.remarks}
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                />
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -809,17 +824,15 @@ class MeasureForm extends Component {
                 >
                     <DialogTitle id="alert-dialog-title">{"האם ברצונך לשמור שינויים ?"}</DialogTitle>
                         <DialogContent>
-                            <DialogContentText id="alert-dialog-description">
-                            אם לא לשמור שינויים נתוני תופס ימחקו !
-                            </DialogContentText>
+
 
                         </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.onDialogCancel} variant='outlined' color="primary">
-                            לצאת בלי שמירה
-                        </Button>
                         <Button onClick={this.onDialogSave} variant='outlined' color="primary" autoFocus>
-                            לשמור
+                            כן
+                        </Button>
+                        <Button onClick={this.onDialogCancel} variant='outlined' color="primary">
+                            לא
                         </Button>
                     </DialogActions>
                 </Dialog>

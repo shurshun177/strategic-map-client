@@ -37,6 +37,11 @@ const styles = theme => ({
 
         width: 400
     },
+    width: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 820
+    },
     dense: {
         marginTop: 30,
     },
@@ -51,7 +56,7 @@ const styles = theme => ({
     },
     focused: {
         margin:'20px',
-        right: '0px',
+        right: '15px',
         // padding: '10px'
     },
     input:{
@@ -417,9 +422,9 @@ class VersionForm extends Component {
                         }
                         label="פעיל"
                     />
-            </FormGroup>
 
-            <FormGroup row>
+
+
                 <TextField
                     id="version_type"
                     name="version_type"
@@ -473,16 +478,16 @@ class VersionForm extends Component {
                         </option>
                     ))}
                 </TextField>
-            </FormGroup>
 
-            <FormGroup grid>
+
+
 
                     <TextField
                     id="version_name"
                     name="version_name"
                     required
                     label="שם גרסה"
-                    className={classes.textField}
+                    className={ classes.width}
                     margin="normal"
 
                     variant="outlined"
@@ -530,6 +535,7 @@ class VersionForm extends Component {
                                 onChange={this.handleChangeSwitch('retro')}
                                 value="retro"
                                 color="primary"
+                                disableRipple
                                 classes={{
                                     switchBase: classes.iOSSwitchBase,
                                     bar: classes.iOSBar,
@@ -554,8 +560,10 @@ class VersionForm extends Component {
                     variant="outlined"
                     required
                     select
-                    helperText="נושא עסקי"
-                    className={classes.textField}
+
+                    className={classes.textField, classes.width}
+                    label="נושא עסקי"
+                    InputLabelProps={{classes:{root: classes.label}}}
                     SelectProps={{
                         native: true,
                         MenuProps: {
@@ -591,16 +599,14 @@ class VersionForm extends Component {
                 >
                     <DialogTitle id="alert-dialog-title">{"האם ברצונך לשמור שינויים ?"}</DialogTitle>
                     <DialogContent>
-                           <DialogContentText>
-                           אם לא לשמור שינויים נתוני תופס ימחקו !
-                           </DialogContentText>
+
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.onDialogCancel} variant='outlined' color="primary">
-                            לצאת בלי שמירה
-                        </Button>
                         <Button onClick={this.onDialogSave} variant='outlined' color="primary" autoFocus>
-                            לשמור
+                            כן
+                        </Button>
+                        <Button onClick={this.onDialogCancel} variant='outlined' color="primary">
+                            לא
                         </Button>
                     </DialogActions>
                 </Dialog>

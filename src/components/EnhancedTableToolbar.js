@@ -87,6 +87,18 @@ const toolbarStyles = theme => ({
 });
 
 class EnhancedTableToolbar extends Component {
+
+     constructor(props) {
+        super(props);
+        this.state = {
+            searchWord: ''
+        }
+        };
+    handleChange = event => {
+        this.setState({
+            searchWord: event.target.value
+        });
+    };
     render() {
         const {classes} = this.props;
         return (
@@ -103,7 +115,8 @@ class EnhancedTableToolbar extends Component {
                             root: classes.inputRoot,
                             input: classes.inputInput,
                         }}
-                        onBlur={this.props.handleSearch}
+                        onChange={this.handleChange}
+                        onBlur={this.props.handleSearch(this.state.searchWord)}
                     />
                 </div>
             </Toolbar>

@@ -179,18 +179,16 @@ class MeasureList extends Component {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">{"האם אתה בטוח שברצונך למחוק את המדד ?"}</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">{"האם שברצונך למחוק את המדד ?"}</DialogTitle>
                     <DialogContent>
-                           <DialogContentText>
-                           אם לא לשמור שינויים נתוני תופס ימחקו !
-                           </DialogContentText>
+
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.onDialogCancel} variant='outlined' color="primary">
-                            ביטול
-                        </Button>
                         <Button onClick={this.onDialogDelete} variant='outlined' color="primary" autoFocus>
-                            למחוק
+                            כן
+                        </Button>
+                        <Button onClick={this.onDialogCancel} variant='outlined' color="primary">
+                           לא
                         </Button>
                     </DialogActions>
                 </Dialog>
