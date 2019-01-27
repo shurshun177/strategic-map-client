@@ -107,9 +107,9 @@ const styles = theme => ({
   iOSIconChecked: {
     boxShadow: theme.shadows[1],
   },
-    switch: {
+   switch: {
         direction: 'ltr'
-    }
+  }
 });
 
 const hosp_type = [
@@ -424,8 +424,8 @@ class VersionForm extends Component {
                     />
 
 
-
                 <TextField
+
                     id="version_type"
                     name="version_type"
                     select
