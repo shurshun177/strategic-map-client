@@ -32,16 +32,18 @@ const styles = theme => ({
         display: 'raw',
         flexWrap: 'wrap',
     },
-    textField: {
+    width: {
         marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
+        marginRight: theme.spacing.unit*1.5,
+        marginTop: theme.spacing.unit*4,
 
         width: 600
     },
-    width: {
+    textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        width: 420
+        marginTop: theme.spacing.unit*0.5,
+        width: 600
     },
     dense: {
         marginTop: 30,
@@ -52,9 +54,12 @@ const styles = theme => ({
     group: {
     },
     label:{
-        marginRight: '20px',
-        right: '15px'
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit*2,
+        marginTop: theme.spacing.unit*4,
+        width: 200
     },
+
     focused: {
         margin:'20px',
         right: '15px',
@@ -109,7 +114,9 @@ const styles = theme => ({
     boxShadow: theme.shadows[1],
   },
    switch: {
-        direction: 'ltr'
+        direction: 'ltr',
+        marginTop: theme.spacing.unit*0.1,
+        marginRight: theme.spacing.unit*0.1
   }
 });
 
@@ -379,7 +386,7 @@ class VersionForm extends Component {
                 </Button>
             </div>
             <FormGroup grid>
-                <InputLabel className={classes.textField} htmlFor="component-simple">מספר גרסה</InputLabel>
+                <InputLabel className={classes.width} htmlFor="component-simple">מספר גרסה</InputLabel>
                 <TextField
                     id="version_number"
                     name="version_number"
@@ -400,7 +407,10 @@ class VersionForm extends Component {
                     InputLabelProps={{classes:{root: classes.label}}}
 
                 />
+                    <InputLabel className={classes.label} htmlFor="component-simple">פעיל</InputLabel>
                     <FormControlLabel
+
+
                         control={
                             <Switch
                                 id="active"
@@ -417,15 +427,16 @@ class VersionForm extends Component {
                                     icon: classes.iOSIcon,
                                     iconChecked: classes.iOSIconChecked,
                                     checked: classes.iOSChecked,
-                                    root: classes.switch
+                                    root: classes.switch,
+
                                 }}
 
                             />
                         }
-                        label="פעיל"
+
                     />
 
-                <InputLabel className={classes.textField} htmlFor="component-simple">סוג גרסה</InputLabel>
+                <InputLabel className={classes.width} htmlFor="component-simple">סוג גרסה</InputLabel>
                 <TextField
 
                     id="version_type"
@@ -433,7 +444,7 @@ class VersionForm extends Component {
                     select
                     variant="outlined"
                     required
-                    
+
                     className={classes.textField}
                     SelectProps={{
                         native: true,
@@ -454,7 +465,7 @@ class VersionForm extends Component {
                     ))}
                 </TextField>
 
-                <InputLabel className={classes.textField} htmlFor="component-simple">שנה</InputLabel>
+                <InputLabel className={classes.width} htmlFor="component-simple">שנה</InputLabel>
                 <TextField
                     id="year"
                     name="year"
@@ -483,7 +494,7 @@ class VersionForm extends Component {
 
 
 
-                    <InputLabel className={classes.textField} htmlFor="component-simple">שם גרסה</InputLabel>
+                    <InputLabel className={classes.width} htmlFor="component-simple">שם גרסה</InputLabel>
                     <TextField
                         id="version_name"
                         name="version_name"
@@ -498,7 +509,7 @@ class VersionForm extends Component {
                         InputLabelProps={{classes:{root: classes.label}}}
                     />
 
-                    <InputLabel className={classes.textField} htmlFor="component-simple">סוג בית חולים</InputLabel>
+                    <InputLabel className={classes.width} htmlFor="component-simple">סוג בית חולים</InputLabel>
                     <TextField
                         id="hospital_type"
                         name="hospital_type"
@@ -528,8 +539,9 @@ class VersionForm extends Component {
 
                     </TextField>
 
-
+                    <InputLabel className={classes.label} htmlFor="component-simple">אפשר עדכון דיווח קודם</InputLabel>
                     <FormControlLabel
+
                         control={
                             <Switch
                                 id="retro"
@@ -549,14 +561,14 @@ class VersionForm extends Component {
                                 }}
                             />
                         }
-                        label="אפשר עדכון דיווח קודם"
+
                     />
 
 
 
 
 
-                    <InputLabel className={classes.textField} htmlFor="component-simple">נושא עסקי</InputLabel>
+                    <InputLabel className={classes.width} htmlFor="component-simple">נושא עסקי</InputLabel>
                     <TextField
                         id="business_topic"
                         name="business_topic"
