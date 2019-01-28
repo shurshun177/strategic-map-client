@@ -388,8 +388,9 @@ class MeasureForm extends Component {
                     יציאה
                 </Button>
             </div>
-                <InputLabel className={classes.label} htmlFor="component-simple">פעיל</InputLabel>
-                <FormControlLabel
+                <FormGroup grid>
+                    <InputLabel className={classes.label} htmlFor="component-simple">פעיל</InputLabel>
+                    <FormControlLabel
                         control={
                             <Switch
                                 id="active"
@@ -411,7 +412,7 @@ class MeasureForm extends Component {
                         }
 
                     />
-                <FormGroup grid>
+
                     <InputLabel className={classes.width} htmlFor="component-simple">סוג בית חולים</InputLabel>
                     <TextField
                         id="hospital_type"
@@ -735,7 +736,7 @@ class MeasureForm extends Component {
                                 }}
                             />
                         }
-                        
+
                     />
 
 
