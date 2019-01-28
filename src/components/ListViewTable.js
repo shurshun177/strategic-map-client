@@ -130,8 +130,8 @@ class EnhancedTable extends React.Component {
     };
 
 
-    handleSearch = (searchWord)=>{
-        this.props.handleSearch(searchWord);
+    handleSearch = searchWord=> e=>{
+       this.props.handleSearch(searchWord);
     };
 
 

@@ -39,9 +39,6 @@ const styles = theme => ({
     menu: {
         width: 200,
     },
-    width: {
-        width: 800
-    },
     label:{
         marginRight: '20px',
         right: '15px'
@@ -83,97 +80,7 @@ const hosp_type = [
     },
 ];
 
-const topic_list = [
-    {
-        value: '0',
-        label: '',
-        items:[
 
-        ]
-    },
-    {
-        value: '1',
-        label: 'תקן איוש ונלוות',
-        items:[
-            { value: '1',
-                label: 'תקן איוש ונלוות'},
-            { value: '4',
-                label: 'תקן איוש ונלוות3'},
-            { value: '3',
-                label: 'תקן איוש ונלוות2'}
-        ]
-    },
-    {
-        value: '2',
-        label: 'פעילות',
-        items:[
-            { value: '4-2',
-                label: 'תקן איוש ונלוות2'},
-            { value: '2-4',
-                label: 'תקן איוש ונלוות23'},
-            { value: '2-3',
-                label: 'תקן איוש ונלוות32'}
-        ]
-
-    },
-    {
-        value: '3',
-        label: 'חווית המטופל',
-        items:[
-
-        ]
-    },
-    {
-        value: '4',
-        label: 'הון אנושי',
-        items:[
-
-        ]
-    },
-    {
-        value: '5',
-        label: 'איכות ובטיחות',
-        items:[
-
-        ]
-    },
-    {
-        value: '6',
-        label: 'תשתית כלכלית ופיזית',
-        items:[
-
-        ]
-    },
-    {
-        value: '7',
-        label: 'ניצולת חדרי ניתוח',
-        items:[
-
-        ]
-    },
-    {
-        value: '8',
-        label: 'תשתית טכנולוגית',
-        items:[
-
-        ]
-    },
-];
-
-const vers_type = [
-    {
-        value: '0',
-        label: '',
-    },
-    {
-        value: '1',
-        label: 'חציוני',
-    },
-    {
-        value: '2',
-        label: 'שנתי',
-    },
-];
 
 class NationalMesureUpdate extends Component {
 
@@ -337,7 +244,7 @@ class NationalMesureUpdate extends Component {
                     variant="outlined"
                     select
                     label="סוג בית חולים"
-                    className={classes.textField, classes.width}
+                    className={classes.textField}
                     SelectProps={{
                         native: true,
                         MenuProps: {
