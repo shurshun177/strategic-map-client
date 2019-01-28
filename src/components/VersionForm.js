@@ -16,6 +16,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Redirect } from 'react-router';
 import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
 
 
 import moment from 'moment';
@@ -35,12 +36,12 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
 
-        width: 400
+        width: 600
     },
     width: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        width: 820
+        width: 420
     },
     dense: {
         marginTop: 30,
@@ -378,11 +379,12 @@ class VersionForm extends Component {
                 </Button>
             </div>
             <FormGroup grid>
+                <InputLabel className={classes.textField} htmlFor="component-simple">מספר גרסה</InputLabel>
                 <TextField
                     id="version_number"
                     name="version_number"
                     required={!isReq}
-                    label="מספר גרסה"
+
                     className={classes.textField}
                     margin="normal"
                     variant="outlined"
@@ -423,7 +425,7 @@ class VersionForm extends Component {
                         label="פעיל"
                     />
 
-
+                <InputLabel className={classes.textField} htmlFor="component-simple">סוג גרסה</InputLabel>
                 <TextField
 
                     id="version_type"
@@ -431,7 +433,7 @@ class VersionForm extends Component {
                     select
                     variant="outlined"
                     required
-                    label="סוג גרסה"
+                    
                     className={classes.textField}
                     SelectProps={{
                         native: true,
@@ -452,14 +454,14 @@ class VersionForm extends Component {
                     ))}
                 </TextField>
 
-
+                <InputLabel className={classes.textField} htmlFor="component-simple">שנה</InputLabel>
                 <TextField
                     id="year"
                     name="year"
                     variant="outlined"
                     required
                     select
-                    label="שנה"
+
                     className={classes.textField}
                     SelectProps={{
                         native: true,
@@ -481,49 +483,50 @@ class VersionForm extends Component {
 
 
 
-
+                    <InputLabel className={classes.textField} htmlFor="component-simple">שם גרסה</InputLabel>
                     <TextField
-                    id="version_name"
-                    name="version_name"
-                    required
-                    label="שם גרסה"
-                    className={ classes.width}
-                    margin="normal"
+                        id="version_name"
+                        name="version_name"
+                        required
 
-                    variant="outlined"
-                    onChange={this.handleChange('version_name')}
-                    value={this.state.version_name}
-                    InputLabelProps={{classes:{root: classes.label}}}
-                />
+                        className={classes.textField}
+                        margin="normal"
 
+                        variant="outlined"
+                        onChange={this.handleChange('version_name')}
+                        value={this.state.version_name}
+                        InputLabelProps={{classes:{root: classes.label}}}
+                    />
+
+                    <InputLabel className={classes.textField} htmlFor="component-simple">סוג בית חולים</InputLabel>
                     <TextField
-                    id="hospital_type"
-                    name="hospital_type"
-                    required
+                        id="hospital_type"
+                        name="hospital_type"
+                        required
 
 
-                    variant="outlined"
-                    select
-                    label="סוג בית חולים"
-                    className={classes.textField}
-                    SelectProps={{
-                        native: true,
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    InputLabelProps={{classes:{root: classes.label}}}
-                    margin="normal"
-                    onChange={this.handleChange('hospital_type')}
-                    value={this.state.hospital_type}
-                >
-                    {hosp_type.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
+                        variant="outlined"
+                        select
 
-                </TextField>
+                        className={classes.textField}
+                        SelectProps={{
+                            native: true,
+                            MenuProps: {
+                                className: classes.menu,
+                            },
+                        }}
+                        InputLabelProps={{classes:{root: classes.label}}}
+                        margin="normal"
+                        onChange={this.handleChange('hospital_type')}
+                        value={this.state.hospital_type}
+                    >
+                        {hosp_type.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+
+                    </TextField>
 
 
                     <FormControlLabel
@@ -553,34 +556,34 @@ class VersionForm extends Component {
 
 
 
+                    <InputLabel className={classes.textField} htmlFor="component-simple">נושא עסקי</InputLabel>
+                    <TextField
+                        id="business_topic"
+                        name="business_topic"
+                        variant="outlined"
+                        required
+                        select
 
-                <TextField
-                    id="business_topic"
-                    name="business_topic"
-                    variant="outlined"
-                    required
-                    select
+                        className={classes.textField}
 
-                    className={classes.textField, classes.width}
-                    label="נושא עסקי"
-                    InputLabelProps={{classes:{root: classes.label}}}
-                    SelectProps={{
-                        native: true,
-                        MenuProps: {
-                            className: classes.menu,
-                        },
-                    }}
-                    margin="normal"
-                    onChange={this.handleMeasure('business_topic')}
-                    value={this.state.business_topic}
-                    FormHelperTextProps={{classes:{root:classes.formHelperText }}}
-                >
-                    {topic_list.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </TextField>
+                        InputLabelProps={{classes:{root: classes.label}}}
+                        SelectProps={{
+                            native: true,
+                            MenuProps: {
+                                className: classes.menu,
+                            },
+                        }}
+                        margin="normal"
+                        onChange={this.handleMeasure('business_topic')}
+                        value={this.state.business_topic}
+                        FormHelperTextProps={{classes:{root:classes.formHelperText }}}
+                    >
+                        {topic_list.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </TextField>
                 <AssignMeasures
                     title='בחירת מדדים'
                     allMeasures={this.state.measure_names}
