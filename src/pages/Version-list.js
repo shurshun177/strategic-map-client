@@ -30,6 +30,7 @@ class VersionList extends Component {
     constructor(props) {
         super(props);
         this.onDeleteClick = this.onDeleteClick.bind(this)
+        this.handleSearch = this.handleSearch.bind(this);
 
         this.state = {
             data: [],
@@ -101,6 +102,25 @@ class VersionList extends Component {
         this.setState({ open: true });
     };
 
+    handleSearch(searchWord){
+        let url = `version/search/${searchWord}`;
+        const measuresList = RestAPI().get(url, {withCredentials: true});
+        measuresList.then(result => {
+            let data = result.data.items.map(el=>{
+                el.create_date = el.create_date['$date'];
+                return el;
+            });
+            this.setState((prevState, props) => {
+                return {
+                    data
+                };
+            });
+
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
+
     render() {
         const {classes} = this.props;
 
@@ -166,7 +186,9 @@ class VersionList extends Component {
                 </div>
 
                 <ContainedButtons buttons={buttons} selectedId={this.state.selectedVersion}/>
-                <ListViewTable data={this.state.data} title={title} columns={columns} setSelectedHandler={this.setSelectedVersion.bind(this)}/>
+                <ListViewTable data={this.state.data} title={title} columns={columns} setSelectedHandler={this.setSelectedVersion.bind(this)}
+                               handleSearch ={this.handleSearch.bind(this)}
+                />
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}

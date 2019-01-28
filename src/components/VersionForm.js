@@ -362,7 +362,6 @@ class VersionForm extends Component {
         let isReq = mode === 'update';
 
         return (
-            <div className={classes.root}>
             <>{this.state.shouldExit?  (<Redirect to="/app/versions"/>):
 
             <form className={classes.container} noValidate autoComplete="off"
@@ -408,7 +407,6 @@ class VersionForm extends Component {
                                 value='active'
                                 disableRipple
                                 color="primary"
-                                disableRipple
                                 classes={{
                                     switchBase: classes.iOSSwitchBase,
                                     bar: classes.iOSBar,
@@ -613,7 +611,6 @@ class VersionForm extends Component {
             </form>
             }
             </>
-            </div>
         );
     }
 }
