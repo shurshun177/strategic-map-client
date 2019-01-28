@@ -31,15 +31,15 @@ class ContainedButtons extends Component{
         if (button.onClick){
             return <Button
                 variant={button.variant} size={button.size} color={button.type} className={classes.button}
-                onClick={button.onClick}
+                onClick={button.onClick} disabled={this.props.selectedId === null && button.couldBeDisabled}
             >{button.text}
             </Button
             >
         }
         else{
             return <Button
-                component={Link} to={`${button.url}/${this.props.selectedId}`}
-                variant={button.variant} color={button.type} className={classes.button}>{button.text}
+                component={Link} to={this.props.selectedId?`${button.url}/${this.props.selectedId}`:`${button.url}`}
+                variant={button.variant} color={button.type} className={classes.button} disabled={this.props.selectedId === null && button.couldBeDisabled}>{button.text}
             </Button
             >
         }

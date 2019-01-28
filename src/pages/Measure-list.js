@@ -129,10 +129,10 @@ class MeasureList extends Component {
         const {classes} = this.props;
 
         let buttons = [
-            {text:'יצירת מדד חדש', variant:'outlined', size: 'large', type: 'primary', 'url': '/app/measure-details' },
-            {text:'עדכון מדד',  variant:'outlined', size: 'large', type: 'primary', 'url':'/app/measure-update'},
-            {text:'העתקת מדד', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/measure-copy' },
-            {text:'מחיקת מדד', variant:'outlined', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick  }
+            {text:'יצירת מדד חדש', variant:'outlined', size: 'large', type: 'primary', 'url': '/app/measure-details', couldBeDisabled: false },
+            {text:'עדכון מדד',  variant:'outlined', size: 'large', type: 'primary', 'url':'/app/measure-update', couldBeDisabled: true},
+            {text:'העתקת מדד', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/measure-copy', couldBeDisabled: true },
+            {text:'מחיקת מדד', variant:'outlined', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick, couldBeDisabled: true  }
         ];
 
 

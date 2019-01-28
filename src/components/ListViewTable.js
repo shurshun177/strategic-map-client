@@ -119,16 +119,26 @@ const styles = theme => ({
 
 class EnhancedTable extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            order: 'asc',
+            orderBy: 'calories',
+            selected: null,
+            page: 0,
+            rowsPerPage: 5
+        };
+    }
 
-    state = {
-        order: 'asc',
-        orderBy: 'calories',
-        selected: null,
-        page: 0,
-        rowsPerPage: 5,
-
-    };
-
+    componentDidUpdate(prevProps) {
+        if ( this.props.data.length && this.props.data.length !==prevProps.data.length){
+            this.setState((prevState, props) => {
+                return {
+                    rowsPerPage: this.props.data.length
+                };
+            });
+        }
+    }
 
     handleSearch = searchWord=> e=>{
        this.props.handleSearch(searchWord);

@@ -125,10 +125,10 @@ class VersionList extends Component {
         const {classes} = this.props;
 
         let buttons = [
-            {text:'יצירת גרסה חדשה', variant:'outlined', size: 'large', type: 'primary', 'url': '/app/version-details' },
-            {text:'עדכון גרסה', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/version-update'},
-            {text:'העתקת גרסה', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/version-copy' },
-            {text:'מחיקת גרסה', variant:'outlined', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick  }
+            {text:'יצירת גרסה חדשה', variant:'outlined', size: 'large', type: 'primary', 'url': '/app/version-details', couldBeDisabled: false },
+            {text:'עדכון גרסה', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/version-update', couldBeDisabled: true},
+            {text:'העתקת גרסה', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/version-copy', couldBeDisabled: true },
+            {text:'מחיקת גרסה', variant:'outlined', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick, couldBeDisabled: true  }
         ];
 
 

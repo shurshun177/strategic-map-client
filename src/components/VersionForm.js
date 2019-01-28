@@ -259,7 +259,8 @@ class VersionForm extends Component {
                 return arr;
             },
             open: false,
-            shouldExit: false
+            shouldExit: false,
+            shouldValidate: false
         };
     }
 
@@ -298,20 +299,22 @@ class VersionForm extends Component {
     };
 
     requestAvailableMeasures = (measure, hospitalType)=>{
-        let url = `available_measures/${hospitalType}/${measure}/`;
-        const ShowMeasures = RestAPI().get(url, {withCredentials: true});
-        ShowMeasures.then(result => {
-            // {"items": [{"_id": {"$oid": "5c27ed38a933f91dc178076c"}, "measure_name": "name2"}]}
-            this.setState((prevState, props) => {
-                return {
-                    measure_names: result.data.items,
-                    measure: []
-                };
-            })
-        }).catch((error) => {
-            //todo if not successful, display an error with toaster
-            alert('Hospital type and business topic must be selected')
-        });
+        if (measure && hospitalType){
+            let url = `available_measures/${hospitalType}/${measure}/`;
+            const ShowMeasures = RestAPI().get(url, {withCredentials: true});
+            ShowMeasures.then(result => {
+                // {"items": [{"_id": {"$oid": "5c27ed38a933f91dc178076c"}, "measure_name": "name2"}]}
+                this.setState((prevState, props) => {
+                    return {
+                        measure_names: result.data.items,
+                        measure: []
+                    };
+                })
+            }).catch((error) => {
+                //todo if not successful, display an error with toaster
+                alert('Hospital type and business topic must be selected')
+            });
+        }
     };
 
     //TODO separate logic
@@ -341,7 +344,16 @@ class VersionForm extends Component {
 
     handleSubmit(e){
         e.preventDefault();
-        this.props.handleFormSubmit(this.state);
+        this.setState({shouldValidate: true},()=>{
+            if (this.state.version_number !== '' &&
+                    this.state.version_type !== '' &&
+                    this.state.year !== '' &&
+                    this.state.version_name !== '' &&
+                    this.state.hospital_type !== ''
+            ){
+                this.props.handleFormSubmit(this.state);
+            }
+        });
     }
 
 
@@ -385,12 +397,11 @@ class VersionForm extends Component {
                 </Button>
             </div>
             <FormGroup grid>
-                <InputLabel className={classes.width} htmlFor="component-simple">מספר גרסה</InputLabel>
+                <InputLabel  required={!isReq} className={classes.width} htmlFor="component-simple">מספר גרסה</InputLabel>
                 <TextField
                     id="version_number"
                     name="version_number"
                     required={!isReq}
-
                     className={classes.textField}
                     margin="normal"
                     variant="outlined"
@@ -403,7 +414,9 @@ class VersionForm extends Component {
                     }}
                     readonly = {isReadonly}
                     disabled={isReadonly}
+                    error={this.state.version_number === '' && this.state.shouldValidate}
                     InputLabelProps={{classes:{root: classes.label}}}
+
 
                 />
                     <InputLabel className={classes.label} htmlFor="component-simple">פעיל</InputLabel>
@@ -434,7 +447,7 @@ class VersionForm extends Component {
 
                     />
 
-                <InputLabel className={classes.width} htmlFor="component-simple">סוג גרסה</InputLabel>
+                <InputLabel  required className={classes.width} htmlFor="component-simple">סוג גרסה</InputLabel>
                 <TextField
 
                     id="version_type"
@@ -454,6 +467,7 @@ class VersionForm extends Component {
                     margin="normal"
                     onChange={this.handleChange('version_type')}
                     value={this.state.version_type}
+                    error={this.state.version_type === '' && this.state.shouldValidate}
 
                 >
                     {vers_type.map(option => (
@@ -463,7 +477,7 @@ class VersionForm extends Component {
                     ))}
                 </TextField>
 
-                <InputLabel className={classes.width} htmlFor="component-simple">שנה</InputLabel>
+                <InputLabel required className={classes.width} htmlFor="component-simple">שנה</InputLabel>
                 <TextField
                     id="year"
                     name="year"
@@ -482,6 +496,8 @@ class VersionForm extends Component {
                     margin="normal"
                     onChange={this.handleChange('year')}
                     value={this.state.year}
+                    error={this.state.year === '' && this.state.shouldValidate}
+
                 >
                     {this.state.year_list().map(option => (
                         <option key={option} value={option}>
@@ -505,6 +521,8 @@ class VersionForm extends Component {
                         onChange={this.handleChange('version_name')}
                         value={this.state.version_name}
                         InputLabelProps={{classes:{root: classes.label}}}
+                        error={this.state.version_name === '' && this.state.shouldValidate}
+
                     />
 
                     <InputLabel className={classes.width} htmlFor="component-simple">סוג בית חולים</InputLabel>
@@ -528,6 +546,8 @@ class VersionForm extends Component {
                         margin="normal"
                         onChange={this.handleChange('hospital_type')}
                         value={this.state.hospital_type}
+                        error={this.state.hospital_type === '' && this.state.shouldValidate}
+
                     >
                         {hosp_type.map(option => (
                             <option key={option.value} value={option.value}>
@@ -571,7 +591,6 @@ class VersionForm extends Component {
                         id="business_topic"
                         name="business_topic"
                         variant="outlined"
-                        required
                         select
 
                         className={classes.textField}
