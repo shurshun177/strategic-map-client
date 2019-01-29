@@ -6,6 +6,12 @@ import _ from 'lodash';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import RestAPI from '../api';
+import InputLabel from '@material-ui/core/InputLabel';
+
+
+
 class AssignMeasures extends Component {
   constructor(props) {
     super(props);
@@ -46,6 +52,39 @@ class AssignMeasures extends Component {
     this.closeAssignModal();
   };
 
+
+    handleMeasure = name => event => {
+        this.setState({
+            [name]: event.target.value,
+        });
+        let t = event.target.value;
+        let code = this.props.hospitalType;
+        if (code && t){
+            this.requestAvailableMeasures(t, code);
+        }
+    };
+
+
+    requestAvailableMeasures = (measure, hospitalType)=>{
+        if (measure && hospitalType){
+            let url = `available_measures/${hospitalType}/${measure}/`;
+            const ShowMeasures = RestAPI().get(url, {withCredentials: true});
+            ShowMeasures.then(result => {
+                // {"items": [{"_id": {"$oid": "5c27ed38a933f91dc178076c"}, "measure_name": "name2"}]}
+                let {mode} = this.props;
+                let isAssignedMeasures = mode === 'clone' || mode === 'update';
+                this.setState((prevState, props) => {
+                    return {
+                        measure_names: result.data.items,
+                        measure: isAssignedMeasures ? prevState.measure : []
+                    };
+                })
+            }).catch((error) => {
+                //todo if not successful, display an error with toaster
+                alert('Hospital type and business topic must be selected')
+            });
+        }
+    };
   setSelectedMeasure = selectedMeasureArray =>{
       this.setState((prevState, props) => {
           let {selectedMeasures} = prevState;
@@ -120,6 +159,33 @@ class AssignMeasures extends Component {
         deleteButton={(<div className="dialog_save_button" onClick={this.cancelChanges}>ביטול</div>)}
         submitButton={(<div className="dialog_save_button" onClick={this.submitChanges}>אישור</div>)}>
           {isMeasuresListEmpty ? <div>אין מדדים כרגע. נא לבכור סוג בית חולים ונושע עשקי.</div> :
+              <div>
+              <div className="modal-header-container">
+                  <InputLabel htmlFor="component-simple">נושא עסקי</InputLabel>
+                  <TextField
+                      id="business_topic"
+                      name="business_topic"
+                      variant="outlined"
+                      select
+                      // InputLabelProps={{classes:{root: classes.label}}}
+                      SelectProps={{
+                          native: true,
+                          // MenuProps: {
+                          //     className: classes.menu,
+                          // },
+                      }}
+                      margin="normal"
+                      onChange={this.handleMeasure('business_topic')}
+                      value={this.props.business_topic}
+                      // FormHelperTextProps={{classes:{root:classes.formHelperText }}}
+                  >
+                      {this.props.topicList.map(option => (
+                          <option key={option.value} value={option.value}>
+                              {option.label}
+                          </option>
+                      ))}
+                  </TextField>
+              </div>
               <div className="therapists-assign-body">
               <div className="section patient-therapists">
                   <AssignMeasuresViewTable
@@ -144,7 +210,8 @@ class AssignMeasures extends Component {
                       showCheckbox={true}
                   />
               </div>
-          </div>}
+          </div>
+              </div>}
       </Modal >
     )
   };

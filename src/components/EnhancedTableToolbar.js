@@ -97,6 +97,8 @@ class EnhancedTableToolbar extends Component {
     handleChange = event => {
         this.setState({
             searchWord: event.target.value
+        }, ()=>{
+            this.props.handleSearch(this.state.searchWord);
         });
     };
     render() {
@@ -116,7 +118,6 @@ class EnhancedTableToolbar extends Component {
                             input: classes.inputInput,
                         }}
                         onChange={this.handleChange}
-                        onBlur={this.props.handleSearch(this.state.searchWord)}
                     />
                 </div>
             </Toolbar>

@@ -29,8 +29,9 @@ class VersionList extends Component {
 
     constructor(props) {
         super(props);
-        this.onDeleteClick = this.onDeleteClick.bind(this)
+        this.onDeleteClick = this.onDeleteClick.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.getList = this.getList.bind(this);
 
         this.state = {
             data: [],
@@ -39,12 +40,16 @@ class VersionList extends Component {
     }
 
     componentDidMount() {
+       this.getList();
+    }
+
+    getList(){
         let url = `versions/`;
         const versionsList = RestAPI().get(url, {withCredentials: true});
         versionsList.then(result => {
             let data = result.data.items.map(el=>{
-               el.create_date = el.create_date['$date'];
-               return el;
+                el.create_date = el.create_date['$date'];
+                return el;
             });
             this.setState((prevState, props) => {
                 return {
@@ -103,26 +108,31 @@ class VersionList extends Component {
     };
 
     handleSearch(searchWord){
-        let url = `version/search/${searchWord}`;
-        const measuresList = RestAPI().get(url, {withCredentials: true});
-        measuresList.then(result => {
-            let data = result.data.items.map(el=>{
-                el.create_date = el.create_date['$date'];
-                return el;
-            });
-            this.setState((prevState, props) => {
-                return {
-                    data
-                };
-            });
+        if (searchWord === '' || searchWord === ' '){
+            this.getList();
+        }
+        else{
+            let url = `version/search/${searchWord}`;
+            const measuresList = RestAPI().get(url, {withCredentials: true});
+            measuresList.then(result => {
+                let data = result.data.items.map(el=>{
+                    el.create_date = el.create_date['$date'];
+                    return el;
+                });
+                this.setState((prevState, props) => {
+                    return {
+                        data
+                    };
+                });
 
-        }).catch((error) => {
-            this.setState((prevState, props) => {
-                return {
-                    data: []
-                };
+            }).catch((error) => {
+                this.setState((prevState, props) => {
+                    return {
+                        data: []
+                    };
+                });
             });
-        });
+        }
     }
 
     render() {

@@ -287,37 +287,6 @@ class VersionForm extends Component {
         }
     }
 
-    handleMeasure = name => event => {
-        this.setState({
-            [name]: event.target.value,
-        });
-        let t = event.target.value;
-        let code = this.state.hospital_type;
-        if (code && t){
-            this.requestAvailableMeasures(t, code);
-        }
-    };
-
-    requestAvailableMeasures = (measure, hospitalType)=>{
-        if (measure && hospitalType){
-            let url = `available_measures/${hospitalType}/${measure}/`;
-            const ShowMeasures = RestAPI().get(url, {withCredentials: true});
-            ShowMeasures.then(result => {
-                // {"items": [{"_id": {"$oid": "5c27ed38a933f91dc178076c"}, "measure_name": "name2"}]}
-                this.setState((prevState, props) => {
-                    return {
-                        measure_names: result.data.items,
-                        measure: []
-                    };
-                })
-            }).catch((error) => {
-                //todo if not successful, display an error with toaster
-                alert('Hospital type and business topic must be selected')
-            });
-        }
-    };
-
-    //TODO separate logic
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
@@ -581,38 +550,6 @@ class VersionForm extends Component {
                         }
 
                     />
-
-
-
-
-
-                    <InputLabel className={classes.label} htmlFor="component-simple">נושא עסקי</InputLabel>
-                    <TextField
-                        id="business_topic"
-                        name="business_topic"
-                        variant="outlined"
-                        select
-
-                        className={classes.textField}
-
-                        InputLabelProps={{classes:{root: classes.label}}}
-                        SelectProps={{
-                            native: true,
-                            MenuProps: {
-                                className: classes.menu,
-                            },
-                        }}
-                        margin="normal"
-                        onChange={this.handleMeasure('business_topic')}
-                        value={this.state.business_topic}
-                        FormHelperTextProps={{classes:{root:classes.formHelperText }}}
-                    >
-                        {topic_list.map(option => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </TextField>
                 <AssignMeasures
                     title='בחירת מדדים'
                     allMeasures={this.state.measure_names}
@@ -621,6 +558,11 @@ class VersionForm extends Component {
                     editedUserName=""
                     assigneesRoleName={"therapists"}
                     setMeasures={selectedMeasures=>{this.setState({measure: selectedMeasures })}}
+
+                    topicList = {topic_list}
+
+                    businestTopic={this.state.business_topic}
+                    hospitalType={this.state.hospital_type}
                 />
             </FormGroup>
                 <Dialog

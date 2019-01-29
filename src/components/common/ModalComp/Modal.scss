@@ -4,10 +4,10 @@
   height: 15px;
   width: calc(100% - 40px);
   text-transform: uppercase;
-  text-align: left;
   float: left;
   color: white;
   padding-left: 20px;
+  margin-right: 20px;
 }
 
 .dialog_body{
@@ -380,4 +380,14 @@
     width: unset;
     max-width: 350px !important;
   }
+}
+
+.table-header {
+  margin-right: 5px;
+}
+
+.modal-header-container{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
 }

@@ -26,6 +26,7 @@ class MeasureList extends Component {
         this.onDeleteClick = this.onDeleteClick.bind(this);
         this.updateMeasureStatus = this.updateMeasureStatus.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.getList = this.getList.bind(this);
         this.state = {
             data: [],
             selectedMeasure: null
@@ -33,12 +34,16 @@ class MeasureList extends Component {
     }
 
     componentDidMount() {
+        this.getList();
+    }
+
+    getList(){
         let url = `measures/`;
         const measuresList = RestAPI().get(url, {withCredentials: true});
         measuresList.then(result => {
             let data = result.data.items.map(el=>{
-               el.create_date = el.create_date['$date'];
-               return el;
+                el.create_date = el.create_date['$date'];
+                return el;
             });
             this.setState((prevState, props) => {
                 return {
@@ -49,8 +54,8 @@ class MeasureList extends Component {
         }).catch((error) => {
             console.log(error);
         });
-    }
 
+    }
     setSelectedMeasure(measure){
         let id = measure._id['$oid'];
         this.setState((prevState, props) => {
@@ -107,26 +112,31 @@ class MeasureList extends Component {
     };
 
     handleSearch(searchWord){
-        let url = `measure/search/${searchWord}`;
-        const measuresList = RestAPI().get(url, {withCredentials: true});
-        measuresList.then(result => {
-            let data = result.data.items.map(el=>{
-                el.create_date = el.create_date['$date'];
-                return el;
-            });
-            this.setState((prevState, props) => {
-                return {
-                    data
-                };
-            });
+        if (searchWord === '' || searchWord === ' '){
+            this.getList();
+        }
+        else {
+            let url = `measure/search/${searchWord}`;
+            const measuresList = RestAPI().get(url, {withCredentials: true});
+            measuresList.then(result => {
+                let data = result.data.items.map(el=>{
+                    el.create_date = el.create_date['$date'];
+                    return el;
+                });
+                this.setState((prevState, props) => {
+                    return {
+                        data
+                    };
+                });
 
-        }).catch((error) => {
-            this.setState((prevState, props) => {
-                return {
-                    data: []
-                };
+            }).catch((error) => {
+                this.setState((prevState, props) => {
+                    return {
+                        data: []
+                    };
+                });
             });
-        });
+        }
     }
 
     render() {

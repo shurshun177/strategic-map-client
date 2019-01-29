@@ -105,7 +105,7 @@ render() {
             <div className="table-container">
                 <div className="table">
                     <div className="header">
-                        {headers.map(el => <div>{el}</div>)}
+                        {headers.map(el => <div className="table-header">{el}</div>)}
                     </div>
                     <div className="body">
                         {this.props.list.length ?
