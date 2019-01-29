@@ -39,20 +39,20 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         marginTop: theme.spacing.unit*0.5,
-        width: 600
+        width: '40%'
     },
     width: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit*1.5,
         marginTop: theme.spacing.unit*4,
 
-        width: 600
+        width: '40%'
     },
     label:{
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit*2,
         marginTop: theme.spacing.unit*4,
-        width: 300
+        width: '40%'
     },
     dense: {
         marginTop: 19,
@@ -413,7 +413,7 @@ class MeasureForm extends Component {
 
                     />
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">סוג בית חולים</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">סוג בית חולים</InputLabel>
                     <TextField
                         id="hospital_type"
                         name="hospital_type"
@@ -442,7 +442,7 @@ class MeasureForm extends Component {
                     </TextField>
 
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">נושא עסקי</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">נושא עסקי</InputLabel>
                     <TextField
                         id="business_topic"
                         name="business_topic"
@@ -469,7 +469,7 @@ class MeasureForm extends Component {
                         ))}
                     </TextField>
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">תת-נושא</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">תת-נושא</InputLabel>
                     <TextField
                         id="sub_business_topic"
                         name="sub_business_topic"
@@ -496,7 +496,7 @@ class MeasureForm extends Component {
                         ))}
                     </TextField>
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">קוד מדד</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">קוד מדד</InputLabel>
                     <TextField
                         id="measure_code"
                         name="measure_code"
@@ -513,7 +513,7 @@ class MeasureForm extends Component {
                     />
 
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">שם מדד</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">שם מדד</InputLabel>
                     <TextField
                         id="measure_name"
                         name="measure_name"
@@ -525,7 +525,7 @@ class MeasureForm extends Component {
                         onChange={this.handleChange('measure_name')}
                         value={this.state.measure_name}
                     />
-                    <InputLabel className={classes.width} htmlFor="component-simple">תיאור מדד</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">תיאור מדד</InputLabel>
                     <TextField
                         id="measure_desc"
                         name="measure_desc"
@@ -541,7 +541,7 @@ class MeasureForm extends Component {
 
 
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">קריטריונים להכללה</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">קריטריונים להכללה</InputLabel>
                     <TextField
                         id="criteria_inclusion"
                         name="criteria_inclusion"
@@ -555,7 +555,7 @@ class MeasureForm extends Component {
 
                     />
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">קריטריונים להוצאה</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">קריטריונים להוצאה</InputLabel>
                     <TextField
                         id="removal_criteria"
                         name="removal_criteria"
@@ -571,7 +571,7 @@ class MeasureForm extends Component {
                     />
 
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">מונה</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">מונה</InputLabel>
                     <TextField
                         id="numerator"
                         name="numerator"
@@ -589,7 +589,7 @@ class MeasureForm extends Component {
                         }}
                     />
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">מכנה</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">מכנה</InputLabel>
                     <TextField
                         id="denominator"
                         name="denominator"
@@ -611,7 +611,7 @@ class MeasureForm extends Component {
 
 
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">סוג מדד</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">סוג מדד</InputLabel>
                     <TextField
                         id="measure_type"
                         name="measure_type"
@@ -639,7 +639,7 @@ class MeasureForm extends Component {
                     </TextField>
 
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">תדירות מדידה</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">תדירות מדידה</InputLabel>
                     <TextField
                         id="measuring_frequency"
                         name="measuring_frequency"
@@ -666,7 +666,7 @@ class MeasureForm extends Component {
                     </TextField>
 
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">יחידת מידה</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">יחידת מידה</InputLabel>
                     <TextField
                         id="measure_unit"
                         name="measure_unit"
@@ -694,7 +694,7 @@ class MeasureForm extends Component {
                         ))}
                     </TextField>
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">מספר ספרות אחרי הנקודה</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">מספר ספרות אחרי הנקודה</InputLabel>
                     <TextField
                         id="digit_num"
                         name="digit_num"
@@ -740,7 +740,7 @@ class MeasureForm extends Component {
                     />
 
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">מתאריך</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">מתאריך</InputLabel>
                     <MuiPickersUtilsProvider utils={MomentUtils}>
                         <DatePicker
                             id="from_date"
@@ -762,7 +762,7 @@ class MeasureForm extends Component {
                         />
                     </MuiPickersUtilsProvider>
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">עד תאריך</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">עד תאריך</InputLabel>
                     <MuiPickersUtilsProvider utils={MomentUtils}>
                         <DatePicker
                             id="to_date"
@@ -785,7 +785,7 @@ class MeasureForm extends Component {
                         />
                     </MuiPickersUtilsProvider>
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">יעד עיסקי</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">יעד עיסקי</InputLabel>
                     <TextField
                         id="target_default"
                         name="target_default"
@@ -828,7 +828,7 @@ class MeasureForm extends Component {
 
                     />
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">הערות</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">הערות</InputLabel>
                     <TextField
                         id="remarks"
                         name="remarks"

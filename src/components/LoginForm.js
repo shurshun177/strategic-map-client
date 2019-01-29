@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import RestAPI from '../api';
 import TextField from '@material-ui/core/TextField';
-
+import InputLabel from '@material-ui/core/InputLabel';
 
 const styles = theme => ({
     main: {
@@ -41,12 +41,14 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 3,
     },
     label: {
-        marginRight:'20px',
-        right:0
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit*2,
+        marginTop: theme.spacing.unit*4
     },
     textField: {
         // marginLeft: theme.spacing.unit,
         // marginRight: theme.spacing.unit,
+        marginTop: theme.spacing.unit*0.5,
         width: '100%'
     }
 });
@@ -101,11 +103,12 @@ class Login extends Component {
 
                     </Typography>
                     <form className={classes.form} onSubmit={this.handleSubmit}>
+                        <InputLabel className={classes.label} required htmlFor="component-simple">שם משתמש</InputLabel>
                         <TextField
                             id="username"
                             name="username"
                             required
-                            label="שם משתמש"
+
                             className={classes.textField}
                             margin="normal"
                             variant="outlined"
@@ -114,11 +117,12 @@ class Login extends Component {
                             InputLabelProps={{classes:{root: classes.label}}}
                             autoFocus
                         />
+                        <InputLabel className={classes.label} required htmlFor="component-simple">סיסמה</InputLabel>
                         <TextField
                             id="password"
                             name="password"
                             required
-                            label="סיסמה"
+
                             className={classes.textField}
                             margin="normal"
                             type="password"

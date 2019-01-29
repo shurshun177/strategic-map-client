@@ -37,13 +37,13 @@ const styles = theme => ({
         marginRight: theme.spacing.unit*1.5,
         marginTop: theme.spacing.unit*4,
 
-        width: 600
+        width: '40%'
     },
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         marginTop: theme.spacing.unit*0.5,
-        width: 600
+        width: '40%'
     },
     dense: {
         marginTop: 30,
@@ -57,7 +57,7 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit*2,
         marginTop: theme.spacing.unit*4,
-        width: 200
+        width: '40%'
     },
 
     focused: {
@@ -397,7 +397,7 @@ class VersionForm extends Component {
                 </Button>
             </div>
             <FormGroup grid>
-                <InputLabel  required={!isReq} className={classes.width} htmlFor="component-simple">מספר גרסה</InputLabel>
+                <InputLabel  required={!isReq} className={classes.label} htmlFor="component-simple">מספר גרסה</InputLabel>
                 <TextField
                     id="version_number"
                     name="version_number"
@@ -447,7 +447,7 @@ class VersionForm extends Component {
 
                     />
 
-                <InputLabel  required className={classes.width} htmlFor="component-simple">סוג גרסה</InputLabel>
+                <InputLabel  required className={classes.label} htmlFor="component-simple">סוג גרסה</InputLabel>
                 <TextField
 
                     id="version_type"
@@ -477,7 +477,7 @@ class VersionForm extends Component {
                     ))}
                 </TextField>
 
-                <InputLabel required className={classes.width} htmlFor="component-simple">שנה</InputLabel>
+                <InputLabel required className={classes.label} htmlFor="component-simple">שנה</InputLabel>
                 <TextField
                     id="year"
                     name="year"
@@ -508,7 +508,7 @@ class VersionForm extends Component {
 
 
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">שם גרסה</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">שם גרסה</InputLabel>
                     <TextField
                         id="version_name"
                         name="version_name"
@@ -525,7 +525,7 @@ class VersionForm extends Component {
 
                     />
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">סוג בית חולים</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">סוג בית חולים</InputLabel>
                     <TextField
                         id="hospital_type"
                         name="hospital_type"
@@ -586,7 +586,7 @@ class VersionForm extends Component {
 
 
 
-                    <InputLabel className={classes.width} htmlFor="component-simple">נושא עסקי</InputLabel>
+                    <InputLabel className={classes.label} htmlFor="component-simple">נושא עסקי</InputLabel>
                     <TextField
                         id="business_topic"
                         name="business_topic"

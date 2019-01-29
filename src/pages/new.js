@@ -15,6 +15,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Redirect } from 'react-router';
+import InputLabel from '@material-ui/core/InputLabel';
 
 
 import moment from 'moment';
@@ -30,8 +31,8 @@ const styles = theme => ({
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-
-        width: 400
+        marginTop: theme.spacing.unit*0.5,
+        width: '30%'
     },
     dense: {
         marginTop: 30,
@@ -40,8 +41,10 @@ const styles = theme => ({
         width: 200,
     },
     label:{
-        marginRight: '20px',
-        right: '15px'
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit*2,
+        marginTop: theme.spacing.unit*3,
+        width: '40%'
     },
     focused: {
         margin:'20px',
@@ -203,15 +206,15 @@ class NationalMesureUpdate extends Component {
                     יציאה
                 </Button>
             </div>
-
-
+            <FormGroup grid>
+                <InputLabel className={classes.label} required htmlFor="component-simple">שנה</InputLabel>
                 <TextField
                     id="year"
                     name="year"
                     variant="outlined"
                     required
                     select
-                    label="שנה"
+
                     className={classes.textField}
                     SelectProps={{
                         native: true,
@@ -219,7 +222,7 @@ class NationalMesureUpdate extends Component {
                             className: classes.menu,
                         },
                     }}
-                    InputLabelProps={{classes:{root: classes.label}}}
+
                     margin="normal"
                     onChange={this.handleChange('year')}
                     value={this.state.year}
@@ -230,11 +233,10 @@ class NationalMesureUpdate extends Component {
                         </option>
                     ))}
                 </TextField>
+            </FormGroup>
 
-
-
-
-
+            <FormGroup grid>
+                <InputLabel className={classes.label} required htmlFor="component-simple">סוג בית חולים</InputLabel>
                 <TextField
                     id="hospital_type"
                     name="hospital_type"
@@ -243,7 +245,7 @@ class NationalMesureUpdate extends Component {
 
                     variant="outlined"
                     select
-                    label="סוג בית חולים"
+
                     className={classes.textField}
                     SelectProps={{
                         native: true,
@@ -251,7 +253,7 @@ class NationalMesureUpdate extends Component {
                             className: classes.menu,
                         },
                     }}
-                    InputLabelProps={{classes:{root: classes.label}}}
+
                     margin="normal"
                     onChange={this.handleChange('hospital_type')}
                     value={this.state.hospital_type}
@@ -263,6 +265,7 @@ class NationalMesureUpdate extends Component {
                     ))}
 
                 </TextField>
+            </FormGroup>
 
 
 
