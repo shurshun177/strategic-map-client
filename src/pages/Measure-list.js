@@ -121,7 +121,11 @@ class MeasureList extends Component {
             });
 
         }).catch((error) => {
-            console.log(error);
+            this.setState((prevState, props) => {
+                return {
+                    data: []
+                };
+            });
         });
     }
 
@@ -129,7 +133,7 @@ class MeasureList extends Component {
         const {classes} = this.props;
 
         let buttons = [
-            {text:'יצירת מדד חדש', variant:'outlined', size: 'large', type: 'primary', 'url': '/app/measure-details', couldBeDisabled: false },
+            {text:'יצירת מדד חדש', variant:'outlined', size: 'large', type: 'primary', 'url': '/app/measure-details', couldBeDisabled: false, hasId: false },
             {text:'עדכון מדד',  variant:'outlined', size: 'large', type: 'primary', 'url':'/app/measure-update', couldBeDisabled: true},
             {text:'העתקת מדד', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/measure-copy', couldBeDisabled: true },
             {text:'מחיקת מדד', variant:'outlined', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick, couldBeDisabled: true  }

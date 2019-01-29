@@ -38,7 +38,7 @@ class ContainedButtons extends Component{
         }
         else{
             return <Button
-                component={Link} to={this.props.selectedId?`${button.url}/${this.props.selectedId}`:`${button.url}`}
+                component={Link} to={button.hasId?`${button.url}/${this.props.selectedId}`:`${button.url}`}
                 variant={button.variant} color={button.type} className={classes.button} disabled={this.props.selectedId === null && button.couldBeDisabled}>{button.text}
             </Button
             >
