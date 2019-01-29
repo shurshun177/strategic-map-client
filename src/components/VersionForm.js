@@ -350,7 +350,8 @@ class VersionForm extends Component {
                     this.state.year !== '' &&
                     this.state.version_name !== '' &&
                     this.state.hospital_type !== ''
-            ){
+            )
+            {
                 this.props.handleFormSubmit(this.state);
             }
         });
@@ -525,11 +526,11 @@ class VersionForm extends Component {
 
                     />
 
-                    <InputLabel className={classes.label} htmlFor="component-simple">סוג בית חולים</InputLabel>
+                    <InputLabel className={classes.label} required htmlFor="component-simple">סוג בית חולים</InputLabel>
                     <TextField
                         id="hospital_type"
                         name="hospital_type"
-                        required
+
 
 
                         variant="outlined"

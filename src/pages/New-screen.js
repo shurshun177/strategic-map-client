@@ -84,7 +84,7 @@ class AlertDialog extends React.Component {
               value="checkedB"
             />
           }
-          label="iOS Switch button"
+          label='דיווח ע"י חטיבה'
         />
       </FormGroup>
       </div>

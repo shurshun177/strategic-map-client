@@ -30,6 +30,7 @@ class MeasureCopy extends Component {
             numerator: formData.numerator,
             denominator: formData.denominator,
             business_topic: formData.business_topic,
+            sub_business_topic: formData.sub_business_topic,
             measure_type: formData.measure_type,
             measuring_frequency: formData.measuring_frequency,
             measure_unit: formData.measure_unit,
