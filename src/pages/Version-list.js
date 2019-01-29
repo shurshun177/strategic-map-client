@@ -130,9 +130,9 @@ class VersionList extends Component {
 
         let buttons = [
             {text:'יצירת גרסה חדשה', variant:'outlined', size: 'large', type: 'primary', 'url': '/app/version-details', couldBeDisabled: false, hasId: false },
-            {text:'עדכון גרסה', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/version-update', couldBeDisabled: true},
-            {text:'העתקת גרסה', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/version-copy', couldBeDisabled: true },
-            {text:'מחיקת גרסה', variant:'outlined', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick, couldBeDisabled: true  }
+            {text:'עדכון גרסה', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/version-update', couldBeDisabled: true, hasId: true},
+            {text:'העתקת גרסה', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/version-copy', couldBeDisabled: true, hasId: true },
+            {text:'מחיקת גרסה', variant:'outlined', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick, couldBeDisabled: true, hasId: true }
         ];
 
 

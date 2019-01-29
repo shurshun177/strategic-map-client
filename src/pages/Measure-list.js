@@ -134,9 +134,9 @@ class MeasureList extends Component {
 
         let buttons = [
             {text:'יצירת מדד חדש', variant:'outlined', size: 'large', type: 'primary', 'url': '/app/measure-details', couldBeDisabled: false, hasId: false },
-            {text:'עדכון מדד',  variant:'outlined', size: 'large', type: 'primary', 'url':'/app/measure-update', couldBeDisabled: true},
-            {text:'העתקת מדד', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/measure-copy', couldBeDisabled: true },
-            {text:'מחיקת מדד', variant:'outlined', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick, couldBeDisabled: true  }
+            {text:'עדכון מדד',  variant:'outlined', size: 'large', type: 'primary', 'url':'/app/measure-update', couldBeDisabled: true, hasId: true},
+            {text:'העתקת מדד', variant:'outlined', size: 'large', type: 'primary', 'url':'/app/measure-copy', couldBeDisabled: true, hasId: true },
+            {text:'מחיקת מדד', variant:'outlined', size: 'large', type: 'secondary', 'onClick': this.onDeleteClick, couldBeDisabled: true, hasId: true }
         ];
 
 
