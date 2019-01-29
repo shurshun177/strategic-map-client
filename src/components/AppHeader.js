@@ -95,10 +95,10 @@ class AppHeader extends React.Component{
         const { classes, theme } = this.props;
 
         const menuItems = [
-            {name: 'ניהול גירסאות', link: '/app/versions'},
+            {name: 'ניהול גרסאות', link: '/app/versions'},
             {name: 'ניהול מדדים', link: '/app/measures'},
-            {name: 'חדש', link: '/app/new'},
-            {name: 'מסך עדכון המדד הלאומי', link: '/app/national-measure'}
+            {name: 'דיווח ע"י חטיבה', link: '/app/new'},
+            {name: 'דיווח ממוצעים', link: '/app/national-measure'}
         ];
         return (
         <>{this.state.isLoggedOut ?

@@ -38,7 +38,8 @@ class MeasureUpdate extends Component {
             to_date: formData.to_date,
             target_default: formData.target_default,
             remarks: formData.remarks,
-            is_division: formData.is_division
+            is_division: formData.is_division,
+            sub_business_topic: formData.sub_business_topic
         };
 
         let url = `measure/update/${currentId}/`;

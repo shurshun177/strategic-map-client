@@ -300,7 +300,8 @@ class MeasureForm extends Component {
             target_default: '',
             remarks: '',
             open: false,
-            shouldExit: false
+            shouldExit: false,
+            shouldValidate: false
         };
     }
 
@@ -346,7 +347,21 @@ class MeasureForm extends Component {
 
     handleSubmit(e){
         e.preventDefault();
-        this.props.handleFormSubmit(this.state);
+        this.setState({shouldValidate: true},()=>{
+            if (this.state.business_topic !== '' &&
+                    this.state.sub_business_topic !== '' &&
+                    this.state.measure_code !== '' &&
+                    this.state.measure_name !== '' &&
+                    this.state.measure_desc !== '' &&
+                    this.state.meas_type !== '' &&
+                    this.state.meas_unit !== '' &&
+                    this.state.digit_num !== '' &&
+                    this.state.hospital_type !== ''
+            )
+            {
+                this.props.handleFormSubmit(this.state);
+            }
+        });
     }
 
     onDialogCancel = () => {
@@ -413,11 +428,11 @@ class MeasureForm extends Component {
 
                     />
 
-                    <InputLabel className={classes.label} htmlFor="component-simple">סוג בית חולים</InputLabel>
+                    <InputLabel className={classes.label} required htmlFor="component-simple">סוג בית חולים</InputLabel>
                     <TextField
                         id="hospital_type"
                         name="hospital_type"
-                        required
+
 
 
                         variant="outlined"
@@ -433,6 +448,7 @@ class MeasureForm extends Component {
                         margin="normal"
                         onChange={this.handleChange('hospital_type')}
                         value={this.state.hospital_type}
+                        error={this.state.hospital_type === '' && this.state.shouldValidate}
                     >
                         {hosp_type.map(option => (
                             <option key={option.value} value={option.value}>
@@ -442,11 +458,11 @@ class MeasureForm extends Component {
                     </TextField>
 
 
-                    <InputLabel className={classes.label} htmlFor="component-simple">נושא עסקי</InputLabel>
+                    <InputLabel className={classes.label} required htmlFor="component-simple">נושא עסקי</InputLabel>
                     <TextField
                         id="business_topic"
                         name="business_topic"
-                        required
+
                         variant="outlined"
                         select
 
@@ -460,6 +476,7 @@ class MeasureForm extends Component {
                         margin="normal"
                         onChange={this.handleChange('business_topic')}
                         value={this.state.business_topic}
+                        error={this.state.business_topic === '' && this.state.shouldValidate}
 
                     >
                         {topic_list.map(option => (
@@ -469,11 +486,11 @@ class MeasureForm extends Component {
                         ))}
                     </TextField>
 
-                    <InputLabel className={classes.label} htmlFor="component-simple">תת-נושא</InputLabel>
+                    <InputLabel className={classes.label} required htmlFor="component-simple">תת-נושא</InputLabel>
                     <TextField
                         id="sub_business_topic"
                         name="sub_business_topic"
-                        required
+
                         variant="outlined"
                         select
 
@@ -487,6 +504,7 @@ class MeasureForm extends Component {
                         margin="normal"
                         onChange={this.handleChange('sub_business_topic')}
                         value={this.state.sub_business_topic}
+                        error={this.state.sub_business_topic === '' && this.state.shouldValidate}
 
                     >
                         {topic_list.map(option => (
@@ -496,47 +514,50 @@ class MeasureForm extends Component {
                         ))}
                     </TextField>
 
-                    <InputLabel className={classes.label} htmlFor="component-simple">קוד מדד</InputLabel>
+                    <InputLabel className={classes.label} required={!isReq} htmlFor="component-simple">קוד מדד</InputLabel>
                     <TextField
                         id="measure_code"
                         name="measure_code"
-                        required={!isReq}
+
 
                         className={classes.textField}
                         margin="normal"
                         variant="outlined"
                         onChange={this.handleChange('measure_code')}
                         value={this.state.measure_code}
+                        error={this.state.measure_code === '' && this.state.shouldValidate}
 
                         disabled={isReadonly}
 
                     />
 
 
-                    <InputLabel className={classes.label} htmlFor="component-simple">שם מדד</InputLabel>
+                    <InputLabel className={classes.label} required htmlFor="component-simple">שם מדד</InputLabel>
                     <TextField
                         id="measure_name"
                         name="measure_name"
-                        required
+
 
                         className={classes.textField}
                         margin="normal"
                         variant="outlined"
                         onChange={this.handleChange('measure_name')}
                         value={this.state.measure_name}
+                        error={this.state.measure_name === '' && this.state.shouldValidate}
                     />
-                    <InputLabel className={classes.label} htmlFor="component-simple">תיאור מדד</InputLabel>
+
+                    <InputLabel className={classes.label} required htmlFor="component-simple">תיאור מדד</InputLabel>
                     <TextField
                         id="measure_desc"
                         name="measure_desc"
-                        required
+
 
                         className={classes.textField}
                         margin="normal"
                         variant="outlined"
                         onChange={this.handleChange('measure_desc')}
                         value={this.state.measure_desc}
-
+                        error={this.state.measure_desc === '' && this.state.shouldValidate}
                     />
 
 
@@ -611,11 +632,11 @@ class MeasureForm extends Component {
 
 
 
-                    <InputLabel className={classes.label} htmlFor="component-simple">סוג מדד</InputLabel>
+                    <InputLabel className={classes.label} required htmlFor="component-simple">סוג מדד</InputLabel>
                     <TextField
                         id="measure_type"
                         name="measure_type"
-                        required
+
                         variant="outlined"
                         select
 
@@ -629,6 +650,7 @@ class MeasureForm extends Component {
                         margin="normal"
                         onChange={this.handleChange('measure_type')}
                         value={this.state.measure_type}
+                        error={this.state.measure_type === '' && this.state.shouldValidate}
 
                     >
                         {meas_type.map(option => (
@@ -666,11 +688,11 @@ class MeasureForm extends Component {
                     </TextField>
 
 
-                    <InputLabel className={classes.label} htmlFor="component-simple">יחידת מידה</InputLabel>
+                    <InputLabel className={classes.label} required htmlFor="component-simple">יחידת מידה</InputLabel>
                     <TextField
                         id="measure_unit"
                         name="measure_unit"
-                        required
+
 
 
                         variant="outlined"
@@ -686,6 +708,7 @@ class MeasureForm extends Component {
                         margin="normal"
                         onChange={this.handleChange('measure_unit')}
                         value={this.state.measure_unit}
+                        error={this.state.measure_unit === '' && this.state.shouldValidate}
                     >
                         {meas_unit.map(option => (
                             <option key={option.value} value={option.value}>
@@ -694,17 +717,18 @@ class MeasureForm extends Component {
                         ))}
                     </TextField>
 
-                    <InputLabel className={classes.label} htmlFor="component-simple">מספר ספרות אחרי הנקודה</InputLabel>
+                    <InputLabel className={classes.label} required htmlFor="component-simple">מספר ספרות אחרי הנקודה</InputLabel>
                     <TextField
                         id="digit_num"
                         name="digit_num"
-                        required
+
 
                         className={classes.textField}
                         margin="normal"
                         variant="outlined"
                         onChange={this.handleChange('digit_num')}
                         value={this.state.digit_num}
+                        error={this.state.digit_num === '' && this.state.shouldValidate}
                         type="number"
                         inputProps={{
                             min: 1,
