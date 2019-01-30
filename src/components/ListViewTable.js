@@ -262,7 +262,9 @@ class EnhancedTable extends React.Component {
                                             />
                                             </TableCell>
                                             {row.map((el, index) =>
-                                                <TableCell component='th' scope='row' padding='none' numeric>{columns[index].isActive? this.isActive(el): columns[index].isTimestamp? this.timestampToDate(el): el}</TableCell>
+                                                <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                                    borderColor: 'red'
+                                                }}}>{columns[index].isActive? this.isActive(el): columns[index].isTimestamp? this.timestampToDate(el): el}</TableCell>
                                             )}
                                         </TableRow>
                                     );
