@@ -268,16 +268,12 @@ class VersionForm extends Component {
         if (this.props.mode === 'update' && this.props.mode !==prevProps.mode){
             this.setState((prevState, props) => {
                 return props.data;
-            }, ()=>{
-                this.requestAvailableMeasures(this.state.business_topic, this.state.hospital_type);
             });
         }
 
         if (this.props.mode === 'clone' && this.props.mode !==prevProps.mode){
             this.setState((prevState, props) => {
                 return props.data;
-            }, ()=>{
-                this.requestAvailableMeasures(this.state.business_topic, this.state.hospital_type);
             });
         }
 
@@ -291,12 +287,6 @@ class VersionForm extends Component {
         this.setState({
             [name]: event.target.value,
         });
-
-        if(name === 'hospital_type'){
-            if (this.state.business_topic !== ''){
-                this.requestAvailableMeasures(this.state.business_topic, event.target.value);
-            }
-        }
     };
 
 
