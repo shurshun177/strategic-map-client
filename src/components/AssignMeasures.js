@@ -80,19 +80,24 @@ class AssignMeasures extends Component {
                 let {mode} = this.props;
                 let isAssignedMeasures = mode === 'clone' || mode === 'update';
                 this.setState((prevState, props) => {
+                    let isPrevState = prevState.currentAssignedMeasures ? prevState.currentAssignedMeasures : [];
+
                     return {
                         currentUnassignedMeasures: result.data.items,
-                        currentAssignedMeasures: isAssignedMeasures ? prevState.measure : []
+                        currentAssignedMeasures: isAssignedMeasures ? isPrevState : []
                     };
                 })
             }).catch((error) => {
                 //todo if not successful, display an error with toaster
                 let {mode} = this.props;
                 let isAssignedMeasures = mode === 'clone' || mode === 'update';
+
                 this.setState((prevState, props) => {
+                    let isPrevState = prevState.currentAssignedMeasures ? prevState.currentAssignedMeasures : [];
+
                     return {
                         currentUnassignedMeasures: prevState.currentUnassignedMeasures,
-                        currentAssignedMeasures: isAssignedMeasures ? prevState.measure : []
+                        currentAssignedMeasures: isAssignedMeasures ? isPrevState : []
                     };
                 })
                 // let result = {"items": [{"_id": {"$oid": "5c27ed38a933f91dc178076c"}, "measure_name": "name2"}]};
