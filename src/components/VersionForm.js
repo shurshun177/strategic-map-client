@@ -323,7 +323,7 @@ class VersionForm extends Component {
 
     onDialogSave = ()=>{
         this.setState({ open: false }, ()=>{
-            this.props.handleFormSubmit(this.state);
+            this.handleSubmit("what function has to recieve?");
         });
 
     };
