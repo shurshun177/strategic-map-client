@@ -561,9 +561,8 @@ class VersionForm extends Component {
                     setMeasures={selectedMeasures=>{this.setState({measure: selectedMeasures })}}
 
                     topicList = {topic_list}
-
-                    businestTopic={this.state.business_topic}
                     hospitalType={this.state.hospital_type}
+                    mode={this.props.mode}
                 />
             </FormGroup>
                 <Dialog

@@ -37,10 +37,26 @@ class AssignUsersViewTable extends Component {
     };
 
 
+    // isElementSelected = el => {
+    //
+    //     // isSelected = id => this.state.selected.indexOf(id) !== -1;
+    //     // console.log(el, 'ELEMENT IS SELECTED')
+    //     // console.log(this.props.selectedUserRole, 'SELECTED USER ROLE')
+    //     // let condition = this.props.selectedUserRole.some(item => {
+    //     //     console.log(item['_id'], 'ITEM');
+    //     //     console.log(el['_id']);
+    //     //     console.log(item['_id'] === el['_id'], 'CONDITION')
+    //     //     return item['_id'] === el['_id']
+    //     // });
+    //     //
+    //     // return !condition;
+    //
+    // };
+
+
     isElementSelected = el => {
         return this.props.selectedUserRole.some(item => item.id === el.id);
     };
-
 
     renderRow = (el, index) => {
         const isEven = index % 2 === 0 ? " even" : "";
@@ -52,7 +68,7 @@ class AssignUsersViewTable extends Component {
                 onClick={() => this.props.setSelected([el])}>
                 <div
                     className="data-row"
-                    title={el.measure_name} key={el.id}>
+                    title={el.measure_name} key={el['_id']}>
                     {el.measure_name}
                 </div>
             </div>

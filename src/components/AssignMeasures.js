@@ -20,16 +20,22 @@ class AssignMeasures extends Component {
       selectedMeasures: [],
       currentAssignedMeasures: [],
       currentUnassignedMeasures: [],
-      openModal: false
+      openModal: false,
+        business_topic: ''
     }
   }
 
     componentDidUpdate(prevProps) {
-        if (this.props.allMeasures !==prevProps.allMeasures || this.props.assignedMeasures !==prevProps.assignedMeasures){
+        if (this.props.assignedMeasures !==prevProps.assignedMeasures){
             this.setState({
                 currentUnassignedMeasures: this.props.allMeasures,
                 currentAssignedMeasures: this.props.assignedMeasures
             });
+        }
+        if (this.props.hospitalType !==prevProps.hospitalType){
+            if (this.state.business_topic !==''){
+                this.requestAvailableMeasures(this.state.business_topic, this.props.hospitalType);
+            }
         }
     }
 
@@ -75,13 +81,29 @@ class AssignMeasures extends Component {
                 let isAssignedMeasures = mode === 'clone' || mode === 'update';
                 this.setState((prevState, props) => {
                     return {
-                        measure_names: result.data.items,
-                        measure: isAssignedMeasures ? prevState.measure : []
+                        currentUnassignedMeasures: result.data.items,
+                        currentAssignedMeasures: isAssignedMeasures ? prevState.measure : []
                     };
                 })
             }).catch((error) => {
                 //todo if not successful, display an error with toaster
-                alert('Hospital type and business topic must be selected')
+                let {mode} = this.props;
+                let isAssignedMeasures = mode === 'clone' || mode === 'update';
+                this.setState((prevState, props) => {
+                    return {
+                        currentUnassignedMeasures: prevState.currentUnassignedMeasures,
+                        currentAssignedMeasures: isAssignedMeasures ? prevState.measure : []
+                    };
+                })
+                // let result = {"items": [{"_id": {"$oid": "5c27ed38a933f91dc178076c"}, "measure_name": "name2"}]};
+                // let {mode} = this.props;
+                // let isAssignedMeasures = mode === 'clone' || mode === 'update';
+                // this.setState((prevState, props) => {
+                //     return {
+                //         currentUnassignedMeasures: [{"_id": {"$oid": "5c27ed38a933f91dc178076c"}, "measure_name": "name2"}],
+                //         currentAssignedMeasures: isAssignedMeasures ? prevState.measure : []
+                //     };
+                // })
             });
         }
     };
@@ -148,8 +170,9 @@ class AssignMeasures extends Component {
   };
 
   renderAssignModal = () => {
-      let isMeasuresListEmpty = false;
-    // let isMeasuresListEmpty = this.props.allMeasures.length === 0;
+      // let isMeasuresListEmpty = false
+      console.log('is measure list empty')
+    let isMeasuresListEmpty = this.props.hospitalType === '' || this.state.business_topic === '';
     return (
       <Modal
         className="assign-therapist-modal-container"
@@ -158,7 +181,6 @@ class AssignMeasures extends Component {
         closeModal={this.cancelChanges}
         deleteButton={(<div className="dialog_save_button" onClick={this.cancelChanges}>ביטול</div>)}
         submitButton={(<div className="dialog_save_button" onClick={this.submitChanges}>אישור</div>)}>
-          {isMeasuresListEmpty ? <div>אין מדדים כרגע. נא לבכור סוג בית חולים ונושע עשקי.</div> :
               <div>
               <div className="modal-header-container">
                   <InputLabel htmlFor="component-simple">נושא עסקי</InputLabel>
@@ -186,7 +208,8 @@ class AssignMeasures extends Component {
                       ))}
                   </TextField>
               </div>
-              <div className="therapists-assign-body">
+                  {isMeasuresListEmpty ? <div>אין מדדים כרגע. נא לבכור סוג בית חולים ונושע עשקי.</div> :
+                      <div className="therapists-assign-body">
               <div className="section patient-therapists">
                   <AssignMeasuresViewTable
                       header='מדדים שנבחרו'
@@ -210,8 +233,8 @@ class AssignMeasures extends Component {
                       showCheckbox={true}
                   />
               </div>
-          </div>
-              </div>}
+          </div>}
+              </div>
       </Modal >
     )
   };
