@@ -346,7 +346,8 @@ class MeasureForm extends Component {
     };
 
     handleSubmit(e){
-        e.preventDefault();
+        if(e)
+            e.preventDefault();
         this.setState({shouldValidate: true},()=>{
             if (this.state.business_topic !== '' &&
                     this.state.sub_business_topic !== '' &&
@@ -376,7 +377,7 @@ class MeasureForm extends Component {
 
     onDialogSave = ()=>{
         this.setState({ open: false }, ()=>{
-            this.handleSubmit("what function has to recieve?");
+            this.handleSubmit();
         });
 };
 

@@ -44,6 +44,22 @@ function getSorting(order, orderBy) {
     return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
+
+
+const CustomTableCell = withStyles(theme => ({
+    head: {
+        // backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.black,
+        fontSize: 20,
+        textAlign: 'right'
+    },
+    body: {
+        fontSize: 15,
+    },
+}))(TableCell);
+
+
+
 class ListViewTable extends React.Component {
 
     createSortHandler = property => event => {
@@ -60,9 +76,8 @@ class ListViewTable extends React.Component {
                     </TableCell>
                     {columns.map(row => {
                         return (
-                            <TableCell
+                            <CustomTableCell
                                 key={row.id}
-                                numeric={row.numeric}
                                 padding={row.disablePadding ? 'none' : 'default'}
                                 sortDirection={orderBy === row.id ? order : false}
                             >
@@ -79,7 +94,7 @@ class ListViewTable extends React.Component {
                                         {row.label}
                                     </TableSortLabel>
                                 </Tooltip>
-                            </TableCell>
+                            </CustomTableCell>
                         );
                     }, this)}
                 </TableRow>
@@ -200,6 +215,7 @@ class EnhancedTable extends React.Component {
         const { order, orderBy, selected, rowsPerPage, page } = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
         const numSelected = 1;
+
         //TODO take columns names
         let columnsNames = columns.map(el=>el.id);
         return (
@@ -274,6 +290,13 @@ class EnhancedTable extends React.Component {
                     }}
                     onChangePage={this.handleChangePage}
                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                    labelRowsPerPage='שורות לעמוד'
+                    labelDisplayedRows={({from, to, count})=>{
+                        let f = 'מ'
+                        let t ='עד'
+                        let c='סכום'
+                        return `${from}-${to} ${c} ${count}`
+                    }}
                 />
             </Paper>
         );

@@ -260,11 +260,10 @@ class AssignMeasures extends Component {
   renderTitle = () => {
     return (
         <div className="add-measures-button">
-          <Fab variant='extended' size='large' color="primary" onClick={() => {
+          <Fab variant='extended' size='large' color="primary"  onClick={() => {
                   this.cancelChanges();
                   this.setState({ openModal: true });
                 }}>בחירת מדדים
-
           </Fab>
         </div>
     );

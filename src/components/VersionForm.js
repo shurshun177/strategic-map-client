@@ -302,7 +302,8 @@ class VersionForm extends Component {
     };
 
     handleSubmit(e){
-        e.preventDefault();
+        if (e)
+            e.preventDefault();
         this.setState({shouldValidate: true},()=>{
             if (this.state.version_number !== '' &&
                     this.state.version_type !== '' &&
@@ -323,7 +324,7 @@ class VersionForm extends Component {
 
     onDialogSave = ()=>{
         this.setState({ open: false }, ()=>{
-            this.handleSubmit("what function has to recieve?");
+            this.handleSubmit();
         });
 
     };
