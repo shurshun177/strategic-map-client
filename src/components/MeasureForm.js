@@ -567,7 +567,8 @@ class MeasureForm extends Component {
                     <TextField
                         id="criteria_inclusion"
                         name="criteria_inclusion"
-
+                        multiline
+                        rows="4"
 
                         className={classes.textField}
                         margin="normal"
@@ -581,7 +582,8 @@ class MeasureForm extends Component {
                     <TextField
                         id="removal_criteria"
                         name="removal_criteria"
-
+                        multiline
+                        rows="4"
 
                         className={classes.textField}
                         margin="normal"
@@ -604,11 +606,8 @@ class MeasureForm extends Component {
                         variant="outlined"
                         onChange={this.handleChange('numerator')}
                         value={this.state.numerator}
-                        type="number"
-                        inputProps={{
-                            min: 1,
-                            step: 1
-                        }}
+                        multiline
+                        rows="4"
                     />
 
                     <InputLabel className={classes.label} htmlFor="component-simple">מכנה</InputLabel>
@@ -622,11 +621,8 @@ class MeasureForm extends Component {
                         variant="outlined"
                         onChange={this.handleChange('denominator')}
                         value={this.state.denominator}
-                        type="number"
-                        inputProps={{
-                            min: 1,
-                            step: 1
-                        }}
+                        multiline
+                        rows="4"
 
                     />
 

@@ -339,7 +339,7 @@ class VersionForm extends Component {
 
         const { classes, type, mode, data } = this.props;
 
-        let isReadonly = mode === 'update';
+        let isReadonly = mode === 'clone';
         let isReq = mode === 'update';
 
         return (
@@ -374,7 +374,7 @@ class VersionForm extends Component {
                         step: 1
                     }}
                     readonly = {isReadonly}
-                    disabled={isReadonly}
+                    disabled = {isReadonly}
                     error={this.state.version_number === '' && this.state.shouldValidate}
                     InputLabelProps={{classes:{root: classes.label}}}
 
