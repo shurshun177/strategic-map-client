@@ -148,10 +148,10 @@ class VersionList extends Component {
 
         const columns = [
             { id: 'version_number', numeric: false, disablePadding: true, label: 'מספר גרסה'},
-            { id: 'version_name', numeric: true, disablePadding: false, label: 'שם הגרסה' },
-            { id: 'hospital_type', numeric: true, disablePadding: false, label: 'סוג בית חולים' },
-            { id: 'active', numeric: true, disablePadding: false, label: 'פעיל/לא פעיל', isActive: true },
-            { id: 'create_date', numeric: true, disablePadding: false, label: 'תאריך יצירת גרסה', isTimestamp: true},
+            { id: 'version_name', numeric: true, disablePadding: true, label: 'שם הגרסה' },
+            { id: 'hospital_type', numeric: true, disablePadding: true, label: 'סוג בית חולים' },
+            { id: 'active', numeric: true, disablePadding: true, label: 'פעיל/לא פעיל', isActive: true },
+            { id: 'create_date', numeric: true, disablePadding: true, label: 'תאריך יצירת גרסה', isTimestamp: true},
         ];
 
         let data = [

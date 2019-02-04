@@ -165,10 +165,10 @@ class MeasureList extends Component {
         // ];
 
         const columns = [
-            { id: 'measure_code', numeric: false, disablePadding: true, label: 'קןד מדד' },
-            { id: 'measure_name', numeric: true, disablePadding: false, label: 'שם מדד' },
-            { id: 'hospital_type', numeric: true, disablePadding: false, label: 'סוג בית חולים' },
-            { id: 'active', numeric: true, disablePadding: false, label: 'פעיל/לא פעיל', isActive: true },
+            { id: 'measure_code', numeric: true, disablePadding: true, label: 'קוד מדד' },
+            { id: 'measure_name', numeric: true, disablePadding: true, label: 'שם מדד' },
+            { id: 'hospital_type', numeric: true, disablePadding: true, label: 'סוג בית חולים' },
+            { id: 'active', numeric: true, disablePadding: true, label: 'פעיל/לא פעיל', isActive: true },
         ];
 
         let title = "מדדים";

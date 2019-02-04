@@ -555,6 +555,8 @@ class MeasureForm extends Component {
 
                         className={classes.textField}
                         margin="normal"
+                        multiline
+                        rows="4"
                         variant="outlined"
                         onChange={this.handleChange('measure_desc')}
                         value={this.state.measure_desc}
@@ -818,10 +820,7 @@ class MeasureForm extends Component {
                         margin="normal"
                         variant="outlined"
                         type="number"
-                        inputProps={{
-                            min: 0,
-                            step: 1
-                        }}
+
 
                     />
 

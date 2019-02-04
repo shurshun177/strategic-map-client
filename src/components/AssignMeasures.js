@@ -213,7 +213,7 @@ class AssignMeasures extends Component {
                       ))}
                   </TextField>
               </div>
-                  {isMeasuresListEmpty ? <div>אין מדדים כרגע. נא לבחור סוג בית חולים ונושע עשקי.</div> :
+                  {isMeasuresListEmpty ? <div>אין מדדים כרגע, נא לבחור סוג בית חולים ונושא עיסקי.</div> :
                       <div className="therapists-assign-body">
               <div className="section patient-therapists">
                   <AssignMeasuresViewTable
