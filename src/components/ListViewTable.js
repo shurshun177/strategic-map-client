@@ -175,7 +175,14 @@ class EnhancedTable extends React.Component {
     handleClick = (event, id) => {
         const { selected } = this.state;
         let newSelected = id;
-        this.setState({ selected: newSelected });
+        this.setState({ selected: newSelected }, ()=>{
+            let i = {
+                '_id':{
+                    '$oid': id
+                }
+            };
+            this.props.setSelectedHandler(i);
+        });
     };
 
     handleChangePage = (event, page) => {
@@ -197,8 +204,6 @@ class EnhancedTable extends React.Component {
 
     setSelectedHandler=(e, id)=>{
         e.preventDefault();
-        // console.log(event);
-        console.log(e, id);
         this.props.setSelectedHandler(id);
     };
 
@@ -294,9 +299,9 @@ class EnhancedTable extends React.Component {
                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
                     labelRowsPerPage='שורות לעמוד'
                     labelDisplayedRows={({from, to, count})=>{
-                        let f = 'מ'
-                        let t ='עד'
-                        let c='סכום'
+                        let f = 'מ';
+                        let t ='עד';
+                        let c='סכום';
                         return `${from}-${to} ${c} ${count}`
                     }}
                 />
