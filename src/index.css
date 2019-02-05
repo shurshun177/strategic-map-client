@@ -38,3 +38,11 @@ code {
   flex-direction: row;
   justify-content:center
 }
+
+.fixedFormToolbar{
+  position: fixed;
+  background-color: white;
+  z-index:1000;
+  top:70px;
+  width:100%;
+}

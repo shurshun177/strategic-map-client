@@ -396,7 +396,7 @@ class MeasureForm extends Component {
                   onSubmit={this.handleSubmit}
             >
 
-            <div>
+            <div className="fixedFormToolbar">
                 <Button variant="outlined" color='primary' size="large" type="submit" className={classes.button} >
                     שמירה
                 </Button>
