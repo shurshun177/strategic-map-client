@@ -481,7 +481,7 @@ class VersionForm extends Component {
 
                         variant="outlined"
                         onChange={this.handleChange('version_name')}
-                        value={this.state.year}
+                        value={this.state.version_name}
                         InputLabelProps={{classes:{root: classes.label}}}
                         error={this.state.version_name === '' && this.state.shouldValidate}
 
