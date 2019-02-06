@@ -77,7 +77,7 @@ class VersionCopy extends Component {
                     //        data={this.state.data}/>)
 
                     (<VersionForm handleFormSubmit={this.handleFormSubmit.bind(this)} mode={this.state.mode}
-                                  data={this.state.data}/>)
+                                  data={this.state.data} versionNumber={this.state.versionNumber}/>)
 
             }</div>
         );
