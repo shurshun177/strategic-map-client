@@ -12,7 +12,8 @@ class VersionCopy extends Component {
         this.state = {
             data: {},
             mode: null,
-            isCreated: false
+            isCreated: false,
+            versionNumber: null
         }
 
     }
@@ -48,18 +49,23 @@ class VersionCopy extends Component {
         let currentId = this.props.match.params.id;
         let url = `versions/${currentId}/`;
         const currentVersion = RestAPI().get(url, {withCredentials: true});
-        currentVersion.then(result => {
-            let item = result.data.items[0];
+        const last_version = RestAPI().get('last_version/', {withCredentials: true});
+
+        Promise.all([currentVersion, last_version]).then(function(values) {
+            let currentVersionResult = values[0];
+            let lastVersionResult = values[1];
+            let item = currentVersionResult.data.items[0];
+            let number = lastVersionResult.data.vers_number;
+
             delete item['_id'];
             this.setState((prevState, props) => {
-                return {
-                    data: item,
-                    mode: 'clone'
-                };
-            });
+                    return {
+                        data: item,
+                        mode: 'clone',
+                        versionNumber: number
+                    };
+                });
 
-        }).catch((error) => {
-            console.log(error);
         });
     }
 
