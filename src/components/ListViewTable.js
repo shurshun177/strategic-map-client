@@ -304,6 +304,7 @@ class EnhancedTable extends React.Component {
                         let c='סכום';
                         return `${from}-${to} ${c} ${count}`
                     }}
+                    rowsPerPageOptions={[]}
                 />
             </Paper>
         );

@@ -18,7 +18,7 @@ const styles = {
         'flex-direction':'row',
         'justify-content':'center'
     },
-    'myTextStyle': {
+    myTextStyle: {
         //textDecoration: 'underline',
         'flex-direction':'row',
         'justify-content':'center'

@@ -14,10 +14,17 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
 const styles = {
+    root:{
+        'flex-direction':'row',
+        'justify-content':'center'
+    },
     'myTextStyle': {
-        //textDecoration: 'underline'
+        //textDecoration: 'underline',
+        'flex-direction':'row',
+        'justify-content':'center'
     }
 };
+
 
 class MeasureList extends Component {
 
@@ -174,15 +181,17 @@ class MeasureList extends Component {
         let title = "מדדים";
         return (
             <div className="main-content">
+                <div className="table-title">
                 <Toolbar>
                     <Typography variant="h4"
                                 color='primary'
-                                align='center'
+                                
 
                                 className={classes.myTextStyle}>
                         ניהול מדדים
                     </Typography>
                 </Toolbar>
+                </div>
                 <ContainedButtons buttons={buttons} selectedId={this.state.selectedMeasure}/>
                 <ListViewTable data={this.state.data} title={title} columns={columns} setSelectedHandler={this.setSelectedMeasure.bind(this)}
                                handleSearch ={this.handleSearch.bind(this)}/>

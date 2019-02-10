@@ -51,7 +51,7 @@ class VersionCopy extends Component {
         const currentVersion = RestAPI().get(url, {withCredentials: true});
         const last_version = RestAPI().get('last_version/', {withCredentials: true});
 
-        Promise.all([currentVersion, last_version]).then(function(values) {
+        Promise.all([currentVersion, last_version]).then(values=> {
             let currentVersionResult = values[0];
             let lastVersionResult = values[1];
             let item = currentVersionResult.data.items[0];
@@ -68,6 +68,8 @@ class VersionCopy extends Component {
 
         });
     }
+
+
 
     render() {
         return (

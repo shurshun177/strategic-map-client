@@ -341,7 +341,7 @@ class VersionForm extends Component {
 
         let isReadonly = mode === 'clone';
         let isReq = mode === 'update';
-        let auto = !isReadonly
+
 
         return (
             <>{this.state.shouldExit?  (<Redirect to="/app/versions"/>):
@@ -369,13 +369,9 @@ class VersionForm extends Component {
                     variant="outlined"
                     onChange={this.handleChange('version_number')}
                     value={this.state.version_number}
-                    type="number"
-                    inputProps={{
-                        min: 1000,
-                        step: 1
-                    }}
+
                     readonly = {isReadonly}
-                    disabled = {auto}
+                    disabled
                     error={this.state.version_number === '' && this.state.shouldValidate}
                     InputLabelProps={{classes:{root: classes.label}}}
 

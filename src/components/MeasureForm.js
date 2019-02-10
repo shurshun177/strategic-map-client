@@ -296,7 +296,7 @@ class MeasureForm extends Component {
             separate_thousands: false,
             active: true,
             from_date: moment().format(),
-            to_date: moment().format(),
+            to_date: moment().add(10, 'years').format(),
             target_default: '',
             remarks: '',
             open: false,

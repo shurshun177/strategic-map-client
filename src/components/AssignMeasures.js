@@ -42,7 +42,7 @@ class AssignMeasures extends Component {
   cancelChanges = () => {
     let { currentAssignedMeasures, currentUnassignedMeasures } = this.state;
 
-    if (this.props.allMeasures.length){
+    if (this.props.allMeasures){
         // currentAssignedMeasures = _.cloneDeep(this.props.assignedMeasures);
         // currentAssignedMeasures = _.cloneDeep(this.props.assignedMeasures).filter(el => currentAssignedMeasures.find(selectedMeasure => selectedMeasure.id === el.id) == null);
         currentUnassignedMeasures = _.cloneDeep(this.props.allMeasures);
