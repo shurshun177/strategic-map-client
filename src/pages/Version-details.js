@@ -63,10 +63,10 @@ class VersionDetails extends Component {
 
     renderNotificationSnackbar=()=>{
         if (this.state.isCreated){
-            return <Notification  message='kukushonok' variant='success' showSnackbar={this.state.showSnackbar} onClose={this.handleClose} />
+            return <Notification  message='הנתונים נשמרו בהצלחה' variant='success' showSnackbar={this.state.showSnackbar} onClose={this.handleClose} />
         }
         else {
-            return <Notification message='an error occured!!!!!' variant='error' showSnackbar={this.state.showSnackbar} onClose={this.handleClose}/>
+            return <Notification message='הנתונים לא נשמרו !' variant='error' showSnackbar={this.state.showSnackbar} onClose={this.handleClose}/>
         }
     };
 
@@ -78,6 +78,7 @@ class VersionDetails extends Component {
             {this.state.showSnackbar? this.renderNotificationSnackbar(): null}
             </div>
             <div className="main-content">{
+
 
                 // (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version' versionNumber={this.state.versionNumber}/>)
                     (<VersionForm handleFormSubmit={this.handleFormSubmit.bind(this)} versionNumber={this.state.versionNumber}/>)

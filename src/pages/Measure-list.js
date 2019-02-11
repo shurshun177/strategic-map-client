@@ -12,6 +12,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
+import Notification from '../components/Snackbar';
 
 const styles = {
     root:{
@@ -36,7 +37,9 @@ class MeasureList extends Component {
         this.getList = this.getList.bind(this);
         this.state = {
             data: [],
-            selectedMeasure: null
+            selectedMeasure: null,
+            showSnackbar: false,
+            isUpdated: false
         };
     }
 
@@ -80,7 +83,9 @@ class MeasureList extends Component {
             this.setState((prevState, props) => {
                 return {
                     selectedMeasure: null,
-                    data: prevState.data.filter(el=>el._id['$oid'] !== prevState.selectedMeasure)
+                    data: prevState.data.filter(el=>el._id['$oid'] !== prevState.selectedMeasure),
+                    showSnackbar: true,
+                    isUpdated: true
                 };
             });
 
@@ -96,7 +101,12 @@ class MeasureList extends Component {
 
         }).catch((error) => {
             console.log(error);
-            alert('measure was not deleted')
+            this.setState((prevState, props) => {
+                return {
+
+                    showSnackbar: true
+                };
+            });
         });
     }
 
@@ -146,6 +156,19 @@ class MeasureList extends Component {
         }
     }
 
+    handleClose=(event, reason)=>{
+        this.setState({showSnackbar:false})
+    };
+
+    renderNotificationSnackbar=()=>{
+        if (this.state.isUpdated){
+            return <Notification  message='המדד נמחק בהצלחה' variant='success' showSnackbar={this.state.showSnackbar} onClose={this.handleClose} />
+        }
+        else {
+            return <Notification message='המדד לא נמחק !' variant='error' showSnackbar={this.state.showSnackbar} onClose={this.handleClose}/>
+        }
+    };
+
     render() {
         const {classes} = this.props;
 
@@ -180,6 +203,10 @@ class MeasureList extends Component {
 
         let title = "מדדים";
         return (
+            <>
+            <div>
+            {this.state.showSnackbar? this.renderNotificationSnackbar(): null}
+            </div>
             <div className="main-content">
                 <div className="table-title">
                 <Toolbar>
@@ -216,6 +243,7 @@ class MeasureList extends Component {
                     </DialogActions>
                 </Dialog>
             </div>
+            </>
         );
     }
 }

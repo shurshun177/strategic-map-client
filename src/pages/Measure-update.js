@@ -3,6 +3,7 @@ import Form from '../components/Form'
 import RestAPI from '../api';
 import { Route, Redirect } from 'react-router';
 import MeasureForm from '../components/MeasureForm';
+import Notification from '../components/Snackbar';
 
 class MeasureUpdate extends Component {
 
@@ -12,7 +13,9 @@ class MeasureUpdate extends Component {
         this.state = {
             data: {},
             mode: null,
-            isCreated: false
+            isCreated: false,
+            showSnackbar: false,
+            isUpdated: false
         }
 
     }
@@ -47,13 +50,20 @@ class MeasureUpdate extends Component {
         updateMeasure.then(result => {
             this.setState((prevState, props) => {
                 return {
-                    isCreated: true
+                    isCreated: true,
+                    isUpdated: true,
+                    showSnackbar: true
                 };
             });
             //TODO if successful, redirect to list with toaster
         }).catch((error) => {
             //todo if not successful, display an error with toaster
-            alert('such credentials already exist')
+            this.setState((prevState, props) => {
+                return {
+                    isUpdated: false,
+                    showSnackbar: true
+                };
+            });
         });
     }
 
@@ -76,18 +86,35 @@ class MeasureUpdate extends Component {
             console.log(error);
         });
     }
+    handleClose=(event, reason)=>{
+        this.setState({showSnackbar:false})
+    };
 
+    renderNotificationSnackbar=()=>{
+        if (this.state.isUpdated){
+            return <Notification  message='הנתונים נשמרו בהצלחה' variant='success' showSnackbar={this.state.showSnackbar} onClose={this.handleClose} />
+        }
+        else {
+            return <Notification message='הנתונים לא נשמרו !' variant='error' showSnackbar={this.state.showSnackbar} onClose={this.handleClose}/>
+        }
+    };
     render() {
         return (
+            <>
+            <div>
+            {this.state.showSnackbar? this.renderNotificationSnackbar(): null}
+            </div>
             <div className="main-content">{
-                this.state.isCreated ? (<Redirect to="/app/measures"/>) :
+
                     // (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='measure' mode={this.state.mode} data={this.state.data}/>)
                     (<MeasureForm handleFormSubmit={this.handleFormSubmit.bind(this)}
                                   mode={this.state.mode}
                                   data={this.state.data}
                     />)
 
-            }</div>
+            }
+            </div>
+            </>
         );
     }
 }

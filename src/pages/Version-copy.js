@@ -3,6 +3,7 @@ import Form from '../components/Form'
 import RestAPI from '../api';
 import { Route, Redirect } from 'react-router';
 import VersionForm from '../components/VersionForm';
+import Notification from '../components/Snackbar';
 
 class VersionCopy extends Component {
 
@@ -13,7 +14,8 @@ class VersionCopy extends Component {
             data: {},
             mode: null,
             isCreated: false,
-            versionNumber: null
+            versionNumber: null,
+            showSnackbar: false
         }
 
     }
@@ -35,12 +37,18 @@ class VersionCopy extends Component {
         copyVersion.then(result => {
             this.setState((prevState, props) => {
                 return {
-                    isCreated: true
+                    isCreated: true,
+                    showSnackbar: true
                 };
             });
         }).catch((error) => {
             //todo if not successful, display an error with toaster
-            alert('such credentials already exist')
+            this.setState((prevState, props) => {
+                return {
+                    isCreated: false,
+                    showSnackbar: true
+                };
+            });
         });
     }
 
@@ -69,19 +77,36 @@ class VersionCopy extends Component {
         });
     }
 
+    handleClose=(event, reason)=>{
+        this.setState({showSnackbar:false})
+    };
 
+    renderNotificationSnackbar=()=>{
+        if (this.state.isCreated){
+            return <Notification  message='הנתונים נשמרו בהצלחה' variant='success' showSnackbar={this.state.showSnackbar} onClose={this.handleClose} />
+        }
+        else {
+            return <Notification message='נא לבחור את המדדים' variant='error' showSnackbar={this.state.showSnackbar} onClose={this.handleClose}/>
+        }
+    };
 
     render() {
         return (
+            <>
+            <div>
+            {this.state.showSnackbar? this.renderNotificationSnackbar(): null}
+            </div>
             <div className="main-content">{
-                this.state.isCreated ? (<Redirect to="/app/versions"/>) :
+
                     // (<Form handleFormSubmit={this.handleFormSubmit.bind(this)} type='version' mode={this.state.mode}
                     //        data={this.state.data}/>)
 
                     (<VersionForm handleFormSubmit={this.handleFormSubmit.bind(this)} mode={this.state.mode}
                                   data={this.state.data} versionNumber={this.state.versionNumber}/>)
 
-            }</div>
+            }
+            </div>
+            </>
         );
     }
 }

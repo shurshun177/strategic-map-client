@@ -184,9 +184,16 @@ class AssignMeasures extends Component {
         modal_title={this.props.title}
         openModal={this.state.openModal}
         closeModal={this.cancelChanges}
-        deleteButton={(<div className="dialog_save_button" onClick={this.cancelChanges}>ביטול</div>)}
-        submitButton={(<div className="dialog_save_button" onClick={this.submitChanges}>אישור</div>)}>
-              <div>
+        deleteButton={(<div>
+                            <Button variant="outlined" color='secondary' size="large"  onClick={this.cancelChanges}>
+                    ביטול
+                            </Button>
+                       </div>)}
+        submitButton={(<div>
+                            <Button variant="outlined" color='secondary' size="large"  onClick={this.submitChanges}>
+                                אישור
+                            </Button></div>)}>
+                       <div>
               <div className="modal-header-container">
                   <InputLabel htmlFor="component-simple">נושא עסקי</InputLabel>
                   <TextField

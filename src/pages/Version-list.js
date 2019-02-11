@@ -12,6 +12,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
+import Notification from '../components/Snackbar';
+
 
 const styles = {
     root:{
@@ -35,7 +37,9 @@ class VersionList extends Component {
 
         this.state = {
             data: [],
-            selectedVersion: null
+            selectedVersion: null,
+            showSnackbar: false,
+            isUpdated: false
         };
     }
 
@@ -78,14 +82,21 @@ class VersionList extends Component {
             this.setState((prevState, props) => {
                 return {
                     selectedVersion: null,
-                    data: prevState.data.filter(el=>el._id['$oid'] !== prevState.selectedVersion)
+                    data: prevState.data.filter(el=>el._id['$oid'] !== prevState.selectedVersion),
+                    showSnackbar: true,
+                    isUpdated: true
                 };
             });
 
 
         }).catch((error) => {
             console.log(error);
-            alert('version was not deleted')
+            this.setState((prevState, props) => {
+                return {
+
+                    showSnackbar: true
+                };
+            });
         });
     }
     onDialogCancel = () => {
@@ -134,6 +145,19 @@ class VersionList extends Component {
             });
         }
     }
+
+    handleClose=(event, reason)=>{
+        this.setState({showSnackbar:false})
+    };
+
+    renderNotificationSnackbar=()=>{
+        if (this.state.isUpdated){
+            return <Notification  message='הגרסה נמחקה בהצלחה' variant='success' showSnackbar={this.state.showSnackbar} onClose={this.handleClose} />
+        }
+        else {
+            return <Notification message='נא לבחור את המדדים' variant='error' showSnackbar={this.state.showSnackbar} onClose={this.handleClose}/>
+        }
+    };
 
     render() {
         const {classes} = this.props;
@@ -187,6 +211,11 @@ class VersionList extends Component {
 
         let title = "גרסאות";
         return (
+            <>
+            <div>
+            {this.state.showSnackbar? this.renderNotificationSnackbar(): null}
+            </div>
+
             <div className="main-content">
                 <div className="table-title">
                 <Toolbar>
@@ -205,7 +234,7 @@ class VersionList extends Component {
                 />
                 <Dialog
                     open={this.state.open}
-                    onClose={this.handleClose}
+
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
@@ -223,6 +252,7 @@ class VersionList extends Component {
                     </DialogActions>
                 </Dialog>
             </div>
+            </>
 
         );
     }

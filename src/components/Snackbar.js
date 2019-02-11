@@ -28,24 +28,30 @@ const styles = theme => ({
         backgroundColor: green[600],
     },
     error: {
-        backgroundColor: theme.palette.error.dark,
+        backgroundColor: theme.palette.secondary.dark,
     },
     info: {
-        backgroundColor: theme.palette.primary.dark,
+        backgroundColor: theme.palette.primary.light,
     },
     warning: {
         backgroundColor: amber[700],
     },
     icon: {
         fontSize: 20,
+        marginRight: 60,
+        marginLeft: 0.1
     },
     iconVariant: {
-        opacity: 0.9,
+        opacity: 10,
         marginLeft: theme.spacing.unit,
+        color: 'white'
+
     },
     message: {
         display: 'flex',
         alignItems: 'right',
+        color: 'white'
+
     },
     anchor: {
         vertical: 'top',
@@ -55,6 +61,9 @@ const styles = theme => ({
         position: 'fixed',
         left: '10px',
         'z-index': 4000
+    },
+    close: {
+        color: 'white'
     }
 });
 
@@ -71,11 +80,11 @@ class Notification extends Component{
                 anchorOrigin={{vertical: 'top', horizontal: 'left'}}
                 message={
                     <span id="client-snackbar" className={classes.message}>
-                <Icon className={classNames(classes.icon, classes.iconVariant)}/>
+                <Icon className={classNames(classes.iconVariant)}/>
                         {message}
                 </span>
                 }
-                autoHideDuration={3000}
+                autoHideDuration={6000}
                 open={showSnackbar}
                 ContentProps={{
                     classes: {root: classes[variant]}
