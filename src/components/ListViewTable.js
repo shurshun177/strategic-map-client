@@ -201,6 +201,29 @@ class EnhancedTable extends React.Component {
 
     isActive = isActive => isActive === true? 'פעיל': 'לא פעיל';
 
+    hospitalCodeToName= el=> {
+
+        const hosp_type = [
+            {
+                value: '0',
+                label: '',
+            },
+            {
+                value: '1',
+                label: 'כללים',
+            },
+            {
+                value: '2',
+                label: 'גריאטריים',
+            },
+            {
+                value: '3',
+                label: 'פסיכיאטריים',
+            }
+        ];
+        let hospital =  hosp_type.find(e=>e.value == el);
+        return hospital? hospital.label: '';
+    };
 
     setSelectedHandler=(e, id)=>{
         e.preventDefault();
@@ -269,7 +292,7 @@ class EnhancedTable extends React.Component {
                                             {row.map((el, index) =>
                                                 <TableCell component='th' scope='row' padding='none' numeric style={{root: {
                                                     borderColor: 'red'
-                                                }}}>{columns[index].isActive? this.isActive(el): columns[index].isTimestamp? this.timestampToDate(el): el}</TableCell>
+                                                }}}>{columns[index].isActive? this.isActive(el): columns[index].isTimestamp? this.timestampToDate(el): this.isHospitalType? this.hospitalCodeToName(el): el}</TableCell>
                                             )}
                                         </TableRow>
                                     );
