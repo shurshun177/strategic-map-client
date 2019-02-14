@@ -578,6 +578,7 @@ class MeasureForm extends Component {
                         onChange={this.handleChange('criteria_inclusion')}
                         value={this.state.criteria_inclusion}
 
+
                     />
 
                     <InputLabel className={classes.label} htmlFor="component-simple">קריטריונים להוצאה</InputLabel>
