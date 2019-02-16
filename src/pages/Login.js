@@ -23,8 +23,10 @@ class Login extends Component {
     }
 
     submitForm(name, password) {
-        let url = 'auth';
-        let submission = RestAPI().post(url, {name, password});
+        let {loginStore} = this.props;
+        let submission =  loginStore.login(name, password);
+        // let url = 'auth';
+        // let submission = RestAPI().post(url, {name, password});
         submission.then( () => {
             this.setState(()=>{
                 return {

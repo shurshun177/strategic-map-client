@@ -329,8 +329,6 @@ class MeasureForm extends Component {
         this.setState({
             [name]: event.target.value,
         });
-
-
     };
 
 
@@ -526,7 +524,7 @@ class MeasureForm extends Component {
                         variant="outlined"
                         onChange={this.handleChange('measure_code')}
                         value={this.state.measure_code}
-                        error={this.state.measure_code === '' && this.state.shouldValidate}
+                        error={this.state.measure_code === '' && this.state.shouldValidate && !this.state.measure_code.match('^\d+(\.\d+)+$')}
 
                         disabled={isReadonly}
 

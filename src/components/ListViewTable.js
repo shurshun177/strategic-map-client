@@ -202,7 +202,6 @@ class EnhancedTable extends React.Component {
     isActive = isActive => isActive === true? 'פעיל': 'לא פעיל';
 
     hospitalCodeToName= el=> {
-
         const hosp_type = [
             {
                 value: '0',
@@ -221,6 +220,7 @@ class EnhancedTable extends React.Component {
                 label: 'פסיכיאטריים',
             }
         ];
+
         let hospital =  hosp_type.find(e=>e.value == el);
         return hospital? hospital.label: '';
     };
@@ -292,7 +292,7 @@ class EnhancedTable extends React.Component {
                                             {row.map((el, index) =>
                                                 <TableCell component='th' scope='row' padding='none' numeric style={{root: {
                                                     borderColor: 'red'
-                                                }}}>{columns[index].isActive? this.isActive(el): columns[index].isTimestamp? this.timestampToDate(el): this.isHospitalType? this.hospitalCodeToName(el): el}</TableCell>
+                                                }}}>{columns[index].isActive? this.isActive(el): columns[index].isTimestamp? this.timestampToDate(el): columns[index].isHospitalType? this.hospitalCodeToName(el): el}</TableCell>
                                             )}
                                         </TableRow>
                                     );
@@ -322,10 +322,11 @@ class EnhancedTable extends React.Component {
                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
                     labelRowsPerPage='שורות לעמוד'
                     labelDisplayedRows={({from, to, count})=>{
-                        let f = 'מ';
-                        let t ='עד';
-                        let c='סכום';
-                        return `${from}-${to} ${c} ${count}`
+                        return `  עמוד${this.state.page +1}` ;
+                        // let f = 'מ';
+                        // let t ='עד';
+                        // let c='סכום';
+                        // return `${from}-${to} ${c} ${count}`
                     }}
                     rowsPerPageOptions={[]}
                 />

@@ -23,11 +23,12 @@ class App extends Component {
   }
   render() {
       // {this.props.location.state.isLoggedIn}
+      let {loginStore} = this.props;
     return (
       <div>
           <RTL>
               <MuiThemeProvider theme={theme}>
-                <AppHeader/>
+                <AppHeader loginStore={loginStore}/>
               </MuiThemeProvider>
           </RTL>
       </div>

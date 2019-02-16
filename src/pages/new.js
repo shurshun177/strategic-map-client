@@ -19,7 +19,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 
 import moment from 'moment';
-
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 const styles = theme => ({
     container: {
         //display: 'flex',
@@ -32,7 +38,7 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         marginTop: theme.spacing.unit*0.5,
-        width: '30%'
+        width: '50%'
     },
     dense: {
         marginTop: 30,
@@ -62,6 +68,17 @@ const styles = theme => ({
         margin: theme.spacing.unit,
     },
 
+    table: {
+        // minWidth: 1020,
+        backgroundColor: '#E3F2FD',
+    },
+    head: {
+        backgroundColor: '#1E88E5',
+
+    },
+    tableWrapper: {
+        // overflowX: 'auto',
+    },
 });
 
 const hosp_type = [
@@ -83,7 +100,26 @@ const hosp_type = [
     },
 ];
 
+const columns = [
+    {id: 1, label: 'קוד מדד'},
+    {id: 2, label: 'שם מדד'},
+    {id: 3, label: 'מדד לאומי שנה קודמת'},
+    {id: 4, label: 'מדד לאומי חדש'},
+    {id: 5, label: 'ממוצע המרכזים הרפואיים הממשלתיים שנה קודמת'},
+    {id: 6, label: 'ממוצע המרכזים הרפואיים הממשלתיים חדש'}
+]
 
+const CustomTableCell = withStyles(theme => ({
+    head: {
+        // backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.black,
+        fontSize: 20,
+        textAlign: 'right'
+    },
+    body: {
+        fontSize: 15,
+    },
+}))(TableCell);
 
 class NationalMesureUpdate extends Component {
 
@@ -192,8 +228,6 @@ class NationalMesureUpdate extends Component {
 
         return (
             <div className="main-content">
-            <>
-
             <form className={classes.container} noValidate autoComplete="off"
                   onSubmit={this.handleSubmit}
             >
@@ -266,11 +300,76 @@ class NationalMesureUpdate extends Component {
 
                 </TextField>
             </FormGroup>
+                <Table className={classes.table} aria-labelledby="tableTitle">
+                <TableHead>
+                    <TableRow>
+                        {columns.map(row => {
+                            return (
+                                <CustomTableCell
+                                    key={row.id}
+                                    padding={row.disablePadding ? 'none' : 'default'}
+                                >
+                                    {row.label}
+                                </CustomTableCell>
+                            );
+                        }, this)}
+                    </TableRow>
+                </TableHead>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>1.02.01
+                            </TableCell>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>מספר מיטות תקן
+                            </TableCell>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>124
+                            </TableCell>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>
+                                <TextField
+                                    id="year"
+                                    name="year"
+                                    variant="outlined"
+                                    required
 
+                                    className={classes.textField}
 
+                                    margin="normal"
+                                    onChange={this.handleChange('year')}
+                                    value={this.state.year}
+                                >
+                                </TextField>
+                            </TableCell>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>123
+                            </TableCell>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>
+                                <TextField
+                                    id="year"
+                                    name="year"
+                                    variant="outlined"
+                                    required
 
+                                    className={classes.textField}
 
-
+                                    margin="normal"
+                                    onChange={this.handleChange('year')}
+                                    value={this.state.year}
+                                >
+                                </TextField>
+                            </TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -294,7 +393,6 @@ class NationalMesureUpdate extends Component {
                 </Dialog>
             </form>
 
-            </>
             </div>
         );
     }

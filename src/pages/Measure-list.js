@@ -197,7 +197,7 @@ class MeasureList extends Component {
         const columns = [
             { id: 'measure_code', numeric: true, disablePadding: true, label: 'קוד מדד' },
             { id: 'measure_name', numeric: true, disablePadding: true, label: 'שם מדד' },
-            { id: 'hospital_type', numeric: true, disablePadding: true, label: 'סוג בית חולים' },
+            { id: 'hospital_type', numeric: true, disablePadding: true, label: 'סוג בית חולים', isHospitalType: true },
             { id: 'active', numeric: true, disablePadding: true, label: 'פעיל/לא פעיל', isActive: true },
         ];
 

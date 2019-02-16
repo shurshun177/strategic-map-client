@@ -21,11 +21,12 @@ import {Link} from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Redirect } from 'react-router';
 
+import {inject, observer} from "mobx-react"
 
 
 const styles = theme => ({
     root: {
-        display: 'flex',
+        // display: 'flex',
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -54,11 +55,18 @@ const styles = theme => ({
         color: 'white'
     },
     sectionMobile: {
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        marginLeft: theme.spacing.unit*178,
-        width: '100%'
+        // position: 'relative',
+        // borderRadius: theme.shape.borderRadius,
+        // marginLeft: theme.spacing.unit*150,
+        // width: '100%'
     },
+    welcomeText: {
+        textDecoration: 'underline',
+    },
+
+    userTypeText: {
+      color: 'green'
+    }
 });
 
 
@@ -67,7 +75,6 @@ const iconStyle = {
     height: 70
 
 };
-
 
 
 class AppHeader extends React.Component{
@@ -100,15 +107,20 @@ class AppHeader extends React.Component{
             {name: 'דיווח ע"י חטיבה', link: '/app/new'},
             {name: 'דיווח ממוצעים', link: '/app/national-measure'}
         ];
+        let {loginStore} = this.props;
+        let {username, type} = loginStore.values;
+        let welcomeText = `ברוך אבה ,${username}`;
         return (
         <>{this.state.isLoggedOut ?
             (<Redirect to="/"/>)
             :
         <div className={classes.root}>
-
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar  disableGutters={!this.state.open}>
                     <img src="/logo.jpg" style={iconStyle}/>
+                    <div style={{margin: '5px'}}>
+                        {welcomeText}
+                    </div>
                     <div className={classes.sectionMobile}>
                     <IconButton aria-haspopup="true" onClick={this.signout} color="inherit">
                         <ExitToApp />
@@ -125,6 +137,9 @@ class AppHeader extends React.Component{
             >
                 <div className={classes.toolbar} />
                 <List>
+                    <MenuItem key={type} classes={classNames.userTypeText}>
+                        <ListItemText primary={type} classes={{primary: classes.userTypeText}}/>
+                    </MenuItem>
                     {menuItems.map((el, index) => (
                         <MenuItem button key={el.name} component={Link} to={el.link} classes={classNames.listItem}>
                             <ListItemText primary={el.name} classes={{primary: classes.listItem}}/>
@@ -142,5 +157,7 @@ class AppHeader extends React.Component{
 AppHeader.propTypes = {
     classes: PropTypes.object.isRequired,
 };
+
+observer(AppHeader);
 
 export default withStyles(styles, { withTheme: true })(AppHeader);

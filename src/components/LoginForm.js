@@ -8,6 +8,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import RestAPI from '../api';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
+import {observer} from "mobx-react"
 
 const styles = theme => ({
     main: {
@@ -152,4 +153,5 @@ Login.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
+observer(Login);
 export default withStyles(styles)(Login);

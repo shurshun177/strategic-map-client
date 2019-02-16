@@ -14,6 +14,8 @@ import LoginPage from './pages/Login';
 import NationalMeasureUpdate from './pages/new';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 
+import loginStore from './stores/loginStore';
+
 const theme = createMuiTheme({
     direction: 'rtl',
     typography:{
@@ -50,8 +52,9 @@ const AppRouter =()=>{
 
         <React.Fragment>
 
-            <Route exact path="/" component={LoginPage} />
-            <Route path="/app" component={App} />
+            {/*<Route exact path="/" component={LoginPage} />*/}
+            <Route exact path="/" render={(props) => <LoginPage {...props} loginStore={loginStore} />} />
+            <Route path="/app" render={(props) => <App {...props} loginStore={loginStore} />} />
             <Route exact path="/app/versions" component={VersionList} />
             <Route exact path="/app/measures" component={MeasureList} />
             <Route exact path="/app/measure-details" component={MeasureDetails} />
