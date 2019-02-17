@@ -101,12 +101,12 @@ const hosp_type = [
 ];
 
 const columns = [
-    {id: 1, label: 'קוד מדד'},
-    {id: 2, label: 'שם מדד'},
-    {id: 3, label: 'מדד לאומי שנה קודמת'},
-    {id: 4, label: 'מדד לאומי חדש'},
-    {id: 5, label: 'ממוצע המרכזים הרפואיים הממשלתיים שנה קודמת'},
-    {id: 6, label: 'ממוצע המרכזים הרפואיים הממשלתיים חדש'}
+    {id: 1, numeric: true, disablePadding: true, label: 'קוד מדד'},
+    {id: 2, numeric: true, disablePadding: true, label: 'שם מדד'},
+    {id: 3, numeric: true, disablePadding: true, label: 'מדד לאומי שנה קודמת'},
+    {id: 4, numeric: false, disablePadding: true, label: 'מדד לאומי חדש'},
+    {id: 5, numeric: false, disablePadding: true, label: 'ממוצע המרכזים הרפואיים הממשלתיים שנה קודמת'},
+    {id: 6, numeric: false, disablePadding: true, label: 'ממוצע המרכזים הרפואיים הממשלתיים חדש'}
 ]
 
 const CustomTableCell = withStyles(theme => ({
