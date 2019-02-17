@@ -109,7 +109,7 @@ class AppHeader extends React.Component{
         ];
         let {loginStore} = this.props;
         let {username, type} = loginStore.values;
-        let welcomeText = `ברוך אבה ,${username}`;
+        let welcomeText = `ברוך הבא  ${username}`;
         return (
         <>{this.state.isLoggedOut ?
             (<Redirect to="/"/>)
@@ -120,6 +120,7 @@ class AppHeader extends React.Component{
                     <img src="/logo.jpg" style={iconStyle}/>
                     <div style={{margin: '5px'}}>
                         {welcomeText}
+
                     </div>
                     <div className={classes.sectionMobile}>
                     <IconButton aria-haspopup="true" onClick={this.signout} color="inherit">

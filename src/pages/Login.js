@@ -27,16 +27,14 @@ class Login extends Component {
         let submission =  loginStore.login(name, password);
         // let url = 'auth';
         // let submission = RestAPI().post(url, {name, password});
-        submission.then( () => {
+        console.log(submission,'SUBMISSION')
+        submission.then( (result) => {
+        console.log('THEN', result)
             this.setState(()=>{
+            console.log(result.isError,'ISERROR')
                 return {
-                    isLoggedIn: name
-                }
-            });
-        }).catch( (error) => {
-            this.setState(()=>{
-                return {
-                    isError: true
+                    isLoggedIn: result.isError? false: name,
+                    isError: result.isError
                 }
             });
         });

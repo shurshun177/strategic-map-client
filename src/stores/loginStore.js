@@ -34,9 +34,15 @@ class AuthStore {
         let url = 'auth';
         let submission = RestAPI().post(url, {name, password});
         return submission.then( result => {
-            this.setUsername(result.user);
-            this.setUserType(result.user_type);
+            this.setUsername(result.data.user);
+            this.setUserType(result.data.user_type);
+            return {
+            isError: false
+            }
         }).catch( (error) => {
+            return {
+            isError: true
+            }
             // this.setState(()=>{
             //     return {
             //         isError: true
