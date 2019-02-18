@@ -21,8 +21,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Redirect } from 'react-router';
 import InputLabel from '@material-ui/core/InputLabel';
-
-
+import CheckboxContainer from '../components/CheckboxContainer';
 
 const styles = theme => ({
     root: {
@@ -127,6 +126,21 @@ const hosp_type = [
         value: '3',
         label: 'פסיכיאטריים',
     },
+];
+
+const hospital_type_container = [
+    {
+        key: '1',
+        name: 'כללים',
+    },
+    {
+        key: '2',
+        name: 'גריאטריים',
+    },
+    {
+        key: '3',
+        name: 'פסיכיאטריים',
+    }
 ];
 
 const topic_list = [
@@ -285,7 +299,7 @@ class MeasureForm extends Component {
             removal_criteria: '',
             numerator: '',
             denominator: '',
-            hospital_type: '',
+            hospital_type: [],
             business_topic: '',
             sub_business_topic: '',
             measure_type: '',
@@ -343,6 +357,10 @@ class MeasureForm extends Component {
         this.setState({  [name]: moment(date).format('YYYY-MM-DD')});
     };
 
+    handleHospitalTypes(hospitalTypesArray){
+        this.setState({hospital_type: hospitalTypesArray})
+    }
+
     handleSubmit(e){
         if(e)
             e.preventDefault();
@@ -355,7 +373,7 @@ class MeasureForm extends Component {
                     this.state.meas_type !== '' &&
                     this.state.meas_unit !== '' &&
                     this.state.digit_num !== '' &&
-                    this.state.hospital_type !== ''
+                    this.state.hospital_type.length ===0
             )
             {
                 this.props.handleFormSubmit(this.state);
@@ -428,34 +446,13 @@ class MeasureForm extends Component {
                     />
 
                     <InputLabel className={classes.label} required htmlFor="component-simple">סוג בית חולים</InputLabel>
-                    <TextField
-                        id="hospital_type"
-                        name="hospital_type"
 
 
-
-                        variant="outlined"
-                        select
-
-                        className={classes.textField}
-                        SelectProps={{
-                            native: true,
-                            MenuProps: {
-                                className: classes.menu,
-                            },
-                        }}
-                        margin="normal"
-                        onChange={this.handleChange('hospital_type')}
-                        value={this.state.hospital_type}
-                        error={this.state.hospital_type === '' && this.state.shouldValidate}
-                    >
-                        {hosp_type.map(option => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </TextField>
-
+                    <CheckboxContainer
+                        checkboxes={hospital_type_container}
+                        selectedValues={this.state.hospital_type}
+                        handleHospitalTypes={this.handleHospitalTypes.bind(this)}
+                    />
 
                     <InputLabel className={classes.label} required htmlFor="component-simple">נושא עסקי</InputLabel>
                     <TextField
@@ -517,8 +514,6 @@ class MeasureForm extends Component {
                     <TextField
                         id="measure_code"
                         name="measure_code"
-
-                        type
                         className={classes.textField}
                         margin="normal"
                         variant="outlined"

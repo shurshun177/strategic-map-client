@@ -307,7 +307,7 @@ class NationalMesureUpdate extends Component {
                             return (
                                 <CustomTableCell
                                     key={row.id}
-                                    padding={row.disablePadding ? 'none' : 'default'}
+                                    padding='default'
                                 >
                                     {row.label}
                                 </CustomTableCell>
