@@ -38,7 +38,7 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         marginTop: theme.spacing.unit*0.5,
-        width: '50%'
+        width: '30%'
     },
     dense: {
         marginTop: 30,
@@ -102,8 +102,8 @@ const hosp_type = [
 
 const columns = [
     {id: 1, numeric: true, disablePadding: true, label: 'קוד מדד'},
-    {id: 2, numeric: true, disablePadding: true, label: 'שם מדד'},
-    {id: 3, numeric: true, disablePadding: true, label: 'מדד לאומי שנה קודמת'},
+    {id: 2, numeric: false, disablePadding: true, label: 'שם מדד'},
+    {id: 3, numeric: false, disablePadding: true, label: 'מדד לאומי שנה קודמת'},
     {id: 4, numeric: false, disablePadding: true, label: 'מדד לאומי חדש'},
     {id: 5, numeric: false, disablePadding: true, label: 'ממוצע המרכזים הרפואיים הממשלתיים שנה קודמת'},
     {id: 6, numeric: false, disablePadding: true, label: 'ממוצע המרכזים הרפואיים הממשלתיים חדש'}

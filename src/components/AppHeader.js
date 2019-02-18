@@ -109,7 +109,7 @@ class AppHeader extends React.Component{
         ];
         let {loginStore} = this.props;
         let {username, type} = loginStore.values;
-        let welcomeText = `ברוך הבא  ${username}`;
+        let welcomeText = `ברוך הבא ${username}`;
         return (
         <>{this.state.isLoggedOut ?
             (<Redirect to="/"/>)
