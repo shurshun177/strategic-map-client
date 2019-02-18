@@ -522,10 +522,7 @@ class MeasureForm extends Component {
                         error={this.state.measure_code === '' && this.state.shouldValidate && !this.state.measure_code.match('^\d+(\.\d+)+$')}
 
                         disabled={isReadonly}
-                        type="number"
-                        inputProps={{
-                            min: 1
-                        }}
+
 
                     />
 
@@ -817,11 +814,7 @@ class MeasureForm extends Component {
                         className={classes.textField}
                         margin="normal"
                         variant="outlined"
-                        type="number"
-                        inputProps={{
-                            min: 1
 
-                        }}
 
 
                     />
