@@ -373,7 +373,7 @@ class MeasureForm extends Component {
                     this.state.meas_type !== '' &&
                     this.state.meas_unit !== '' &&
                     this.state.digit_num !== '' &&
-                    this.state.hospital_type.length ===0
+                    this.state.hospital_type.length !==0
             )
             {
                 this.props.handleFormSubmit(this.state);
@@ -723,11 +723,7 @@ class MeasureForm extends Component {
                         onChange={this.handleChange('digit_num')}
                         value={this.state.digit_num}
                         error={this.state.digit_num === '' && this.state.shouldValidate}
-                        type="number"
-                        inputProps={{
-                            min: 1,
-                            step: 1
-                        }}
+
 
 
 

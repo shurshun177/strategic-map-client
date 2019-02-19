@@ -204,7 +204,7 @@ class MeasureList extends Component {
         let title = "מדדים";
         return (
             <>
-            <div>
+            <div className="fixedFormToolbar">
             {this.state.showSnackbar? this.renderNotificationSnackbar(): null}
             </div>
             <div className="main-content">
