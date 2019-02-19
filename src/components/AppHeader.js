@@ -118,7 +118,7 @@ class AppHeader extends React.Component{
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar  disableGutters={!this.state.open}>
                     <img src="/logo.jpg" style={iconStyle}/>
-                    <div style={{margin: '5px'}}>
+                    <div style={{margin: '5px', 'text-decoration':'underline', 'font-size': '30px'}}>
                         {welcomeText}
 
                     </div>
