@@ -130,6 +130,11 @@ const styles = theme => ({
     tableWrapper: {
         overflowX: 'auto',
     },
+    checkbox: {
+        root: {
+            textAlign: 'right'
+        }
+    }
 });
 
 class EnhancedTable extends React.Component {
@@ -287,6 +292,7 @@ class EnhancedTable extends React.Component {
                                                 checked={isSelected}
                                                 onChange={event => this.setSelectedHandler(event, n)}
                                                 color="primary"
+                                                className={classes.checkbox}
                                             />
                                             </TableCell>
                                             {row.map((el, index) =>
