@@ -185,12 +185,12 @@ class AssignMeasures extends Component {
         openModal={this.state.openModal}
         closeModal={this.cancelChanges}
         deleteButton={(<div>
-                            <Button variant="outlined" color='secondary' size="large"  onClick={this.cancelChanges}>
+                            <Button variant="outlined" color='primary' size="large"  onClick={this.cancelChanges}>
                     ביטול
                             </Button>
                        </div>)}
         submitButton={(<div>
-                            <Button variant="outlined" color='secondary' size="large"  onClick={this.submitChanges}>
+                            <Button variant="outlined" color='primary' size="large"  onClick={this.submitChanges}>
                                 אישור
                             </Button></div>)}>
                        <div>

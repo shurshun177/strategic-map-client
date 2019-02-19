@@ -62,10 +62,13 @@ const styles = theme => ({
     },
     welcomeText: {
         textDecoration: 'underline',
+        fontSize: 30
     },
 
     userTypeText: {
-      color: 'green'
+      textDecoration: 'underline',
+      color: 'white',
+      fontSize: 30
     }
 });
 

@@ -115,7 +115,7 @@ ListViewTable.propTypes = {
 
 const styles = theme => ({
     root: {
-        width: '99%',
+        width: '96%',
         marginTop: theme.spacing.unit * 3,
          // fontFamily: 'Georgia'
     },

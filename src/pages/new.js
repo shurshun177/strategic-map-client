@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../App.css';
+import '../components/EditableRowTable'
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
@@ -101,9 +102,9 @@ const hosp_type = [
 ];
 
 const columns = [
-    {id: 1, numeric: true, disablePadding: true, label: 'קוד מדד'},
+    {id: 1, numeric: false, disablePadding: true, label: 'קוד מדד'},
     {id: 2, numeric: false, disablePadding: true, label: 'שם מדד'},
-    {id: 3, numeric: false, disablePadding: true, label: 'מדד לאומי שנה קודמת'},
+    {id: 3, numeric: true, disablePadding: true, label: 'מדד לאומי שנה קודמת'},
     {id: 4, numeric: false, disablePadding: true, label: 'מדד לאומי חדש'},
     {id: 5, numeric: false, disablePadding: true, label: 'ממוצע המרכזים הרפואיים הממשלתיים שנה קודמת'},
     {id: 6, numeric: false, disablePadding: true, label: 'ממוצע המרכזים הרפואיים הממשלתיים חדש'}
