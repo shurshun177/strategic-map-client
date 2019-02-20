@@ -261,6 +261,7 @@ class VersionForm extends Component {
             open: false,
             shouldExit: false,
             shouldValidate: false
+
         };
     }
 
@@ -317,6 +318,9 @@ class VersionForm extends Component {
         });
     }
 
+    onDialogClose = () => {
+        this.setState({open: false});
+    };
 
     onDialogCancel = () => {
         this.setState({ open: false, shouldExit: true });
@@ -483,6 +487,22 @@ class VersionForm extends Component {
 
                     />
 
+                    <TextField
+                        id="m"
+                        name="m"
+
+
+                        className={classes.textField}
+                        margin="normal"
+
+                        variant="outlined"
+                        multiline
+                        rows="4"
+                        value={this.state.measure}
+
+
+                    />
+
                     <InputLabel className={classes.label} required htmlFor="component-simple">סוג בית חולים</InputLabel>
                     <TextField
                         id="hospital_type"
@@ -564,6 +584,9 @@ class VersionForm extends Component {
 
                     </DialogContent>
                     <DialogActions>
+                        <Button onClick={this.onDialogClose} variant='outlined' color="primary" autoFocus>
+                            ביטול
+                        </Button>
                         <Button onClick={this.onDialogSave} variant='outlined' color="primary" autoFocus>
                             כן
                         </Button>

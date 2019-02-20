@@ -9,11 +9,11 @@ import VersionUpdate from './pages/Version-update';
 import MeasureUpdate from './pages/Measure-update';
 import VersionCopy from './pages/Version-copy';
 import MeasureCopy from './pages/Measure-copy';
-import AlertDialog from './pages/New-screen';
-import LoginPage from './pages/Login';
-import NationalMeasureUpdate from './pages/new';
-import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 
+import LoginPage from './pages/Login';
+import NationalMeasureUpdate from './pages/NationalAverage';
+import DepartmentMeasure from './pages/DepartmentReport';
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import loginStore from './stores/loginStore';
 
 const theme = createMuiTheme({
@@ -63,7 +63,7 @@ const AppRouter =()=>{
             <Route exact path="/app/measure-update/:id" component={MeasureUpdate} />
             <Route exact path="/app/version-copy/:id" component={VersionCopy} />
             <Route exact path="/app/measure-copy/:id" component={MeasureCopy} />
-            <Route exact path="/app/new" component={AlertDialog} />
+            <Route exact path="/app/department-measure" component={DepartmentMeasure} />
             <Route exact path="/app/national-measure" component={NationalMeasureUpdate} />
         </React.Fragment>
         </MuiThemeProvider>

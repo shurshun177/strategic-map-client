@@ -107,7 +107,7 @@ class AppHeader extends React.Component{
         const menuItems = [
             {name: 'ניהול גרסאות', link: '/app/versions'},
             {name: 'ניהול מדדים', link: '/app/measures'},
-            {name: 'דיווח ע"י חטיבה', link: '/app/new'},
+            {name: 'דיווח ע"י חטיבה', link: '/app/department-measure'},
             {name: 'דיווח ממוצעים', link: '/app/national-measure'}
         ];
         let {loginStore} = this.props;

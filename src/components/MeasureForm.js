@@ -155,23 +155,33 @@ const topic_list = [
         value: '1',
         label: 'תקן איוש ונלוות',
         items:[
-            { value: '1',
-                label: 'תקן איוש ונלוות'},
-            { value: '4',
-                label: 'תקן איוש ונלוות3'},
-            { value: '3',
-                label: 'תקן איוש ונלוות2'}
+            { value: '11',
+                label: 'תקן מול איוש'},
+            { value: '12',
+                label: 'כמויות נלוות'},
+            { value: '13',
+                label: 'כמויות נלוות - מתוקן לאיוש'}
         ]
     },
     {
         value: '2',
         label: 'פעילות',
         items:[
-            { value: '4-2',
+            { value: '21',
                 label: 'תקן איוש ונלוות2'},
-            { value: '2-4',
+            { value: '22',
                 label: 'תקן איוש ונלוות23'},
-            { value: '2-3',
+            { value: '23',
+                label: 'תקן איוש ונלוות32'},
+            { value: '24',
+                label: 'תקן איוש ונלוות32'},
+            { value: '25',
+                label: 'תקן איוש ונלוות32'},
+            { value: '26',
+                label: 'תקן איוש ונלוות32'},
+            { value: '27',
+                label: 'תקן איוש ונלוות32'},
+            { value: '28',
                 label: 'תקן איוש ונלוות32'}
         ]
 
@@ -180,42 +190,84 @@ const topic_list = [
         value: '3',
         label: 'חווית המטופל',
         items:[
-
+            { value: '31',
+                label: 'תקן איוש ונלוות2'},
+            { value: '32',
+                label: 'תקן איוש ונלוות23'},
+            { value: '33',
+                label: 'תקן איוש ונלוות32'},
+            { value: '34',
+                label: 'תקן איוש ונלוות32'}
         ]
     },
     {
         value: '4',
         label: 'הון אנושי',
         items:[
-
+            { value: '41',
+                label: 'תקן איוש ונלוות2'},
+            { value: '42',
+                label: 'תקן איוש ונלוות23'},
+            { value: '43',
+                label: 'תקן איוש ונלוות32'},
+            { value: '44',
+                label: 'תקן איוש ונלוות32'},
+            { value: '45',
+                label: 'תקן איוש ונלוות32'},
+            { value: '46',
+                label: 'תקן איוש ונלוות32'},
+            { value: '47',
+                label: 'תקן איוש ונלוות32'}
         ]
     },
     {
         value: '5',
         label: 'איכות ובטיחות',
         items:[
-
+            { value: '51',
+                label: 'מניעת זיהומים'},
+            { value: '52',
+                label: 'אומדן כאב'},
+            { value: '53',
+                label: 'בטיחות הטיפול'}
         ]
     },
     {
         value: '6',
         label: 'תשתית כלכלית ופיזית',
         items:[
-
+            { value: '61',
+                label: 'ניצולת חדרי ניתוח'},
+            { value: '62',
+                label: 'ניהול היבטי שכר'},
+            { value: '63',
+                label: 'צריכת חשמל ומים'},
+            { value: '64',
+                label: 'תחזוקת שבר מול מונעת'},
+            { value: '65',
+                label: 'היבטים תקציביים ופיננסיים'}
         ]
     },
     {
         value: '7',
         label: 'ניצולת חדרי ניתוח',
         items:[
-
+            { value: '71',
+                label: 'ניצולת חדרי ניתוח ( בוקר)'},
+            { value: '72',
+                label: 'פעילות חדרי ניתוח ( דחוף ותאגיד)'}
         ]
     },
     {
         value: '8',
         label: 'תשתית טכנולוגית',
         items:[
-
+            { value: '81',
+                label: 'איכות הקידוד הרפואי'},
+            { value: '82',
+                label: 'שדרוג תשתית טכנולוגית'},
+            { value: '83',
+                label: 'היקף השקעה במחשוב'}
         ]
     },
 ];
@@ -310,7 +362,7 @@ class MeasureForm extends Component {
             separate_thousands: false,
             active: true,
             from_date: moment().format(),
-            to_date: moment().add(10, 'years').format(),
+            to_date: moment().format(),
             target_default: '',
             remarks: '',
             open: false,
@@ -380,6 +432,10 @@ class MeasureForm extends Component {
             }
         });
     }
+
+    onDialogClose = () => {
+        this.setState({open: false});
+    };
 
     onDialogCancel = () => {
         this.setState({ open: false, shouldExit: true });
@@ -867,6 +923,9 @@ class MeasureForm extends Component {
 
                         </DialogContent>
                     <DialogActions>
+                        <Button onClick={this.onDialogClose} variant='outlined' color="primary" autoFocus>
+                            ביטול
+                        </Button>
                         <Button onClick={this.onDialogSave} variant='outlined' color="primary" autoFocus>
                             כן
                         </Button>

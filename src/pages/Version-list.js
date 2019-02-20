@@ -19,6 +19,7 @@ const styles = {
     root:{
         'flex-direction':'row',
         'justify-content':'center'
+
     },
     myTextStyle: {
         //textDecoration: 'underline',

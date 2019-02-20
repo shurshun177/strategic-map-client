@@ -27,6 +27,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+
+
 const styles = theme => ({
     container: {
         //display: 'flex',
@@ -268,9 +270,7 @@ class NationalMesureUpdate extends Component {
                         </option>
                     ))}
                 </TextField>
-            </FormGroup>
 
-            <FormGroup grid>
                 <InputLabel className={classes.label} required htmlFor="component-simple">סוג בית חולים</InputLabel>
                 <TextField
                     id="hospital_type"
