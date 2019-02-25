@@ -362,7 +362,7 @@ class MeasureForm extends Component {
             separate_thousands: false,
             active: true,
             from_date: moment().format(),
-            to_date: moment().format(),
+            to_date: moment().format('12, 31, 9999'),
             target_default: '',
             remarks: '',
             open: false,
@@ -840,7 +840,7 @@ class MeasureForm extends Component {
                             format="D/MM/YYYY"
 
 
-                            className={classNames(classes.textField)}
+                            className={classes.textField}
                             margin="normal"
                             variant="outlined"
                             okLabel='אישור'

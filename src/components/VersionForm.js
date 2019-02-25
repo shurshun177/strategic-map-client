@@ -487,21 +487,10 @@ class VersionForm extends Component {
 
                     />
 
-                    <TextField
-                        id="m"
-                        name="m"
 
 
-                        className={classes.textField}
-                        margin="normal"
-
-                        variant="outlined"
-                        multiline
-                        rows="4"
-                        value={this.state.measure}
 
 
-                    />
 
                     <InputLabel className={classes.label} required htmlFor="component-simple">סוג בית חולים</InputLabel>
                     <TextField
@@ -535,6 +524,9 @@ class VersionForm extends Component {
 
                     </TextField>
 
+
+
+
                     <InputLabel className={classes.label} htmlFor="component-simple">אפשר עדכון דיווח קודם</InputLabel>
                     <FormControlLabel
 
@@ -559,6 +551,20 @@ class VersionForm extends Component {
                         }
 
                     />
+                    <InputLabel className={classes.label} required htmlFor="component-simple">מדדים שנבחרו</InputLabel>
+                    <TextField
+                        id="choice_measures"
+                        name="choice_measures"
+
+
+                        className={classes.textField}
+                        margin="normal"
+
+                        variant="outlined"
+                        multiline
+                        rows="4"
+                        value={this.state.measure}
+                    />
                 <AssignMeasures
                     title='בחירת מדדים'
                     allMeasures={this.state.measure_names}
@@ -572,6 +578,7 @@ class VersionForm extends Component {
                     hospitalType={this.state.hospital_type}
                     mode={this.props.mode}
                 />
+
             </FormGroup>
                 <Dialog
                     open={this.state.open}

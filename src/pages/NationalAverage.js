@@ -133,6 +133,8 @@ class NationalMesureUpdate extends Component {
         this.state = {
             hospital_type: '',
             year:  moment().format('YYYY'),
+            national_measure: '',
+            average_measure: '',
             year_list: ()=>{
                 let d = new Date( "01 " + "July 1980");
                 let first = d.getFullYear();
@@ -334,16 +336,16 @@ class NationalMesureUpdate extends Component {
                                 borderColor: 'red'
                             }}}>
                                 <TextField
-                                    id="year"
-                                    name="year"
+                                    id="national_measure"
+                                    name="national_measure"
                                     variant="outlined"
                                     required
 
-                                    className={classes.textField}
+//                                    className={classes.textField}
 
                                     margin="normal"
-                                    onChange={this.handleChange('year')}
-                                    value={this.state.year}
+                                    onChange={this.handleChange('national_measure')}
+                                    value={this.state.national_measure}
                                 >
                                 </TextField>
                             </TableCell>
@@ -355,16 +357,16 @@ class NationalMesureUpdate extends Component {
                                 borderColor: 'red'
                             }}}>
                                 <TextField
-                                    id="year"
-                                    name="year"
+                                    id="average_measure"
+                                    name="average_measure"
                                     variant="outlined"
                                     required
 
-                                    className={classes.textField}
+//                                    className={classes.textField}
 
                                     margin="normal"
-                                    onChange={this.handleChange('year')}
-                                    value={this.state.year}
+                                    onChange={this.handleChange('average_measure')}
+                                    value={this.state.average_measure}
                                 >
                                 </TextField>
                             </TableCell>

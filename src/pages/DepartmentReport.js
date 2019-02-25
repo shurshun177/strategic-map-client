@@ -267,6 +267,7 @@ class DepartmentMeasure extends Component {
         this.state = {
             hospital_type: '',
             business_topic: '',
+
             open: false
         };
     }
@@ -451,7 +452,20 @@ class DepartmentMeasure extends Component {
                             </TableCell>
                             <TableCell component='th' scope='row' padding='none' numeric style={{root: {
                                 borderColor: 'red'
-                            }}}>124
+                            }}}>
+                                <TextField
+                                    id="year"
+                                    name="year"
+                                    variant="outlined"
+                                    required
+
+//                                    className={classes.textField}
+
+                                    margin="normal"
+                                    onChange={this.handleChange('year')}
+                                    value={this.state.year}
+                                >
+                                </TextField>
                             </TableCell>
                             <TableCell component='th' scope='row' padding='none' numeric style={{root: {
                                 borderColor: 'red'
@@ -462,17 +476,13 @@ class DepartmentMeasure extends Component {
                                     variant="outlined"
                                     required
 
-                                    className={classes.textField}
+//                                    className={classes.textField}
 
                                     margin="normal"
                                     onChange={this.handleChange('year')}
                                     value={this.state.year}
                                 >
                                 </TextField>
-                            </TableCell>
-                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                borderColor: 'red'
-                            }}}>123
                             </TableCell>
                             <TableCell component='th' scope='row' padding='none' numeric style={{root: {
                                 borderColor: 'red'
@@ -483,7 +493,7 @@ class DepartmentMeasure extends Component {
                                     variant="outlined"
                                     required
 
-                                    className={classes.textField}
+//                                    className={classes.textField}
 
                                     margin="normal"
                                     onChange={this.handleChange('year')}
@@ -491,6 +501,144 @@ class DepartmentMeasure extends Component {
                                 >
                                 </TextField>
                             </TableCell>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>
+                                <TextField
+                                    id="year"
+                                    name="year"
+                                    variant="outlined"
+                                    required
+
+//                                    className={classes.textField}
+
+                                    margin="normal"
+                                    onChange={this.handleChange('year')}
+                                    value={this.state.year}
+                                >
+                                </TextField>
+                            </TableCell>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>
+                                <TextField
+                                    id="year"
+                                    name="year"
+                                    variant="outlined"
+                                    required
+
+//                                    className={classes.textField}
+
+                                    margin="normal"
+                                    onChange={this.handleChange('year')}
+                                    value={this.state.year}
+                                >
+                                </TextField>
+                            </TableCell>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>
+                                <TextField
+                                    id="year"
+                                    name="year"
+                                    variant="outlined"
+                                    required
+
+//                                    className={classes.textField}
+
+                                    margin="normal"
+                                    onChange={this.handleChange('year')}
+                                    value={this.state.year}
+                                >
+                                </TextField>
+                            </TableCell>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>
+                                <TextField
+                                    id="year"
+                                    name="year"
+                                    variant="outlined"
+                                    required
+
+//                                    className={classes.textField}
+
+                                    margin="normal"
+                                    onChange={this.handleChange('year')}
+                                    value={this.state.year}
+                                >
+                                </TextField>
+                            </TableCell>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>
+                                <TextField
+                                    id="year"
+                                    name="year"
+                                    variant="outlined"
+                                    required
+
+//                                    className={classes.textField}
+
+                                    margin="normal"
+                                    onChange={this.handleChange('year')}
+                                    value={this.state.year}
+                                >
+                                </TextField>
+                            </TableCell>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>
+                                <TextField
+                                    id="year"
+                                    name="year"
+                                    variant="outlined"
+                                    required
+
+//                                    className={classes.textField}
+
+                                    margin="normal"
+                                    onChange={this.handleChange('year')}
+                                    value={this.state.year}
+                                >
+                                </TextField>
+                            </TableCell>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>
+                                <TextField
+                                    id="year"
+                                    name="year"
+                                    variant="outlined"
+                                    required
+
+//                                    className={classes.textField}
+
+                                    margin="normal"
+                                    onChange={this.handleChange('year')}
+                                    value={this.state.year}
+                                >
+                                </TextField>
+                            </TableCell>
+                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                                borderColor: 'red'
+                            }}}>
+                                <TextField
+                                    id="year"
+                                    name="year"
+                                    variant="outlined"
+                                    required
+
+//                                    className={classes.textField}
+
+                                    margin="normal"
+                                    onChange={this.handleChange('year')}
+                                    value={this.state.year}
+                                >
+                                </TextField>
+                            </TableCell>
+
+
                         </TableRow>
                     </TableBody>
                 </Table>
