@@ -20,6 +20,7 @@ class CheckboxContainer extends React.Component {
         if (isChecked){
             this.setState(prevState => {
                 prevState.checkedItems.push(item);
+
                 this.props.handleHospitalTypes(prevState.checkedItems);
                 return {
                     checkedItems: prevState.checkedItems
@@ -29,7 +30,7 @@ class CheckboxContainer extends React.Component {
             this.setState(prevState => {
                 let index =  prevState.checkedItems.indexOf(item);
                 if(index !== -1){
-                    prevState.checkedItems.splice(index);
+                    prevState.checkedItems.splice(index, 1);
                 }
                 this.props.handleHospitalTypes(prevState.checkedItems);
                 return {

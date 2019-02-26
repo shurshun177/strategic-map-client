@@ -227,8 +227,14 @@ class EnhancedTable extends React.Component {
             }
         ];
 
-        let hospital =  hosp_type.find(e=>e.value == el);
-        return hospital? hospital.label: '';
+        let humanLabels = [];
+
+        humanLabels = el.map(code=>{
+            let hospital =  hosp_type.find(e=>e.value == code);
+            return hospital? hospital.label: '';
+        });
+
+        return humanLabels.join();
     };
 
     setSelectedHandler=(e, id)=>{

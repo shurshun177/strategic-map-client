@@ -563,7 +563,7 @@ class VersionForm extends Component {
                         variant="outlined"
                         multiline
                         rows="4"
-                        value={this.state.measure}
+                        value={()=>{this.state.measure.join()}}
                     />
                 <AssignMeasures
                     title='בחירת מדדים'
