@@ -82,6 +82,10 @@ const styles = theme => ({
     tableWrapper: {
         // overflowX: 'auto',
     },
+    cell: {
+        width: '90%',
+        marginRight: theme.spacing.unit*3
+    }
 });
 
 const hosp_type = [
@@ -241,6 +245,9 @@ class NationalMesureUpdate extends Component {
                 <Button variant="outlined" color='primary' size="large" type="submit" className={classes.button} >
                     שמירה
                 </Button>
+                <Button variant="outlined" color='primary' size="large" type="submit" className={classes.button} >
+                    חזרה לנתונים השמורים
+                </Button>
                 <Button variant="outlined" color='primary' size="large" className={classes.button} onClick={this.onExitClick}>
                     יציאה
                 </Button>
@@ -342,7 +349,7 @@ class NationalMesureUpdate extends Component {
                                     required
 
 //                                    className={classes.textField}
-
+                                    className={classes.cell}
                                     margin="normal"
                                     onChange={this.handleChange('national_measure')}
                                     value={this.state.national_measure}
@@ -363,7 +370,7 @@ class NationalMesureUpdate extends Component {
                                     required
 
 //                                    className={classes.textField}
-
+                                    className={classes.cell}
                                     margin="normal"
                                     onChange={this.handleChange('average_measure')}
                                     value={this.state.average_measure}

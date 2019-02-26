@@ -125,6 +125,7 @@ const styles = theme => ({
     },
     head: {
         backgroundColor: '#1E88E5',
+//        textAlign: 'right'
 
     },
     tableWrapper: {
