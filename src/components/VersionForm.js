@@ -21,6 +21,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 import moment from 'moment';
 
+import _ from 'lodash';
+
 const styles = theme => ({
     root: {
     flexGrow: 1,
@@ -563,7 +565,7 @@ class VersionForm extends Component {
                         variant="outlined"
                         multiline
                         rows="4"
-                        value={()=>{this.state.measure.join()}}
+                        value={()=>{ console.log( _.map(this.state.measure, 'measure_name'), 'ARRRAY!!')}}
                     />
                 <AssignMeasures
                     title='בחירת מדדים'
