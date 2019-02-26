@@ -80,64 +80,146 @@ const styles = theme => ({
     tableWrapper: {
         // overflowX: 'auto',
     },
+    cell: {
+        width: '90%',
+        marginRight: theme.spacing.unit*3
+    }
 });
 
+
+
 class EditableRowTable extends Component  {
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+            national_measure: '',
+            average_measure: ''
+        };
+    }
+
+    handleChange = name => event => {
+        this.setState({
+            [name]: event.target.value,
+        });
+    };
+
+
+    handleDateChange = name => date => {
+        this.setState({  [name]: moment(date).format('YYYY-MM-DD')});
+    };
+
+    handleSubmit(e){
+        e.preventDefault();
+        this.props.handleFormSubmit(this.state);
+    }
+
+    getNationalMeasure= element => {
+        console.log(element, this.props.currentYear, );
+        let {currentYear} = this.props;
+        let values = element[currentYear];
+
+        if (values && values.length >0){
+            let national_measure = values[0].national_measure;
+            // this.setState({national_measure});
+            return national_measure;
+        }
+    };
+
+    getAverageMeasure = element => {
+        console.log(element, this.props.currentYear, );
+        let {currentYear} = this.props;
+        let values = element[currentYear];
+
+        if (values && values.length >0){
+            let national_measure = values[1].average_measure;
+            // this.setState({national_measure});
+            return national_measure;
+        }
+    };
+
+
+    getNationalMeasurePrevYear= element => {
+        let {currentYear} = this.props;
+        let prevYear = moment(currentYear).subtract(1,'years').format('YYYY');
+
+        let values = element[prevYear];
+
+        if (values && values.length >0){
+            let national_measure = values[0].national_measure;
+            // this.setState({national_measure});
+            return national_measure;
+        }
+    };
+
+    getAverageMeasurePrevYear = element => {
+        console.log(element, this.props.currentYear, );
+        let {currentYear} = this.props;
+        let prevYear = moment(currentYear).subtract(1,'years').format('YYYY');
+
+        let values = element[prevYear];
+
+        if (values && values.length >0){
+            let national_measure = values[1].average_measure;
+            // this.setState({national_measure});
+            return national_measure;
+        }
+    };
     render() {
-        const { classes, type, mode, data } = this.props;
+        const { classes, element, currentYear } = this.props;
         return (
-                        <TableRow>
-                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                borderColor: 'red'
-                            }}}>1.02.01
-                            </TableCell>
-                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                borderColor: 'red'
-                            }}}>מספר מיטות תקן
-                            </TableCell>
-                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                borderColor: 'red'
-                            }}}>124
-                            </TableCell>
-                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                borderColor: 'red'
-                            }}}>
-                                <TextField
-                                    id="year"
-                                    name="year"
-                                    variant="outlined"
-                                    required
+            <TableRow>
+                <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                    borderColor: 'red'
+                }}}>{element.measure_code}
+                </TableCell>
+                <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                    borderColor: 'red'
+                }}}>{element.measure_name}
+                </TableCell>
+                <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                    borderColor: 'red'
+                }}}>{this.getNationalMeasurePrevYear(element)}
+                </TableCell>
+                <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                    borderColor: 'red'
+                }}}>
+                    <TextField
+                        id="national_measure"
+                        name="national_measure"
+                        variant="outlined"
+                        required
 
-                                    className={classes.textField}
+                        //                                    className={classes.textField}
+                        className={classes.cell}
+                        margin="normal"
+                        onChange={this.handleChange('national_measure')}
+                        value={this.getNationalMeasure(element)}
+                    >
+                    </TextField>
+                </TableCell>
+                <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                    borderColor: 'red'
+                }}}>{this.getAverageMeasurePrevYear(element)}
+                </TableCell>
+                <TableCell component='th' scope='row' padding='none' numeric style={{root: {
+                    borderColor: 'red'
+                }}}>
+                    <TextField
+                        id="average_measure"
+                        name="average_measure"
+                        variant="outlined"
+                        required
 
-                                    margin="normal"
-                                    onChange={this.handleChange('year')}
-                                    value={this.state.year}
-                                >
-                                </TextField>
-                            </TableCell>
-                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                borderColor: 'red'
-                            }}}>123
-                            </TableCell>
-                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                borderColor: 'red'
-                            }}}>
-                                <TextField
-                                    id="year"
-                                    name="year"
-                                    variant="outlined"
-                                    required
-
-                                    className={classes.textField}
-
-                                    margin="normal"
-                                    onChange={this.handleChange('year')}
-                                    value={this.state.year}
-                                >
-                                </TextField>
-                            </TableCell>
-                        </TableRow>
+                        //                                    className={classes.textField}
+                        className={classes.cell}
+                        margin="normal"
+                        onChange={this.handleChange('average_measure')}
+                        value={this.getAverageMeasure(element)}
+                    >
+                    </TextField>
+                </TableCell>
+            </TableRow>
         );
     }
 }

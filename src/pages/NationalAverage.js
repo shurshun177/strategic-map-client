@@ -27,7 +27,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-
+import EditableRowTable from '../components/EditableRowTable';
 
 const styles = theme => ({
     container: {
@@ -139,6 +139,7 @@ class NationalMesureUpdate extends Component {
             year:  moment().format('YYYY'),
             national_measure: '',
             average_measure: '',
+            elements: [],
             year_list: ()=>{
                 let d = new Date( "01 " + "July 1980");
                 let first = d.getFullYear();
@@ -193,11 +194,49 @@ class NationalMesureUpdate extends Component {
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
+        }, ()=>{
+            if (this.state.hospital_type !== '' && this.state.year !== ''){
+                this.requestNationalAverages(this.state.year, this.state.hospital_type);
+            }
         });
-
-
     };
 
+
+    requestNationalAverages =(year, hospitalType)=>{
+        let url = `average/${hospitalType}/${year}/`;
+        const NationalAverages = RestAPI().get(url, {withCredentials: true});
+        NationalAverages.then(result => {
+            // {"items": [{"_id": {"$oid": "5c27ed38a933f91dc178076c"}, "measure_name": "name2"}]}
+            this.setState((prevState, props) => {
+                return {
+                    elements: result.data.items
+                };
+            })
+        }).catch((error) => {
+            //todo if not successful, display an error with toaster
+            alert('Hospital type and business topic must be selected')
+
+            // let fakeItems = [
+            //     {'_id': {'$oid': '5c3f323c326f420848fbe1bf'},
+            //     'measure_code': '978.01.90', 'measure_name':
+            //         'מדד הראשון',
+            //         '2019':
+            //             [{'national_measure': '484', 'create_data': {'$date': 1551113757980}, 'create_user': '', 'change_date': {'$date': 1551169120200}, 'change_user': ''},
+            //
+            //                 {'average_measure': '196', 'create_data': {'$date': 1551113757980}, 'create_user': '', 'change_date': '', 'change_user': ''}
+            //
+            //
+            //             ]},
+            //     {'_id': {'$oid': '5c3f32ab326f420848fbe1c1'}, 'measure_code': '366.63.53', 'measure_name': 'מדד השני', '2019': [{'national_measure': '484', 'create_data': {'$date': 1551169583896}, 'create_user': '', 'change_date': '', 'change_user': ''}, {'average_measure': 'None', 'create_data': {'$date': 1551169583896}, 'create_user': '', 'change_date': '', 'change_user': ''}]}, {'_id': {'$oid': '5c3f32fa326f420848fbe1c2'}, 'measure_code': '297.58.61', 'measure_name': 'מדד השלישי'}, {'_id': {'$oid': '5c3f3347326f420848fbe1c3'}, 'measure_code': '308.16.99', 'measure_name': 'מדד המבחן'}, {'_id': {'$oid': '5c51a830326f423ec8dd9149'}, 'measure_code': '366.63.53.1', 'measure_name': 'מדד השני'}, {'_id': {'$oid': '5c52c923326f423c7cf3cfba'}, 'measure_code': '12.23.345', 'measure_name': 'dshjghk'}, {'_id': {'$oid': '5c616f2a326f423de8900d71'}, 'measure_code': '85.06.16', 'measure_name': 'fallen angel'}, {'_id': {'$oid': '5c617087326f423de8900d72'}, 'measure_code': '123245', 'measure_name': 'fgsdgsdfg'}, {'_id': {'$oid': '5c619025326f422d987f5934'}, 'measure_code': '1978.01.90', 'measure_name': 'מדד הראשון'}, {'_id': {'$oid': '5c6190e5326f422d987f5935'}, 'measure_code': '978.01.90.1', 'measure_name': 'מדד הראשון'}, {'_id': {'$oid': '5c619121326f422d987f5936'}, 'measure_code': '978.01.90.2', 'measure_name': 'מדד הראשון'}, {'_id': {'$oid': '5c7267d0326f4232b4c6541d'}, 'measure_code': '12.144.169', 'measure_name': 'fdg'}]
+            //
+            // this.setState((prevState, props) => {
+            //     return {
+            //         elements: fakeItems
+            //     };
+            // })
+
+        });
+    };
 
 
 
@@ -207,7 +246,7 @@ class NationalMesureUpdate extends Component {
 
     handleSubmit(e){
         e.preventDefault();
-        this.props.handleFormSubmit(this.state);
+        //TODO implement save
     }
 
 
@@ -217,7 +256,7 @@ class NationalMesureUpdate extends Component {
 
     onDialogSave = ()=>{
         this.setState({ open: false }, ()=>{
-            this.props.handleFormSubmit(this.state);
+            // this.props.handleFormSubmit(this.state);
         });
 
     };
@@ -231,9 +270,7 @@ class NationalMesureUpdate extends Component {
     render() {
 
         const { classes, type, mode, data } = this.props;
-
-        let isReadonly = mode === 'update';
-        let isReq = mode === 'update';
+        let {elements} = this.state;
 
         return (
             <div className="main-content">
@@ -326,58 +363,11 @@ class NationalMesureUpdate extends Component {
                     </TableRow>
                 </TableHead>
                     <TableBody>
-                        <TableRow>
-                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                borderColor: 'red'
-                            }}}>1.02.01
-                            </TableCell>
-                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                borderColor: 'red'
-                            }}}>מספר מיטות תקן
-                            </TableCell>
-                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                borderColor: 'red'
-                            }}}>124
-                            </TableCell>
-                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                borderColor: 'red'
-                            }}}>
-                                <TextField
-                                    id="national_measure"
-                                    name="national_measure"
-                                    variant="outlined"
-                                    required
-
-//                                    className={classes.textField}
-                                    className={classes.cell}
-                                    margin="normal"
-                                    onChange={this.handleChange('national_measure')}
-                                    value={this.state.national_measure}
-                                >
-                                </TextField>
-                            </TableCell>
-                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                borderColor: 'red'
-                            }}}>123
-                            </TableCell>
-                            <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                borderColor: 'red'
-                            }}}>
-                                <TextField
-                                    id="average_measure"
-                                    name="average_measure"
-                                    variant="outlined"
-                                    required
-
-//                                    className={classes.textField}
-                                    className={classes.cell}
-                                    margin="normal"
-                                    onChange={this.handleChange('average_measure')}
-                                    value={this.state.average_measure}
-                                >
-                                </TextField>
-                            </TableCell>
-                        </TableRow>
+                        {
+                            elements.map(element=>{
+                                return <EditableRowTable element={element} currentYear={this.state.year}/>
+                            })
+                        }
                     </TableBody>
                 </Table>
                 <Dialog

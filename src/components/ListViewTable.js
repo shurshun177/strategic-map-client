@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -45,7 +45,6 @@ function getSorting(order, orderBy) {
 }
 
 
-
 const CustomTableCell = withStyles(theme => ({
     head: {
         // backgroundColor: theme.palette.common.black,
@@ -59,7 +58,6 @@ const CustomTableCell = withStyles(theme => ({
 }))(TableCell);
 
 
-
 class ListViewTable extends React.Component {
 
     createSortHandler = property => event => {
@@ -67,7 +65,7 @@ class ListViewTable extends React.Component {
     };
 
     render() {
-        const { columns, onSelectAllClick, order, orderBy, numSelected, rowCount } = this.props;
+        const {columns, onSelectAllClick, order, orderBy, numSelected, rowCount} = this.props;
 
         return (
             <TableHead>
@@ -117,7 +115,7 @@ const styles = theme => ({
     root: {
         width: '96%',
         marginTop: theme.spacing.unit * 3,
-         // fontFamily: 'Georgia'
+        // fontFamily: 'Georgia'
     },
     table: {
         minWidth: 1020,
@@ -152,7 +150,7 @@ class EnhancedTable extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if ( this.props.data.length && this.props.data.length !==prevProps.data.length){
+        if (this.props.data.length && this.props.data.length !== prevProps.data.length) {
             this.setState((prevState, props) => {
                 return {
                     rowsPerPage: this.props.data.length
@@ -161,8 +159,8 @@ class EnhancedTable extends React.Component {
         }
     }
 
-    handleSearch = searchWord=> {
-       this.props.handleSearch(searchWord);
+    handleSearch = searchWord => {
+        this.props.handleSearch(searchWord);
     };
 
 
@@ -174,16 +172,16 @@ class EnhancedTable extends React.Component {
             order = 'asc';
         }
 
-        this.setState({ order, orderBy });
+        this.setState({order, orderBy});
     };
 
 
     handleClick = (event, id) => {
-        const { selected } = this.state;
+        const {selected} = this.state;
         let newSelected = id;
-        this.setState({ selected: newSelected }, ()=>{
+        this.setState({selected: newSelected}, () => {
             let i = {
-                '_id':{
+                '_id': {
                     '$oid': id
                 }
             };
@@ -192,22 +190,22 @@ class EnhancedTable extends React.Component {
     };
 
     handleChangePage = (event, page) => {
-        this.setState({ page });
+        this.setState({page});
     };
 
     handleChangeRowsPerPage = event => {
-        this.setState({ rowsPerPage: event.target.value });
+        this.setState({rowsPerPage: event.target.value});
     };
 
     isSelected = id => this.state.selected === id;
 
-    timestampToDate= timestamp=>{
-        return moment.unix(timestamp/1000).tz('Asia/Jerusalem').format("DD/MM/YYYY");
+    timestampToDate = timestamp => {
+        return moment.unix(timestamp / 1000).tz('Asia/Jerusalem').format("DD/MM/YYYY");
     };
 
-    isActive = isActive => isActive === true? 'פעיל': 'לא פעיל';
+    isActive = isActive => isActive === true ? 'פעיל' : 'לא פעיל';
 
-    hospitalCodeToName= el=> {
+    hospitalCodeToName = el => {
         const hosp_type = [
             {
                 value: '0',
@@ -227,43 +225,43 @@ class EnhancedTable extends React.Component {
             }
         ];
 
-        if (Array.isArray(el)){
-                let humanLabels = [];
-        humanLabels = el.map(code=>{
-            let hospital =  hosp_type.find(e=>e.value == code);
-            return hospital? hospital.label: '';
-        });
+        if (Array.isArray(el)) {
+            let humanLabels = [];
+            humanLabels = el.map(code => {
+                let hospital = hosp_type.find(e => e.value == code);
+                return hospital ? hospital.label : '';
+            });
 
-        return humanLabels.join(', ');
+            return humanLabels.join(', ');
         }
 
-else {
-let hospital =  hosp_type.find(e=>e.value == el);
-            return hospital? hospital.label: '';
-}
+        else {
+            let hospital = hosp_type.find(e => e.value == el);
+            return hospital ? hospital.label : '';
+        }
     };
 
-    setSelectedHandler=(e, id)=>{
+    setSelectedHandler = (e, id) => {
         e.preventDefault();
         this.props.setSelectedHandler(id);
     };
 
-    elementToRow (columns, obj){
+    elementToRow(columns, obj) {
         let row = [];
-        columns.forEach(el=>{
+        columns.forEach(el => {
             row.push(obj[el]);
         });
         return row;
     }
 
     render() {
-        const { classes, data, columns } = this.props;
-        const { order, orderBy, selected, rowsPerPage, page } = this.state;
+        const {classes, data, columns} = this.props;
+        const {order, orderBy, selected, rowsPerPage, page} = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
         const numSelected = 1;
 
         //TODO take columns names
-        let columnsNames = columns.map(el=>el.id);
+        let columnsNames = columns.map(el => el.id);
         return (
             <Paper className={classes.root}>
                 <EnhancedTableToolbar handleSearch={this.handleSearch}/>
@@ -293,34 +291,38 @@ let hospital =  hosp_type.find(e=>e.value == el);
                                         <TableRow
 
                                             hover
-                                            onClick={event => this.handleClick(event,id)}
+                                            onClick={event => this.handleClick(event, id)}
                                             role="checkbox"
                                             aria-checked={isSelected}
                                             tabIndex={-1}
                                             key={id}
                                             selected={isSelected}
                                         >
-                                            <TableCell padding="checkbox" >
-                                            <Checkbox
-                                                checked={isSelected}
-                                                onChange={event => this.setSelectedHandler(event, n)}
-                                                color="primary"
-                                                className={classes.checkbox}
-                                            />
+                                            <TableCell padding="checkbox">
+                                                <Checkbox
+                                                    checked={isSelected}
+                                                    onChange={event => this.setSelectedHandler(event, n)}
+                                                    color="primary"
+                                                    className={classes.checkbox}
+                                                />
                                             </TableCell>
                                             {row.map((el, index) =>
-                                                <TableCell component='th' scope='row' padding='none' numeric style={{root: {
-                                                    borderColor: 'red'
-                                                }}}>{columns[index].isActive? this.isActive(el): columns[index].isTimestamp? this.timestampToDate(el): columns[index].isHospitalType? this.hospitalCodeToName(el): el}</TableCell>
+                                                <TableCell component='th' scope='row' padding='none' numeric style={{
+                                                    root: {
+                                                        borderColor: 'red'
+                                                    }
+                                                }}>{columns[index].isActive ? this.isActive(el) : columns[index].isTimestamp ? this.timestampToDate(el) : columns[index].isHospitalType ? this.hospitalCodeToName(el) : el}</TableCell>
                                             )}
                                         </TableRow>
                                     );
                                 })}
                             {emptyRows > 0 && (
-                                <TableRow style={{ height: 49 * emptyRows }}>
-                                    <TableCell style={{body: {
+                                <TableRow style={{height: 49 * emptyRows}}>
+                                    <TableCell style={{
+                                        body: {
                                             fontSize: 20
-                                          }}} colSpan={6} />
+                                        }
+                                    }} colSpan={6}/>
                                 </TableRow>
                             )}
                         </TableBody>
@@ -340,8 +342,8 @@ let hospital =  hosp_type.find(e=>e.value == el);
                     onChangePage={this.handleChangePage}
                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
                     labelRowsPerPage='שורות לעמוד'
-                    labelDisplayedRows={({from, to, count})=>{
-                        return `  עמוד${this.state.page +1}` ;
+                    labelDisplayedRows={({from, to, count}) => {
+                        return `  עמוד${this.state.page + 1}`;
                         // let f = 'מ';
                         // let t ='עד';
                         // let c='סכום';
