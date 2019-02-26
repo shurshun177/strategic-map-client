@@ -244,7 +244,11 @@ const columns = [
     {id: 11, numeric: false, disablePadding: true, label: 'המרכז הרפואי פוריה'},
     {id: 12, numeric: false, disablePadding: true, label: 'המרכז הרפואי רמב"ם'},
     {id: 13, numeric: false, disablePadding: true, label: 'המרכז הרפואי שיבה'}
-]
+];
+
+let baseColumns = [
+    {id: 1, numeric: false, disablePadding: true, label: 'קוד מדד'},
+    {id: 2, numeric: false, disablePadding: true, label: 'שם מדד'}];
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -268,8 +272,10 @@ class DepartmentMeasure extends Component {
             hospital_type: '',
             business_topic: '',
 
-            open: false
-        };
+            open: false,
+            columns: [{id: 1, numeric: false, disablePadding: true, label: 'קוד מדד'},
+                {id: 2, numeric: false, disablePadding: true, label: 'שם מדד'}]
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -312,13 +318,79 @@ class DepartmentMeasure extends Component {
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
+        }, ()=>{
+            if (name === 'hospital_type'){
+                this.requestColumnsByHospitalType(this.state.hospital_type);
+            }
         });
-
-
     };
 
 
 
+    processColumns(columns){
+        return columns.map(el=>{
+           return {
+               id: el.hosp_code,
+               label: el.name,
+               numeric: false, disablePadding: true
+           }
+        });
+    }
+
+    requestColumnsByHospitalType(hospitalCode){
+        let url = `hospitals/${hospitalCode}/`;
+        const Columns = RestAPI().get(url, {withCredentials: true});
+        Columns.then(result => {
+            let items = result.data.items;
+            let relevantType = `type_${hospitalCode}`;
+
+            let columns = items[0][relevantType];
+
+            let newColumns =baseColumns;
+            if(columns){
+                let relevantColumns = this.processColumns(columns);
+
+                newColumns = baseColumns.concat(relevantColumns);
+            }
+            this.setState((prevState, props) => {
+                return {
+                    columns: newColumns
+                };
+            })
+        }).catch((error) => {
+            //todo if not successful, display an error with toaster
+            alert('Hospital type and business topic must be selected')
+            //
+            // let fakeItems = [{'_id': {'$oid': '5c6eb21c326f4204203f2432'}, 'type_1': [
+            //     {'hosp_code': '01103', 'name': 'ביה"ח אסף הרופה', 'type': '1'},
+            //     {'hosp_code': '01108', 'name': 'ביה"ח ברזילי', 'type': '1'},
+            //     {'hosp_code': '01204', 'name': 'ביה"ח בני ציון', 'type': '1'},
+            //     {'hosp_code': '01107', 'name': 'ביה"ח נהריה', 'type': '1'},
+            //     {'hosp_code': '01106', 'name': 'ביה"ח הלל יפה', 'type': '1'},
+            //     {'hosp_code': '01109', 'name': 'ביה"ח פוריה', 'type': '1'},
+            //     {'hosp_code': '01102', 'name': 'ביה"ח רמב"ם', 'type': '1'},
+            //     {'hosp_code': '01201', 'name': 'ביה"ח איכילוב', 'type': '1'},
+            //     {'hosp_code': '01104', 'name': 'ביה"ח וולפסון', 'type': '1'}, {'hosp_code': '01105', 'name': 'ביה"ח זיו', 'type': '1'}, {'hosp_code': '01101', 'name': 'ביה"ח שיבה', 'type': '1'}]}];
+            //
+            // let relevantType = `type_${hospitalCode}`;
+            //
+            // let columns = fakeItems[0][relevantType];
+            //
+            // let newColumns = baseColumns;
+            // if(columns){
+            //     let relevantColumns = this.processColumns(columns);
+            //
+            //     console.log(relevantColumns, 'RELEVANT COLUMNS')
+            //
+            //     newColumns = baseColumns.concat(relevantColumns);
+            // }
+            // this.setState((prevState, props) => {
+            //     return {
+            //         columns: newColumns
+            //     };
+            // })
+        });
+    }
 
 
 
@@ -349,8 +421,7 @@ class DepartmentMeasure extends Component {
 
         const { classes, type, mode, data } = this.props;
 
-        let isReadonly = mode === 'update';
-        let isReq = mode === 'update';
+        let {columns} = this.state;
 
         return (
             <div className="main-content">
@@ -637,8 +708,6 @@ class DepartmentMeasure extends Component {
                                 >
                                 </TextField>
                             </TableCell>
-
-
                         </TableRow>
                     </TableBody>
                 </Table>
