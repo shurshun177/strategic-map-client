@@ -22,6 +22,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { Redirect } from 'react-router';
 import InputLabel from '@material-ui/core/InputLabel';
 import CheckboxContainer from '../components/CheckboxContainer';
+import _ from 'lodash';
 
 const styles = theme => ({
     root: {
@@ -392,8 +393,26 @@ class MeasureForm extends Component {
 
 
     handleChange = name => event => {
+        let currentValue = event.target.value;
         this.setState({
-            [name]: event.target.value,
+            [name]: currentValue,
+        }, ()=>{
+            if (name === 'sub_business_topic'){
+                this.handleSubBusTopic(currentValue);
+            }
+        });
+    };
+
+    handleSubBusTopic = val =>{
+       let parentTopic = _.flatten(topic_list
+            .filter(el =>
+                el.items.some(sub => sub.value === val))
+            .map(el => {
+                return el;
+            }));
+
+        this.setState({
+            business_topic: parentTopic[0].value
         });
     };
 
@@ -459,6 +478,14 @@ class MeasureForm extends Component {
 
         let isReadonly = mode === 'update';
         let isReq = mode === 'update';
+
+        let subBusinessTopic = _.flatten(_.map(topic_list, 'items'));
+
+        let subBusinessTopicList = [    {
+            value: '0',
+            label: '',
+        },...subBusinessTopic];
+
 
         return (
             <>{this.state.shouldExit?  (<Redirect to="/app/measures"/>):
@@ -529,7 +556,7 @@ class MeasureForm extends Component {
                         onChange={this.handleChange('business_topic')}
                         value={this.state.business_topic}
                         error={this.state.business_topic === '' && this.state.shouldValidate}
-
+                        disabled
                     >
                         {topic_list.map(option => (
                             <option key={option.value} value={option.value}>
@@ -559,7 +586,7 @@ class MeasureForm extends Component {
                         error={this.state.sub_business_topic === '' && this.state.shouldValidate}
 
                     >
-                        {topic_list.map(option => (
+                        {subBusinessTopicList.map(option => (
                             <option key={option.value} value={option.value}>
                                 {option.label}
                             </option>

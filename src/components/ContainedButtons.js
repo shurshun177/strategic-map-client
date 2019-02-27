@@ -49,7 +49,7 @@ class ContainedButtons extends Component{
         const { classes, buttons } = this.props;
 
        return (
-        <div>
+        <div className="fixedFormToolbar">
             { buttons.map(button => this.getButtonComponent(button, classes))}
         </div>
         );
