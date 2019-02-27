@@ -28,6 +28,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import EditableRowTable from '../components/EditableRowTable';
+import Notification from '../components/Snackbar';
 
 const styles = theme => ({
     container: {
@@ -150,7 +151,8 @@ class NationalMesureUpdate extends Component {
                 for(let i = second; i >= first; i--) arr.push(i);
                 return arr;
             },
-            open: false
+            open: false,
+            showSnackbar: false
         };
     }
 
@@ -214,7 +216,14 @@ class NationalMesureUpdate extends Component {
             })
         }).catch((error) => {
             //todo if not successful, display an error with toaster
-            alert('Hospital type and business topic must be selected')
+
+                this.setState((prevState, props) => {
+                    return {
+
+                        showSnackbar: true
+                    };
+                });
+
 
             // let fakeItems = [
             //     {'_id': {'$oid': '5c3f323c326f420848fbe1bf'},
@@ -236,6 +245,17 @@ class NationalMesureUpdate extends Component {
             // })
 
         });
+    };
+
+    handleClose=(event, reason)=>{
+        this.setState({showSnackbar:false})
+    };
+
+    renderNotificationSnackbar=()=>{
+
+
+            return <Notification message='נא לבחור את המדדים' variant='error' showSnackbar={this.state.showSnackbar} onClose={this.handleClose}/>
+
     };
 
 
@@ -274,6 +294,9 @@ class NationalMesureUpdate extends Component {
 
         return (
             <div className="main-content">
+                <div>
+                    {this.state.showSnackbar? this.renderNotificationSnackbar(): null}
+                </div>
             <form className={classes.container} noValidate autoComplete="off"
                   onSubmit={this.handleSubmit}
             >

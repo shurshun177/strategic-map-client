@@ -77,10 +77,10 @@ class Notification extends Component{
     return (
         <div>
             <Snackbar
-                anchorOrigin={{vertical: 'top', horizontal: 'left'}}
+                anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
                 message={
                     <span id="client-snackbar" className={classes.message}>
-                <Icon className={classNames(classes.iconVariant)}/>
+
                         {message}
                 </span>
                 }
@@ -90,17 +90,17 @@ class Notification extends Component{
                     classes: {root: classes[variant]}
                 }}
                 onClose={onClose}
-                action={[
-                    <IconButton
-                        key="close"
-                        aria-label="Close"
-                        color="inherit"
-                        className={classes.close}
-                        onClick={onClose}
-                    >
-                        <CloseIcon className={classes.icon}/>
-                    </IconButton>,
-                ]}
+//                action={[
+//                    <IconButton
+//                        key="close"
+//                        aria-label="Close"
+//                        color="inherit"
+//                        className={classes.close}
+//                        onClick={onClose}
+//                    >
+//                        <CloseIcon className={classes.icon}/>
+//                    </IconButton>,
+//                ]}
             />
         </div>
     );

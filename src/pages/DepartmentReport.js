@@ -27,6 +27,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Notification from '../components/Snackbar';
+
 const styles = theme => ({
     container: {
         //display: 'flex',
@@ -271,7 +273,7 @@ class DepartmentMeasure extends Component {
         this.state = {
             hospital_type: '',
             business_topic: '',
-
+            showSnackbar: false,
             open: false,
             columns: [{id: 1, numeric: false, disablePadding: true, label: 'קוד מדד'},
                 {id: 2, numeric: false, disablePadding: true, label: 'שם מדד'}]
@@ -359,7 +361,12 @@ class DepartmentMeasure extends Component {
             })
         }).catch((error) => {
             //todo if not successful, display an error with toaster
-            alert('Hospital type and business topic must be selected')
+                this.setState((prevState, props) => {
+                    return {
+
+                        showSnackbar: true
+                    };
+                });
             //
             // let fakeItems = [{'_id': {'$oid': '5c6eb21c326f4204203f2432'}, 'type_1': [
             //     {'hosp_code': '01103', 'name': 'ביה"ח אסף הרופה', 'type': '1'},
@@ -391,6 +398,17 @@ class DepartmentMeasure extends Component {
             // })
         });
     }
+
+    handleClose=(event, reason)=>{
+        this.setState({showSnackbar:false})
+    };
+
+    renderNotificationSnackbar=()=>{
+
+
+            return <Notification message='נא לבחור את הסוג בית חולים' variant='error' showSnackbar={this.state.showSnackbar} onClose={this.handleClose}/>
+
+    };
 
 
 
@@ -425,6 +443,9 @@ class DepartmentMeasure extends Component {
 
         return (
             <div className="main-content">
+                <div>
+                    {this.state.showSnackbar? this.renderNotificationSnackbar(): null}
+                </div>
             <form className={classes.container} noValidate autoComplete="off"
                   onSubmit={this.handleSubmit}
             >
