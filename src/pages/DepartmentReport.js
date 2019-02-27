@@ -248,6 +248,25 @@ const columns = [
     {id: 13, numeric: false, disablePadding: true, label: 'המרכז הרפואי שיבה'}
 ];
 
+const version_list = [
+    {
+        value: '0',
+        label: '',
+    },
+    {
+        value: '1',
+        label: '1000',
+    },
+    {
+        value: '2',
+        label: '1001',
+    },
+    {
+        value: '3',
+        label: '1002',
+    },
+];
+
 let baseColumns = [
     {id: 1, numeric: false, disablePadding: true, label: 'קוד מדד'},
     {id: 2, numeric: false, disablePadding: true, label: 'שם מדד'}];
@@ -271,6 +290,7 @@ class DepartmentMeasure extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onExitClick = this.onExitClick.bind(this);
         this.state = {
+            version: '',
             hospital_type: '',
             business_topic: '',
             showSnackbar: false,
@@ -459,6 +479,36 @@ class DepartmentMeasure extends Component {
                 </Button>
             </div>
             <FormGroup grid>
+                <InputLabel  required className={classes.label} htmlFor="component-simple">גרסה</InputLabel>
+                <TextField
+
+                    id="version"
+                    name="version"
+                    select
+                    variant="outlined"
+                    required
+
+                    className={classes.textField}
+                    SelectProps={{
+                        native: true,
+                        MenuProps: {
+                            className: classes.menu,
+                        },
+                    }}
+                    InputLabelProps={{classes:{root: classes.label}}}
+                    margin="normal"
+                    onChange={this.handleChange('version')}
+                    value={this.state.version}
+
+
+                >
+                    {version_list.map(option => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </TextField>
+
                 <InputLabel className={classes.label} required htmlFor="component-simple">נושא עסקי</InputLabel>
                 <TextField
                         id="business_topic"
