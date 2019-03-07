@@ -232,21 +232,7 @@ const hosp_type = [
     },
 ];
 
-const columns = [
-    {id: 1, numeric: false, disablePadding: true, label: 'קוד מדד'},
-    {id: 2, numeric: false, disablePadding: true, label: 'שם מדד'},
-    {id: 3, numeric: true, disablePadding: true, label: 'המרכז הרפואי איכילוב'},
-    {id: 4, numeric: false, disablePadding: true, label: 'המרכז הרפואי אסף הרופא'},
-    {id: 5, numeric: false, disablePadding: true, label: 'המרכז הרפואי בני ציון'},
-    {id: 6, numeric: false, disablePadding: true, label: 'המרכז הרפואי נהריה'},
-    {id: 7, numeric: false, disablePadding: true, label: 'המרכז הרפואי זיב'},
-    {id: 8, numeric: false, disablePadding: true, label: 'המרכז הרפואי וולפסון'},
-    {id: 9, numeric: false, disablePadding: true, label: 'המרכז הרפואי ברזילי'},
-    {id: 10, numeric: false, disablePadding: true, label: 'המרכז הרפואי הלל יפה'},
-    {id: 11, numeric: false, disablePadding: true, label: 'המרכז הרפואי פוריה'},
-    {id: 12, numeric: false, disablePadding: true, label: 'המרכז הרפואי רמב"ם'},
-    {id: 13, numeric: false, disablePadding: true, label: 'המרכז הרפואי שיבה'}
-];
+//
 
 const version_list = [
     {
